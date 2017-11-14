@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Archives: 2017/11 | 随写 - XinoAssassin&#39;s Blog</title>
+  <title>Tag: Programming, Game | 随写 - XinoAssassin&#39;s Blog</title>
   <meta name="description" content="A minimal hexo theme." />
   <meta name="keywords" content="hexo,theme,typescript" />
   <meta name="HandheldFriendly" content="True" />
@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="随写 - XinoAssassin&#39;s Blog">
-<meta property="og:url" content="https://xinoassasssin.github.io/archives/2017/11/index.html">
+<meta property="og:url" content="https://xinoassasssin.github.io/tags/Programming-Game/index.html">
 <meta property="og:site_name" content="随写 - XinoAssassin&#39;s Blog">
 <meta property="og:locale" content="zh">
 <meta name="twitter:card" content="summary">
@@ -76,49 +76,17 @@
     
     <main id="main" role="main">
       
-	
-
-
-	<section class="page-header archive">
-    <h1>- <span>2017.11</span> -</h1>
+	<section class="page-header tag">
+    <h1>- <span>Programming, Game</span> -</h1>
   </section>
+
+
 
 
 
 
 <section class="post-list">
 	
-    <article class="post ">
-
-  
-  <h2 class="title">
-    <a href="/2017/11/hexo-with-submodule/">
-      一场因为使用 Git Submodule 引发的血案
-    </a>
-  </h2>
-  
-  <time>
-    Nov 14, 2017
-  </time>
-  <section class="content">
-	  <p><strong>前略</strong><br>今天继续对 Blog 进行一些更新，上午先是将目前暂挂于 Github Page 的本博客链接上了<a href="http://blog.xinoassassin.com" target="_blank" rel="external">自定义域名</a>，但是这样一来就不能强制启用 HTTPS 让我略感不爽，有空解决之。<br>中午的时候突然冒出来的念头：把 Blog 的主题用 Git Submodule 来进行管理，原因也是用这种形式管理非常适合 Hexo 的结构，遂动手。</p>
-<p>我的 _config.yml 中是将 public_dir 挂在 Hexo 目录之外，所以不用动它。而原本就在的 themes/hexo-theme-typescript 已经是一个 Git Repo 了，先将它之中的改动 push 上去，然后删了它。</p>
-<p>将原本 themes 文件夹中的内容清空后，我同时删除了该文件夹，这也是之后二十分钟让我不知道错在何处的原因。</p>
-<p>删去 themes 文件夹之后我们来添加 submodule, 命令很简单，一句 <code>git submodule add</code>就可以搞定，然后会自动帮你 clone 下来并且在根目录下生成 .gitmodules 保存 submodule 信息。</p>
-<p>搞定之后尝试跑跑看有没有问题，hexo g 之后发现警告信息：”No Layout: index.html”. 我心想，不对啊，文件没缺啊，你怎么就找不到 Index 的 Layout 信息了呢？首先想到的是，Git 的 Submodule 是不是用了某种 link, 以至于 hexo 读不到这个文件夹的内容，于是用 ls 查看之，ls 告诉我 theme 和 hexo-theme-typescript 都是实打实的文件夹而不是软链接，百思不得其解，Google 之，发现这个警告代表的文件百分之百是由于文件缺失。然而我的文件都在啊，没缺啊，就认为是 submodule 的问题，参考了别人的 hexo 用 submodule 方式管理的文章之后，我突然想到，会不会是原本文件目录是 “themes” 而我建 submodule 时候用的是 “theme”, 缺了个 ‘s’ 导致的文件缺失呢？于是我新建了一个文件夹跑了一下 hexo init 看看文件目录结构，果不其然，用的确实是 “themes”, 重新把 submodule 建好，用对文件夹名字，运行 hexo s, 打开本地页面，熟悉的主页终于回来了。</p>
-
-
-    
-    
-    
-	  <div class="tags">
-      <a class="tag-link" href="/tags/Everything-Blog/">Everything, Blog</a>
-	  </div>
-    
-
-  </section>
-</article>
-  
     <article class="post ">
 
   
@@ -156,49 +124,7 @@
   </section>
 </article>
   
-    <article class="post ">
-
-  
-  <h2 class="title">
-    <a href="/2017/11/Hello-World-n/">
-      Hello,World.\n
-    </a>
-  </h2>
-  
-  <time>
-    Nov 11, 2017
-  </time>
-  <section class="content">
-	  <p>想自己架个 Blog 好几个月了，开始用了 Jekyll，在 Windows 上做本地生成不太方便，扔远程机器上有时候自己会忘记目录结构也很麻烦。</p>
-<p>很早就听说过几个著名的博客框架，什么 WordPress, Ghost, Hexo, Jekyll. 最后我还是选择了 Hexo, 原因有几个：</p>
-<ul>
-<li>我需要静态文件</li>
-<li>我得看得懂</li>
-<li>可以在 Windows 平台上进行静态文件生成</li>
-<li>简洁</li>
-</ul>
-<p>那么最后试用了一下 Hexo, 感觉不错，Windows 上跑的挺欢快，主题也挺多，修改起来自己也看得懂点。</p>
-<p><del>还是要感谢 Node.js 这玩意儿</del></p>
-<p>那么架好了，写些什么呢？</p>
-<p>上上礼拜刚 Uninstall 了 PUBG, 给自己的理由是挂太多了不想玩，其实主要的一点是一开游戏一晚上就没了，大学时间已经不多了，还是多留给学各种各样的东西。</p>
-<p>所以上礼拜写了 GBF2Weibo 这个半成品，学了点 JavaScript. 同时因为需要，写了个 C# 小工具来进行 Boss 数据的转化，具体过程写在之后的文章。</p>
-<p>想了想，开篇文确实没什么能多说的，我就只能鞭策自己以后把玩游戏的时间多用来学习，没事的时候多写点文字随便记录一下，大概这也是我把 Blog 的 Title 设置为“随写”的原因吧。</p>
-<p><code>&gt;&gt; endl;</code></p>
-
-
-    
-    
-    
-	  <div class="tags">
-      <a class="tag-link" href="/tags/Everything/">Everything</a>
-	  </div>
-    
-
-  </section>
-</article>
-  
 </section>
-
 
 
       <script>setLoadingBarProgress(60);</script>
