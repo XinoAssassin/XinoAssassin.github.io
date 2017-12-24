@@ -6,7 +6,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="https://xinoassasssin.github.io/"/>
-  <updated>2017-12-17T14:31:22.071Z</updated>
+  <updated>2017-12-24T09:33:52.733Z</updated>
   <id>https://xinoassasssin.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>杂（三）</title>
+    <link href="https://xinoassasssin.github.io/2017/12/something-2/"/>
+    <id>https://xinoassasssin.github.io/2017/12/something-2/</id>
+    <published>2017-12-24T09:26:24.000Z</published>
+    <updated>2017-12-24T09:33:52.733Z</updated>
+    
+    <content type="html"><![CDATA[<p>又是一个礼拜过去了，成都今年的严重雾霾晚来了一会儿，但是终究没有缺席。看着每天天气报告中那令人窒息的空气指数数字、全球领先的排位，感叹一句，国际化大都市不过如此。</p><p>被冬日的温度以及那浑浊的空气困在室内，也就只能每日流连在各种垃圾手游和几个大型在线射击游戏里。</p><hr><p>今天还是想来写一下对于字体的一些感想，源起是看到<a href="https://feng.moe/" target="_blank" rel="external">烧饼的 Blog</a> 字体设置上比较“怀旧”的采用了全局衬线字体、思源宋体优先的设定。我也是一个对思源系字体情有独钟的爱好者，能自定义的场合和自己输出的 PDF 等文档打印件中必然会采用思源系字体，比如本 Blog 就使用了思源宋体和黑体的组合，当然你系统里没有这两款字体就会回退，在 Windows 上回退了就很难看，除非你的浏览器里面把 sans-serif 和 <span style="font-family:serif;">serif</span> 通过一些手段自定义了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;又是一个礼拜过去了，成都今年的严重雾霾晚来了一会儿，但是终究没有缺席。看着每天天气报告中那令人窒息的空气指数数字、全球领先的排位，感叹一句，国际化大都市不过如此。&lt;/p&gt;
+&lt;p&gt;被冬日的温度以及那浑浊的空气困在室内，也就只能每日流连在各种垃圾手游和几个大型在线射击游戏里。&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="Everything" scheme="https://xinoassasssin.github.io/tags/Everything/"/>
+    
+  </entry>
   
   <entry>
     <title>玩家用脚投票</title>
