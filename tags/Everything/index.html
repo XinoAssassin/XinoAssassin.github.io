@@ -114,6 +114,8 @@
 <h2 id="最主要的问题"><a href="#最主要的问题" class="headerlink" title="最主要的问题"></a>最主要的问题</h2><p>问题就是：Twitter Stream Track 的关键词设置不支持 CJK 字符，而 GBF 的玩家则大部分使用日语，他们的救援推的关键词都是<code>&quot;参加者募集！&quot;</code>。</p>
 <p>于是我在 Twitter Deck 中新建了一栏，使用<code>&quot;参加者募集！&quot; OR &quot;I need backup!&quot;</code>的搜索条件进行搜索并观察官方用的是什么办法支持 CJK 字符的。结果大失所望，官方的搜索也只是用 Search API 而不是 Stream API, 然后定时获取一次假装出 Stream 的感觉来“糊弄”用户。那么我想，目前找到的库对于 CJK 都没有支持的情况下应该作者是用了一些手段来支持 CJK 字符的。</p>
 <p>那么也只有继续读源码了。</p>
+<hr>
+<p>经过大概一小时的思考，我决定暂时先将实现平台放到 .NET 上，目前 .NET Core 在跨平台上面已经比较稳定了，用 C# 写也更顺手一些。先拿这套把实现思路和一些算法给摸清楚，以后再重新用 Node.js 来实现。</p>
 
 
     
