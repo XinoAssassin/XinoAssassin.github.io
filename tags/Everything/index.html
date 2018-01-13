@@ -99,6 +99,38 @@
 
   
   <h2 class="title">
+    <a href="/2018/01/rf-developing-0/">
+      RaidFinder 开发记——1
+    </a>
+  </h2>
+  
+  <time>
+    Jan 13, 2018
+  </time>
+  <section class="content">
+	  <p>上篇文章给自己写了一个开发计划，这两天已经开始动手了，结果刚开头就非常不顺，来写篇文章吐槽一下。</p>
+<p>从原版的描述和一些代码中，我发现原作者使用了 Twitter4j 这个看起来在 Java 平台非常强大的库来进行 Twitter Stream 的获取。而在 NPM 上不难找到类似的 Twitter 库，也不难使用，填好两组 Key &amp; Secret 之后简单的调用 API 就可以输出源源不断的 Tweets 来。</p>
+<p>Twitter 官方提供的 Stream API 中自带了对自定义关键词的 Filter, 那么我们就来调用它。然后就碰到了目前为止第一个也是最主要最棘手的问题。</p>
+<h2 id="最主要的问题"><a href="#最主要的问题" class="headerlink" title="最主要的问题"></a>最主要的问题</h2><p>问题就是：Twitter Stream Track 的关键词设置不支持 CJK 字符，而 GBF 的玩家则大部分使用日语，他们的救援推的关键词都是<code>&quot;参加者募集！&quot;</code>。</p>
+<p>于是我在 Twitter Deck 中新建了一栏，使用<code>&quot;参加者募集！&quot; OR &quot;I need backup!&quot;</code>的搜索条件进行搜索并观察官方用的是什么办法支持 CJK 字符的。结果大失所望，官方的搜索也只是用 Search API 而不是 Stream API, 然后定时获取一次假装出 Stream 的感觉来“糊弄”用户。那么我想，目前找到的库对于 CJK 都没有支持的情况下应该作者是用了一些手段来支持 CJK 字符的。</p>
+<p>那么也只有继续读源码了。</p>
+
+
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/tags/Everything/">Everything</a><a class="tag-link" href="/tags/Programming/">Programming</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
     <a href="/2018/01/gbf-raidfinder/">
       计划：用 Node.js 重写 GBF-RaidFinder
     </a>
@@ -499,49 +531,19 @@
   </section>
 </article>
   
-    <article class="post ">
-
-  
-  <h2 class="title">
-    <a href="/2017/11/Hello-World-n/">
-      Hello,World.\n
-    </a>
-  </h2>
-  
-  <time>
-    Nov 11, 2017
-  </time>
-  <section class="content">
-	  <p>想自己架个 Blog 好几个月了，开始用了 Jekyll，在 Windows 上做本地生成不太方便，扔远程机器上有时候自己会忘记目录结构也很麻烦。</p>
-<p>很早就听说过几个著名的博客框架，什么 WordPress, Ghost, Hexo, Jekyll. 最后我还是选择了 Hexo, 原因有几个：</p>
-<ul>
-<li>我需要静态文件</li>
-<li>我得看得懂</li>
-<li>可以在 Windows 平台上进行静态文件生成</li>
-<li>简洁</li>
-</ul>
-<p>那么最后试用了一下 Hexo, 感觉不错，Windows 上跑的挺欢快，主题也挺多，修改起来自己也看得懂点。</p>
-<p><del>还是要感谢 Node.js 这玩意儿</del></p>
-<p>那么架好了，写些什么呢？</p>
-<p>上上礼拜刚 Uninstall 了 PUBG, 给自己的理由是挂太多了不想玩，其实主要的一点是一开游戏一晚上就没了，大学时间已经不多了，还是多留给学各种各样的东西。</p>
-<p>所以上礼拜写了 GBF2Weibo 这个半成品，学了点 JavaScript. 同时因为需要，写了个 C# 小工具来进行 Boss 数据的转化，具体过程写在之后的文章。</p>
-<p>想了想，开篇文确实没什么能多说的，我就只能鞭策自己以后把玩游戏的时间多用来学习，没事的时候多写点文字随便记录一下，大概这也是我把 Blog 的 Title 设置为“随写”的原因吧。</p>
-<p><code>&gt;&gt; endl;</code></p>
-
-
-    
-    
-    
-	  <div class="tags">
-      <a class="tag-link" href="/tags/Blog/">Blog</a><a class="tag-link" href="/tags/Everything/">Everything</a>
-	  </div>
-    
-
-  </section>
-</article>
-  
 </section>
 
+
+  <nav id="page-nav">
+    
+    
+    <a class="next" rel="next" href="/tags/Everything/page/2/">
+      <span class="text">Next</span>
+      <span class="icon icon-chevron-right"></span>
+    </a>
+    
+  </nav>
+  
 
       <script>setLoadingBarProgress(60);</script>
     </main>
