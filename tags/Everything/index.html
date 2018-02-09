@@ -99,6 +99,43 @@
 
   
   <h2 class="title">
+    <a href="/2018/02/what-iboot-source-code-contains/">
+      泄露的 iBoot 源代码中都有些什么
+    </a>
+  </h2>
+  
+  <time>
+    Feb 9, 2018
+  </time>
+  <section class="content">
+	  <p>近日，一份疑似 iOS 9.3.x 的 iBoot 及其他部分 BootLoader 的源代码被匿名人士 push 上了 Github, 粗略地查看了一下里面的文件之后，大家都惊讶地发现这份源代码的爆点实在是太多了。</p>
+<p>项目的 README 中是这么写的：iBoot_BootROM_iBSS_iBSS_iLLB_Source_Code</p>
+<p>其中 iBSS 是 <strong>iB</strong>oot <strong>S</strong>ingle <strong>S</strong>tage 的缩写，而 LLB 是 <strong>L</strong>ow <strong>L</strong>evel <strong>B</strong>ootloader 的缩写。</p>
+<p>我们先来看一下 iOS Devices 的启动流程：</p>
+<p>在 Apple 定制的一系列 A 系列 SoC 中有一块存储区域专门存放了一部分最初的启动代码，也就是俗称的 BootROM, 这部分被 Apple 称之为 SecureROM, 它是在电源键被按下，设备上电之后最初加载的代码。SecureROM 检查下一级 BootLoader, 也就是 LLB, 如果签名没有问题，那么就加载并初始化 LLB, 此时设备的 Apple Logo 就出现了。然后 LLB 检查并初始化 iBoot, 同样是通过 Apple Root CA Public 证书验证签名，通过就会把设备带给 iBoot, 而 iBoot 会映射 Device Tree, 然后验证内核签名并加载，最终初始化内核并运行，这时候可以说 iOS 系统已经启动了。</p>
+<p>通过简述的启动流程，我们可以看到，BootROM, LLB, iBoot 这三个无论哪一个都是在整个启动流程中充当关键角色的。所以这次源代码的泄露，非常劲爆。</p>
+<p>在基于证书链的安全体系下，私钥的泄露可以说是直接把安全性掉到0去了，而这份代码中，在位于 /lib/pki 和其中的 tests 目录下，可以看到有一份 Fake CA 和一些私钥，还有一份中间证书和私钥，如果后续版本也是沿用这些东西的话，整个启动验证链的加密体系，就真的可以说安全性为0了。</p>
+<p>因为这份代码是 9.3 时代的，也就是在 iPhone 7 那代发布前的版本，所以我们能看到有许多 T8010 相关的文件（T8010 是 Apple 对于 A10 芯片平台的代号）。而有趣的是，在 /target 目录下出现了 iphone8 这个文件夹，难不成 Apple 内部在 2016 年就开始对 iPhone 8 进行内部测试了？但是点进去看，目录下的文件清晰的指向了另一款产品——iPhone 6s. 往上推，iPhone 7 文件夹对应着 iPhone 6, iPhone 6 文件夹对应着 iPhone 5s, 如果按照这个内部排序，iPhone Ⅹ 这个 Ⅹ的由来，可能更好解释一点。而 iPhone 8, 则更像后来上马的 iPhone 7 Reversion.</p>
+<p>除了主引导程序的代码外，泄露的代码中还包含了许多驱动，在 /drivers 目录下，可以清晰地认出 iOS 平台所使用的一些硬件，其中甚至包括了Thunderbolt 驱动。</p>
+<p>内容还有很多，笔者水平有限，也解读不出更多的东西了。</p>
+<p><code>&gt;&gt; endl;</code></p>
+
+
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/tags/Everything/">Everything</a><a class="tag-link" href="/tags/杂/">杂</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
     <a href="/2018/02/mourn-for-acfun/">
       悼念 AcFun
     </a>
@@ -485,40 +522,6 @@
     
 	  <div class="tags">
       <a class="tag-link" href="/tags/Everything/">Everything</a><a class="tag-link" href="/tags/Game/">Game</a>
-	  </div>
-    
-
-  </section>
-</article>
-  
-    <article class="post ">
-
-  
-  <h2 class="title">
-    <a href="/2017/12/something-1/">
-      杂（二）
-    </a>
-  </h2>
-  
-  <time>
-    Dec 17, 2017
-  </time>
-  <section class="content">
-	  <p>前略，快考试了。</p>
-<p>今天一时兴起去听贾鹏芳老师的曲子。<br>自己当初还拉二胡的时候没听说过其人，直到后来接触了和平之月之后才了解到，原来还有这么一位当代二胡演奏、作曲、艺术家。当今二胡界，她应当就是那个站在顶端的人了。可惜了，这么杰出的人物却要跑到日本才能获得更好的发展。<br>翻了一眼网易云下面的评论，称赞的，喷她的，叫人安心听曲子别废话的，什么都有，却没人思考为什么这么好的艺术家要跑到日本去才有今天的成就。</p>
-<p>结合一下昨晚 steamcommunity 突然被墙之后今天贴吧让人去举报那几个政治敏感组想让 Valve 关闭掉那几个组从而让国内用户能够重新访问社区的事情，可笑。</p>
-<p>大家都以一句“你懂的”略过对于体制本身问题的探讨，问起为什么的时候都无奈地表达出“‘说了反正也会被删’、‘我说了也没用’”这样的意思。这已经是相当多已经麻木的国人自我阉割的状态了，在一次次的尝试争取宪法中规定公民应当享有的权利中，越来越多的人放弃了。这其中不少人转而把枪口对准另外一批还在努力为所有人争取权利的“斗争者”，他们中有的认为，是另一批人持续不断的斗争行为导致了自己享有不到应该有的权利，而他们的目的，是干扰这帮给他们争取着权利的人们，甚至不择手段。</p>
-<p>思想是自由的，讨论思想也应当是自由的。对于某种思想的评价是每个人自己做出的评判，不应当根据自己对于这种思想的理解而去干扰别人对于这种思想的看法。我们应该做的是讨论，而不是闭口不言甚至去把那些敢于讨论的人的嘴巴给捂上。你去把那些敢于讨论的人的嘴巴捂上，那么你是不是跟那些不让你开口说话的人是一样的呢？</p>
-<p>鲁迅先生的文章中的那些道理，在这个年代仍然适用着。或者说，对中国这块大地上生活着的人们，只要有一天封建思想还扎根在人们的心中，那么将一直适用下去。</p>
-<hr>
-<p>明天还有场考试，这周就写这么多。</p>
-
-
-    
-    
-    
-	  <div class="tags">
-      <a class="tag-link" href="/tags/Everything/">Everything</a><a class="tag-link" href="/tags/杂/">杂</a>
 	  </div>
     
 
