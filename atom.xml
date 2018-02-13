@@ -6,7 +6,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="https://xinoassasssin.github.io/"/>
-  <updated>2018-02-09T09:05:33.067Z</updated>
+  <updated>2018-02-13T06:21:11.116Z</updated>
   <id>https://xinoassasssin.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>故人</title>
+    <link href="https://xinoassasssin.github.io/2018/02/old-friends/"/>
+    <id>https://xinoassasssin.github.io/2018/02/old-friends/</id>
+    <published>2018-02-13T06:21:11.000Z</published>
+    <updated>2018-02-13T06:21:11.116Z</updated>
+    
+    <content type="html"><![CDATA[<p>故人，泛指以前认识的人。</p><p>你活了二十年了，认识过了多少人呢？</p><p>从亲戚到学校再到社会，故人所指代的人越来越多。曾经那些与你关系不错的“朋友”们，不联系了也就进故人堆中了，你的故人堆越来越高。</p><p>没办法的人总在变化的你不可能一辈子只认识这么点人不跟更多的人打交道。但是每当由以前的“朋友”进入故人堆中，你感到过自己情绪的变化吗？惋惜，痛心？亦或是经历的多了根本就无动于衷？</p><hr><p>这个小县城，是全中国千千万万个县城中普通的一个，坐落于传统的富庶之地。千百年来，此地的士绅文化根深蒂固，不像是更南方的人们更喜欢经商。在外读书的学子们，学成之后也更偏向于归家，而不是留在求学之地。</p><p>这个小县城，只要你的故人多，那你上街随便走两步都能碰到他们，就连坐在这小小图书馆的一个自习室里，你一眼扫去，都能找到好几个疑似你认识的人。</p><hr><p>中国是个“人情社会”。</p><p>人情，在我的定义中，就是“我帮了你一个忙，你就欠了我一份情”中的“情”，用劳动报酬来解释或许更好一些。</p><p>人情社会，就是以人情编织成的网络为基础的社会。举个例子，你爹喝酒上头了，跟你说，儿子，你想不想回来工作，爹帮你去跟局长说一说。</p><p>这个“说一说”中，又包含了多少背后的含义呢？</p><p>我讨厌人情。</p><hr><p>故人来找你帮忙。</p><p>你正好闲着没事干，帮了。</p><p>故人一句谢谢，结束了这几年中你们为数不多可能是仅有的交流，你甚至找不到一句你们能聊的共同话题。</p><hr><p>你还能指望更多的报酬吗？你的时间成本就值那么两个字了？</p><p>当然不是，这份我最厌恶的人情，就是委托方亏欠的你仅有的报酬，虚无而飘渺。</p><hr><p>小县城是一个小型的人情社会。走两步都能碰到故人的情况下，你被迫地，要去帮故人的忙。</p><p>你不帮，是你不念旧情太过高冷不会做人。你帮了，又是白费自己时间获得一句空头的“谢谢”。</p><p>这只是整个中国这个大型人情社会的一个小缩影，有人的地方，总会有人情。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;故人，泛指以前认识的人。&lt;/p&gt;
+&lt;p&gt;你活了二十年了，认识过了多少人呢？&lt;/p&gt;
+&lt;p&gt;从亲戚到学校再到社会，故人所指代的人越来越多。曾经那些与你关系不错的“朋友”们，不联系了也就进故人堆中了，你的故人堆越来越高。&lt;/p&gt;
+&lt;p&gt;没办法的人总在变化的你不可能一辈子只认识这
+      
+    
+    </summary>
+    
+    
+      <category term="Everything" scheme="https://xinoassasssin.github.io/tags/Everything/"/>
+    
+      <category term="Memories" scheme="https://xinoassasssin.github.io/tags/Memories/"/>
+    
+  </entry>
   
   <entry>
     <title>泄露的 iBoot 源代码中都有些什么</title>
@@ -415,9 +443,9 @@
     </summary>
     
     
-      <category term="Programming" scheme="https://xinoassasssin.github.io/tags/Programming/"/>
-    
       <category term="Game" scheme="https://xinoassasssin.github.io/tags/Game/"/>
+    
+      <category term="Programming" scheme="https://xinoassasssin.github.io/tags/Programming/"/>
     
   </entry>
   
