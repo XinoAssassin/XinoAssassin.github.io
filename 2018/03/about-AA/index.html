@@ -25,13 +25,13 @@
 <meta property="og:site_name" content="随写 - XinoAssassin&#39;s Blog">
 <meta property="og:description" content="今天听 Gadio News 的时候，最末尾一段提到了希望有人能来讲讲抗锯齿技术。才疏学浅，但是前几年看 MC 的文章还是知道一点相关内容，所以就来看着维基写写看，如有不正之处劳请指出。 锯齿与抗锯齿首先，什么是锯齿，以及为什么会出现锯齿。 我们的屏幕，是以一个个正方形的像素点组成的，而正方形的特性导致了在倾斜的线上，边缘必定会出现一个个突起的阶梯状“毛刺”，比如图上这种 这种阶梯状的“毛刺”就是">
 <meta property="og:locale" content="zh">
-<meta property="og:image" content="https://pic2.zhimg.com/04fb3bbbec0c10e70c660aac1efd7cf1_r.jpg">
-<meta property="og:image" content="https://pic1.zhimg.com/80/4ec755cfd484c8333f094f57b97f3408_hd.jpg">
-<meta property="og:updated_time" content="2018-03-11T09:51:47.466Z">
+<meta property="og:image" content="https://xinoassasssin.github.io/images/04fb3bbbec0c10e70c660aac1efd7cf1_r.jpg">
+<meta property="og:image" content="https://xinoassasssin.github.io/images/4ec755cfd484c8333f094f57b97f3408_hd.jpg">
+<meta property="og:updated_time" content="2018-03-25T14:23:46.495Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于抗锯齿">
 <meta name="twitter:description" content="今天听 Gadio News 的时候，最末尾一段提到了希望有人能来讲讲抗锯齿技术。才疏学浅，但是前几年看 MC 的文章还是知道一点相关内容，所以就来看着维基写写看，如有不正之处劳请指出。 锯齿与抗锯齿首先，什么是锯齿，以及为什么会出现锯齿。 我们的屏幕，是以一个个正方形的像素点组成的，而正方形的特性导致了在倾斜的线上，边缘必定会出现一个个突起的阶梯状“毛刺”，比如图上这种 这种阶梯状的“毛刺”就是">
-<meta name="twitter:image" content="https://pic2.zhimg.com/04fb3bbbec0c10e70c660aac1efd7cf1_r.jpg">
+<meta name="twitter:image" content="https://xinoassasssin.github.io/images/04fb3bbbec0c10e70c660aac1efd7cf1_r.jpg">
   
   
     <link rel="icon" href="/favicon.png">
@@ -106,9 +106,9 @@
   	<div class="article-entry" itemprop="articleBody">
     	<p>今天听 Gadio News 的时候，最末尾一段提到了希望有人能来讲讲抗锯齿技术。才疏学浅，但是前几年看 MC 的文章还是知道一点相关内容，所以就来看着维基写写看，如有不正之处劳请指出。</p>
 <h2 id="锯齿与抗锯齿"><a href="#锯齿与抗锯齿" class="headerlink" title="锯齿与抗锯齿"></a>锯齿与抗锯齿</h2><p>首先，什么是锯齿，以及为什么会出现锯齿。</p>
-<p>我们的屏幕，是以一个个正方形的像素点组成的，而正方形的特性导致了在倾斜的线上，边缘必定会出现一个个突起的阶梯状“毛刺”，比如图上这种<img src="https://pic2.zhimg.com/04fb3bbbec0c10e70c660aac1efd7cf1_r.jpg" alt="preview"></p>
+<p>我们的屏幕，是以一个个正方形的像素点组成的，而正方形的特性导致了在倾斜的线上，边缘必定会出现一个个突起的阶梯状“毛刺”，比如图上这种<img src="/images/04fb3bbbec0c10e70c660aac1efd7cf1_r.jpg" alt="preview"></p>
 <p>这种阶梯状的“毛刺”就是典型的锯齿。而有了锯齿也就有了抗锯齿(Anti-Aliasing).</p>
-<p>抗锯齿的一般过程就是将这个毛刺的边缘柔化，使图像边缘看起来更平滑。如图：<img src="https://pic1.zhimg.com/80/4ec755cfd484c8333f094f57b97f3408_hd.jpg" alt="img"></p>
+<p>抗锯齿的一般过程就是将这个毛刺的边缘柔化，使图像边缘看起来更平滑。如图：<img src="/images/4ec755cfd484c8333f094f57b97f3408_hd.jpg" alt="img"></p>
 <h2 id="各种算法简单介绍"><a href="#各种算法简单介绍" class="headerlink" title="各种算法简单介绍"></a>各种算法简单介绍</h2><p>抗锯齿算法种类非常多，下面的介绍顺序基本上是各种抗锯齿算法出现的时间顺序。</p>
 <h3 id="SSAA"><a href="#SSAA" class="headerlink" title="SSAA"></a>SSAA</h3><p>超级采样抗锯齿(Super-Sampling Anti-Aliasing, 也可叫做 Supersampling 超采样)是最早也最简单粗暴的抗锯齿手法，它的原理非常简单，就是在渲染时将要输出的分辨率提升 x 倍，比如要输出 1920x1080 的分辨率到屏幕上，开启 SSAA 2x, 那么内部渲染时的分辨率就是 3840x2160, 然后 Downsampling 到 1920x1080 上，自然在许多纹理边缘上就显得平滑许多。但是这种方式太太太吃资源了，所以又开发出了新的算法。</p>
 <p>在 Nvidia 发布二代 Maxwell 架构的时候，同时发布的 <a href="http://www.geforce.cn/hardware/technology/dsr/technology" target="_blank" rel="external">DSR</a> 技术中就有 SSAA 的影子，技术思路同样是以更高分辨率渲染的原始画面输出到显示器分辨率上来得到更加精细平滑的画面。</p>
