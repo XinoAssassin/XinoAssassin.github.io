@@ -180,7 +180,7 @@
 </ul>
 <h2 id="十年一轮回"><a href="#十年一轮回" class="headerlink" title="十年一轮回"></a>十年一轮回</h2><p>回到文章开头的主题，AC 系列十周年了。我也一路从初中升到大学，很高兴成长路上接触了这个系列，很高兴我没有把它当成快餐游戏去玩，而是喜欢去深挖现代剧情还有刺客信条的内涵。就如那句经典的“万事皆虚万事皆允”影响了不少中二青年一样，我初中的时候也特爱把这句话挂在嘴边显得特有逼格。我把 Assassin 当成 ID 来用，也把这个系列安利给了不少身边的人。在高中毕业的那次变故导致的不得不纹身的时候，选择把 AC logo 纹在手臂上。我相信 Ubi 能将这个系列做的更棒，但我更想看到 AC 系列现代主线完结的那一天，想看到普通的人是如何打败第一文明的那一天。</p>
 <p><code>&gt;&gt;endl;</code></p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>不知不觉，本来是受到 <a href="https://weibo.com/ttarticle/p/show?id=2309404176605982363791" target="_blank" rel="external">A9VG 官博发的十周年纪念文</a>的影响<del>想喷它一番</del>，但不知道怎么的，就不当心写成这篇六千五百字的文章了。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>不知不觉，本来是受到 <a href="https://weibo.com/ttarticle/p/show?id=2309404176605982363791" target="_blank" rel="noopener">A9VG 官博发的十周年纪念文</a>的影响<del>想喷它一番</del>，但不知道怎么的，就不当心写成这篇六千五百字的文章了。</p>
 <p style="font-family: assassin; font-size: 24px; text-align: center;">Nothing is ture,<br> Everything is permitted.</p>
 
 <p style="font-family: assassin; font-size: 48px; text-align: center;">?</p>
@@ -209,7 +209,7 @@
     Nov 14, 2017
   </time>
   <section class="content">
-	  <p><strong>前略</strong><br>今天继续对 Blog 进行一些更新，上午先是将目前暂挂于 Github Page 的本博客链接上了<a href="http://blog.xinoassassin.com" target="_blank" rel="external">自定义域名</a>，但是这样一来就不能强制启用 HTTPS 让我略感不爽，有空解决之。<br>中午的时候突然冒出来的念头：把 Blog 的主题用 Git Submodule 来进行管理，原因也是用这种形式管理非常适合 Hexo 的结构，遂动手。</p>
+	  <p><strong>前略</strong><br>今天继续对 Blog 进行一些更新，上午先是将目前暂挂于 Github Page 的本博客链接上了<a href="http://blog.xinoassassin.com" target="_blank" rel="noopener">自定义域名</a>，但是这样一来就不能强制启用 HTTPS 让我略感不爽，有空解决之。<br>中午的时候突然冒出来的念头：把 Blog 的主题用 Git Submodule 来进行管理，原因也是用这种形式管理非常适合 Hexo 的结构，遂动手。</p>
 <p>我的 _config.yml 中是将 public_dir 挂在 Hexo 目录之外，所以不用动它。而原本就在的 themes/hexo-theme-typescript 已经是一个 Git Repo 了，先将它之中的改动 push 上去，然后删了它。</p>
 <p><del>将原本 themes 文件夹中的内容清空后，我同时删除了该文件夹，这也是之后二十分钟让我不知道错在何处的原因。</del></p>
 <p>删去 themes 文件夹之后我们来添加 submodule, 命令很简单，一句 <code>git submodule add</code>就可以搞定，然后会自动帮你 clone 下来并且在根目录下生成 .gitmodules 保存 submodule 信息。</p>
@@ -241,7 +241,7 @@
     Nov 11, 2017
   </time>
   <section class="content">
-	  <p>上周末和这周头上都一直在写那个 GBF 自动发 PO 到微博的工具(<a href="https://github.com/XinoAssassin/GBF2weibo" target="_blank" rel="external">github</a>)，到目前为止也就实现了一半，后半部分自动发 PO 的功能因为新浪的限制，已经没办法做到以前 FaWave 那种形式的发送微博了。我的想法是绕路，通过在 weibo.com, 也就是网页版微博中插脚本，实现将文本插入到发送框，同时图片也插入进去，然后模拟点击发送按钮。上周日下午研究了一小时的微博首页，文本插入到发送框和模拟点击发送是能够做到的，但是就是不知道如何插入图片。在这里我又产生了一种绕路想法，就是模拟 Ctrl + C/V 的键盘操作来进行复制粘贴工作，然后，坑了。</p>
+	  <p>上周末和这周头上都一直在写那个 GBF 自动发 PO 到微博的工具(<a href="https://github.com/XinoAssassin/GBF2weibo" target="_blank" rel="noopener">github</a>)，到目前为止也就实现了一半，后半部分自动发 PO 的功能因为新浪的限制，已经没办法做到以前 FaWave 那种形式的发送微博了。我的想法是绕路，通过在 weibo.com, 也就是网页版微博中插脚本，实现将文本插入到发送框，同时图片也插入进去，然后模拟点击发送按钮。上周日下午研究了一小时的微博首页，文本插入到发送框和模拟点击发送是能够做到的，但是就是不知道如何插入图片。在这里我又产生了一种绕路想法，就是模拟 Ctrl + C/V 的键盘操作来进行复制粘贴工作，然后，坑了。</p>
 <p>写这玩意儿的过程中，因为需要自己获取当前的 RaidCode, 也就是那个八位参战码。GBF 页面加载完存在一个 “stage” object, 其中 .pJsnData.twitter.battle_id 就是我需要的码。那么就需要将这个码传递出来，而 Chrome 对于 Extension 是有非常严格的限制的，Extension 的 Content Script 和 Extension 本体是处于不同的沙盒之内的，所以就不能直接用 <code>var raidCode = stage.pJsnData.twitter.battle_id</code> 这种形式，而是要通过 Chrome 的 Message Passing API 来传递信息。苦学了好几天的消息传递都不能达到目的的时候，我想起来 Viramate 提供了外部获取数据的 API, 那我直接调用 API 来得到整理过的信息不是更方便吗？说是这么说，看了半天源码之后发现它没提供现成的 RaidCode 直接返回，发邮件询问作者之后得知，原来有提供战场数据的返回，但没有直接的 RaidCode 返回，不过已经能满足我的需求了。</p>
 <p><del>其实作者在说明文档中有写这个 API, 但他写返回内容的时候写了”a bunch of shit”，所以我当时看文档的时候也就忽视掉了这个 API.</del></p>
 <p>有了现成的数据源，我只需要将其解析就行了。随后遇到了一些奇奇怪怪的小问题，大部分都是新手常见问题，值得一提的是，JS 的执行时间点与其在页面里的加载位置有关系，比如说，放在<code>&lt;head&gt;</code>里的要比<code>&lt;body&gt;</code>中的早执行（表意可能有问题）。</p>

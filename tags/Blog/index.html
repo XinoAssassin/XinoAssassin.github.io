@@ -111,7 +111,7 @@
 	  <p>又是一个礼拜过去了，成都今年的严重雾霾晚来了一会儿，但是终究没有缺席。看着每天天气报告中那令人窒息的空气指数数字、全球领先的排位，感叹一句，国际化大都市不过如此。</p>
 <p>被冬日的温度以及那浑浊的空气困在室内，也就只能每日流连在各种垃圾手游和几个大型在线射击游戏里。</p>
 <hr>
-<p>今天还是想来写一下对于字体的一些感想，源起是看到<a href="https://feng.moe/" target="_blank" rel="external">烧饼的 Blog</a> 字体设置上比较“怀旧”的采用了全局衬线字体、思源宋体优先的设定。我也是一个对思源系字体情有独钟的爱好者，能自定义的场合和自己输出的 PDF 等文档打印件中必然会采用思源系字体，比如本 Blog 就使用了思源宋体和黑体的组合，当然你系统里没有这两款字体就会回退，在 Windows 上回退了就很难看，除非你的浏览器里面把 sans-serif 和 <span style="font-family:serif;">serif</span> 通过一些手段自定义了。</p>
+<p>今天还是想来写一下对于字体的一些感想，源起是看到<a href="https://feng.moe/" target="_blank" rel="noopener">烧饼的 Blog</a> 字体设置上比较“怀旧”的采用了全局衬线字体、思源宋体优先的设定。我也是一个对思源系字体情有独钟的爱好者，能自定义的场合和自己输出的 PDF 等文档打印件中必然会采用思源系字体，比如本 Blog 就使用了思源宋体和黑体的组合，当然你系统里没有这两款字体就会回退，在 Windows 上回退了就很难看，除非你的浏览器里面把 sans-serif 和 <span style="font-family:serif;">serif</span> 通过一些手段自定义了。</p>
 <p>然后烧饼跟我说，Typekit 是有免费版的，一查，还真有，那肯定要用上啊。比较搞笑的是，我用的这个主题的作者原本在 head.ejs 中，是有调用 Typekit 的，但被我直接就去掉了。现在加回来之后，在没有思源系字体的桌面浏览器上，字体的显示是正常了，但是在移动端上，字体显示还是会被系统默认给覆盖掉，接下来需要想办法解决的，就是这点了。</p>
 <p>题外话，这个主题已经被我修改的跟原版差距有点大了。包括一系列增大中间内容呈现框的宽度和图片大小设定等修改，在 Blog 内容显示上可以说已经完全是我个人喜好的体现了。<br>有空把分类目录写了，再把 About 页面写了，这个 Blog 的总体就算是完成了。<br><code>&gt;&gt;&gt; endl;</code></p>
 
@@ -140,7 +140,7 @@
     Nov 14, 2017
   </time>
   <section class="content">
-	  <p><strong>前略</strong><br>今天继续对 Blog 进行一些更新，上午先是将目前暂挂于 Github Page 的本博客链接上了<a href="http://blog.xinoassassin.com" target="_blank" rel="external">自定义域名</a>，但是这样一来就不能强制启用 HTTPS 让我略感不爽，有空解决之。<br>中午的时候突然冒出来的念头：把 Blog 的主题用 Git Submodule 来进行管理，原因也是用这种形式管理非常适合 Hexo 的结构，遂动手。</p>
+	  <p><strong>前略</strong><br>今天继续对 Blog 进行一些更新，上午先是将目前暂挂于 Github Page 的本博客链接上了<a href="http://blog.xinoassassin.com" target="_blank" rel="noopener">自定义域名</a>，但是这样一来就不能强制启用 HTTPS 让我略感不爽，有空解决之。<br>中午的时候突然冒出来的念头：把 Blog 的主题用 Git Submodule 来进行管理，原因也是用这种形式管理非常适合 Hexo 的结构，遂动手。</p>
 <p>我的 _config.yml 中是将 public_dir 挂在 Hexo 目录之外，所以不用动它。而原本就在的 themes/hexo-theme-typescript 已经是一个 Git Repo 了，先将它之中的改动 push 上去，然后删了它。</p>
 <p><del>将原本 themes 文件夹中的内容清空后，我同时删除了该文件夹，这也是之后二十分钟让我不知道错在何处的原因。</del></p>
 <p>删去 themes 文件夹之后我们来添加 submodule, 命令很简单，一句 <code>git submodule add</code>就可以搞定，然后会自动帮你 clone 下来并且在根目录下生成 .gitmodules 保存 submodule 信息。</p>

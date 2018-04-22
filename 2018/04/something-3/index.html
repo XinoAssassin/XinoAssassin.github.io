@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>计划：用 Node.js 重写 GBF-RaidFinder | 随写 - XinoAssassin&#39;s Blog</title>
+  <title>杂（四） | 随写 - XinoAssassin&#39;s Blog</title>
   
   <meta name="author" content="XinoAssassin Ni">
   
@@ -17,18 +17,18 @@
   <meta name="HandheldFriendly" content="True" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-  <meta name="description" content="最近产生了一个“大胆”的想法，就是用 Node.js 来重写 walfie/gbf-raidfinder 这个被许多骑空士使用着的项目。 为什么想要重写？因为原项目是用 Scala 写的，运行在 JVM 上，虽然 JVM 跨平台的能力比较强，但它相对比较“臃肿”，而且构建、更新起来比较慢。可以是可以用作者提供的 Docker 镜像直接部署，但是之前因为 Docker 不兼容于 4.9 以上的内核，">
-<meta name="keywords" content="Everything,Programming">
+  <meta name="description" content="烦躁的很。 最近心头一直堵着，有形无形的压力大到快把我压垮了。 首先列一个 To Do List:  财务案例分析 资产评估报告 财务英语报告 数学重修考试 初级会计考试  除了第四个是年轻犯下的错误之外，其他都是与这个我一点都不喜欢的专业相关的内容，我一点都不想做，但奈何，这是必须要完成的，尤其是前三个还是小组作业——别人都想要划水就我想认真做的那种。 内心的压力大到什么程度，我每晚二点前才将将">
+<meta name="keywords" content="Everything,杂">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计划：用 Node.js 重写 GBF-RaidFinder">
-<meta property="og:url" content="https://xinoassasssin.github.io/2018/01/gbf-raidfinder/index.html">
+<meta property="og:title" content="杂（四）">
+<meta property="og:url" content="https://xinoassasssin.github.io/2018/04/something-3/index.html">
 <meta property="og:site_name" content="随写 - XinoAssassin&#39;s Blog">
-<meta property="og:description" content="最近产生了一个“大胆”的想法，就是用 Node.js 来重写 walfie/gbf-raidfinder 这个被许多骑空士使用着的项目。 为什么想要重写？因为原项目是用 Scala 写的，运行在 JVM 上，虽然 JVM 跨平台的能力比较强，但它相对比较“臃肿”，而且构建、更新起来比较慢。可以是可以用作者提供的 Docker 镜像直接部署，但是之前因为 Docker 不兼容于 4.9 以上的内核，">
+<meta property="og:description" content="烦躁的很。 最近心头一直堵着，有形无形的压力大到快把我压垮了。 首先列一个 To Do List:  财务案例分析 资产评估报告 财务英语报告 数学重修考试 初级会计考试  除了第四个是年轻犯下的错误之外，其他都是与这个我一点都不喜欢的专业相关的内容，我一点都不想做，但奈何，这是必须要完成的，尤其是前三个还是小组作业——别人都想要划水就我想认真做的那种。 内心的压力大到什么程度，我每晚二点前才将将">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2018-01-08T15:11:06.912Z">
+<meta property="og:updated_time" content="2018-04-22T15:14:36.562Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="计划：用 Node.js 重写 GBF-RaidFinder">
-<meta name="twitter:description" content="最近产生了一个“大胆”的想法，就是用 Node.js 来重写 walfie/gbf-raidfinder 这个被许多骑空士使用着的项目。 为什么想要重写？因为原项目是用 Scala 写的，运行在 JVM 上，虽然 JVM 跨平台的能力比较强，但它相对比较“臃肿”，而且构建、更新起来比较慢。可以是可以用作者提供的 Docker 镜像直接部署，但是之前因为 Docker 不兼容于 4.9 以上的内核，">
+<meta name="twitter:title" content="杂（四）">
+<meta name="twitter:description" content="烦躁的很。 最近心头一直堵着，有形无形的压力大到快把我压垮了。 首先列一个 To Do List:  财务案例分析 资产评估报告 财务英语报告 数学重修考试 初级会计考试  除了第四个是年轻犯下的错误之外，其他都是与这个我一点都不喜欢的专业相关的内容，我一点都不想做，但奈何，这是必须要完成的，尤其是前三个还是小组作业——别人都想要划水就我想认真做的那种。 内心的压力大到什么程度，我每晚二点前才将将">
   
   
     <link rel="icon" href="/favicon.png">
@@ -88,36 +88,42 @@
     <script>setLoadingBarProgress(40);</script>
     
     <main id="main" role="main">
-      <article id="post-gbf-raidfinder"
+      <article id="post-something-3"
   class="post article white-box article-type-post"
   itemscope itemprop="blogPost">
 	<h2 class="title">
-  	<a href="/2018/01/gbf-raidfinder/">
-    	计划：用 Node.js 重写 GBF-RaidFinder
+  	<a href="/2018/04/something-3/">
+    	杂（四）
     </a>
   </h2>
 	<time>
-	  Jan 8, 2018
+	  Apr 22, 2018
 	</time>
 	<section class="content">
   	<div class="article-entry" itemprop="articleBody">
-    	<p>最近产生了一个“大胆”的想法，就是用 Node.js 来重写 <a href="https://github.com/walfie/gbf-raidfinder" target="_blank" rel="noopener">walfie/gbf-raidfinder</a> 这个被许多骑空士使用着的项目。</p>
-<h2 id="为什么想要重写？"><a href="#为什么想要重写？" class="headerlink" title="为什么想要重写？"></a>为什么想要重写？</h2><p>因为原项目是用 Scala 写的，运行在 JVM 上，虽然 JVM 跨平台的能力比较强，但它相对比较“臃肿”，而且构建、更新起来比较慢。可以是可以用作者提供的 Docker 镜像直接部署，但是之前因为 Docker 不兼容于 4.9 以上的内核，而我又比较依赖于 bbr 这玩意儿所以就没用 Docker 而是直接跑在系统的 JVM 上。</p>
-<p>那么为什么想用 Node.js 重写，Node.js 相比较于 JVM, 保证了一定的跨平台能力的同时更为轻量化，版本迭代的代价也更低一些。最主要的是，我想通过这次重写来学习 Node.js 和 Javascript, 因为这个项目是 C/S 架构的，也能学习一定的全栈能力。</p>
-<h2 id="重写方案"><a href="#重写方案" class="headerlink" title="重写方案"></a>重写方案</h2><p>在重新简要查看了原作者的实现之后，我得出了“这不是我短时间就能重写出来”的结论，原因如下：</p>
-<ul>
-<li>原作者使用了 WebSockets 这项技术来实现列表的实时更新</li>
-<li>原作者使用的许多库不知道在 npm 有没有类似的替代品</li>
-<li>原作者写的 Boss 列表自更新是一大难点</li>
-<li>我在 JS 和 Node.js 上都只是一个初学者</li>
-</ul>
-<p>那么就一步一步地来，先写出一个 Twitter 的搜索模块，再学 WebSockets 然后把实时更新给实现了，然后把自更新实现了，最后把几个部分整合到一起，差不多重写就完成了。我给这个坑留半年到一年的时间，希望明年的现在我已经填完这个坑了。</p>
+    	<p>烦躁的很。</p>
+<p>最近心头一直堵着，有形无形的压力大到快把我压垮了。</p>
+<p>首先列一个 To Do List:</p>
+<ol>
+<li>财务案例分析</li>
+<li>资产评估报告</li>
+<li>财务英语报告</li>
+<li>数学重修考试</li>
+<li>初级会计考试</li>
+</ol>
+<p>除了第四个是年轻犯下的错误之外，其他都是与这个我一点都不喜欢的专业相关的内容，我<strong>一点</strong>都不想做，但奈何，这是必须要完成的，尤其是前三个还是小组作业——别人都想要划水就我想认真做的那种。</p>
+<p>内心的压力大到什么程度，我每晚二点前才将将睡着，早上七点半左右准时醒来，即使每天跑五圈还是不能让我早睡哪怕半小时。</p>
+<p>这些杂七杂八的专业相关让我没有任何足够的空闲来学习别的东西，练手用的机核网电台收听器已经搁置了一个月没动过一行代码了，而年初定下的 RaidFinder 更是八字没有一撇——我会另写一篇博文来讲述这几个月碰到的曲折。</p>
+<p>从三月末开始我就不断地在投实习简历，有一家上海的，很中意很想做的实习编辑，却因为时间问题，连去面试的机会都没有，而投出的其他简历则是一点回声都没有。今天我还是想通了，剩下的时间不如好好钻研代码，精通个一种 WebApp 框架就能让自己在就业的时候好过一些，最起码比这个做财务的强。</p>
+<p>归根结底还是自己浪费了太多的时间，如果从高考完就意志坚定的学习代码，现在靠朋友内推应该已经拿到个实习机会了，怎么也比现在成天操心自己毕业实习那个章怎么办来的强。</p>
+<p>不过我倒是不会把写博客的时间归于浪费，多码点字能让人的逻辑思维更加清晰，水文章来的更快，也是一种释放压力的好方式，虽然大概也没几个人看吧（笑）。</p>
+<p>内心的烦躁大部分还是来自于就业，我看不到未来的路，一片迷茫。</p>
 
   	</div>
 
 	  <div class="article-tags tags">
 		  
-        <a class="tag-link" href="/tags/Everything/">Everything</a><a class="tag-link" href="/tags/Programming/">Programming</a>
+        <a class="tag-link" href="/tags/Everything/">Everything</a><a class="tag-link" href="/tags/杂/">杂</a>
       
 	  </div>
 	</section>

@@ -101,7 +101,7 @@
 	</time>
 	<section class="content">
   	<div class="article-entry" itemprop="articleBody">
-    	<p>上周末和这周头上都一直在写那个 GBF 自动发 PO 到微博的工具(<a href="https://github.com/XinoAssassin/GBF2weibo" target="_blank" rel="external">github</a>)，到目前为止也就实现了一半，后半部分自动发 PO 的功能因为新浪的限制，已经没办法做到以前 FaWave 那种形式的发送微博了。我的想法是绕路，通过在 weibo.com, 也就是网页版微博中插脚本，实现将文本插入到发送框，同时图片也插入进去，然后模拟点击发送按钮。上周日下午研究了一小时的微博首页，文本插入到发送框和模拟点击发送是能够做到的，但是就是不知道如何插入图片。在这里我又产生了一种绕路想法，就是模拟 Ctrl + C/V 的键盘操作来进行复制粘贴工作，然后，坑了。</p>
+    	<p>上周末和这周头上都一直在写那个 GBF 自动发 PO 到微博的工具(<a href="https://github.com/XinoAssassin/GBF2weibo" target="_blank" rel="noopener">github</a>)，到目前为止也就实现了一半，后半部分自动发 PO 的功能因为新浪的限制，已经没办法做到以前 FaWave 那种形式的发送微博了。我的想法是绕路，通过在 weibo.com, 也就是网页版微博中插脚本，实现将文本插入到发送框，同时图片也插入进去，然后模拟点击发送按钮。上周日下午研究了一小时的微博首页，文本插入到发送框和模拟点击发送是能够做到的，但是就是不知道如何插入图片。在这里我又产生了一种绕路想法，就是模拟 Ctrl + C/V 的键盘操作来进行复制粘贴工作，然后，坑了。</p>
 <p>写这玩意儿的过程中，因为需要自己获取当前的 RaidCode, 也就是那个八位参战码。GBF 页面加载完存在一个 “stage” object, 其中 .pJsnData.twitter.battle_id 就是我需要的码。那么就需要将这个码传递出来，而 Chrome 对于 Extension 是有非常严格的限制的，Extension 的 Content Script 和 Extension 本体是处于不同的沙盒之内的，所以就不能直接用 <code>var raidCode = stage.pJsnData.twitter.battle_id</code> 这种形式，而是要通过 Chrome 的 Message Passing API 来传递信息。苦学了好几天的消息传递都不能达到目的的时候，我想起来 Viramate 提供了外部获取数据的 API, 那我直接调用 API 来得到整理过的信息不是更方便吗？说是这么说，看了半天源码之后发现它没提供现成的 RaidCode 直接返回，发邮件询问作者之后得知，原来有提供战场数据的返回，但没有直接的 RaidCode 返回，不过已经能满足我的需求了。</p>
 <p><del>其实作者在说明文档中有写这个 API, 但他写返回内容的时候写了”a bunch of shit”，所以我当时看文档的时候也就忽视掉了这个 API.</del></p>
 <p>有了现成的数据源，我只需要将其解析就行了。随后遇到了一些奇奇怪怪的小问题，大部分都是新手常见问题，值得一提的是，JS 的执行时间点与其在页面里的加载位置有关系，比如说，放在<code>&lt;head&gt;</code>里的要比<code>&lt;body&gt;</code>中的早执行（表意可能有问题）。</p>

@@ -100,6 +100,49 @@
 
   
   <h2 class="title">
+    <a href="/2018/04/something-3/">
+      杂（四）
+    </a>
+  </h2>
+  
+  <time>
+    Apr 22, 2018
+  </time>
+  <section class="content">
+	  <p>烦躁的很。</p>
+<p>最近心头一直堵着，有形无形的压力大到快把我压垮了。</p>
+<p>首先列一个 To Do List:</p>
+<ol>
+<li>财务案例分析</li>
+<li>资产评估报告</li>
+<li>财务英语报告</li>
+<li>数学重修考试</li>
+<li>初级会计考试</li>
+</ol>
+<p>除了第四个是年轻犯下的错误之外，其他都是与这个我一点都不喜欢的专业相关的内容，我<strong>一点</strong>都不想做，但奈何，这是必须要完成的，尤其是前三个还是小组作业——别人都想要划水就我想认真做的那种。</p>
+<p>内心的压力大到什么程度，我每晚二点前才将将睡着，早上七点半左右准时醒来，即使每天跑五圈还是不能让我早睡哪怕半小时。</p>
+<p>这些杂七杂八的专业相关让我没有任何足够的空闲来学习别的东西，练手用的机核网电台收听器已经搁置了一个月没动过一行代码了，而年初定下的 RaidFinder 更是八字没有一撇——我会另写一篇博文来讲述这几个月碰到的曲折。</p>
+<p>从三月末开始我就不断地在投实习简历，有一家上海的，很中意很想做的实习编辑，却因为时间问题，连去面试的机会都没有，而投出的其他简历则是一点回声都没有。今天我还是想通了，剩下的时间不如好好钻研代码，精通个一种 WebApp 框架就能让自己在就业的时候好过一些，最起码比这个做财务的强。</p>
+<p>归根结底还是自己浪费了太多的时间，如果从高考完就意志坚定的学习代码，现在靠朋友内推应该已经拿到个实习机会了，怎么也比现在成天操心自己毕业实习那个章怎么办来的强。</p>
+<p>不过我倒是不会把写博客的时间归于浪费，多码点字能让人的逻辑思维更加清晰，水文章来的更快，也是一种释放压力的好方式，虽然大概也没几个人看吧（笑）。</p>
+<p>内心的烦躁大部分还是来自于就业，我看不到未来的路，一片迷茫。</p>
+
+
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/tags/Everything/">Everything</a><a class="tag-link" href="/tags/杂/">杂</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
     <a href="/2018/04/Chinese-Parents/">
       中国式家长
     </a>
@@ -215,10 +258,10 @@
 <p>抗锯齿的一般过程就是将这个毛刺的边缘柔化，使图像边缘看起来更平滑。如图：<img src="/images/4ec755cfd484c8333f094f57b97f3408_hd.jpg" alt="img"></p>
 <h2 id="各种算法简单介绍"><a href="#各种算法简单介绍" class="headerlink" title="各种算法简单介绍"></a>各种算法简单介绍</h2><p>抗锯齿算法种类非常多，下面的介绍顺序基本上是各种抗锯齿算法出现的时间顺序。</p>
 <h3 id="SSAA"><a href="#SSAA" class="headerlink" title="SSAA"></a>SSAA</h3><p>超级采样抗锯齿(Super-Sampling Anti-Aliasing, 也可叫做 Supersampling 超采样)是最早也最简单粗暴的抗锯齿手法，它的原理非常简单，就是在渲染时将要输出的分辨率提升 x 倍，比如要输出 1920x1080 的分辨率到屏幕上，开启 SSAA 2x, 那么内部渲染时的分辨率就是 3840x2160, 然后 Downsampling 到 1920x1080 上，自然在许多纹理边缘上就显得平滑许多。但是这种方式太太太吃资源了，所以又开发出了新的算法。</p>
-<p>在 Nvidia 发布二代 Maxwell 架构的时候，同时发布的 <a href="http://www.geforce.cn/hardware/technology/dsr/technology" target="_blank" rel="external">DSR</a> 技术中就有 SSAA 的影子，技术思路同样是以更高分辨率渲染的原始画面输出到显示器分辨率上来得到更加精细平滑的画面。</p>
+<p>在 Nvidia 发布二代 Maxwell 架构的时候，同时发布的 <a href="http://www.geforce.cn/hardware/technology/dsr/technology" target="_blank" rel="noopener">DSR</a> 技术中就有 SSAA 的影子，技术思路同样是以更高分辨率渲染的原始画面输出到显示器分辨率上来得到更加精细平滑的画面。</p>
 <h3 id="MSAA"><a href="#MSAA" class="headerlink" title="MSAA"></a>MSAA</h3><p>SSAA 太吃资源了，我们的硬件暂时还跟不上，怎么办？于是就有了多重采样抗锯齿(Multi-Sampling Anti-Aliasing), 它跟 SSAA 的区别就是，MSAA 只对于多边形的边缘进行抗锯齿处理。比如一个红色的圆，只对圆周作抗锯齿多重采样计算，但是圆周以内的部分则不会处理。这种方式下的画面锯齿得到了一定的抑制，而抗锯齿需要的资源也大幅下降到可接受的范围中。所以 MSAA 也逐渐成为目前被使用的最多的抗锯齿技术。</p>
 <p>但是 MSAA 也有其局限之处，比如对于半透明物件、边缘不明确或者非常复杂的物件比如密集草丛、铁丝网这类的抗锯齿处理就比较力不从心。</p>
-<h3 id="CSAA-amp-CFAA"><a href="#CSAA-amp-CFAA" class="headerlink" title="CSAA &amp; CFAA"></a>CSAA &amp; CFAA</h3><p>历史进入 Direct 10 时代，NV 方先声夺人发布了 G80 系列，同时带来了覆盖采样抗锯齿(<a href="http://www.nvidia.com/object/coverage-sampled-aa.html" target="_blank" rel="external">Coverage-Sampling Anti-Aliasing</a>)技术，主要改进了取样类型从而使得抗锯齿效率提升，资源占用量也得到减少。举例来说，如果使用 16x MSAA，需要在周围取得 16 个采样点的色彩值和 Z 轴值，然后保存这些数值进行计算。而 16x CSAA，则全部在被采样的像素点中心取得色彩之和Z轴值，然后对比并去掉同样的数据。一般来说，16x CSAA 后只需要保存 4 份色彩值和 Z 轴值即可。换句话来说，4x MSAA 耗费的资源和 16x CSAA 是相同的，但是，16x CSAA的画面效果相比 4x MSAA 更好。</p>
+<h3 id="CSAA-amp-CFAA"><a href="#CSAA-amp-CFAA" class="headerlink" title="CSAA &amp; CFAA"></a>CSAA &amp; CFAA</h3><p>历史进入 Direct 10 时代，NV 方先声夺人发布了 G80 系列，同时带来了覆盖采样抗锯齿(<a href="http://www.nvidia.com/object/coverage-sampled-aa.html" target="_blank" rel="noopener">Coverage-Sampling Anti-Aliasing</a>)技术，主要改进了取样类型从而使得抗锯齿效率提升，资源占用量也得到减少。举例来说，如果使用 16x MSAA，需要在周围取得 16 个采样点的色彩值和 Z 轴值，然后保存这些数值进行计算。而 16x CSAA，则全部在被采样的像素点中心取得色彩之和Z轴值，然后对比并去掉同样的数据。一般来说，16x CSAA 后只需要保存 4 份色彩值和 Z 轴值即可。换句话来说，4x MSAA 耗费的资源和 16x CSAA 是相同的，但是，16x CSAA的画面效果相比 4x MSAA 更好。</p>
 <p>同期 ATI 在发布 R600 系列时也带来了可编程过滤抗锯齿(Custom Filter Anti-Aliasing)技术。简单的来说 CFAA 就是扩大取样面积的 MSAA，比方说之前的 MSAA 是严格选取物体边缘像素进行缩放的，而 CFAA 则可以通过驱动判断对影响锯齿效果较大的像素进行缩放，以较少的性能牺牲换取平滑效果。</p>
 <p>但是由于种种原因，CSAA 被接受程度更高一些，不少游戏就直接加入了 CSAA 选项。而 CFAA 由于需要在显卡驱动面板中进行调试而渐渐被用户所遗忘。</p>
 <h3 id="MLAA-amp-FXAA"><a href="#MLAA-amp-FXAA" class="headerlink" title="MLAA &amp; FXAA"></a>MLAA &amp; FXAA</h3><p>在 CFAA 被遗忘之后，AMD-ATI 带来了形态抗锯齿(Morphological Anti-Aliasing).</p>
@@ -226,7 +269,7 @@
 <p>MLAA 的实际效果还是非常不错的，但是资源耗用还是有点厉害的。它的最大优势就是不需要游戏来支持它，因为是后处理技术所以在显卡驱动面板中打开就能用而且兼容性非常好。但是由于其仅仅使用颜色数据来判断抗锯齿边缘，因此 MLAA 的应用可能导致无法辨识到底哪些边缘需要进行抗锯齿计算。特别是一些不需要抗锯齿的地方，如文字，表格等，可能都由于不当抗锯齿而显得圆滑甚至怪异。</p>
 <p>这边 A 家出了新抗锯齿技术，老冤家 NV 当然也不甘落后，在 Fermi 上推出了快速近似抗锯齿(Fast Approximate Anti-Aliasing)。</p>
 <p>FXAA 和 MLAA 一样，也是一种后处理抗锯齿，两种 AA 在原理上相似，但是由于 FXAA 可以在 AN 两家的卡上都可以用而 MLAA 则由于部分计算处理依赖于硬件所以只能在 A 卡上用，最后导致 FXAA 被广泛的采用了。而且同时期 FXAA 的性能损失比 MLAA 更小，而效果上基本能接近 4x MSAA 的画面，虽然同样还是会出现“字体破坏”的情况。</p>
-<h3 id="TXAA"><a href="#TXAA" class="headerlink" title="TXAA"></a>TXAA</h3><p>在抗锯齿这条路上，众多程序员以及各种“家”的探索是不会停下来的。在 Kepler 架构发布的同时，NV 也带来了新的 <a href="http://www.geforce.cn/hardware/technology/txaa/technology" target="_blank" rel="external">TXAA</a>(Temporal Anti-Aliasing 可称为“时间性抗锯齿”)技术，据 NV 自家的介绍，这项技术集时间性过滤器、硬件抗锯齿以及定制的 CG 电影式抗锯齿解算法于一身。</p>
+<h3 id="TXAA"><a href="#TXAA" class="headerlink" title="TXAA"></a>TXAA</h3><p>在抗锯齿这条路上，众多程序员以及各种“家”的探索是不会停下来的。在 Kepler 架构发布的同时，NV 也带来了新的 <a href="http://www.geforce.cn/hardware/technology/txaa/technology" target="_blank" rel="noopener">TXAA</a>(Temporal Anti-Aliasing 可称为“时间性抗锯齿”)技术，据 NV 自家的介绍，这项技术集时间性过滤器、硬件抗锯齿以及定制的 CG 电影式抗锯齿解算法于一身。</p>
 <p>原有的抗锯齿技术在解决静态画面的锯齿上可以说已经达到了瓶颈了，但是在动态画面上，有锯齿的部位很容易出现闪烁。如同其名字中的“时间性”，TXAA 旨在解决“时间性抗锯齿”，也就是动态画面中的锯齿闪烁等问题。而其同时提供着不输于 8x MSAA 的静态画面抗锯齿效果。</p>
 <p>TXAA 可以说是目前被采用的较多的抗锯齿算法中最厉害的一种了，但是它一是需要硬件电路配合，二是吃资源，以性能换画面，所以也基本上是中高端 N 卡用户用的。</p>
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>目前主流的一些抗锯齿技术大概就是这么多了，本文很多内容都是参考中文互联网上的一些文章写成的。第一次在机核发文，存在的许多不足之处也请多多包涵。</p>
@@ -265,15 +308,15 @@
 </ul>
 <p><del>Pacman 是最好的包管理器</del></p>
 <hr>
-<p>我分别在自己的台机上和一台 ThinkPad S1 Yoga 2014 上安装 Arch. 具体过程跟着官方 <a href="https://wiki.archlinux.org/index.php/Installation_guide" target="_blank" rel="external">Installation Guide</a> 走就行了，Wiki 中的注意事项也是比较全面了，本文写几个小注意点。</p>
+<p>我分别在自己的台机上和一台 ThinkPad S1 Yoga 2014 上安装 Arch. 具体过程跟着官方 <a href="https://wiki.archlinux.org/index.php/Installation_guide" target="_blank" rel="noopener">Installation Guide</a> 走就行了，Wiki 中的注意事项也是比较全面了，本文写几个小注意点。</p>
 <h2 id="Btrfs"><a href="#Btrfs" class="headerlink" title="Btrfs"></a>Btrfs</h2><p>不知道 Btrfs 的我建议你马上查 Wikipedia.</p>
 <p>Arch 的安装 ISO 环境中是自带了 Btrfs 的工具包和支持的，但是在 base 软件包中不包含这些，所以你需要手动安装 <code>btrfs-progs</code> 这个包，然后在 /etc/mkinitcpio.conf (注意是在 <code>arch-chroot</code> 这一步之后)中的 HOOK 一行中添加 btrfs, 之后跑一遍 <code>mkinitcpio -p linux</code>, 看到输出中有 btrfs 即可。</p>
-<p>关于 btrfs 的配置问题，参见官方 Wiki, 也可以参考 <a href="https://github.com/egara/arch-btrfs-installation" target="_blank" rel="external">egara/arch-btrfs-installation</a>.</p>
+<p>关于 btrfs 的配置问题，参见官方 Wiki, 也可以参考 <a href="https://github.com/egara/arch-btrfs-installation" target="_blank" rel="noopener">egara/arch-btrfs-installation</a>.</p>
 <h2 id="Boot-Loader"><a href="#Boot-Loader" class="headerlink" title="Boot Loader"></a>Boot Loader</h2><p>在 Boot Loader 的选择中，我个人还是比较倾向于直接使用 systemd 集成的 systemd-boot, 懒得再装个 GRUB.</p>
 <p>虽然 systemd-boot 局限性非常大，比如它只能加载 EFI 可执行文件比如 bootmgfw.efi, vmlinuz-linux.</p>
 <p>如果选择了 systemd-boot 作为 Boot Loader, 那么就需要在 <code>arch-chroot</code> 后手动运行一次 <code>bootctl --path=$ESP install</code> 来把引导程序安装进 EFI 分区中并向 UEFI 界面注册这个引导器，之后你在启动时按 F12 就可以看到一个 Linux Boot Loader.</p>
 <p>但是如果只是将 Boot Loader 安装到了 EFI 分区还不足以让它引导我们进 Arch, 仍然需要在 /boot/loader/entries/ 这个目录下建立新的 conf 文件，里面的内容如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">title Arch Linux</div><div class="line">linux /vmlinuz-linux</div><div class="line">initrd /initramfs-linux.img</div><div class="line">options root=(PARTUUID|PARTLABEL)=xxxxxxxxxxxxxxxxxxxxxxxx rw</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title Arch Linux</span><br><span class="line">linux /vmlinuz-linux</span><br><span class="line">initrd /initramfs-linux.img</span><br><span class="line">options root=(PARTUUID|PARTLABEL)=xxxxxxxxxxxxxxxxxxxxxxxx rw</span><br></pre></td></tr></table></figure>
 <p>如果使用的是 Intel 的 CPU 并且有安装 <code>intel-ucode</code> 包，那么在第3行之前再加一行 <code>initrd /intel-ucode.img</code> 启用它。</p>
 <p>建立完了引导所需的系统 config, 需要在 /boot/loader/loader.conf 中的 default 一行中指定刚才建立的 config 文件名，然后使用 Linux Boot Loader 引导器就会默认进入 Arch Linux.</p>
 <h2 id="双系统与时钟"><a href="#双系统与时钟" class="headerlink" title="双系统与时钟"></a>双系统与时钟</h2><p>感谢 UEFI 标准，现在我们可以非常方便地组建双系统 (Windows + Linux) 环境。</p>
@@ -281,7 +324,7 @@
 <p>双系统有一个很大的问题，就是时钟。Windows 默认往 BIOS 写入本地时间，而不是 Linux 标准的 UTC, 这就会导致你从 Windows 切换过去后时间会+8, 也就是按你的时区调整然后又写回到 BIOS 中。从 Linux 切换过去，Windows 认为是本地时间，于是显示给你的实际上是 UTC. 所以为了解决这个问题，在安装 Arch 时，使用 <code>hwclock --hctosys -l</code> (将硬件时间作为本地时间读入系统), 而不是 Guide 上所用的 <code>hwclock --systohc</code>(将系统时间写入 BIOS 并且是 UTC).</p>
 <p>之后启动到 Windows, 注册表定位到 <code>HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation</code> 添加一个 DWORD, 名为 <code>RealTimeIsUniversal</code> 值为 1, 即可实现 Windows 往硬件中写入的时间是以 UTC 为标准而不是本地时间。</p>
 <h2 id="systemctl-enable"><a href="#systemctl-enable" class="headerlink" title="systemctl enable"></a>systemctl enable</h2><p>由于 Arch Linux 的哲学，大部分软件包在安装之后也并不会自动启用，需要你手动 <code>systemctl enable|start xxxx</code>. 尤其要留意的是，还在 ISO 环境下安装系统的时候就要把 dhcpcd 这个服务给 enable 了，解决你进系统之后发现连不上网络想半天不知道问题出在哪里的问题。当然这是针对有线网卡，而大部分无线网卡，我推荐直接使用 Network Manager 搞定。当然使用无线网卡的首次联网你还是需要如下步骤：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ip link set dev interface up</div><div class="line">iw interface scan</div><div class="line">wpa_supplicant -B -i interface -c &lt;(wpa_passphrase SSID Password)</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip link set dev interface up</span><br><span class="line">iw interface scan</span><br><span class="line">wpa_supplicant -B -i interface -c &lt;(wpa_passphrase SSID Password)</span><br></pre></td></tr></table></figure>
 <p>还有一点需要注意的是，Arch 的 Shadowsocks-libev 默认读取的配置目录在 /etc/shadowsocks/, 与 Python 版相同的目录而不是传统的 /etc/shadowsocks-libev/ 下，启用它的命令为 <code>systemctl enable shadowsocks-libev@配置文件名.service</code> .</p>
 <h2 id="Intel-有线网卡的坑"><a href="#Intel-有线网卡的坑" class="headerlink" title="Intel 有线网卡的坑"></a>Intel 有线网卡的坑</h2><p>当你机器上使用的网卡的是 Intel Ethernet Connection I21x 的时候，你要小心了，在安装 Arch 之前，在 Windows 中安装 Intel 的官方驱动，然后在网卡的硬件配置面板中将所有的网络唤醒选项给关闭，这可以有效防止你进入 Arch 环境之后获取不到任何的网络信息导致连不上网。</p>
 <p><code>&gt;&gt; endl;</code></p>
@@ -408,7 +451,7 @@
 <p>而这时候的 B 站，已经开始逐步用力发展他们的移动客户端业务了。早期的 AB 两站移动客户端体验，B 站的 App 无论在界面设计还是播放体验上，都是比 A 站的要高出一条街的存在。</p>
 <p>本文主旨不在于两站对比，故以引用形式略提一句同时期的 B 站发展概况。</p>
 </blockquote>
-<p>搞笑的是，在第一届宅学会过去恰好一年之际，GoHank, 这个对 A 站贡献不少的 UP 后来进入管理层的“猴子”出走了 B 站。当时 A 站不少运营以及用户的理念，在这个帖子中，能够瞥见一番。<a href="http://last-dreamer.com/thread-2501-1-1.html" target="_blank" rel="external">狗Hank+葛平+ACFUN事件</a></p>
+<p>搞笑的是，在第一届宅学会过去恰好一年之际，GoHank, 这个对 A 站贡献不少的 UP 后来进入管理层的“猴子”出走了 B 站。当时 A 站不少运营以及用户的理念，在这个帖子中，能够瞥见一番。<a href="http://last-dreamer.com/thread-2501-1-1.html" target="_blank" rel="noopener">狗Hank+葛平+ACFUN事件</a></p>
 <blockquote>
 <p>那hank确实不适合这里了，因为我觉得ac就像是猴王的微博的简介<br>“只交朋友，不混圈”<br>走好不送。</p>
 <p>还是那句话，<br>只交朋友，不混圈，混圈的话，隔壁欢迎你。当然这里也欢迎你，不过&gt;这里欢迎的是朋友，不是圈子。<br>谢谢。</p>
@@ -481,7 +524,7 @@
 <p>而 Signature 字段又是根据其他6个字段以及 HTTP 请求的 URL 和参数（包括 POST 方法的 Request Body）来产生的，格式如下：</p>
 <p><code>请求方法&amp;请求URL&amp;其他6个字段&amp;请求参数</code></p>
 <p>HMAC-SHA1 签名的产生还需要一个 Key, 这个 Key 是由用户的 Consumer Secret 和 Access Token Secret 来构建的。</p>
-<h2 id="抓包"><a href="#抓包" class="headerlink" title="抓包"></a>抓包</h2><p>写了半个下午的 OAuth, 写完运行之后还是返回一个 401 给我，仔细检查代码也没有发现哪里出错了。没有办法之下，我想到了抓原版的请求包来看它到底用了什么关键词。于是立即安装 <a href="http://www.scala-sbt.org/index.html" target="_blank" rel="external">sbt</a> 和 JDK. 其实 Windows 上的 sbt 也就是提供一个 jar 包和 sbt.bat 这个运行脚本来设定 sbt 所需要的运行环境而已。</p>
+<h2 id="抓包"><a href="#抓包" class="headerlink" title="抓包"></a>抓包</h2><p>写了半个下午的 OAuth, 写完运行之后还是返回一个 401 给我，仔细检查代码也没有发现哪里出错了。没有办法之下，我想到了抓原版的请求包来看它到底用了什么关键词。于是立即安装 <a href="http://www.scala-sbt.org/index.html" target="_blank" rel="noopener">sbt</a> 和 JDK. 其实 Windows 上的 sbt 也就是提供一个 jar 包和 sbt.bat 这个运行脚本来设定 sbt 所需要的运行环境而已。</p>
 <p>安装完了，<code>sbt run</code> 先跑一记看看，然后让我没想到的是，在性能比 VPS 强了几倍的情况下，这玩意儿还是跑的稀慢，也可能是 Windows 的问题，总之，构建初始运行环境就花了大概一个半小时，不容易等到开始编译 scala 资源了，开始疯狂报错了。</p>
 <p>首先是一个 Python 脚本报错导致后续脚本无法继续，查询项目文档后得知 Windows 上需要 Python 2.X, 而我安装的是 3.6, 没想到在这里会第一次碰到 Python 的版本问题，没办法，下 2.7 改 Path, 好通过了，然后继续报错。</p>
 <p>之后报错都是因为 Java 运行环境的限制，主要问题出在内存的设定上，Google 之，然后在 Java 控制面板中添加全局参数，<code>sbt run</code> 之后开任务管理器看到参数起效了，遂继续运行下去，然而还是会报内存不够的错误，不解，好在每次都能按部就班的往下跑一点，几次重启之后也搞定了。把 twitter4j.properties 放到根目录下，<code>sbt run</code> 之后发现貌似请求没走代理，Twitter 请求撞墙超时。这时想到用 Proxifier 将 java.exe 的请求重定向到本地代理去，重定向之后就跑起来了，程序启动的一瞬间有两个 Search API 的请求和一个 Stream API 的请求，然后全是访问 pic.twitter.com 的请求，下图片的。</p>
@@ -492,10 +535,10 @@
 <p>切记 keytool 这玩意儿要用管理员身份来跑，添加完之后 keytool 会生成一个 keystore 文件，建议将它移动在自己 Home 文件夹中并重命名为 .keystore</p>
 </blockquote>
 <p>既然 \$JAVA_OPTS 这个环境变量看上去对 sbt 没用，那我改 $SBT_OPTS, 利用 Everything 这玩意儿强大的搜索功能找到了存在于 <code>sbt 安装目录\config</code> 下面的 sbtopts 文件，好就是你了，添加自定义命令行，<code>sbt run</code>, 然并卵，一点作用都没起。一头雾水中我打开 sbt.bat 这个 Windows 版 sbt 的实际起效文件，发现了这行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set FN=%SBT_HOME%\..\conf\sbtconfig.txt</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set FN=%SBT_HOME%\..\conf\sbtconfig.txt</span><br></pre></td></tr></table></figure>
 <p><del>我去你妈的，也是个不喜欢用一套轮子的。</del></p>
 <p>把原本写进 sbtopts 文件的自定义命令行改写到 sbtconfig.txt 中，Java 命令行的前缀 <code>-J</code> 并不用添加，最后如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-DproxySet=true </div><div class="line">-DproxyHost=127.0.0.1</div><div class="line">-DproxyPort=8888   &apos;Fiddler 的代理端口</div><div class="line">-Djavax.net.ssl.trustStore=&lt;path\to\FiddlerKeystore&gt; &apos;刚刚生成的 keystore 文件的位置，如果移动到了 $Home 下面并重命名为 .keystore 的话这行就不用加</div><div class="line">-Djavax.net.ssl.trustStorePassword=&lt;Keystore Password&gt; &apos;刚刚 keytool 让你敲的密码</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-DproxySet=true </span><br><span class="line">-DproxyHost=127.0.0.1</span><br><span class="line">-DproxyPort=8888   &apos;Fiddler 的代理端口</span><br><span class="line">-Djavax.net.ssl.trustStore=&lt;path\to\FiddlerKeystore&gt; &apos;刚刚生成的 keystore 文件的位置，如果移动到了 $Home 下面并重命名为 .keystore 的话这行就不用加</span><br><span class="line">-Djavax.net.ssl.trustStorePassword=&lt;Keystore Password&gt; &apos;刚刚 keytool 让你敲的密码</span><br></pre></td></tr></table></figure>
 <p><code>sbt run</code></p>
 <p>终于，我在 Fiddler 中看到了 java.exe 的请求，并且正确地解密了出来。我花了半天时间探寻的内容终于呈现在我眼前：</p>
 <p><code>count=0&amp;track=%E5%8F%82%E5%8A%A0%E8%80%85%E5%8B%9F%E9%9B%86%EF%BC%81%2C%3A%E5%8F%82%E6%88%A6ID%2CI%20need%20backup%21%2C%3ABattle%20ID&amp;stall_warnings=true</code></p>
@@ -507,7 +550,7 @@
 <p>然而从外部使用 DDNS 域名+端口号的方式不能直接访问到 RaidFinder. 哦好像是要配上一个 HTTP Server, 那简单，跑一个 http.server 80 不就行了。</p>
 <p>是行了，能访问到所有的静态资源，但是看着 Console 中不断提示的 <code>ws/raids?keepAlive=true</code> 404, 我突然想起来前不久看到的 WebSockets 简介中提到的，要建立一个 WebSockets 连接是需要从 HTTP 请求“转发升级”过去的。于是想到用 NGINX, 下载，这玩意儿才 1MB+ 的大小，真他妈绿色环保。</p>
 <p>把自己服务器上的 nginx.conf 拖出来抄配置，终于理解了之前搜到的配置的用处：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">proxy_pass http://127.0.0.1:$port;</div><div class="line">proxy_http_version 1.1;</div><div class="line">proxy_set_header Upgrade $http_upgrade;</div><div class="line">proxy_set_header Connection "upgrade";</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">proxy_pass http://127.0.0.1:$port;</span><br><span class="line">proxy_http_version 1.1;</span><br><span class="line">proxy_set_header Upgrade $http_upgrade;</span><br><span class="line">proxy_set_header Connection "upgrade";</span><br></pre></td></tr></table></figure>
 <p>配置中最后两句就是为 WebSockets 而服务的，是一个 HTTP 请求转为 WebSockets 连接的关键点。</p>
 <p>那么一切设定好，开始跑，问题又来了：外网无法访问，内网 80 转发正常。</p>
 <h2 id="gt-gt-endl"><a href="#gt-gt-endl" class="headerlink" title="&gt;&gt; endl;"></a>&gt;&gt; endl;</h2><p>最后这篇折腾记的终点就在这里了，不知道为何，访问就是无限转圈，但是起初寻找关键词的目的还是完成了。</p>
@@ -518,37 +561,6 @@
     
 	  <div class="tags">
       <a class="tag-link" href="/tags/Everything/">Everything</a><a class="tag-link" href="/tags/Programming/">Programming</a>
-	  </div>
-    
-
-  </section>
-</article>
-  
-    <article class="post ">
-
-  
-  <h2 class="title">
-    <a href="/2018/01/router/">
-      家庭网络和路由
-    </a>
-  </h2>
-  
-  <time>
-    Jan 21, 2018
-  </time>
-  <section class="content">
-	  <p>在<a href="https://blog.xinoassassin.com/2018/01/holiday-0/" target="_blank" rel="external">上一篇文章</a>中，我提到回家要干的一件事情就是更换路由。把新买的二手<del> Nepgear</del> Netgear R6250 替换掉用了两年多的洋垃圾 RT-N16. 更换到现在已经过去一天半左右的时间了，遇到了几个问题。</p>
-<p><img src="/images/HomeNetwork.png" alt="HomeNetwork"></p>
-<p>拿快递开箱换上配置好一共花了不到半小时就搞定了，然后问题开始浮现：我的 ThinkPad S1 Yoga 连接不到 R6250 提供的 2.4G 无线网络。开始认为是笔记本上那块单频 Intel 7260 的锅，然后把 R6250 的 2.4G 网的频宽从 40MHz 降到了 20MHz, 结果仍然有时断时续的情况出现，认为还是 7260 这张网卡的问题，准备更换网卡。但北美良心想在 BIOS 中做了限制，更换起来很麻烦，所以一筹莫展。结果今晚日常拿起手柄 V 的时候突发奇想连一下无线，发现根本找不到 2.4G 网的 SSID, 就算不容易刷出来了也是连接不上的状态，遂开始感觉是 R6250 的问题。Google 之，发现使用第三方固件的 R6250 大多都存在这种问题，比如 2.4G 网不稳定，2.4G 根本连不上什么的。但是我又不想用回官方那个烂的很的固件，于是掏出从学校快递回家，原本准备用来替换掉配电箱中的主路由的那只被改装过的 TP-Link WR720N, 本就刷好了 LEDE, 稍微改了几个配置就当 2.4G 的 AP 来用了，连接非常稳定。</p>
-<p>把 DMZ 主机指定到自己的机器之后，直接通过 DDNS 域名进行内网访问，速度非常快，延迟非常低，爽。</p>
-<p>然后用着用着，无心看到 IPv6 的地址头不对，而且怎么本地 DNS 域也变成了 LEDE 了？一看果然是小的 AP 在作怪，上面的 DHCP 服务器没关，也就是一个网段中有两个设备在 DHCP 广播。遂关闭之，顺带着把 Lan 口设置中的网关确定为 2.1, 并把 Dnsmasq 的服务一起关了，问题消失。</p>
-
-
-    
-    
-    
-	  <div class="tags">
-      <a class="tag-link" href="/tags/Everything/">Everything</a>
 	  </div>
     
 
