@@ -6,7 +6,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="https://xinoassasssin.github.io/"/>
-  <updated>2018-07-02T13:52:55.198Z</updated>
+  <updated>2018-07-25T13:42:59.558Z</updated>
   <id>https://xinoassasssin.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PC 硬件史话——序章</title>
+    <link href="https://xinoassasssin.github.io/2018/07/pc-hardware-history-0/"/>
+    <id>https://xinoassasssin.github.io/2018/07/pc-hardware-history-0/</id>
+    <published>2018-07-25T13:42:59.000Z</published>
+    <updated>2018-07-25T13:42:59.558Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="前言的前言"><a href="#前言的前言" class="headerlink" title="前言的前言"></a>前言的前言</h3><p>前两个月因为沉迷游戏而在一定程度上荒废了码字，最早产生整理 PC 硬件历史并写出来的想法还是在今年二月份的时候，种种原因之下，拖到了现在，也就是七月份才开始动笔。</p><p>思前想后几个月，我决定还是以比较方便我自己阅读的资料为主，尽量客观的以时间轴的方式来书写这段跨度长达近乎六十年的传奇历史。</p><p>参考的资料主要是以英文维基为主，并辅以各种其他资料来保证准确性和真实性。</p><p>前言里面还要讲讲这一整段传奇故事的大背景。</p><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>十九世纪的电学研究开启了第二次工业革命，把人类带入了电气时代。随着材料科技的迅猛进步，半导体的性质逐渐被人们所掌握，这直接导致了在二十世纪初，各种新型电子元件被发明，比如现在大家非常熟悉的二极管、电子管等等，这些半导体元件的个头都比较大，随后出现的晶体管，则开启了真正意义上的一场革命。</p><p>晶体管分为两种类型，一种是场效应管(Field-effect Transistor, FET)，其概念由 J. E. Lilienfeld 于 1926 年提出，但限于当时的条件，没有能够生产出实际能够工作的器件。而现在普遍认为的第一支晶体管是由贝尔实验室在 1947 年发明的，参与研发的人员有 John Bardeen, Walter Brattain 和 William Shockley。 他们发明的晶体管是与 J. E. Lilienfeld 提出的场效应管不同的双极性结型晶体管(Bipolar Junction Transistor, BJT)，也就是我们现在俗称的三极管。</p><p>由于种种原因，在发明了晶体管之后，Shockley（后文译作肖克利）离开了贝尔实验室。1956 年，他在山景城创办了以他自己名字命名的肖克利半导体实验室(Shockley Semiconductor Laboratory)，实验室所在的那片地区后来发展演变成为了举世闻名的硅谷(Silicon Valley)。肖克利实验室招揽了许多有志向研究半导体的年轻科学家与工程师，其中最为著名的便是日后的“八叛逆”。</p><p>可能是因为肖克利在实验室管理以及个人性格上存在的一些缺陷，八叛逆向肖克利的上级 Arnold Beckman 要求替换掉他在实验室的位置，然而 Arnold Beckman 最终做出的一系列支持肖克利的决定使得八叛逆不得不考虑离开肖克利实验室另寻出路。在 1957 年，他们获得了仙童摄影器材公司的资助，创办了仙童半导体(Fairchild Semiconductor)。当时半导体器件的主要基底材料是锗，而八叛逆认为硅比锗拥有更好的商业前景，因为相对于储量不高、提炼繁杂的锗，硅可以从沙子中提炼出来，可以降低原料成本和生产时间。仙童半导体在 1958 年成功的以硅为基底开发出了一款非常成功的晶体管，随后在 1959 年，八叛逆之一的 Jean Hoerni 又研发出了新的平面晶体管，这为后来仙童半导体的集成电路获得业界认可铺平了道路。</p><p>继承了前人的理念之后，在 1958 年 9 月 12 日，德州仪器(Texas Instruments)的 Jack Kilby 成功的研发出了第一块能够工作的集成电路，随后他在 1959 年 2 月 6 日为这项发明申请了专利。半年之后，仙童八叛逆之一的 Robert Noyce（后文译作罗伯特·诺伊斯）成功独立研发出了另一种不同的集成电路，与 Jack Kilby 不同的是，罗伯特·诺伊斯的集成电路是以硅为基底，并且更加实用。一年之后，诺伊斯又将平面晶体管技术运用在集成电路之上，这也使得业界更为认可仙童半导体出产的集成电路。仙童半导体在创造了一系列影响深远的研究发明之后俨然已经成为了整个半导体行业的领军者。</p><p>1965 年 4 月 8 日，八叛逆之一的 Gordon Moore（后文译作高登·摩尔）在 Electronics 杂志上发表了名为 <a href="http://hasler.ece.gatech.edu/Published_papers/Technology_overview/gordon_moore_1965_article.pdf" target="_blank" rel="noopener"><em>Cramming more components onto integrated circuits</em></a> 的文章，文中，他基于对行业发展的长久观察和思考后做出了一项具有历史意义的预测：</p><blockquote><p>The complexity for minimum component costs has increased at a rate of roughly a factor of two per year. Certainly over the short term this rate can be expected to continue, if not to increase. Over the longer term, the rate of increase is a bit more uncertain, although there is no reason to believe it will not remain nearly constant for at least 10 years. </p></blockquote><p>这就是半导体行业中著名的”Moore’s Law”的前身，在 1975 年 IEEE 的一次会议上，摩尔修订了预测的增长率，两倍的增长率将在 1980 年之后减半。年内稍晚时候，加州理工学院的 Carver Mead 教授将摩尔的预测总结为”Moore’s Law”。</p><p>摩尔定律事实上只是一条经验定律，但是却延续至今仍旧没有失效，甚至一定程度上指导了半导体业界的发展。</p><p>让我们把目光重新对准仙童半导体。在六十年代的前五年，仙童半导体的风光一时无两，然而这家公司并不会这么一帆风顺下去。1965 年开始，仙童半导体在公司内部管理上开始出现了一些问题，到了 1967 年 7 月，公司已经开始亏损并且领头的位置被德州仪器所夺取。1968 年 8 月，罗伯特·诺伊斯、高登·摩尔和 Andrew Grove 一起从仙童半导体离职，创办了 NM Electronics，一年之后，公司更名为 Intel。1969 年，仙童半导体的一群工程师决定离开公司创业，他们找到了 Jerry Sanders 一起合伙，5 月 1 日，Advanced Micro Devices 公司成立。</p><p>好了，演员已经全数登场，传奇即将上演。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;h3 id=&quot;前言的前言&quot;&gt;&lt;a href=&quot;#前言的前言&quot; class=&quot;headerlink&quot; title=&quot;前言的前言&quot;&gt;&lt;/a&gt;前言的前
+      
+    
+    </summary>
+    
+    
+      <category term="Hardware History" scheme="https://xinoassasssin.github.io/tags/Hardware-History/"/>
+    
+  </entry>
   
   <entry>
     <title>游戏六月</title>
@@ -37,9 +60,9 @@
     </summary>
     
     
-      <category term="Game" scheme="https://xinoassasssin.github.io/tags/Game/"/>
-    
       <category term="Everything" scheme="https://xinoassasssin.github.io/tags/Everything/"/>
+    
+      <category term="Game" scheme="https://xinoassasssin.github.io/tags/Game/"/>
     
   </entry>
   
@@ -131,9 +154,9 @@
     <link href="https://xinoassasssin.github.io/2018/04/the-newsroom/"/>
     <id>https://xinoassasssin.github.io/2018/04/the-newsroom/</id>
     <published>2018-04-13T14:34:54.000Z</published>
-    <updated>2018-04-14T14:37:56.673Z</updated>
+    <updated>2018-07-24T17:05:07.011Z</updated>
     
-    <content type="html"><![CDATA[<p>许多年前——其实也就是近几年——我听说了一部名为《新闻编辑室》的美剧，但却是前几天，我才看了这部早就应该看的剧。</p><p>这也是我看的第二部 HBO 出品的电视剧，第一部是《权力的游戏》。</p><h2 id="News"><a href="#News" class="headerlink" title="News"></a>News</h2><p>什么是新闻，我想不必再多赘言。而剧中新闻人们对于可播报的新闻，有着严格的审定程序，其中令人最为印象深刻的一条原则，就是“两个信源”原则，意思就是一个新闻必须有两个可靠的可信任的消息源(Source)来确认之后才是一个<strong>真实的</strong>新闻。这个原则是 ACN 头头 Charlie 坚守数十年的信条，在 S01E07 本·拉登这集中，这个原则体现的淋漓尽致。</p><p>看回到国内的现实状况。</p><p>我们的审查制度在某种意义上对于新闻的真实性和准确性是有帮助的，但是这种帮助的方式是有问题的。官方统一的口径固然重要，但是如果在某些存在重大争议性的社会事件上，不允许媒体发出自己的声音，没有各种不同角度的看法，那么在一定程度上就是对整个社会多样性的一种扼杀。</p><p>再来看剧集中以及现实中的国外媒体，我们不时就能看到对于政府的负面报道，在自由世界中，媒体甚至被喻为在行政立法司法三权之外的“第四权”。现今世界的民众通过媒体这一媒介了解大部分的信息，大众媒体的发展以及深入社会的每一个角落带来的是民众知情权的落实。</p><p>但新闻人，需要审查。</p><p>新闻人需要的审查是自我审查，而不是国家来对你的新闻进行审查，自我审查的应该是新闻中的事实成分是不是准确客观。事实如何，新闻就该是如何，客观始终是新闻人最需要遵守的一大原则。在新闻报道中不可避免的会带入媒体的主观色彩，但是不能因为你想用自己的主观看法去影响受众就去更改展现给受众的“事实”。</p><h2 id="人性"><a href="#人性" class="headerlink" title="人性"></a>人性</h2><p>新闻人是冷酷的，他们报道的是冷酷的客观事实。那么新闻人就一定会是冷血的吗？不是，绝不是。</p><p>剧集中展现出来的新闻人们，都是一个个活生生的人，他们有血有肉有心有自己的真情实感。</p><p>在剧终集的 Charlie 的葬礼上当 Mac 告诉 Will 她怀孕之后，Will 整个人就从一个略有一丝冷血的人改变了，他意识到他即将成为一个父亲。他有些慌张，以至于在一些时刻他语无伦次，甚至走进了婴儿房。</p><h2 id="美利坚"><a href="#美利坚" class="headerlink" title="美利坚"></a>美利坚</h2><p>美利坚是一个移民国家。</p><p>美利坚是自由世界的灯塔。</p><p>美利坚是……</p><p>我们谈起美国这个国家，想到的关键词，大部分是与自由民主强大世界警察之类的所相关。但不可忽视的是，它内部的各种问题，正在且一直都在影响着这个伟大的国家。从建国初期的内战，到二十世纪初的托拉斯崛起带来的各种问题、二十世纪中期的种族平权运动再到今天的自由派与保守派之间的矛盾分歧越来越大甚至重新兴起了极左极右的思潮。</p><p>当然，美利坚一次再一次地从各种问题的吞噬中脱身，就如 S01E01 中 Will 在西北大学说的最后那番话一样。</p><blockquote><p>We were able to be all these things and do all these things because we were informed… by great men, men who were revered. First step in solving any problem is recognizing there is one.</p></blockquote><p>美利坚能够认识到问题并解决它，他们的政治建构在一个超稳定的结构体系上，他们的社会虽然存在着各种各样的问题，但是他们拥有民主，他们拥有投票权。虽然从剧集中得知，原来的政治献金对于公司的捐赠限制在世纪末的时候已经被废除了，政坛上将会越来越充斥着金钱的臭味。</p>]]></content>
+    <content type="html"><![CDATA[<p>许多年前——其实也就是近几年——我听说了一部名为《新闻编辑室》的美剧，但却是前几天，我才看了这部早就应该看的剧。</p><p>这也是我看的第二部 HBO 出品的电视剧，第一部是《权力的游戏》。</p><h2 id="News"><a href="#News" class="headerlink" title="News"></a>News</h2><p>什么是新闻，我想不必再多赘言。而剧中新闻人们对于可播报的新闻，有着严格的审定程序，其中令人最为印象深刻的一条原则，就是“两个信源”原则，意思就是一个新闻必须有两个可靠的可信任的消息源(Source)来确认之后才是一个<strong>真实的</strong>新闻。这个原则是 ACN 头头 Charlie 坚守数十年的信条，在 S01E07 本·拉登这集中，这个原则体现的淋漓尽致。</p><p>看回到国内的现实状况。</p><p>我们的审查制度在某种意义上对于新闻的真实性和准确性是有帮助的，但是这种帮助的方式是有问题的。官方统一的口径固然重要，但是如果在某些存在重大争议性的社会事件上，不允许媒体发出自己的声音，没有各种不同角度的看法，那么在一定程度上就是对整个社会多样性的一种扼杀。</p><p>再来看剧集中以及现实中的国外媒体，我们不时就能看到对于政府的负面报道，在自由世界中，媒体甚至被喻为在行政立法司法三权之外的“第四权”。现今世界的民众通过媒体这一媒介了解大部分的信息，大众媒体的发展以及深入社会的每一个角落带来的是民众知情权的落实。</p><p>但新闻人，需要审查。</p><p>新闻人需要的审查是自我审查，而不是国家来对你的新闻进行审查，自我审查的应该是新闻中的事实成分是不是准确客观。事实如何，新闻就该是如何，客观始终是新闻人最需要遵守的一大原则。在新闻报道中不可避免的会带入媒体的主观色彩，但是不能因为你想用自己的主观看法去影响受众就去更改展现给受众的“事实”。</p><h2 id="人性"><a href="#人性" class="headerlink" title="人性"></a>人性</h2><p>新闻人是冷酷的，他们报道的是冷酷的客观事实。那么新闻人就一定会是冷血的吗？不是，绝不是。</p><p>剧集中展现出来的新闻人们，都是一个个活生生的人，他们有血有肉有心有自己的真情实感。</p><p>在剧终集的 Charlie 的葬礼上当 Mac 告诉 Will 她怀孕之后，Will 整个人就从一个略有一丝冷血的人改变了，他意识到他即将成为一个父亲。他有些慌张，以至于在一些时刻他语无伦次，甚至走进了婴儿房。</p><h2 id="美利坚"><a href="#美利坚" class="headerlink" title="美利坚"></a>美利坚</h2><p>美利坚是一个移民国家。</p><p>美利坚是自由世界的灯塔。</p><p>美利坚是……</p><p>我们谈起美国这个国家，想到的关键词，大部分是与自由民主强大世界警察之类的所相关。但不可忽视的是，它内部的各种问题，正在且一直都在影响着这个伟大的国家。从建国初期的内战，到二十世纪初的托拉斯崛起带来的各种问题、二十世纪中期的种族平权运动再到今天的自由派与保守派之间的矛盾分歧越来越大甚至重新兴起了极左极右的思潮。</p><p>当然，美利坚一次再一次地从各种问题的吞噬中脱身，就如 S01E01 中 Will 在西北大学说的最后那番话一样。</p><blockquote><p>We were able to be all these things and do all these things because we were informed… by great men, men who were revered. First step in solving any problem is recognizing there is one.</p></blockquote><p>美利坚能够认识到问题并解决它，他们的政治建构在一个超稳定的结构体系上，他们的社会虽然存在着各种各样的问题，但是他们拥有民主，他们拥有投票权。虽然从剧集中得知，原来的政治献金对于公司的捐赠限制在世纪末的时候已经被废除了，政坛上将会越来越充斥着金钱的臭味。</p><h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>这是一部值得一看的美剧，我始终认为，能够引发你进行思考的，都是好东西。</p><p>4.8/5，扣掉的 0.2 分在于没有续集。</p><p><code>&gt;&gt;endl;</code></p>]]></content>
     
     <summary type="html">
     
@@ -200,9 +223,9 @@
     </summary>
     
     
-      <category term="Game" scheme="https://xinoassasssin.github.io/tags/Game/"/>
-    
       <category term="Everything" scheme="https://xinoassasssin.github.io/tags/Everything/"/>
+    
+      <category term="Game" scheme="https://xinoassasssin.github.io/tags/Game/"/>
     
       <category term="Hardware" scheme="https://xinoassasssin.github.io/tags/Hardware/"/>
     
@@ -334,9 +357,9 @@
     </summary>
     
     
-      <category term="Programming" scheme="https://xinoassasssin.github.io/tags/Programming/"/>
-    
       <category term="Everything" scheme="https://xinoassasssin.github.io/tags/Everything/"/>
+    
+      <category term="Programming" scheme="https://xinoassasssin.github.io/tags/Programming/"/>
     
   </entry>
   
@@ -407,9 +430,9 @@
     </summary>
     
     
-      <category term="Programming" scheme="https://xinoassasssin.github.io/tags/Programming/"/>
-    
       <category term="Everything" scheme="https://xinoassasssin.github.io/tags/Everything/"/>
+    
+      <category term="Programming" scheme="https://xinoassasssin.github.io/tags/Programming/"/>
     
   </entry>
   
@@ -432,9 +455,9 @@
     </summary>
     
     
-      <category term="Programming" scheme="https://xinoassasssin.github.io/tags/Programming/"/>
-    
       <category term="Everything" scheme="https://xinoassasssin.github.io/tags/Everything/"/>
+    
+      <category term="Programming" scheme="https://xinoassasssin.github.io/tags/Programming/"/>
     
   </entry>
   
@@ -508,31 +531,9 @@
     </summary>
     
     
+      <category term="Everything" scheme="https://xinoassasssin.github.io/tags/Everything/"/>
+    
       <category term="Game" scheme="https://xinoassasssin.github.io/tags/Game/"/>
-    
-      <category term="Everything" scheme="https://xinoassasssin.github.io/tags/Everything/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>杂（二）</title>
-    <link href="https://xinoassasssin.github.io/2017/12/something-1/"/>
-    <id>https://xinoassasssin.github.io/2017/12/something-1/</id>
-    <published>2017-12-17T09:02:06.000Z</published>
-    <updated>2017-12-24T11:45:19.993Z</updated>
-    
-    <content type="html"><![CDATA[<p>前略，快考试了。</p><p>今天一时兴起去听贾鹏芳老师的曲子。<br>自己当初还拉二胡的时候没听说过其人，直到后来接触了和平之月之后才了解到，原来还有这么一位当代二胡演奏、作曲、艺术家。当今二胡界，她应当就是那个站在顶端的人了。可惜了，这么杰出的人物却要跑到日本才能获得更好的发展。<br>翻了一眼网易云下面的评论，称赞的，喷她的，叫人安心听曲子别废话的，什么都有，却没人思考为什么这么好的艺术家要跑到日本去才有今天的成就。</p><p>结合一下昨晚 steamcommunity 突然被墙之后今天贴吧让人去举报那几个政治敏感组想让 Valve 关闭掉那几个组从而让国内用户能够重新访问社区的事情，可笑。</p><p>大家都以一句“你懂的”略过对于体制本身问题的探讨，问起为什么的时候都无奈地表达出“‘说了反正也会被删’、‘我说了也没用’”这样的意思。这已经是相当多已经麻木的国人自我阉割的状态了，在一次次的尝试争取宪法中规定公民应当享有的权利中，越来越多的人放弃了。这其中不少人转而把枪口对准另外一批还在努力为所有人争取权利的“斗争者”，他们中有的认为，是另一批人持续不断的斗争行为导致了自己享有不到应该有的权利，而他们的目的，是干扰这帮给他们争取着权利的人们，甚至不择手段。</p><p>思想是自由的，讨论思想也应当是自由的。对于某种思想的评价是每个人自己做出的评判，不应当根据自己对于这种思想的理解而去干扰别人对于这种思想的看法。我们应该做的是讨论，而不是闭口不言甚至去把那些敢于讨论的人的嘴巴给捂上。你去把那些敢于讨论的人的嘴巴捂上，那么你是不是跟那些不让你开口说话的人是一样的呢？</p><p>鲁迅先生的文章中的那些道理，在这个年代仍然适用着。或者说，对中国这块大地上生活着的人们，只要有一天封建思想还扎根在人们的心中，那么将一直适用下去。</p><hr><p>明天还有场考试，这周就写这么多。</p>]]></content>
-    
-    <summary type="html">
-    
-      大家都以一句“你懂的”略过对于体制本身问题的探讨，问起为什么的时候都无奈地表达出“‘说了反正也会被删’、‘我说了也没用’”这样的意思。这已经是相当多已经麻木的国人自我阉割的状态了，在一次次的尝试争取宪法中规定公民应当享有的权利中，越来越多的人放弃了。
-    
-    </summary>
-    
-    
-      <category term="Everything" scheme="https://xinoassasssin.github.io/tags/Everything/"/>
-    
-      <category term="杂" scheme="https://xinoassasssin.github.io/tags/%E6%9D%82/"/>
     
   </entry>
   
