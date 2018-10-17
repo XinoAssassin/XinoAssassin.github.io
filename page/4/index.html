@@ -95,6 +95,37 @@
 
   
   <h2 class="title">
+    <a href="/2018/01/router/">
+      家庭网络和路由
+    </a>
+  </h2>
+  
+  <time>
+    Jan 21, 2018
+  </time>
+  <section class="content">
+	  <p>在<a href="https://blog.xinoassassin.com/2018/01/holiday-0/" target="_blank" rel="noopener">上一篇文章</a>中，我提到回家要干的一件事情就是更换路由。把新买的二手<del> Nepgear</del> Netgear R6250 替换掉用了两年多的洋垃圾 RT-N16. 更换到现在已经过去一天半左右的时间了，遇到了几个问题。</p>
+<p><img src="/images/HomeNetwork.png" alt="HomeNetwork"></p>
+<p>拿快递开箱换上配置好一共花了不到半小时就搞定了，然后问题开始浮现：我的 ThinkPad S1 Yoga 连接不到 R6250 提供的 2.4G 无线网络。开始认为是笔记本上那块单频 Intel 7260 的锅，然后把 R6250 的 2.4G 网的频宽从 40MHz 降到了 20MHz, 结果仍然有时断时续的情况出现，认为还是 7260 这张网卡的问题，准备更换网卡。但北美良心想在 BIOS 中做了限制，更换起来很麻烦，所以一筹莫展。结果今晚日常拿起手柄 V 的时候突发奇想连一下无线，发现根本找不到 2.4G 网的 SSID, 就算不容易刷出来了也是连接不上的状态，遂开始感觉是 R6250 的问题。Google 之，发现使用第三方固件的 R6250 大多都存在这种问题，比如 2.4G 网不稳定，2.4G 根本连不上什么的。但是我又不想用回官方那个烂的很的固件，于是掏出从学校快递回家，原本准备用来替换掉配电箱中的主路由的那只被改装过的 TP-Link WR720N, 本就刷好了 LEDE, 稍微改了几个配置就当 2.4G 的 AP 来用了，连接非常稳定。</p>
+<p>把 DMZ 主机指定到自己的机器之后，直接通过 DDNS 域名进行内网访问，速度非常快，延迟非常低，爽。</p>
+<p>然后用着用着，无心看到 IPv6 的地址头不对，而且怎么本地 DNS 域也变成了 LEDE 了？一看果然是小的 AP 在作怪，上面的 DHCP 服务器没关，也就是一个网段中有两个设备在 DHCP 广播。遂关闭之，顺带着把 Lan 口设置中的网关确定为 2.1, 并把 Dnsmasq 的服务一起关了，问题消失。</p>
+
+
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/tags/Everything/">Everything</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
     <a href="/2018/01/holiday-0/">
       假期——于飞机上
     </a>
@@ -245,38 +276,6 @@
     
 	  <div class="tags">
       <a class="tag-link" href="/tags/Everything/">Everything</a>
-	  </div>
-    
-
-  </section>
-</article>
-  
-    <article class="post ">
-
-  
-  <h2 class="title">
-    <a href="/2017/12/something-2/">
-      杂（三）
-    </a>
-  </h2>
-  
-  <time>
-    Dec 24, 2017
-  </time>
-  <section class="content">
-	  <p>又是一个礼拜过去了，成都今年的严重雾霾晚来了一会儿，但是终究没有缺席。看着每天天气报告中那令人窒息的空气指数数字、全球领先的排位，感叹一句，国际化大都市不过如此。</p>
-<p>被冬日的温度以及那浑浊的空气困在室内，也就只能每日流连在各种垃圾手游和几个大型在线射击游戏里。</p>
-<hr>
-<p>今天还是想来写一下对于字体的一些感想，源起是看到<a href="https://feng.moe/" target="_blank" rel="noopener">烧饼的 Blog</a> 字体设置上比较“怀旧”的采用了全局衬线字体、思源宋体优先的设定。我也是一个对思源系字体情有独钟的爱好者，能自定义的场合和自己输出的 PDF 等文档打印件中必然会采用思源系字体，比如本 Blog 就使用了思源宋体和黑体的组合，当然你系统里没有这两款字体就会回退，在 Windows 上回退了就很难看，除非你的浏览器里面把 sans-serif 和 <span style="font-family:serif;">serif</span> 通过一些手段自定义了。</p>
-<p>然后烧饼跟我说，Typekit 是有免费版的，一查，还真有，那肯定要用上啊。比较搞笑的是，我用的这个主题的作者原本在 head.ejs 中，是有调用 Typekit 的，但被我直接就去掉了。现在加回来之后，在没有思源系字体的桌面浏览器上，字体的显示是正常了，但是在移动端上，字体显示还是会被系统默认给覆盖掉，接下来需要想办法解决的，就是这点了。</p>
-<p>题外话，这个主题已经被我修改的跟原版差距有点大了。包括一系列增大中间内容呈现框的宽度和图片大小设定等修改，在 Blog 内容显示上可以说已经完全是我个人喜好的体现了。<br>有空把分类目录写了，再把 About 页面写了，这个 Blog 的总体就算是完成了。<br><code>&gt;&gt;&gt; endl;</code></p>
-
-
-    
-    
-    
-	  <div class="tags">
-      <a class="tag-link" href="/tags/Blog/">Blog</a><a class="tag-link" href="/tags/Everything/">Everything</a><a class="tag-link" href="/tags/杂/">杂</a>
 	  </div>
     
 
