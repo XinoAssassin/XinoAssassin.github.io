@@ -35,8 +35,19 @@
   
     <link rel="icon" href="/images/favicon.png">
   
-  <script src="https://use.typekit.net/kqs5lfe.js"></script>
-  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  
+  <script type="text/javascript">
+    //Export hexo config to js
+    var HexoConfig = {
+      root: '/',
+      search: {
+        enabled: 'true'
+      }
+    };
+  </script>
+
+	<script src="https://use.typekit.net/kqs5lfe.js"></script>
+  <script>try{Typekit.load({ async: false });}catch(e){}</script>
   <link rel="stylesheet" href="/style.css">
   <script>
     function setLoadingBarProgress(num) {

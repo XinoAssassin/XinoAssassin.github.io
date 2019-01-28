@@ -28,8 +28,19 @@
   
     <link rel="icon" href="/images/favicon.png">
   
-  <script src="https://use.typekit.net/kqs5lfe.js"></script>
-  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  
+  <script type="text/javascript">
+    //Export hexo config to js
+    var HexoConfig = {
+      root: '/',
+      search: {
+        enabled: 'true'
+      }
+    };
+  </script>
+
+	<script src="https://use.typekit.net/kqs5lfe.js"></script>
+  <script>try{Typekit.load({ async: false });}catch(e){}</script>
   <link rel="stylesheet" href="/style.css">
   <script>
     function setLoadingBarProgress(num) {
@@ -91,6 +102,56 @@
 
 <section class="post-list">
 	
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/2018/01/pwa/">
+      国内的一些 Progressive Web App
+    </a>
+  </h2>
+  
+  <time>
+    Jan 1, 2018
+  </time>
+  <section class="content">
+	  <h2 id="什么是-PWA"><a href="#什么是-PWA" class="headerlink" title="什么是 PWA"></a>什么是 PWA</h2><p>前不久了解到 Progressive Web App 这个在2015年就已经由 Chrome 项目组提出来的概念，<a href="https://pwa.rocks/" target="_blank" rel="noopener">A selection of Progressive Web Apps</a> 这个站点上收录了许多支持 PWA 的网站，不乏有可用性非常高的 <a href="https://web.telegram.org/" target="_blank" rel="noopener">Telegram Web</a> 和知名的 <a href="https://flipboard.com/" target="_blank" rel="noopener">Flipboard</a> 应用的网页版。</p>
+<p>PWA 是什么？直译过来就是渐进式网络应用。特性有很多，想要了解具体的直接看 <a href="https://developers.google.com/web/progressive-web-apps/" target="_blank" rel="noopener">Progressive Web App</a>, 这里只举我最看重的几点：</p>
+<ul>
+<li><p><strong>轻量</strong> &amp; <strong>离线可用</strong></p>
+<p>跟普通的网页没啥区别，加载快。而且不像 Hybrid App 那样还是依赖于一个本地的 App 壳子，需要你去 App Store 安装</p>
+<p>PWA 在 Android 上保存到 Home Screen 之后就会自动编译生成一个 APK 安装进系统中，也就意味着，它不止是一个网页，而已经成为了一个本地应用，离线状态下也是可用的（当然依赖于网络的东西就不行了）。而这一过程相当快，所要耗费的网络流量也远远小于 Native/Hybrid App</p>
+</li>
+<li><p><strong>本地通知支持</strong></p>
+<p>在添加在本地之后，PWA 就拥有了本地通知能力，因为在 Android 上是通过 GCM 实现的，所以国内这点并不好用，微博 PWA 就干脆没有写通知的功能</p>
+</li>
+<li><p><strong>All in Browser</strong></p>
+<p>其实这点就是第一点的补充，一个浏览器干所有的活，不用装那么多又大更新还要开 App Store 的应用。而这一点也包括在所有平台上都有同样的用户体验，虽然目前的 PWA 界面多是为移动设备而设计，但是至少我在 PC 上能一样很方便的用到它，而不是通过虚拟机或者其他手段。</p>
+</li>
+</ul>
+<p>我记得在早期 iPhone 刚发布的时候，Apple 的想推广的就是 Web App, 让用户可以用一个 Safari 干所有的活（可笑的是现在 iOS 还没支持 PWA），可惜当时的前端远远没有今天那么多好用新颖的技术，那时的移动设备性能也满足不了使用非原生代码的开销，所以最后 Apple 妥协了，推出了 App Store 直到今天。而现在 PWA 的推出，多了一个“渐进式”的前缀形容词，没有前几年强推 Web App 的那种势头，更加务实的风格更能被人们接受。</p>
+<h2 id="目前比较有用的-PWA-站点"><a href="#目前比较有用的-PWA-站点" class="headerlink" title="目前比较有用的 PWA 站点"></a>目前比较有用的 PWA 站点</h2><ul>
+<li><a href="https://m.weibo.cn/beta" target="_blank" rel="noopener">微博 Lite</a></li>
+<li><a href="https://m.bilibili.com" target="_blank" rel="noopener">Bilibili Web 版</a></li>
+<li><a href="https://h5.ele.me" target="_blank" rel="noopener">饿了么</a></li>
+<li><a href="https://mobile.twitter.com/" target="_blank" rel="noopener">Twitter Lite</a></li>
+</ul>
+<p>其他的可以上 <a href="https://pwa.rocks/" target="_blank" rel="noopener">A selection of Progressive Web Apps</a> 看，虽然好像都是国外的而且好久没有更新了。</p>
+<h2 id="怎么安装"><a href="#怎么安装" class="headerlink" title="怎么安装"></a>怎么安装</h2><p>非常简单，用你的 PC 版 Chrome 或者 Chrome Android 打开上一节的随意一个站点，等待一会儿就会有一条提示你可以添加到主界面的横幅在下方出现，点击即可。或者你可以手动使用“添加到主界面”的功能来实现。</p>
+<p><code>&gt;&gt;&gt; endl;</code></p>
+
+
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/tags/Everything/">Everything</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
     <article class="post ">
 
   
@@ -229,47 +290,6 @@
     
 	  <div class="tags">
       <a class="tag-link" href="/tags/Everything/">Everything</a>
-	  </div>
-    
-
-  </section>
-</article>
-  
-    <article class="post ">
-
-  
-  <h2 class="title">
-    <a href="/2017/12/something-0/">
-      杂（一）
-    </a>
-  </h2>
-  
-  <time>
-    Dec 3, 2017
-  </time>
-  <section class="content">
-	  <p>又是有段日子没写文章了，说实话，脑子里有墨水但是倒不出来的感觉挺痛苦的，有时又是懒得打字，过了几小时之后也就把刚榨出来的脑汁吸收进去了，又不想写啥了。</p>
-<p>还是写点东西吧。</p>
-<hr>
-<p>前段日子几乎天天会梦见她，毕竟又是一个十一月末。仍然记得，六年前的那个十一月，月头我看到新的座位表的那种兴奋，和到第二学期中期为止的沉浸在那种单恋之中的“幸福”——确实是挺幸福的，对一个初三的小男生来说。每天做做卷子下了课还有一帮哥们儿能吵闹，旁边又坐着自己喜欢的女孩，有时候还能“打情骂俏”一下，多美好的日子啊。现在，也就只能在梦里面见到你了。</p>
-<p>那时候还能看得进去一点有点营养的野书，还是个小小的福迷，时不时会模仿老福的那个经典姿势，甚至对郭敬明着迷——那个年纪确实比较容易着迷——整个初三看了不少最世的书。</p>
-<p>可是没有办法，应试教育，形势急转而下。</p>
-<p>距离产生美，可我不喜欢距离。</p>
-<hr>
-<p>十二月头的成都，一个礼拜出一次太阳，经过了之前的突然降温接近冰点，这几天气温似乎稳定在十度上下。来这第三年了，不用太厚的衣服不用太厚的被子不用把寝室的门窗关紧以防西北风入侵，可能是这个城市冬天中的一丝温情，可是少见的阳光和每日早晨的大雾还是给这座城市的冬天写上了深刻的标题。</p>
-<p>开口是困难的，已经是不可能回到以前那样了，干脆自暴自弃，可是深夜里却不住的想。</p>
-<p>记忆这东西真的很神奇，每当你觉得自己忘记的差不多的时候，它就突然托个梦给你，梦里全是你以为自己忘记的东西，然后突然那么呈现在你面前告诉你你一点没忘记。醒来梦里的东西马上就不清晰了然而被重新调用起的记忆却在海马体浅层在那里在现实里告诉你你一点都没忘记你不可能忘记的事实时，伤痛感就来了。</p>
-<p>后悔吗？悔。有用吗？没用。无力吗？无力。</p>
-<p>人，不是健忘的。</p>
-<p>当肚子上的肥肉越来越厚以前的裤子也都穿不上提醒我该运动的时候，我也不想。懒吗？不。</p>
-<p>只是因为，这座城市，没有你。</p>
-
-
-    
-    
-    
-	  <div class="tags">
-      <a class="tag-link" href="/tags/Everything/">Everything</a><a class="tag-link" href="/tags/Memories/">Memories</a><a class="tag-link" href="/tags/杂/">杂</a>
 	  </div>
     
 
