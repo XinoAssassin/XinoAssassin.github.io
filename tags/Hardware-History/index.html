@@ -11,9 +11,9 @@
   
   <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/atom.xml">
   
-  <meta name="description" content="A minimal hexo theme." />
+  <meta name="description" content="Self-recording Blog" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-  <meta name="keywords" content="hexo,theme,typescript" />
+  <meta name="keywords" content="life,technology,thinking" />
   <meta name="HandheldFriendly" content="True" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
@@ -122,7 +122,7 @@
 	  <h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><p>这期史话笔者将视点从 CPU 这个单一元件转移开，来讲讲 PC 标准出现前的那些故事。</p>
 <h2 id="DEC-与小型机"><a href="#DEC-与小型机" class="headerlink" title="DEC 与小型机"></a>DEC 与小型机</h2><p>Minicomputer，中文中多称为小型机，用今天的眼光来看，小型机其实并不小，大多数都还是有个立柜那么大。不过在微型计算机出现之前，小型机占据了计算机市场的大半江山，而要说起小型机，不得不提的就是影响了整个计算机历史的 PDP 系列和它背后的创造者—— DEC 公司。</p>
 <h3 id="从-TX-0-到-PDP-1"><a href="#从-TX-0-到-PDP-1" class="headerlink" title="从 TX-0 到 PDP-1"></a>从 TX-0 到 PDP-1</h3><p>让我们把时间倒回到上世纪四五十年代，现代计算机刚诞生不久的时候。那时的计算机动辄几个书柜的大小，更大的可能占据几个房间，并且造价普遍十分昂贵。而从六十年代开始，随着晶体管和集成电路的大规模应用，计算机开始了小型化之路。首先出现的，是 1956 年由麻省理工学院林肯实验室<em>（MIT Lincoln Laboratory）</em>研发出的首台全晶体管计算机—— TX-0，这台计算机不久之后被 MIT “借走”拿去当教学仪器了。</p>
-<p><img src="/images/tx-0.jpg" alt="TX-0"></p>
+<p><img src="/images/tx-0.jpg" width="40%"></p>
 <p style="text-align: center;">TX-0</p>
 
 <p>随后，两名 TX-0 的工程师肯·奥尔森（Ken Olsen） 和 Harlan Anderson 在 MIT 注意到了一个奇怪的现象：明明学院里有同样提供给学生用并且更快的 IBM 的大型计算机，但学生就是喜欢在 TX-0 那儿排长长的队伍来尝试一下它。思索之后，他们认为小型计算机是有市场前景的，并且不是所有人都需要大型机那么强的性能，对于某些特定用途，低成本的解决方案就可以满足需求了；还有些用户往往更在意机器的图形输出或是实时可操作性而非机器的性能。</p>
@@ -150,7 +150,7 @@
 <li>与 C 语言的渊源<br>Unix 最早是用 PDP-7 的汇编语言写成的（当时还没有一个正式名字），为了移植到 PDP-11 上面，核心开发人员不断开发改进新的编程语言，而 C 语言就是这一阶段性完成产物，直到今天 C 语言标准中仍残留有 PDP-11 指令的痕迹。</li>
 <li>与 Windows NT 的渊源<br>在 PDP 系列之后，DEC 继续推出了 VAX 系列，他们将其称之为超级小型机（Superminicomputer）。VAX 系列上运行的系统是重新设计编写的 VMS，其核心设计师戴夫·卡特勒（Dave Cutler）后来被微软招入麾下并领导了 Windows NT 的开发，他把 VMS 的不少理念带入到了 NT 上，甚至后来有说法称 Windows NT 是 VMS 的重新改进版本，而 NT 内核也一直被微软沿用至今。值得一提的是，戴夫·卡特勒后来还领导开发了 Azure 平台，再后来设计了 Xbox One 的系统架构。</li>
 </ul>
-<p><img src="/images/VAX-11-750.jpg" alt="VAX-11-750"></p>
+<p><img src="/images/VAX-11-750.jpg" width="60%"></p>
 <h3 id="巅峰与衰亡"><a href="#巅峰与衰亡" class="headerlink" title="巅峰与衰亡"></a>巅峰与衰亡</h3><p>不过有句话说的好：“王权没有永恒”，这句话同样可以套用在 DEC 身上。回首上一篇文章，PDP-11 推出之后不久，Intel 的 8008 就登上了舞台，单片式微处理器技术的成熟使得计算机行业掀起了一波更加汹涌的微型（Micro）化浪潮，其结果直接导致了微型计算机（Microcomputer），也就是我们现在使用的这代计算机的成熟和普及。而 DEC 作为小型化的先锋，却抗拒着新的浪潮。</p>
 <p>1974 年，公司的研发组已经证明了微机的可行性，甚至给出了两台原型机，然而奥尔森却选择中断了这项企划。1977 年，DEC 又同样拒绝了开发个人电脑的提案，奥尔森甚至说「个人没有理由在家里放台计算机<em>（There is no reason for any individual to have a computer in his home.）</em>（后来他澄清他说的 Computer 指代的不是现代意义上的 PC）」。</p>
 <p>历史证明了 DEC 选择了一条错误的道路。八十年代初期，在看到 IBM PC 大获成功之后，他们才迟迟推出自家类似的系统，但 PC 业界最经典的定律已经开始生效了——不兼容就会死。DEC 的新品不兼容 IBM PC 标准，没办法直接运行当时需求最猛的电子表格软件 Lotus 1-2-3，他们的新系列叫好不叫座，这也为日后 DEC 的衰败埋下了伏笔。</p>
@@ -163,7 +163,7 @@
 <p>七十年代初，计算器和电子游戏的普及让大众认知了计算机的威力，而数字化产品也吸引着越来越多的电子爱好者。于是这么一台平价但是实用，而且扩展性还不赖的机器一上市就火了。这是罗伯茨自己也没想到的事情，原本他预想能卖 800 台已经很不错了，结果一个月内他们就收到了一千份订单，五月末的时候这个数字已经变成了 2500 台，到了八月，这个数字又翻了一番，还有不少订单是直接买组装好的机器。</p>
 <p>而在 Altair 8800 身上最出名的故事可能已经为很多人所熟知了：我们亲爱的比尔·盖茨和他的好友保罗·艾伦为它开发了一套 BASIC 语言解译器，并察觉到了软件行业存在的巨大机遇，随后便创立了 Micro-Soft。<br><img src="/images/altair-8800.jpg" alt="img"></p>
 <p>在 Altair 8800 之后，许多公司察觉到了新的商机，于是乎类似的微型计算机如雨后春笋般开始出现，它们大多采用一块 8bit 的处理器比如 Intel 的 8080 或者 Zilog 的 Z80，采用了兼容 Altair 8800 的 S-100 总线，运行着 CP/M 之类的操作系统。在这波创业大潮中，就有苹果电脑公司，他们的 Apple II 获得了巨大的成功。也是摆这股潮流所赐，越来越多小公司也能用得起计算机来做数据库管理、会计还有文字排版之类的活。</p>
-<p><img src="/images/Apple_II.jpg" alt="Apple_II"></p>
+<p><img src="/images/Apple_II.jpg" width="60%"></p>
 <p>不过最终使得微机走入千家万户的，还是有请我们的主角——PC。</p>
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>所谓合久必分，分久必合，微型计算机野蛮生长了足够长的时间了，是时候该有人出来一统江湖了！</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
