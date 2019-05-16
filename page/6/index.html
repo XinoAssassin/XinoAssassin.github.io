@@ -106,6 +106,43 @@
 
   
   <h2 class="title">
+    <a href="/2018/02/what-iboot-source-code-contains/">
+      泄露的 iBoot 源代码中都有些什么
+    </a>
+  </h2>
+  
+  <time>
+    Feb 9, 2018
+  </time>
+  <section class="content">
+	  <p>近日，一份疑似 iOS 9.3.x 的 iBoot 及其他部分 BootLoader 的源代码被匿名人士 push 上了 Github, 粗略地查看了一下里面的文件之后，大家都惊讶地发现这份源代码的爆点实在是太多了。</p>
+<p>项目的 README 中是这么写的：iBoot_BootROM_iBSS_iBSS_iLLB_Source_Code</p>
+<p>其中 iBSS 是 <strong>iB</strong>oot <strong>S</strong>ingle <strong>S</strong>tage 的缩写，而 LLB 是 <strong>L</strong>ow <strong>L</strong>evel <strong>B</strong>ootloader 的缩写。</p>
+<p>我们先来看一下 iOS Devices 的启动流程：</p>
+<p>在 Apple 定制的一系列 A 系列 SoC 中有一块存储区域专门存放了一部分最初的启动代码，也就是俗称的 BootROM, 这部分被 Apple 称之为 SecureROM, 它是在电源键被按下，设备上电之后最初加载的代码。SecureROM 检查下一级 BootLoader, 也就是 LLB, 如果签名没有问题，那么就加载并初始化 LLB, 此时设备的 Apple Logo 就出现了。然后 LLB 检查并初始化 iBoot, 同样是通过 Apple Root CA Public 证书验证签名，通过就会把设备带给 iBoot, 而 iBoot 会映射 Device Tree, 然后验证内核签名并加载，最终初始化内核并运行，这时候可以说 iOS 系统已经启动了。</p>
+<p>通过简述的启动流程，我们可以看到，BootROM, LLB, iBoot 这三个无论哪一个都是在整个启动流程中充当关键角色的。所以这次源代码的泄露，非常劲爆。</p>
+<p>在基于证书链的安全体系下，私钥的泄露可以说是直接把安全性掉到0去了，而这份代码中，在位于 /lib/pki 和其中的 tests 目录下，可以看到有一份 Fake CA 和一些私钥，还有一份中间证书和私钥，如果后续版本也是沿用这些东西的话，整个启动验证链的加密体系，就真的可以说安全性为0了。</p>
+<p>因为这份代码是 9.3 时代的，也就是在 iPhone 7 那代发布前的版本，所以我们能看到有许多 T8010 相关的文件（T8010 是 Apple 对于 A10 芯片平台的代号）。而有趣的是，在 /target 目录下出现了 iphone8 这个文件夹，难不成 Apple 内部在 2016 年就开始对 iPhone 8 进行内部测试了？但是点进去看，目录下的文件清晰的指向了另一款产品——iPhone 6s. 往上推，iPhone 7 文件夹对应着 iPhone 6, iPhone 6 文件夹对应着 iPhone 5s, 如果按照这个内部排序，iPhone Ⅹ 这个 Ⅹ的由来，可能更好解释一点。而 iPhone 8, 则更像后来上马的 iPhone 7 Reversion.</p>
+<p>除了主引导程序的代码外，泄露的代码中还包含了许多驱动，在 /drivers 目录下，可以清晰地认出 iOS 平台所使用的一些硬件，其中甚至包括了 Thunderbolt 驱动。</p>
+<p>内容还有很多，笔者水平有限，也解读不出更多的东西了。</p>
+<p><code>&gt;&gt; endl;</code></p>
+
+
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/tags/Programming/">Programming</a><a class="tag-link" href="/tags/杂/">杂</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
     <a href="/2018/02/mourn-for-acfun/">
       悼念 AcFun
     </a>
@@ -265,7 +302,7 @@
     
     
 	  <div class="tags">
-      <a class="tag-link" href="/tags/Hardware/">Hardware</a><a class="tag-link" href="/tags/杂/">杂</a>
+      <a class="tag-link" href="/tags/DIY/">DIY</a><a class="tag-link" href="/tags/Hardware/">Hardware</a><a class="tag-link" href="/tags/杂/">杂</a>
 	  </div>
     
 
@@ -305,40 +342,6 @@
     
 	  <div class="tags">
       <a class="tag-link" href="/tags/杂/">杂</a>
-	  </div>
-    
-
-  </section>
-</article>
-  
-    <article class="post ">
-
-  
-  <h2 class="title">
-    <a href="/2018/01/rf-developing-0/">
-      RaidFinder 开发记——1
-    </a>
-  </h2>
-  
-  <time>
-    Jan 13, 2018
-  </time>
-  <section class="content">
-	  <p>上篇文章给自己写了一个开发计划，这两天已经开始动手了，结果刚开头就非常不顺，来写篇文章吐槽一下。</p>
-<p>从原版的描述和一些代码中，我发现原作者使用了 Twitter4j 这个看起来在 Java 平台非常强大的库来进行 Twitter Stream 的获取。而在 NPM 上不难找到类似的 Twitter 库，也不难使用，填好两组 Key &amp; Secret 之后简单的调用 API 就可以输出源源不断的 Tweets 来。</p>
-<p>Twitter 官方提供的 Stream API 中自带了对自定义关键词的 Filter, 那么我们就来调用它。然后就碰到了目前为止第一个也是最主要最棘手的问题。</p>
-<h2 id="最主要的问题"><a href="#最主要的问题" class="headerlink" title="最主要的问题"></a>最主要的问题</h2><p>问题就是：Twitter Stream Track 的关键词设置不支持 CJK 字符，而 GBF 的玩家则大部分使用日语，他们的救援推的关键词都是<code>&quot;参加者募集！&quot;</code>。</p>
-<p>于是我在 Twitter Deck 中新建了一栏，使用<code>&quot;参加者募集！&quot; OR &quot;I need backup!&quot;</code>的搜索条件进行搜索并观察官方用的是什么办法支持 CJK 字符的。结果大失所望，官方的搜索也只是用 Search API 而不是 Stream API, 然后定时获取一次假装出 Stream 的感觉来“糊弄”用户。那么我想，目前找到的库对于 CJK 都没有支持的情况下应该作者是用了一些手段来支持 CJK 字符的。</p>
-<p>那么也只有继续读源码了。</p>
-<hr>
-<p>经过大概一小时的思考，我决定暂时先将实现平台放到 .NET 上，目前 .NET Core 在跨平台上面已经比较稳定了，用 C# 写也更顺手一些。先拿这套把实现思路和一些算法给摸清楚，以后再重新用 Node.js 来实现。</p>
-
-
-    
-    
-    
-	  <div class="tags">
-      <a class="tag-link" href="/tags/Game/">Game</a><a class="tag-link" href="/tags/Programming/">Programming</a>
 	  </div>
     
 
