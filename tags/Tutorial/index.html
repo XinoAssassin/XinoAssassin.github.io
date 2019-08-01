@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>随写 - XinoAssassin&#39;s Blog</title>
+  <title>Tag: Tutorial | 随写 - XinoAssassin&#39;s Blog</title>
   
   <meta name="author" content="XinoAssassin Ni">
   
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
   <meta property="og:type" content="website">
 <meta property="og:title" content="随写 - XinoAssassin&#39;s Blog">
-<meta property="og:url" content="https://blog.xinoassassin.me/page/10/index.html">
+<meta property="og:url" content="https://blog.xinoassassin.me/tags/Tutorial/index.html">
 <meta property="og:site_name" content="随写 - XinoAssassin&#39;s Blog">
 <meta property="og:locale" content="zh">
 <meta name="twitter:card" content="summary">
@@ -95,6 +95,10 @@
     
     <main id="main" role="main">
       
+	<section class="page-header tag">
+    <h1>- <span>Tutorial</span> -</h1>
+  </section>
+
 
 
 
@@ -106,62 +110,44 @@
 
   
   <h2 class="title">
-    <a href="/2015/12/archives-1/">
-      冷冷的却又不刺骨
+    <a href="/2019/08/Download-Youtube-Steaming-while-Streaming/">
+      用youtube-dl在直播进行中同时下载
     </a>
   </h2>
   
   <time>
-    Dec 5, 2015
+    Aug 2, 2019
   </time>
   <section class="content">
-	  <p>成都的雨很像家那边<br>秋末的时间比起来<br>晚了很多<br>却是一样的感受<br>一场秋雨<br>一场寒</p>
-<p>在已经忘记了多少个熬夜的晚上过后<br>离回家也就剩不了多少时间了<br>试问自己<br>该干的都干了么</p>
-<p>我只知道<br>大学始初的几个月我自学到的东西可能是有高中三年的总和那么多了<br>当然也亏之前一步一步走来的累积的基础</p>
-<p>对于这个专业我还是没有太多的兴趣可言<br>对于数学我还是老样子<br>我就是一个兴趣驱动着的人啊<br>永远不喜欢让自己太忙但有时候却是很需要任务来充实自己<br>很想给别人做点事情证明自己的存在<br>却又孤独惯了<br>想主动找人说说话却被平淡的回答所打退<br>想想“算了算了”把话全塞心里</p>
-<p>“我也不是很懂你们的社交”</p>
-<p>可能孤苦伶仃几年下来<br>我就真的会成另外一种人吧<br>我一直想成为的那种完全理性没有什么情感的人类<br>但就算是福尔摩斯也在华生受伤时候动真感情啊<br>那又为何不在多点人性色彩呢</p>
-<p>不过<br>有个身影<br>在你的前方<br>默默地走着<br>有个身影<br>你可以<br>去追逐<br>那就不会<br>失去方向了吧<br>足够了。  </p>
+	  <p>基于今天花谱Live的下载失败，一怒之下又翻了翻youtube-dl的文档，发现可以在直播的同时直接截流保存成文件，用这种方法可以大大加快海盗效率。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>良好的网络环境</li>
+<li>空闲的CPU资源</li>
+<li><a href="https://ytdl-org.github.io/youtube-dl/index.html" target="_blank" rel="noopener">youtube-dl</a></li>
+<li><a href="https://ffmpeg.org/" target="_blank" rel="noopener">FFmpeg</a></li>
+<li>一点点命令行基础</li>
+</ul>
+<p>这里建议将youtube-dl和FFmpeg所在的目录加入环境变量中，用户或者系统的均可。另外你还要搞清楚自己的本地代理端口号，一般为1080。</p>
+<h2 id="配置文件与命令"><a href="#配置文件与命令" class="headerlink" title="配置文件与命令"></a>配置文件与命令</h2><p>youtube-dl支持配置文件，可以免去每次手动输一长串命令的麻烦，在Windows下其默认读取的配置文件位于用户目录下的<code>youtube-dl.conf</code>，即<code>%userprofile%\youtube-dl.conf</code>。</p>
+<p>这边准备好了两份配置文件，一份是直播同时下载，另一份是平常下载视频。两份配置文件都需要手动更改里面的代理端口号，和自己环境所匹配，其他不需要进行更改。</p>
+<p>普通下载：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">--proxy socks5://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">1081</span></span><br><span class="line">-f <span class="string">'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'</span></span><br><span class="line">-o <span class="string">'%(uploader)s/%(title)s.%(ext)s'</span></span><br><span class="line">--add-metadata</span><br><span class="line">--write-thumbnail</span><br><span class="line">--ignore-errors</span><br><span class="line">--extract-audio</span><br><span class="line">--audio-format best</span><br><span class="line">--audio-quality <span class="number">0</span></span><br><span class="line">--keep-video</span><br><span class="line">--embed-thumbnail</span><br></pre></td></tr></table></figure>
+<p>直播的同时进行下载：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--proxy http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">1081</span></span><br><span class="line">-f <span class="string">'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'</span></span><br></pre></td></tr></table></figure>
+<p>分别将这两块命令行保存成两个文件，修改Proxy行的端口为自己使用的，建议一个命名为<code>youtube-dl.conf</code>放置在<code>%userprofile%</code>目录下，另一个换个名字也存<code>%userprofile%</code>目录下方便调用。</p>
+<p>以上工作完成之后打开命令提示符，注意是cmd不是PowerShell，因为后者在管道操作上面有一些不同，这边是用最简单的cmd来完成。命令：</p>
+<p><code>youtube-dl -o - U2B-LINK|ffmpeg -i - -vcodec copy -acodec copy &quot;OUTPUT.mp4&quot;</code></p>
+<p>如果你默认的配置文件不是用于直播时同时下载的，那么请指定配置文件：</p>
+<p><code>youtube-dl -o - --config-location PATH\TO\CONFIG U2B-LINK|ffmpeg -i - -vcodec copy -acodec copy &quot;OUTPUT.mp4&quot;</code></p>
+<p>注意，<code>-o</code>之后的<code>-</code>和<code>-i</code>之后的<code>-</code>均不能遗漏，这是管道操作最重要的两点之一，还有一点是管道操作符<code>|</code>，跟反斜杠<code>\</code>同一个键。命令中的<code>U2B-LINK</code>就是油管链接、<code>PATH\TO\CONFIG</code>就是youtube-dl的配置文件具体位置，<code>OUTPUT.mp4</code>是输出的文件名。</p>
+<p><code>&gt;&gt;endl;</code></p>
 
 
     
     
     
 	  <div class="tags">
-      <a class="tag-link" href="/tags/杂/">杂</a>
-	  </div>
-    
-
-  </section>
-</article>
-  
-    <article class="post ">
-
-  
-  <h2 class="title">
-    <a href="/2015/11/archives-0/">
-      本当にありがとうございました
-    </a>
-  </h2>
-  
-  <time>
-    Nov 7, 2015
-  </time>
-  <section class="content">
-	  <p>我决定重新开始<br>想了很多东西<br>汐与我太相熟<br>又太遥远<br>我们交流的过于深入<br>彼此知根知底<br>但<br>总有一些事情无法分享<br>那是她隐藏的秘密<br>我对她全无保留和盘托出<br>她却在一些事情上始终支支吾吾<br>我知道信息的完全平等交流几乎是不可能实现的<br>但<br>这始终在我心中留有隔阂<br>我离她的世界终究太远</p>
-<p>于是<br>就像我那几张永远寄不出手的信上写的那样<br>你<br>将<br>或者说<br>已经是<br>我的信仰</p>
-<p>我选择去重复那个接近一个人的过程<br>一步一步地<br>减少我曾犯过的错误<br>那些傻事</p>
-<p>汐改变我很多<br>某种意义上我目前的性格的养成过程中<br>是有她很大功劳的</p>
-<p>那天翻看了自己的说说<br>发现自己真的是改变了许多<br>你何尝又不是呢<br>经历了和朋友的分离冷落<br>你也变得沉下去了</p>
-<p>不怪谁<br>你给不出答案是当然的<br>谁晓得四年后的我们会是什么样子的</p>
-<p>索性<br>我三年前的愿望还是坚持住了<br>这三年我过的无悔<br>喜欢上你我无怨无悔<br>谢谢你陪我走过的那些时光<br>我将永远铭记在心<br>本当にありがとうございました</p>
-
-
-    
-    
-    
-	  <div class="tags">
-      <a class="tag-link" href="/tags/杂/">杂</a>
+      <a class="tag-link" href="/tags/Tutorial/">Tutorial</a>
 	  </div>
     
 
@@ -170,17 +156,6 @@
   
 </section>
 
-
-  <nav id="page-nav">
-    
-    <a class="prev" rel="prev" href="/page/9/">
-      <span class="icon icon-chevron-left"></span>
-      <span class="text">Previous</span>
-    </a>
-    
-    
-  </nav>
-  
 
       <script>setLoadingBarProgress(60);</script>
     </main>

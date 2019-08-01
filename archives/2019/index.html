@@ -111,6 +111,54 @@
 
   
   <h2 class="title">
+    <a href="/2019/08/Download-Youtube-Steaming-while-Streaming/">
+      用youtube-dl在直播进行中同时下载
+    </a>
+  </h2>
+  
+  <time>
+    Aug 2, 2019
+  </time>
+  <section class="content">
+	  <p>基于今天花谱Live的下载失败，一怒之下又翻了翻youtube-dl的文档，发现可以在直播的同时直接截流保存成文件，用这种方法可以大大加快海盗效率。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>良好的网络环境</li>
+<li>空闲的CPU资源</li>
+<li><a href="https://ytdl-org.github.io/youtube-dl/index.html" target="_blank" rel="noopener">youtube-dl</a></li>
+<li><a href="https://ffmpeg.org/" target="_blank" rel="noopener">FFmpeg</a></li>
+<li>一点点命令行基础</li>
+</ul>
+<p>这里建议将youtube-dl和FFmpeg所在的目录加入环境变量中，用户或者系统的均可。另外你还要搞清楚自己的本地代理端口号，一般为1080。</p>
+<h2 id="配置文件与命令"><a href="#配置文件与命令" class="headerlink" title="配置文件与命令"></a>配置文件与命令</h2><p>youtube-dl支持配置文件，可以免去每次手动输一长串命令的麻烦，在Windows下其默认读取的配置文件位于用户目录下的<code>youtube-dl.conf</code>，即<code>%userprofile%\youtube-dl.conf</code>。</p>
+<p>这边准备好了两份配置文件，一份是直播同时下载，另一份是平常下载视频。两份配置文件都需要手动更改里面的代理端口号，和自己环境所匹配，其他不需要进行更改。</p>
+<p>普通下载：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">--proxy socks5://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">1081</span></span><br><span class="line">-f <span class="string">'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'</span></span><br><span class="line">-o <span class="string">'%(uploader)s/%(title)s.%(ext)s'</span></span><br><span class="line">--add-metadata</span><br><span class="line">--write-thumbnail</span><br><span class="line">--ignore-errors</span><br><span class="line">--extract-audio</span><br><span class="line">--audio-format best</span><br><span class="line">--audio-quality <span class="number">0</span></span><br><span class="line">--keep-video</span><br><span class="line">--embed-thumbnail</span><br></pre></td></tr></table></figure>
+<p>直播的同时进行下载：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--proxy http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">1081</span></span><br><span class="line">-f <span class="string">'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'</span></span><br></pre></td></tr></table></figure>
+<p>分别将这两块命令行保存成两个文件，修改Proxy行的端口为自己使用的，建议一个命名为<code>youtube-dl.conf</code>放置在<code>%userprofile%</code>目录下，另一个换个名字也存<code>%userprofile%</code>目录下方便调用。</p>
+<p>以上工作完成之后打开命令提示符，注意是cmd不是PowerShell，因为后者在管道操作上面有一些不同，这边是用最简单的cmd来完成。命令：</p>
+<p><code>youtube-dl -o - U2B-LINK|ffmpeg -i - -vcodec copy -acodec copy &quot;OUTPUT.mp4&quot;</code></p>
+<p>如果你默认的配置文件不是用于直播时同时下载的，那么请指定配置文件：</p>
+<p><code>youtube-dl -o - --config-location PATH\TO\CONFIG U2B-LINK|ffmpeg -i - -vcodec copy -acodec copy &quot;OUTPUT.mp4&quot;</code></p>
+<p>注意，<code>-o</code>之后的<code>-</code>和<code>-i</code>之后的<code>-</code>均不能遗漏，这是管道操作最重要的两点之一，还有一点是管道操作符<code>|</code>，跟反斜杠<code>\</code>同一个键。命令中的<code>U2B-LINK</code>就是油管链接、<code>PATH\TO\CONFIG</code>就是youtube-dl的配置文件具体位置，<code>OUTPUT.mp4</code>是输出的文件名。</p>
+<p><code>&gt;&gt;endl;</code></p>
+
+
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/tags/Tutorial/">Tutorial</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
     <a href="/2019/05/pc-hardware-history-3/">
       PC 硬件史话（三）
     </a>
@@ -883,51 +931,6 @@
     
 	  <div class="tags">
       <a class="tag-link" href="/tags/Game/">Game</a>
-	  </div>
-    
-
-  </section>
-</article>
-  
-    <article class="post ">
-
-  
-  <h2 class="title">
-    <a href="/2019/01/something-4/">
-      杂（五）
-    </a>
-  </h2>
-  
-  <time>
-    Jan 6, 2019
-  </time>
-  <section class="content">
-	  <p>夜晚是属于自己的。</p>
-<p>没有了白天的临街窗外的喧嚣，只剩下房间里还在响的几个风扇声和硬盘的响动。</p>
-<p>你再一次地想起这一年来发生过的事情。</p>
-<p>去年的这个时候，你头一次站到全年级面前主持活动，头一次试探着自己能达到的高度，高中之后，你头一次这么高调。</p>
-<p>然后是又一年的沉沦，什么都没干，什么都没做成。</p>
-<p>却又很累，压力越来越重，睡眠质量越来越差，开始长期的熬夜与通宵消耗自己为数不多的生命力。</p>
-<p>想要做梦啊，无奈梦境似乎已经快离我而去了，无论我怎么地去呼唤它，一觉醒来却又是什么都不记得，然而精神上的疲乏告诉我，你一定在刚才经历了些什么。</p>
-<p>又回想了一遍 ReLife，那可能是最近两年中看的感触最深的一部动画了。想回，却又不想回到高中时代。李宗盛说既然青春留不住还是做个大叔好，但是我真的不想变成别人口中的大叔，我还是想当一个比那时候更加成熟，但却是被人称为少年的人。</p>
-<p>终于也能用平常心去面对有特殊感情的人了。</p>
-<p>终于也能做到父亲多年前期望的那样「圆滑」了，可这真不是我想要的。</p>
-<p>终于也能做到和母亲吵架时不吊起喉咙吼她了，可她还是要继续念叨我。</p>
-<p>终于也会在一个人看电影时不再克制自己的眼泪了。</p>
-<p>人生确实是由一个个选择组成的，你看不见的蝴蝶效应在一次次选择中泛起巨大的波纹。</p>
-<p>我现在的愿望是回到一年前的这个时候。</p>
-<p>但是，却没有后悔药，没有能让你回到 15 岁的药丸，更没有哆啦 A 梦的时光机，有的只是你的妄想和「如果那样就好了」的感叹。</p>
-<p>不要再错过什么了，但这又是不可能的，活着太无奈了，就像自己毫无主动权一般。</p>
-<p>又会想到命运和宿命，他们究竟存不存在呢，究竟是你自己的意识主导着你自己的行动与未来还是冥冥之中的力量已经将这一切都安排好了呢？</p>
-<p>可能上帝和爱因斯坦，真的是同时存在着的吧。</p>
-<p><code>&gt;&gt;endl;</code></p>
-
-
-    
-    
-    
-	  <div class="tags">
-      <a class="tag-link" href="/tags/杂/">杂</a>
 	  </div>
     
 
