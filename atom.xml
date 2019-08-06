@@ -6,7 +6,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="https://blog.xinoassassin.me/"/>
-  <updated>2019-08-01T16:21:00.340Z</updated>
+  <updated>2019-08-06T09:07:15.681Z</updated>
   <id>https://blog.xinoassassin.me/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>怎样在境外网站上进行推流</title>
+    <link href="https://blog.xinoassassin.me/2019/08/how-to-streaming-on-youtube/"/>
+    <id>https://blog.xinoassassin.me/2019/08/how-to-streaming-on-youtube/</id>
+    <published>2019-08-06T09:07:15.000Z</published>
+    <updated>2019-08-06T09:07:15.681Z</updated>
+    
+    <content type="html"><![CDATA[<p>其实很简单，只需要将obs的网络连接引向代理，但是Shadowsocks中直接挂全局模式不太好，因为会将本来能够直连的网站也会通过代理连接，而且应该是不能代理到obs的（我从来不用全局）。</p><p>那么要怎么做到这点呢？我常用的是<a href="https://www.proxifier.com/" target="_blank" rel="noopener">Proxifier</a>，使用教程网上很多，这边不再赘述，只要在规则里面把obs的执行文件加入需代理列表即可，各种使用RTMP协议的直播网站应该都是直接可以这样搞定。</p><p><img src="/images/proxifier-rule.png" width="50%"></p><p>当然，一个高带宽的代理是必须条件。</p><p>题外话，无论是Youtube还是Twitch，其直播后台都比Bilibili强太多了。</p><p><img src="/images/youtube-back.png" width="50%"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;其实很简单，只需要将obs的网络连接引向代理，但是Shadowsocks中直接挂全局模式不太好，因为会将本来能够直连的网站也会通过代理连接，而且应该是不能代理到obs的（我从来不用全局）。&lt;/p&gt;
+&lt;p&gt;那么要怎么做到这点呢？我常用的是&lt;a href=&quot;https://ww
+      
+    
+    </summary>
+    
+    
+      <category term="Tutorial" scheme="https://blog.xinoassassin.me/tags/Tutorial/"/>
+    
+  </entry>
   
   <entry>
     <title>用youtube-dl在直播进行中同时下载</title>
@@ -480,31 +504,6 @@
     
     
       <category term="Game" scheme="https://blog.xinoassassin.me/tags/Game/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>再见，老伙计；你好，新朋友</title>
-    <link href="https://blog.xinoassassin.me/2018/05/new-laptop/"/>
-    <id>https://blog.xinoassassin.me/2018/05/new-laptop/</id>
-    <published>2018-05-12T13:12:12.000Z</published>
-    <updated>2019-06-06T14:08:39.234Z</updated>
-    
-    <content type="html"><![CDATA[<p>前略，上周日，一次突如其来的停电袭击之后，我那本来就已经处在崩溃边缘的 K610D 终于不得行了，进系统之后必蓝屏，而且此次蓝屏的 Code 还不一样（说实话可能我基本上把 Windows 10 能出现的蓝屏代码全看了一遍了）。花了半天尝试了各种修复后故障依旧，没有办法之下，只得跟父亲申请新机器的资金——其实已经延长了非常久的时间了，自从两年前进过水之后我就知道必然会有这么一天到来的——再花了四分之一天在限定资金下确定了现在这台新伙计，用的蓝天 W65KJ 的模具。<br>配置最基本两个大件新旧对比：</p><table><thead><tr><th style="text-align:center"></th><th style="text-align:center">K610D-i7d2</th><th style="text-align:center">W65KJ</th></tr></thead><tbody><tr><td style="text-align:center">CPU</td><td style="text-align:center">Intel Core i7 4710MQ</td><td style="text-align:center">Intel Core i3 8100</td></tr><tr><td style="text-align:center">GPU</td><td style="text-align:center">NVIDIA GeForce 940M</td><td style="text-align:center">NVIDIA GeForce GTX 1050</td></tr></tbody></table><p>之所以新机器选择了 W65KJ, 原因有二：</p><ol><li><p>散热强劲</p><p>因为用的是桌面级 CPU, 所以 CPU 部分是用了双热管来压的，而且 CPU 与 dGPU 各用了一个风扇来分散热量。之前因为在 K610D 上面吃尽了散热差的苦头，所以这次舍弃了拥有更好扩展接口的另一个型号，也要散热系统非常强劲。</p><p>测试下来非常令我满意，在风扇全开的情况下能把 CPU 压在 65 度附近，四核频率稳定标称的 3.6 GHz 运行，dGPU 也压的非常好。</p></li><li><p>可扩展性强</p><p>因为用的是桌面级 Core 8 代 CPU, 所以机器上直接给了两个 M.2 接口，两个均支持 NVMe 协议。而且因为散热系统仍有余裕，所以后续升级至 Core i5 是非常可行的提升性能的办法，甚至 i7 都有一试之力。</p></li></ol><p>京东速度还算是不错，第二天周一中午机器到手的时候是 8GB 2400 的英睿达单条 DDR4 内存加上一条金士顿的 128 GB 的 TLC 条子，成本原因自然是走 SATA 协议的，但是够用是够用了，就是容量太小了，于是当天下午就下单了另一条英睿达 DDR4 2400 8GB 和三星的 SM961 256GB, 最谢天谢地的是最近的内存条和 SSD 都有一些降价，不然得是大出血。</p><p>犹豫是周一下午五点——一般快递停收时间——之后才淘宝下的单，所以内存到了周五才到，而 SM961 却到了周三还没发货，咨询了卖家：“没货，明天或者后天到”。我可去你妈的，换店，之前物色 NVMe SSD 的时候在 XG3 和 SM961 之间纠结，然后这时候在淘宝上看到一家拆机 XG3 512GB 才卖九百出头的店，果断付款。</p><p>然后今天周六下午，终于是到手了。赶紧插上装好东芝家的驱动跑个分，果然 NVMe + MLC 的组合数据上非常吓人。马上迁移系统，结果文件都是复制完了却在启动上栽了跟头。</p><h2 id="系统迁移引导处理"><a href="#系统迁移引导处理" class="headerlink" title="系统迁移引导处理"></a>系统迁移引导处理</h2><p>在 UEFI + GPT 环境下直接复制全盘复制文件到新分区是可行的，前提是你的 NVMe 在原来的系统中要被认过一次，系统的设备管理器中的“存储控制器”一项出现了 NVMe 控制器，这是迁移可行的大前提。</p><p>文件复制完毕之后，你还需要做两个事情，否则，是进不去新驱动器上的系统的：</p><h3 id="改变注册表中默认分配盘符"><a href="#改变注册表中默认分配盘符" class="headerlink" title="改变注册表中默认分配盘符"></a>改变注册表中默认分配盘符</h3><p>首先你需要一个可用的注册表编辑器，定位到 <code>HKLM\SYSTEM\MountedDevices</code> 下，将 <code>\DosDevices\新系统所在的盘符:</code> 的值复制下来。挂载上新系统的注册表文件（通过文件-加载配置单元读取 <code>Windows\System32\Config\SYSTEM</code> 文件），然后定位到相同的项，将之前复制的值覆盖掉 <code>\DosDevices\C:</code> 的值即可。</p><h3 id="写入新的-BCD-配置"><a href="#写入新的-BCD-配置" class="headerlink" title="写入新的 BCD 配置"></a>写入新的 BCD 配置</h3><p>然后你需要一块系统安装盘，启动到系统安装界面，调出命令行(Shift + F10), 然后将新系统所在的分区的盘符挂成 “C”, 同时要给新硬盘上的 ESP 分区分配一个盘符，使程序能够写入文件，大概过程如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">diskpart</span><br><span class="line">list disk &apos;查看磁盘列表</span><br><span class="line">sele disk x &apos;x 是你新磁盘在列表中的编号</span><br><span class="line">list part</span><br><span class="line">sele part x &apos;x 是你新系统所在的分区编号</span><br><span class="line">assign letter=C &apos;分配新系统所在分区的盘符为 C</span><br><span class="line">sele part y &apos;y 是这块磁盘上的 ESP 分区编号</span><br><span class="line">assign letter=Y &apos;给 ESP 分区分配 Y 的盘符</span><br><span class="line">exit &apos;退出 diskpart</span><br><span class="line">bcdboot C:\windows /s Y: [/v] &apos;将 C:\Windows 作为启动目录写入到 Y: 上，&quot;/v&quot; 为可选参数，即详细模式</span><br></pre></td></tr></table></figure><p>重启之后就搞定了。</p><hr><p>那么，这台机子就这么算是正式启用了吧，之后会攒钱买块 Core i5 给换上就算是完全大功告成了，但愿它能陪我长一些时间吧。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;前略，上周日，一次突如其来的停电袭击之后，我那本来就已经处在崩溃边缘的 K610D 终于不得行了，进系统之后必蓝屏，而且此次蓝屏的 Code 还不一样（说实话可能我基本上把 Windows 10 能出现的蓝屏代码全看了一遍了）。花了半天尝试了各种修复后故障依旧，没有办法之下
-      
-    
-    </summary>
-    
-    
-      <category term="Hardware" scheme="https://blog.xinoassassin.me/tags/Hardware/"/>
-    
-      <category term="DIY" scheme="https://blog.xinoassassin.me/tags/DIY/"/>
     
   </entry>
   
