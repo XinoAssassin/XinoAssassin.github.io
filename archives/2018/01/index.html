@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
   <title>Archives: 2018/1 | 随写 - XinoAssassin&#39;s Blog</title>
   
@@ -11,19 +11,18 @@
   
   <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/atom.xml">
   
-  <meta name="description" content="Self-recording Blog">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="keywords" content="life,technology,thinking">
-  <meta name="HandheldFriendly" content="True">
+  <meta name="description" content="Self-recording Blog" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta name="keywords" content="life,technology,thinking" />
+  <meta name="HandheldFriendly" content="True" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
   <meta property="og:type" content="website">
 <meta property="og:title" content="随写 - XinoAssassin&#39;s Blog">
-<meta property="og:url" content="https://blog.xinoassassin.me/archives/2018/01/index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;archives&#x2F;2018&#x2F;01&#x2F;index.html">
 <meta property="og:site_name" content="随写 - XinoAssassin&#39;s Blog">
 <meta property="og:locale" content="zh">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="随写 - XinoAssassin&#39;s Blog">
   
   
     <link rel="icon" href="/images/favicon.png">
@@ -50,7 +49,7 @@
   
 
 </head>
-</html>
+
 <body>
   
   <div id="loading-bar-wrapper">
@@ -156,11 +155,13 @@
 <blockquote>
 <p>切记 keytool 这玩意儿要用管理员身份来跑，添加完之后 keytool 会生成一个 keystore 文件，建议将它移动在自己 Home 文件夹中并重命名为 .keystore</p>
 </blockquote>
-<p>既然 \$JAVA_OPTS 这个环境变量看上去对 sbt 没用，那我改 $SBT_OPTS, 利用 Everything 这玩意儿强大的搜索功能找到了存在于 <code>sbt 安装目录\config</code> 下面的 sbtopts 文件，好就是你了，添加自定义命令行，<code>sbt run</code>, 然并卵，一点作用都没起。一头雾水中我打开 sbt.bat 这个 Windows 版 sbt 的实际起效文件，发现了这行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set FN=%SBT_HOME%\..\conf\sbtconfig.txt</span><br></pre></td></tr></table></figure>
+<p>既然 $JAVA_OPTS 这个环境变量看上去对 sbt 没用，那我改 $SBT_OPTS, 利用 Everything 这玩意儿强大的搜索功能找到了存在于 <code>sbt 安装目录\config</code> 下面的 sbtopts 文件，好就是你了，添加自定义命令行，<code>sbt run</code>, 然并卵，一点作用都没起。一头雾水中我打开 sbt.bat 这个 Windows 版 sbt 的实际起效文件，发现了这行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">set FN=%SBT_HOME%\..\conf\sbtconfig.txt</span></pre></td></tr></table></figure>
+
 <p><del>我去你妈的，也是个不喜欢用一套轮子的。</del></p>
 <p>把原本写进 sbtopts 文件的自定义命令行改写到 sbtconfig.txt 中，Java 命令行的前缀 <code>-J</code> 并不用添加，最后如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-DproxySet=true </span><br><span class="line">-DproxyHost=127.0.0.1</span><br><span class="line">-DproxyPort=8888   &apos;Fiddler 的代理端口</span><br><span class="line">-Djavax.net.ssl.trustStore=&lt;path\to\FiddlerKeystore&gt; &apos;刚刚生成的 keystore 文件的位置，如果移动到了 $Home 下面并重命名为 .keystore 的话这行就不用加</span><br><span class="line">-Djavax.net.ssl.trustStorePassword=&lt;Keystore Password&gt; &apos;刚刚 keytool 让你敲的密码</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">-DproxySet&#x3D;true </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">-DproxyHost&#x3D;127.0.0.1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">-DproxyPort&#x3D;8888   &#39;Fiddler 的代理端口</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">-Djavax.net.ssl.trustStore&#x3D;&lt;path\to\FiddlerKeystore&gt; &#39;刚刚生成的 keystore 文件的位置，如果移动到了 $Home 下面并重命名为 .keystore 的话这行就不用加</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">-Djavax.net.ssl.trustStorePassword&#x3D;&lt;Keystore Password&gt; &#39;刚刚 keytool 让你敲的密码</span></pre></td></tr></table></figure>
+
 <p><code>sbt run</code></p>
 <p>终于，我在 Fiddler 中看到了 java.exe 的请求，并且正确地解密了出来。我花了半天时间探寻的内容终于呈现在我眼前：</p>
 <p><code>count=0&amp;track=%E5%8F%82%E5%8A%A0%E8%80%85%E5%8B%9F%E9%9B%86%EF%BC%81%2C%3A%E5%8F%82%E6%88%A6ID%2CI%20need%20backup%21%2C%3ABattle%20ID&amp;stall_warnings=true</code></p>
@@ -172,7 +173,8 @@
 <p>然而从外部使用 DDNS 域名+端口号的方式不能直接访问到 RaidFinder. 哦好像是要配上一个 HTTP Server, 那简单，跑一个 http.server 80 不就行了。</p>
 <p>是行了，能访问到所有的静态资源，但是看着 Console 中不断提示的 <code>ws/raids?keepAlive=true</code> 404, 我突然想起来前不久看到的 WebSockets 简介中提到的，要建立一个 WebSockets 连接是需要从 HTTP 请求“转发升级”过去的。于是想到用 NGINX, 下载，这玩意儿才 1MB+ 的大小，真他妈绿色环保。</p>
 <p>把自己服务器上的 nginx.conf 拖出来抄配置，终于理解了之前搜到的配置的用处：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">proxy_pass http://127.0.0.1:$port;</span><br><span class="line">proxy_http_version 1.1;</span><br><span class="line">proxy_set_header Upgrade $http_upgrade;</span><br><span class="line">proxy_set_header Connection "upgrade";</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">proxy_pass http://127.0.0.1:$port;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">proxy_http_version 1.1;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">proxy_set_header Upgrade $http_upgrade;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">proxy_set_header Connection "upgrade";</span></pre></td></tr></table></figure>
+
 <p>配置中最后两句就是为 WebSockets 而服务的，是一个 HTTP 请求转为 WebSockets 连接的关键点。</p>
 <p>那么一切设定好，开始跑，问题又来了：外网无法访问，内网 80 转发正常。</p>
 <h2 id="gt-gt-endl"><a href="#gt-gt-endl" class="headerlink" title="&gt;&gt; endl;"></a>&gt;&gt; endl;</h2><p>最后这篇折腾记的终点就在这里了，不知道为何，访问就是无限转圈，但是起初寻找关键词的目的还是完成了。</p>
@@ -182,7 +184,7 @@
     
     
 	  <div class="tags">
-      <a class="tag-link" href="/tags/Programming/">Programming</a>
+      <a class="tag-link" href="/tags/Programming/" rel="tag">Programming</a>
 	  </div>
     
 
@@ -213,7 +215,7 @@
     
     
 	  <div class="tags">
-      <a class="tag-link" href="/tags/DIY/">DIY</a><a class="tag-link" href="/tags/Hardware/">Hardware</a><a class="tag-link" href="/tags/杂/">杂</a>
+      <a class="tag-link" href="/tags/DIY/" rel="tag">DIY</a><a class="tag-link" href="/tags/Hardware/" rel="tag">Hardware</a><a class="tag-link" href="/tags/%E6%9D%82/" rel="tag">杂</a>
 	  </div>
     
 
@@ -252,7 +254,7 @@
     
     
 	  <div class="tags">
-      <a class="tag-link" href="/tags/杂/">杂</a>
+      <a class="tag-link" href="/tags/%E6%9D%82/" rel="tag">杂</a>
 	  </div>
     
 
@@ -286,7 +288,7 @@
     
     
 	  <div class="tags">
-      <a class="tag-link" href="/tags/Game/">Game</a><a class="tag-link" href="/tags/Programming/">Programming</a>
+      <a class="tag-link" href="/tags/Game/" rel="tag">Game</a><a class="tag-link" href="/tags/Programming/" rel="tag">Programming</a>
 	  </div>
     
 
@@ -323,7 +325,7 @@
     
     
 	  <div class="tags">
-      <a class="tag-link" href="/tags/Game/">Game</a><a class="tag-link" href="/tags/Programming/">Programming</a>
+      <a class="tag-link" href="/tags/Game/" rel="tag">Game</a><a class="tag-link" href="/tags/Programming/" rel="tag">Programming</a>
 	  </div>
     
 
@@ -373,7 +375,7 @@
     
     
 	  <div class="tags">
-      <a class="tag-link" href="/tags/Programming/">Programming</a>
+      <a class="tag-link" href="/tags/Programming/" rel="tag">Programming</a>
 	  </div>
     
 

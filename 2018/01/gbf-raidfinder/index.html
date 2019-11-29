@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
   <title>计划：用 Node.js 重写 GBF-RaidFinder | 随写 - XinoAssassin&#39;s Blog</title>
   
@@ -11,24 +11,22 @@
   
   <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/atom.xml">
   
-  <meta name="description" content="Self-recording Blog">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="keywords" content="life,technology,thinking">
-  <meta name="HandheldFriendly" content="True">
+  <meta name="description" content="Self-recording Blog" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta name="keywords" content="life,technology,thinking" />
+  <meta name="HandheldFriendly" content="True" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-  <meta name="description" content="最近产生了一个“大胆”的想法，就是用 Node.js 来重写 walfie/gbf-raidfinder 这个被许多骑空士使用着的项目。 为什么想要重写？因为原项目是用 Scala 写的，运行在 JVM 上，虽然 JVM 跨平台的能力比较强，但它相对比较“臃肿”，而且构建、更新起来比较慢。可以是可以用作者提供的 Docker 镜像直接部署，但是之前因为 Docker 不兼容于 4.9 以上的内核，">
+  <meta name="description" content="最近产生了一个“大胆”的想法，就是用 Node.js 来重写 walfie&#x2F;gbf-raidfinder 这个被许多骑空士使用着的项目。 为什么想要重写？因为原项目是用 Scala 写的，运行在 JVM 上，虽然 JVM 跨平台的能力比较强，但它相对比较“臃肿”，而且构建、更新起来比较慢。可以是可以用作者提供的 Docker 镜像直接部署，但是之前因为 Docker 不兼容于 4.9 以上的内核，">
 <meta name="keywords" content="Game,Programming">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计划：用 Node.js 重写 GBF-RaidFinder">
-<meta property="og:url" content="https://blog.xinoassassin.me/2018/01/gbf-raidfinder/index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;2018&#x2F;01&#x2F;gbf-raidfinder&#x2F;index.html">
 <meta property="og:site_name" content="随写 - XinoAssassin&#39;s Blog">
-<meta property="og:description" content="最近产生了一个“大胆”的想法，就是用 Node.js 来重写 walfie/gbf-raidfinder 这个被许多骑空士使用着的项目。 为什么想要重写？因为原项目是用 Scala 写的，运行在 JVM 上，虽然 JVM 跨平台的能力比较强，但它相对比较“臃肿”，而且构建、更新起来比较慢。可以是可以用作者提供的 Docker 镜像直接部署，但是之前因为 Docker 不兼容于 4.9 以上的内核，">
+<meta property="og:description" content="最近产生了一个“大胆”的想法，就是用 Node.js 来重写 walfie&#x2F;gbf-raidfinder 这个被许多骑空士使用着的项目。 为什么想要重写？因为原项目是用 Scala 写的，运行在 JVM 上，虽然 JVM 跨平台的能力比较强，但它相对比较“臃肿”，而且构建、更新起来比较慢。可以是可以用作者提供的 Docker 镜像直接部署，但是之前因为 Docker 不兼容于 4.9 以上的内核，">
 <meta property="og:locale" content="zh">
 <meta property="og:updated_time" content="2019-05-30T07:45:42.696Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="计划：用 Node.js 重写 GBF-RaidFinder">
-<meta name="twitter:description" content="最近产生了一个“大胆”的想法，就是用 Node.js 来重写 walfie/gbf-raidfinder 这个被许多骑空士使用着的项目。 为什么想要重写？因为原项目是用 Scala 写的，运行在 JVM 上，虽然 JVM 跨平台的能力比较强，但它相对比较“臃肿”，而且构建、更新起来比较慢。可以是可以用作者提供的 Docker 镜像直接部署，但是之前因为 Docker 不兼容于 4.9 以上的内核，">
   
   
     <link rel="icon" href="/images/favicon.png">
@@ -55,7 +53,7 @@
   
 
 </head>
-</html>
+
 <body>
   
   <div id="loading-bar-wrapper">
@@ -128,7 +126,7 @@
 
 	  <div class="article-tags tags">
 		  
-        <a class="tag-link" href="/tags/Game/">Game</a><a class="tag-link" href="/tags/Programming/">Programming</a>
+        <a class="tag-link" href="/tags/Game/" rel="tag">Game</a><a class="tag-link" href="/tags/Programming/" rel="tag">Programming</a>
       
 	  </div>
 	</section>

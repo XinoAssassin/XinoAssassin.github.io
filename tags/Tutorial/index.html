@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
   <title>Tag: Tutorial | 随写 - XinoAssassin&#39;s Blog</title>
   
@@ -11,19 +11,18 @@
   
   <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/atom.xml">
   
-  <meta name="description" content="Self-recording Blog">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="keywords" content="life,technology,thinking">
-  <meta name="HandheldFriendly" content="True">
+  <meta name="description" content="Self-recording Blog" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta name="keywords" content="life,technology,thinking" />
+  <meta name="HandheldFriendly" content="True" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
   <meta property="og:type" content="website">
 <meta property="og:title" content="随写 - XinoAssassin&#39;s Blog">
-<meta property="og:url" content="https://blog.xinoassassin.me/tags/Tutorial/index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;tags&#x2F;Tutorial&#x2F;index.html">
 <meta property="og:site_name" content="随写 - XinoAssassin&#39;s Blog">
 <meta property="og:locale" content="zh">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="随写 - XinoAssassin&#39;s Blog">
   
   
     <link rel="icon" href="/images/favicon.png">
@@ -50,7 +49,7 @@
   
 
 </head>
-</html>
+
 <body>
   
   <div id="loading-bar-wrapper">
@@ -121,17 +120,17 @@
   <section class="content">
 	  <p>其实很简单，只需要将obs的网络连接引向代理，但是Shadowsocks中直接挂全局模式不太好，因为会将本来能够直连的网站也会通过代理连接，而且应该是不能代理到obs的（我从来不用全局）。</p>
 <p>那么要怎么做到这点呢？我常用的是<a href="https://www.proxifier.com/" target="_blank" rel="noopener">Proxifier</a>，使用教程网上很多，这边不再赘述，只要在规则里面把obs的执行文件加入需代理列表即可，各种使用RTMP协议的直播网站应该都是直接可以这样搞定。</p>
-<p><img src="/images/proxifier-rule.png" width="50%"></p>
+<img src="/images/proxifier-rule.png" width="50%" />
+
 <p>当然，一个高带宽的代理是必须条件。</p>
 <p>题外话，无论是Youtube还是Twitch，其直播后台都比Bilibili强太多了。</p>
-<p><img src="/images/youtube-back.png" width="70%"></p>
-
+<img src="/images/youtube-back.png"  width="70%" />
 
     
     
     
 	  <div class="tags">
-      <a class="tag-link" href="/tags/Tutorial/">Tutorial</a>
+      <a class="tag-link" href="/tags/Tutorial/" rel="tag">Tutorial</a>
 	  </div>
     
 
@@ -163,9 +162,10 @@
 <h2 id="配置文件与命令"><a href="#配置文件与命令" class="headerlink" title="配置文件与命令"></a>配置文件与命令</h2><p>youtube-dl支持配置文件，可以免去每次手动输一长串命令的麻烦，在Windows下其默认读取的配置文件位于用户目录下的<code>youtube-dl.conf</code>，即<code>%userprofile%\youtube-dl.conf</code>。</p>
 <p>这边准备好了两份配置文件，一份是直播同时下载，另一份是平常下载视频。两份配置文件都需要手动更改里面的代理端口号，和自己环境所匹配，其他不需要进行更改。</p>
 <p>普通下载：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">--proxy socks5://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">1081</span></span><br><span class="line">-f <span class="string">'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'</span></span><br><span class="line">-o <span class="string">'%(uploader)s/%(title)s.%(ext)s'</span></span><br><span class="line">--add-metadata</span><br><span class="line">--write-thumbnail</span><br><span class="line">--ignore-errors</span><br><span class="line">--extract-audio</span><br><span class="line">--audio-format best</span><br><span class="line">--audio-quality <span class="number">0</span></span><br><span class="line">--keep-video</span><br><span class="line">--embed-thumbnail</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">--proxy socks5://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">1081</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">-f <span class="string">'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">-o <span class="string">'%(uploader)s/%(title)s.%(ext)s'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">--add-metadata</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">--write-thumbnail</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">--ignore-errors</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">--extract-audio</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">--audio-format best</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">--audio-quality <span class="number">0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">--keep-video</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">--embed-thumbnail</span></pre></td></tr></table></figure>
 <p>直播的同时进行下载：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--proxy http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">1081</span></span><br><span class="line">-f <span class="string">'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">--proxy http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">1081</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">-f <span class="string">'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'</span></span></pre></td></tr></table></figure>
+
 <p>分别将这两块命令行保存成两个文件，修改Proxy行的端口为自己使用的，建议一个命名为<code>youtube-dl.conf</code>放置在<code>%userprofile%</code>目录下，另一个换个名字也存<code>%userprofile%</code>目录下方便调用。</p>
 <p>以上工作完成之后打开命令提示符，注意是cmd不是PowerShell，因为后者在管道操作上面有一些不同，这边是用最简单的cmd来完成。命令：</p>
 <p><code>youtube-dl -o - U2B-LINK|ffmpeg -i - -vcodec copy -acodec copy &quot;OUTPUT.mp4&quot;</code></p>
@@ -179,7 +179,7 @@
     
     
 	  <div class="tags">
-      <a class="tag-link" href="/tags/Tutorial/">Tutorial</a>
+      <a class="tag-link" href="/tags/Tutorial/" rel="tag">Tutorial</a>
 	  </div>
     
 

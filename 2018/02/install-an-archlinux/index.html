@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
   <title>Arch Linux 小折腾记 | 随写 - XinoAssassin&#39;s Blog</title>
   
@@ -11,24 +11,22 @@
   
   <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/atom.xml">
   
-  <meta name="description" content="Self-recording Blog">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="keywords" content="life,technology,thinking">
-  <meta name="HandheldFriendly" content="True">
+  <meta name="description" content="Self-recording Blog" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta name="keywords" content="life,technology,thinking" />
+  <meta name="HandheldFriendly" content="True" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
   <meta name="description" content="久闻 Arch Linux (下文简称 Arch )大名，在虚拟机上多次完成过了整个系统的安装与图形界面的配置，也试过了 KDE 和 GNOME 这两个大名鼎鼎的图形环境，深切体会到了 Arch Linux 的四大原则：  Simplicity Modernity Pragmatism User Centrality  Pacman 是最好的包管理器  我分别在自己的台机上和一台 ThinkPad">
 <meta name="keywords" content="杂,DIY,Programming">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Arch Linux 小折腾记">
-<meta property="og:url" content="https://blog.xinoassassin.me/2018/02/install-an-archlinux/index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;2018&#x2F;02&#x2F;install-an-archlinux&#x2F;index.html">
 <meta property="og:site_name" content="随写 - XinoAssassin&#39;s Blog">
 <meta property="og:description" content="久闻 Arch Linux (下文简称 Arch )大名，在虚拟机上多次完成过了整个系统的安装与图形界面的配置，也试过了 KDE 和 GNOME 这两个大名鼎鼎的图形环境，深切体会到了 Arch Linux 的四大原则：  Simplicity Modernity Pragmatism User Centrality  Pacman 是最好的包管理器  我分别在自己的台机上和一台 ThinkPad">
 <meta property="og:locale" content="zh">
 <meta property="og:updated_time" content="2019-06-06T14:08:03.990Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Arch Linux 小折腾记">
-<meta name="twitter:description" content="久闻 Arch Linux (下文简称 Arch )大名，在虚拟机上多次完成过了整个系统的安装与图形界面的配置，也试过了 KDE 和 GNOME 这两个大名鼎鼎的图形环境，深切体会到了 Arch Linux 的四大原则：  Simplicity Modernity Pragmatism User Centrality  Pacman 是最好的包管理器  我分别在自己的台机上和一台 ThinkPad">
   
   
     <link rel="icon" href="/images/favicon.png">
@@ -55,7 +53,7 @@
   
 
 </head>
-</html>
+
 <body>
   
   <div id="loading-bar-wrapper">
@@ -129,7 +127,8 @@
 <p>虽然 systemd-boot 局限性非常大，比如它只能加载 EFI 可执行文件比如 bootmgfw.efi, vmlinuz-linux.</p>
 <p>如果选择了 systemd-boot 作为 Boot Loader, 那么就需要在 <code>arch-chroot</code> 后手动运行一次 <code>bootctl --path=$ESP install</code> 来把引导程序安装进 EFI 分区中并向 UEFI 界面注册这个引导器，之后你在启动时按 F12 就可以看到一个 Linux Boot Loader.</p>
 <p>但是如果只是将 Boot Loader 安装到了 EFI 分区还不足以让它引导我们进 Arch, 仍然需要在 /boot/loader/entries/ 这个目录下建立新的 conf 文件，里面的内容如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title Arch Linux</span><br><span class="line">linux /vmlinuz-linux</span><br><span class="line">initrd /initramfs-linux.img</span><br><span class="line">options root=(PARTUUID|PARTLABEL)=xxxxxxxxxxxxxxxxxxxxxxxx rw</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">title Arch Linux</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">linux &#x2F;vmlinuz-linux</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">initrd &#x2F;initramfs-linux.img</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">options root&#x3D;(PARTUUID|PARTLABEL)&#x3D;xxxxxxxxxxxxxxxxxxxxxxxx rw</span></pre></td></tr></table></figure>
+
 <p>如果使用的是 Intel 的 CPU 并且有安装 <code>intel-ucode</code> 包，那么在第3行之前再加一行 <code>initrd /intel-ucode.img</code> 启用它。</p>
 <p>建立完了引导所需的系统 config, 需要在 /boot/loader/loader.conf 中的 default 一行中指定刚才建立的 config 文件名，然后使用 Linux Boot Loader 引导器就会默认进入 Arch Linux.</p>
 <h2 id="双系统与时钟"><a href="#双系统与时钟" class="headerlink" title="双系统与时钟"></a>双系统与时钟</h2><p>感谢 UEFI 标准，现在我们可以非常方便地组建双系统 (Windows + Linux) 环境。</p>
@@ -137,7 +136,8 @@
 <p>双系统有一个很大的问题，就是时钟。Windows 默认往 BIOS 写入本地时间，而不是 Linux 标准的 UTC, 这就会导致你从 Windows 切换过去后时间会+8, 也就是按你的时区调整然后又写回到 BIOS 中。从 Linux 切换过去，Windows 认为是本地时间，于是显示给你的实际上是 UTC. 所以为了解决这个问题，在安装 Arch 时，使用 <code>hwclock --hctosys -l</code> (将硬件时间作为本地时间读入系统), 而不是 Guide 上所用的 <code>hwclock --systohc</code>(将系统时间写入 BIOS 并且是 UTC).</p>
 <p>之后启动到 Windows, 注册表定位到 <code>HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation</code> 添加一个 DWORD, 名为 <code>RealTimeIsUniversal</code> 值为 1, 即可实现 Windows 往硬件中写入的时间是以 UTC 为标准而不是本地时间。</p>
 <h2 id="systemctl-enable"><a href="#systemctl-enable" class="headerlink" title="systemctl enable"></a>systemctl enable</h2><p>由于 Arch Linux 的哲学，大部分软件包在安装之后也并不会自动启用，需要你手动 <code>systemctl enable|start xxxx</code>. 尤其要留意的是，还在 ISO 环境下安装系统的时候就要把 dhcpcd 这个服务给 enable 了，解决你进系统之后发现连不上网络想半天不知道问题出在哪里的问题。当然这是针对有线网卡，而大部分无线网卡，我推荐直接使用 Network Manager 搞定。当然使用无线网卡的首次联网你还是需要如下步骤：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip link set dev interface up</span><br><span class="line">iw interface scan</span><br><span class="line">wpa_supplicant -B -i interface -c &lt;(wpa_passphrase SSID Password)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ip link set dev interface up</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">iw interface scan</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">wpa_supplicant -B -i interface -c &lt;(wpa_passphrase SSID Password)</span></pre></td></tr></table></figure>
+
 <p>还有一点需要注意的是，Arch 的 Shadowsocks-libev 默认读取的配置目录在 /etc/shadowsocks/, 与 Python 版相同的目录而不是传统的 /etc/shadowsocks-libev/ 下，启用它的命令为 <code>systemctl enable shadowsocks-libev@配置文件名.service</code> .</p>
 <h2 id="Intel-有线网卡的坑"><a href="#Intel-有线网卡的坑" class="headerlink" title="Intel 有线网卡的坑"></a>Intel 有线网卡的坑</h2><p>当你机器上使用的网卡的是 Intel Ethernet Connection I21x 的时候，你要小心了，在安装 Arch 之前，在 Windows 中安装 Intel 的官方驱动，然后在网卡的硬件配置面板中将所有的网络唤醒选项给关闭，这可以有效防止你进入 Arch 环境之后获取不到任何的网络信息导致连不上网。</p>
 <p><code>&gt;&gt; endl;</code></p>
@@ -146,7 +146,7 @@
 
 	  <div class="article-tags tags">
 		  
-        <a class="tag-link" href="/tags/DIY/">DIY</a><a class="tag-link" href="/tags/Programming/">Programming</a><a class="tag-link" href="/tags/杂/">杂</a>
+        <a class="tag-link" href="/tags/DIY/" rel="tag">DIY</a><a class="tag-link" href="/tags/Programming/" rel="tag">Programming</a><a class="tag-link" href="/tags/%E6%9D%82/" rel="tag">杂</a>
       
 	  </div>
 	</section>
