@@ -18,23 +18,25 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
   <meta name="description" content="终于确认的 Turing距离 Nvidia 发布目前主流消费市场上的显卡—— GeForce 10 系列已经过去两年又三个月了，或许是因为竞争对手实在不给力，其推出的 Vega 系列没有撼动 Pascal 系显卡统治地位的能力，又或许是新卡的配套工程出了一些问题，比如制程问题还有 GDDR 6 显存的产量问题。   这是一张 2015 年初，Nvidia 发布会上的路线图，上面可以很清楚地看到，P">
-<meta name="keywords" content="Hardware">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GeForce RTX 前瞻——在图灵架构初来乍到之时">
-<meta property="og:url" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;2018&#x2F;08&#x2F;before-Turing&#x2F;index.html">
+<meta property="og:url" content="https://blog.xinoassassin.me/2018/08/before-Turing/index.html">
 <meta property="og:site_name" content="随写 - XinoAssassin&#39;s Blog">
 <meta property="og:description" content="终于确认的 Turing距离 Nvidia 发布目前主流消费市场上的显卡—— GeForce 10 系列已经过去两年又三个月了，或许是因为竞争对手实在不给力，其推出的 Vega 系列没有撼动 Pascal 系显卡统治地位的能力，又或许是新卡的配套工程出了一些问题，比如制程问题还有 GDDR 6 显存的产量问题。   这是一张 2015 年初，Nvidia 发布会上的路线图，上面可以很清楚地看到，P">
 <meta property="og:locale" content="zh">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;Roadmap-2015.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;old-huang-with-QuadroRTX.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;an-example-of-Ray-Tracing.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;pascal-vs-turing.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;turing-architecture.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;AIDA64-1180.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;video-45s.png">
-<meta property="og:updated_time" content="2019-05-30T07:45:42.696Z">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/Roadmap-2015.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/old-huang-with-QuadroRTX.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/an-example-of-Ray-Tracing.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/pascal-vs-turing.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/turing-architecture.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/AIDA64-1180.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/video-45s.png">
+<meta property="article:published_time" content="2018-08-14T15:16:25.000Z">
+<meta property="article:modified_time" content="2019-05-30T07:45:42.696Z">
+<meta property="article:author" content="XinoAssassin Ni">
+<meta property="article:tag" content="Hardware">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;Roadmap-2015.jpg">
+<meta name="twitter:image" content="https://blog.xinoassassin.me/images/Roadmap-2015.jpg">
   
   
     <link rel="icon" href="/images/favicon.png">
@@ -52,7 +54,9 @@
 
 	<script src="https://use.typekit.net/kqs5lfe.js"></script>
   <script>try{Typekit.load({ async: false });}catch(e){}</script>
-  <link rel="stylesheet" href="/style.css">
+  
+<link rel="stylesheet" href="/style.css">
+
   <script>
     function setLoadingBarProgress(num) {
       document.getElementById('loading-bar').style.width=num+"%";
@@ -60,7 +64,7 @@
   </script>
   
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 <body>
   
@@ -249,7 +253,9 @@
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
 
+
 <script src="/js/jquery.fitvids.js"></script>
+
 <script>
 	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
 	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
@@ -262,8 +268,12 @@
   var BAIDU_API_ID = "";
   var SEARCH_SERVICE = "google";
 </script>
+
 <script src="/js/search.js"></script>
+
+
 <script src="/js/app.js"></script>
+
 
 
   <script>setLoadingBarProgress(100);</script>

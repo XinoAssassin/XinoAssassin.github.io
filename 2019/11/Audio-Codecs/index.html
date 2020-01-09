@@ -18,38 +18,40 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
   <meta name="description" content="前面讲过了多媒体容器格式的变迁，这期我们来看看音频编码是如何发展的。在讲编码之前，同样地，让我们来看看现在最为通用的数字音频格式——PCM是怎么来的吧。 从音频波形到0和1声波是一种机械波，在数字时代到来前，录音的原理其实就是将声波的波形、振幅等等特征依样画葫芦给记录到如黑胶唱片、磁带等介质上面，但是这种记录方式并不利于保存，计算机等电子设备的普及使得人们更想使用电子数据的方式来保存音频。但是用于">
-<meta name="keywords" content="杂">
 <meta property="og:type" content="article">
 <meta property="og:title" content="音频编码变迁录">
-<meta property="og:url" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;2019&#x2F;11&#x2F;Audio-Codecs&#x2F;index.html">
+<meta property="og:url" content="https://blog.xinoassassin.me/2019/11/Audio-Codecs/index.html">
 <meta property="og:site_name" content="随写 - XinoAssassin&#39;s Blog">
 <meta property="og:description" content="前面讲过了多媒体容器格式的变迁，这期我们来看看音频编码是如何发展的。在讲编码之前，同样地，让我们来看看现在最为通用的数字音频格式——PCM是怎么来的吧。 从音频波形到0和1声波是一种机械波，在数字时代到来前，录音的原理其实就是将声波的波形、振幅等等特征依样画葫芦给记录到如黑胶唱片、磁带等介质上面，但是这种记录方式并不利于保存，计算机等电子设备的普及使得人们更想使用电子数据的方式来保存音频。但是用于">
 <meta property="og:locale" content="zh">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;image-20191127212231945.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;samples.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;220px-CDDAlogo.svg.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;logo-150x150.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;hireslogo-150x150.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;MP3_Logo.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;image-20191127231815878.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;image-20191127232759538.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;image-20191127233224835.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;advanced-audio-coding-aac-logo-1C1956B992-seeklogo.com.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;AAC-LC-HE.png.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;AAC-LC-HE.png.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;image-20191128152343951.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;Dolby-Digital.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;DTS_small_logo.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;dd.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;image-20191128154458041.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;logo130.gif">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;applelossless.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;Dolby_TrueHD.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;DTS-HD-MA.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;PCM-vs-DSD.png">
-<meta property="og:updated_time" content="2019-12-01T08:10:36.307Z">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/image-20191127212231945.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/samples.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/220px-CDDAlogo.svg.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/logo-150x150.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/hireslogo-150x150.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/MP3_Logo.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/image-20191127231815878.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/image-20191127232759538.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/image-20191127233224835.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/advanced-audio-coding-aac-logo-1C1956B992-seeklogo.com.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/AAC-LC-HE.png.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/AAC-LC-HE.png.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/image-20191128152343951.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/Dolby-Digital.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/DTS_small_logo.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/dd.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/image-20191128154458041.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/logo130.gif">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/applelossless.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/Dolby_TrueHD.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/DTS-HD-MA.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/PCM-vs-DSD.png">
+<meta property="article:published_time" content="2019-11-28T07:34:47.000Z">
+<meta property="article:modified_time" content="2019-12-01T08:10:36.307Z">
+<meta property="article:author" content="XinoAssassin Ni">
+<meta property="article:tag" content="杂">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;blog.xinoassassin.me&#x2F;images&#x2F;image-20191127212231945.png">
+<meta name="twitter:image" content="https://blog.xinoassassin.me/images/image-20191127212231945.png">
   
   
     <link rel="icon" href="/images/favicon.png">
@@ -67,7 +69,9 @@
 
 	<script src="https://use.typekit.net/kqs5lfe.js"></script>
   <script>try{Typekit.load({ async: false });}catch(e){}</script>
-  <link rel="stylesheet" href="/style.css">
+  
+<link rel="stylesheet" href="/style.css">
+
   <script>
     function setLoadingBarProgress(num) {
       document.getElementById('loading-bar').style.width=num+"%";
@@ -75,7 +79,7 @@
   </script>
   
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 <body>
   
@@ -328,7 +332,9 @@
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
 
+
 <script src="/js/jquery.fitvids.js"></script>
+
 <script>
 	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
 	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
@@ -341,8 +347,12 @@
   var BAIDU_API_ID = "";
   var SEARCH_SERVICE = "google";
 </script>
+
 <script src="/js/search.js"></script>
+
+
 <script src="/js/app.js"></script>
+
 
 
   <script>setLoadingBarProgress(100);</script>
