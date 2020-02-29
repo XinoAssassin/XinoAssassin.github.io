@@ -170,7 +170,7 @@
     
     
 	  <div class="tags">
-      <a class="tag-link" href="/tags/%E6%9D%82/" rel="tag">杂</a>
+      <a class="tag-link" href="/tags/Tutorial/" rel="tag">Tutorial</a>
 	  </div>
     
 
@@ -206,7 +206,7 @@
     
     
 	  <div class="tags">
-      <a class="tag-link" href="/tags/Comment/" rel="tag">Comment</a><a class="tag-link" href="/tags/%E6%9D%82/" rel="tag">杂</a>
+      <a class="tag-link" href="/tags/Comment/" rel="tag">Comment</a>
 	  </div>
     
 
@@ -249,7 +249,7 @@
     
     
 	  <div class="tags">
-      <a class="tag-link" href="/tags/Entertainment/" rel="tag">Entertainment</a><a class="tag-link" href="/tags/%E6%9D%82/" rel="tag">杂</a>
+      <a class="tag-link" href="/tags/Comment/" rel="tag">Comment</a><a class="tag-link" href="/tags/Entertainment/" rel="tag">Entertainment</a>
 	  </div>
     
 
@@ -276,9 +276,8 @@
 这种将声波记录成数字数据的方式就叫做PCM调制，这里说的很简化，但是原理其实是一样的，就是用记录下来的点去拟合出声波函数应该有的样子，在PCM调制中，我们记录到的数据是时间与对应的电平值。而上面这两个操作就带来了**采样频率**和**量化位数**这两个关键特征。
 
 <h3 id="PCM调制下的音频重要特征"><a href="#PCM调制下的音频重要特征" class="headerlink" title="PCM调制下的音频重要特征"></a>PCM调制下的音频重要特征</h3><p style="text-align:center;"><img src="/images/samples.png" /><br/>一个波形函数，上面的红点代表采样点，两个红点之间的横向距离一致，距离值就是采样频率的倒数<br/>量化要做的就是将这个红点的y值以一定的规则记录下来</p>
-#### 采样频率
 
-<p>由于声波是一种连续的信号，你可以把它看成数学上面的连续函数，从一个点到下一个点之间有无数多个点，我们没有办法全部将这些时间-振幅信息100％记录下来，只能从中挑选一些，那么怎么挑选呢？以一个固定的时间间隔，到点了就记录。而采样频率指的就是每秒记录这些值的次数，用Hz作为单位。</p>
+<h4 id="采样频率"><a href="#采样频率" class="headerlink" title="采样频率"></a>采样频率</h4><p>由于声波是一种连续的信号，你可以把它看成数学上面的连续函数，从一个点到下一个点之间有无数多个点，我们没有办法全部将这些时间-振幅信息100％记录下来，只能从中挑选一些，那么怎么挑选呢？以一个固定的时间间隔，到点了就记录。而采样频率指的就是每秒记录这些值的次数，用Hz作为单位。</p>
 <p>采样频率越高，我们记录下来的原始声波信息越多，我们保存下来的数字信号自然就越贴近于原始音频信号。</p>
 <h4 id="量化位数"><a href="#量化位数" class="headerlink" title="量化位数"></a>量化位数</h4><p>在确定了采样次数后，我们在这条声波函数上面拥有了一些间隔相同的点，我们知道，在二维函数上面的点可以用一组二维坐标值来表示，这里横轴是时间t，而纵轴一般就是电平值，因为计算机处理能力的限制，我们不可能用一个无限长的数字去记录它，只能用有限位数的数字去记录，而这个位数就是“量化位数”，它决定了数字音频信号的量化精度。</p>
 <p>因为这种记录方式用的是近似值的方法，所以量化位数越大，我们记录下的原始模拟信号的电平值就越精确、越贴近于原始音频信号，另外量化位数越大的音频在动态范围上也要比量化位数小的音频要大。</p>
@@ -393,7 +392,7 @@ DSD解决了传统PCM编码上的高频量化噪声问题，高采样率同时�
     
     
 	  <div class="tags">
-      <a class="tag-link" href="/tags/%E6%9D%82/" rel="tag">杂</a>
+      <a class="tag-link" href="/tags/Tutorial/" rel="tag">Tutorial</a>
 	  </div>
     
 
