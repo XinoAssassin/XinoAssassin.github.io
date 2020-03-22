@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>随写 - XinoAssassin&#39;s Blog</title>
+  <title>数字视频编码的发展历程 | 随写 - XinoAssassin&#39;s Blog</title>
   
   <meta name="author" content="XinoAssassin Ni">
   
@@ -17,13 +17,36 @@
   <meta name="HandheldFriendly" content="True" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="随写 - XinoAssassin&#39;s Blog">
-<meta property="og:url" content="https://blog.xinoassassin.me/index.html">
+  <meta name="description" content="大家久等了，这是多媒体文件格式系列课堂文章的第三篇，前面已经讲过了容器与音频编码，现在我们要看到最为复杂的视频编码了，人们一直在想尽办法提高视频编码的效率，让它在尽可能小的体积内提供最好的画面质量，从而满足人们对于视频传输、存储的需求。和前两篇文章中介绍的容器与音频编码不同的是，视频编码有一条较为清晰的发展脉络，比种类繁多且不统一的音频编码要容易理顺，目前国际通行的视频编码标准基本上都是由MPEG">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数字视频编码的发展历程">
+<meta property="og:url" content="https://blog.xinoassassin.me/2020/03/Video-Codecs/index.html">
 <meta property="og:site_name" content="随写 - XinoAssassin&#39;s Blog">
+<meta property="og:description" content="大家久等了，这是多媒体文件格式系列课堂文章的第三篇，前面已经讲过了容器与音频编码，现在我们要看到最为复杂的视频编码了，人们一直在想尽办法提高视频编码的效率，让它在尽可能小的体积内提供最好的画面质量，从而满足人们对于视频传输、存储的需求。和前两篇文章中介绍的容器与音频编码不同的是，视频编码有一条较为清晰的发展脉络，比种类繁多且不统一的音频编码要容易理顺，目前国际通行的视频编码标准基本上都是由MPEG">
 <meta property="og:locale" content="zh">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/S0_P2_Sullivan-3.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/mc.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/mc-vector.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/DCT-8x8.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/pixel-block.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/DCT-pic.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/DCT-pic-2.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/image-20200313120744255.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/B-frame.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/GOP.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/Snipaste_2019-10-18_21-59-14.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/sub-pixel.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/H.264_block_division.svg.png">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/intra-pred-1.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/intra-pred.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/CABAC.jpg">
+<meta property="og:image" content="https://blog.xinoassassin.me/images/HEVC_angular_intra_prediction_modes.png">
+<meta property="article:published_time" content="2020-03-19T10:54:55.000Z">
+<meta property="article:modified_time" content="2020-03-22T09:55:07.229Z">
 <meta property="article:author" content="XinoAssassin Ni">
+<meta property="article:tag" content="Tutorial">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.xinoassassin.me/images/S0_P2_Sullivan-3.png">
   
   
     <link rel="icon" href="/images/favicon.png">
@@ -96,28 +119,20 @@
     <script>setLoadingBarProgress(40);</script>
     
     <main id="main" role="main">
-      
-
-
-
-
-
-<section class="post-list">
-	
-    <article class="post ">
-
-  
-  <h2 class="title">
-    <a href="/2020/03/Video-Codecs/">
-      数字视频编码的发展历程
+      <article id="post-Video-Codecs"
+  class="post article white-box article-type-post"
+  itemscope itemprop="blogPost">
+	<h2 class="title">
+  	<a href="/2020/03/Video-Codecs/">
+    	数字视频编码的发展历程
     </a>
   </h2>
-  
-  <time>
-    Mar 19, 2020
-  </time>
-  <section class="content">
-	  <p>大家久等了，这是多媒体文件格式系列课堂文章的第三篇，前面已经讲过了容器与音频编码，现在我们要看到最为复杂的视频编码了，人们一直在想尽办法提高视频编码的效率，让它在尽可能小的体积内提供最好的画面质量，从而满足人们对于视频传输、存储的需求。和前两篇文章中介绍的容器与音频编码不同的是，视频编码有一条较为清晰的发展脉络，比种类繁多且不统一的音频编码要容易理顺，目前国际通行的视频编码标准基本上都是由MPEG（动态图像专家组）和ITU-T（国际电信联盟电信标准化部门）等组织牵头开发的，另外还有一些零星的编码，它们可能在一段短暂的时间内占据主流地位，不过最终还是让位于国际通行标准。</p>
+	<time>
+	  Mar 19, 2020
+	</time>
+	<section class="content">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>大家久等了，这是多媒体文件格式系列课堂文章的第三篇，前面已经讲过了容器与音频编码，现在我们要看到最为复杂的视频编码了，人们一直在想尽办法提高视频编码的效率，让它在尽可能小的体积内提供最好的画面质量，从而满足人们对于视频传输、存储的需求。和前两篇文章中介绍的容器与音频编码不同的是，视频编码有一条较为清晰的发展脉络，比种类繁多且不统一的音频编码要容易理顺，目前国际通行的视频编码标准基本上都是由MPEG（动态图像专家组）和ITU-T（国际电信联盟电信标准化部门）等组织牵头开发的，另外还有一些零星的编码，它们可能在一段短暂的时间内占据主流地位，不过最终还是让位于国际通行标准。</p>
 <blockquote>
 <p>国际上主要通行的编码标准为ITU-T组织的H.26x系列视频编码和MPEG组织制定的部分编码标准，有一点需要说明的是，同样的一个标准在不同组织那儿可能会叫成不同名字，比如最典型的就是AVC（高级视频编码），大家可能更熟悉它的另一个名字——H.264，AVC是MPEG组织在标准中给它起的名字，MPEG组织从属于国际标准化组织（ISO）和国际电工委员会（IEC），所以在ISO标准中，它的正式名字是“MPEG-4 Part 10, Advanced Video Coding”。这种情况多见于H.26x系列编码，下文会注出。</p>
 </blockquote>
@@ -227,269 +242,18 @@
 <p>另外，根据最新的报告，当前互联网流量中占大头的就是视频流量，随着流媒体继续深入日常生活，用于视频传输的流量只会更大，而互联网的总体带宽并不是可以无限提升的，对于内容提供方来说，流量费用也是相当一部分开销，压缩效率更好的编码自然也会受到他们的青睐。实际上，编码不断升级这件事情是双赢的，用户和内容提供方都可以从中获利。</p>
 <p>由于时间与作者个人能力限制，本篇文章也存在诸多的不足，但我仍然想通过对这些编码的概述让更多人了解到正确的编码知识，如果能够起到抛砖引玉的作用，让更多人对编码产生兴趣，开始自己的研究，那是最好不过的事情了。</p>
 
+  	</div>
 
-    
-    
-    
-	  <div class="tags">
-      <a class="tag-link" href="/tags/Tutorial/" rel="tag">Tutorial</a>
+	  <div class="article-tags tags">
+		  
+        <a class="tag-link" href="/tags/Tutorial/" rel="tag">Tutorial</a>
+      
 	  </div>
-    
-
-  </section>
+	</section>
 </article>
-  
-    <article class="post ">
-
-  
-  <h2 class="title">
-    <a href="/2020/03/xbox-series-x-explained/">
-      从硬件编辑的角度解读Xbox Series X的规格
-    </a>
-  </h2>
-  
-  <time>
-    Mar 1, 2020
-  </time>
-  <section class="content">
-	  <h1 id="从硬件编辑的角度解读Xbox-Series-X的规格"><a href="#从硬件编辑的角度解读Xbox-Series-X的规格" class="headerlink" title="从硬件编辑的角度解读Xbox Series X的规格"></a>从硬件编辑的角度解读Xbox Series X的规格</h1><p>在对外正式公开Xbox Series X这台主机74天之后，2月25日，Phil Spencer用一篇新的<a href="https://news.xbox.com/en-us/2020/02/24/what-you-can-expect-next-generation-gaming/" target="_blank" rel="noopener">博文</a>对外公布了这台次世代主机身上更多的细节，想必各位或多或少已经读过<a href="https://www.gcores.com/articles/120661" target="_blank" rel="noopener">新闻</a>了。不过普通玩家可能会对文章里面的很多名词感到陌生，什么Zen 2、RDNA 2、VRS……可能只看懂这台主机被吹上天了。本文就对这些名词简单进行一番介绍，顺便带出笔者作为一个硬件媒体编辑，对于这台主机的一些个人看法。让我们顺着Phil Spencer的文章脉络，一点一点来看。</p>
-<h1 id="硬件部分：Zen-2、RDNA-2、VRS、光追的简介"><a href="#硬件部分：Zen-2、RDNA-2、VRS、光追的简介" class="headerlink" title="硬件部分：Zen 2、RDNA 2、VRS、光追的简介"></a>硬件部分：Zen 2、RDNA 2、VRS、光追的简介</h1><p>Phil Spencer首先介绍的是Xbox Series X使用的处理器——下一代定制处理器（Next Generation Custom Processor）。这枚处理器比今年CES展会上AMD发布的Ryzen 4000系列APU还要新，Phil Spencer其实早就已经剧透了这枚芯片的模样，在1月头上的时候，他把自己的Twitter头像给改成了这枚芯片的照片。</p>
-<p><img src="/images/dO7wSpcd_400x400.jpg" alt=""></p>
-<p>Xbox Series X上面使用的这枚“下一代定制处理器”中集成了CPU和GPU，CPU部分是这半年来PC市场上表现得非常好的Zen 2处理器，而GPU部分则是基于尚未公布技术细节的RDNA 2架构。那么这块芯片究竟有多强呢？</p>
-<h2 id="CPU：基于Zen-2，相对本世代主机有巨大提升"><a href="#CPU：基于Zen-2，相对本世代主机有巨大提升" class="headerlink" title="CPU：基于Zen 2，相对本世代主机有巨大提升"></a>CPU：基于Zen 2，相对本世代主机有巨大提升</h2><p><img src="/images/Zen_2_Logo.jpg" alt=""></p>
-<p>首先来看CPU部分，也就是Zen 2处理器。它是AMD近年来的最大翻身之作，在拥有相同核心数、相同频率的情况下它的综合性能已经可以比肩Intel最新一代的酷睿桌面版处理器（比如说，Ryzen 7 3700X的综合性能压了同为八核的i7-9700K一头，比i9-9900K稍弱），而它在玩家更看重的游戏性能方面也表现得相当优秀，基本上已经有对手90％的功力了。对比本世代主机上面那颗羸弱的Jaguar APU，那提升幅度只能用巨大来形容，原本CPU方面存在的严重短板将不复存在。</p>
-<h2 id="GPU：基于RDNA-2，性能可能约在RTX-2080与RTX-2080-SUPER之间"><a href="#GPU：基于RDNA-2，性能可能约在RTX-2080与RTX-2080-SUPER之间" class="headerlink" title="GPU：基于RDNA 2，性能可能约在RTX 2080与RTX 2080 SUPER之间"></a>GPU：基于RDNA 2，性能可能约在RTX 2080与RTX 2080 SUPER之间</h2><p>然后来看对于游戏更为重要的GPU。这里Phil Spencer给出了一个具体的数字——12 TFLOPS，这个数字代表的是GPU的单精度浮点运算能力，经常性被用来当作GPU的主要性能指标。但我们并不能单单看这个指标就说新主机的GPU性能会是Xbox One X的两倍，因为它只是一个理论值，实际性能还得看架构，而新主机的GPU架构恰恰就有着巨大的改变。RDNA架构是AMD完全重新打造的显卡架构，在游戏图形效能上面较沿用约八年的GCN架构有很大的提升。比如说，理论单精度性能比RX 580显卡（基于GCN 4.0架构，就是PS4 Pro和Xbox One X上的GPU架构）低1 TFLOPS的RX 5500 XT（基于RDNA架构），其实际游戏性能反而要比前者强。（对于RDNA与GCN架构的实际表现差异，Digital Foundry做过一期视频，有兴趣的可以去看一下：《<a href="https://www.youtube.com/watch?v=fzPo7gu-fTw" target="_blank" rel="noopener">Navi RDNA vs GCN 1.0: Last-Gen vs Next-Gen GPU Tech Head-To-Head!</a>》）</p>
-<p style="text-align:center;"><img src="/images/PS5_XboxSeriesX_Specs-5.jpg" / width="100%" /><br/>Digital Foundry推测中的Xbox Series X GPU规格</p>
-
-<p>比较凑巧的是，此前的泄漏显示Xbox Series X的GPU将会集成56组计算单元（CU），Digital Foundry对这枚GPU的单精度浮点性能推算结果正好是12 TFLOPS，所以现在我们可以假设这枚GPU拥有56组CU，那么对比拥有40组CU的Radeon RX 5700 XT（目前RDNA架构的旗舰显卡），它的计算单元规模大了40％，这将会带来显著的性能提升。</p>
-<p>因此我们有理由认为Xbox Series X上面的显卡将会比Radeon RX 5700 XT强上不止一个档次。如果放在PC市场来看，RX 5700 XT跟NVIDIA GeForce RTX 2070 SUPER差上半档左右，也就是说，如果不算上RDNA 2架构可能带来的效率提升，Xbox Series X的GPU性能可能会处于RTX 2080到RTX 2080 SUPER之间，这是笔者的保守估计。</p>
-<h2 id="RDNA-2带来的VRS和光线追踪支持"><a href="#RDNA-2带来的VRS和光线追踪支持" class="headerlink" title="RDNA 2带来的VRS和光线追踪支持"></a>RDNA 2带来的VRS和光线追踪支持</h2><p>新的图形架构带来的不单单是性能方面的提升，在功能性上也终于追上了这个时代，加入了VRS（<strong>V</strong>ariable <strong>R</strong>ate <strong>S</strong>hading，可变速率着色）和光线追踪的支持。对于后者，我们见到了它在游戏中的实际表现，而VRS是什么东西呢？</p>
-<h3 id="可变速率着色"><a href="#可变速率着色" class="headerlink" title="可变速率着色"></a>可变速率着色</h3><p>VRS的原理是通过改变单次像素着色器操作所处理的像素数量，来改变屏幕不同区域的着色质量。简单来说，它可以改变同个画面中不同部分的渲染精细度，<strong>它的用处是提高画面帧数</strong>。我们还是拿NVIDIA的那张示意图来举例：</p>
-<img src="/images/vrs_grids_car_002.png" width="100%" />
-
-<p>在不开启VRS的情况，也就是正常情况下，一帧画面的所有像素都是独立着色的；而开启VRS之后，原本独立的像素被分成了一个个像素块，它们会共享着色结果，此时GPU会根据程序员设定的重要性分级为所有像素块分配不同的着色精细度。拿上面的图片为例，车辆和远景部分的像素仍然是独立着色的，但快速变动的道路和路边的像素块就是区块共同着色的，此时由于显卡的计算资源得到了节约，所以游戏的帧数会有所提高。</p>
-<p>目前3DMark已经引入了VRS相关的测试，在该软件的测试中，VRS分为两级，在Tier 1测试中，你会发现画面整体的精细程度都变差了，这是因为整个画面的着色速率都被降低了。</p>
-<p style="text-align:center;"><img src="/images/VRS-T1-Comp.jpg" width="100%" /><br/>左：VRS关；右：VRS开</p>
-
-<p>而在完整的Tier 2特性下，才会像上面所说的那样对整个画面进行分区，此时的效果就好了太多：</p>
-<p style="text-align:center;"><img src="/images/VRS-T2-Comp-2.jpg" width="100%" /><br/>上：VRS关；下：VRS开。现在区别就小了很多。</p>
-
-<p>这项技术最大的意义就是提高帧数，而且分辨率越高它的作用越明显。在3DMark的测试中，一张公版RTX 2070在1080p分辨率下的帧数提升为24.43％，而在4K分辨率下，提升幅度已经达到70.84％，在8K下面更是有116.62％的提升，直接从18帧幻灯片变成了40帧基本流畅的水平（数据来源：<a href="https://www.expreview.com/72147.html" target="_blank" rel="noopener">超能网</a>）。</p>
-<p>这项功能是由NVIDIA最先在Turing GPU上引入的，Intel也在他们的Gen 11核显上面加入了这项特性，我们也终于将在RDNA 2架构中看到AMD方面的支持。所以，这项技术是Xbox Series X实现8K游戏的一大技术利器，如果运用得当，我们将会在不牺牲过多画面质量的情况下得到更为流畅的画面，或是享受到更高分辨率的画面。</p>
-<h2 id="硬件光线追踪支持"><a href="#硬件光线追踪支持" class="headerlink" title="硬件光线追踪支持"></a>硬件光线追踪支持</h2><p>微软家嘛，肯定会用自己的DXR API作为光追的入口啦。官方也明确说了这是基于硬件加速（Hardware-accelerated）的光线追踪支持，所以很明确的一点就是RDNA 2架构中将会加入新的针对光线追踪的处理单元，一如当年Turing架构中的RT Core，用专用处理单元的形式为光追提供更好的支持。</p>
-<img src="/images/RDNA_2_RT.jpg" width="100%" />
-
-<p>这方面因为没有太多的信息，所以也没什么可说的。但有一个趋势是很明显的，那就是在主机端的推动下，未来支持光追的游戏将大幅变多。目前的PC市场上面也就只有NVIDIA在大力推光追，但实际收效并不明显，Turing推出一年多了也就只有寥寥十数款已发售游戏支持光追，其中很多游戏也只是浅尝辄止，没有完全应用光追的所有效果。这方面还是需要占据游戏业界主流地位的主机来推动。</p>
-<h1 id="功能性：快速恢复、DLI、HDMI-2-1、120fps、四代同堂以及智能分发"><a href="#功能性：快速恢复、DLI、HDMI-2-1、120fps、四代同堂以及智能分发" class="headerlink" title="功能性：快速恢复、DLI、HDMI 2.1、120fps、四代同堂以及智能分发"></a>功能性：快速恢复、DLI、HDMI 2.1、120fps、四代同堂以及智能分发</h1><p>在硬件部分之后，Phil Spencer介绍了由新硬件带来的新功能和新特性，主要有SSD存储、快速恢复、延迟动态输入、HDMI 2.1、120 fps支持和四代兼容性、智能分发，对于这部分内容，我们分成一个个小点来看，首先是SSD以及在它支持下的快速恢复功能。</p>
-<h2 id="高速SSD带来的超快加载以及快速恢复"><a href="#高速SSD带来的超快加载以及快速恢复" class="headerlink" title="高速SSD带来的超快加载以及快速恢复"></a>高速SSD带来的超快加载以及快速恢复</h2><p>新主机将会用SSD这个事情实际上在去年就已经公布了，但我们不清楚的是新主机会用什么规格的SSD，是中端的“够用型”SSD呢还是高端的性能级SSD。现在Phil Spencer似乎暗示了Xbox Series X将会使用高端性能级SSD，因为他使用了“next-generation”来形容SSD。</p>
-<p>对于目前的SSD来说，什么是下一代呢？要么存储密度上有提升，要么是接口进入了下一代。恰好，新的Zen 2 CPU带来了新的PCIe 4.0总线，简单的说，它的速度是上代（PCIe 3.0）的两倍。而今年正好会有大量采用PCIe 4.0接口的SSD会上市，像三星就已经在CES 2020上面展出了他们的消费级PCIe 4.0 SSD——980 PRO。因此，完全有理由认为Xbox Series X上面的SSD将会使用PCIe 4.0接口来最大化读写性能。</p>
-<p style="text-align:center;">
-<img src="/images/samsung-980-pro.jpg" /><br/>三星980 PRO，支持PCIe 4.0，图片来自<a herf="https://www.anandtech.com/show/15352/ces-2020-samsung-980-pro-pcie-40-ssd-makes-an-appearance">AnandTech</a></p>
-
-<p>一个多月前，DigiTimes报道过<a href="https://www.digitimes.com/news/a20200110PD204.html" target="_blank" rel="noopener">一则群联打入Xbox供应链的新闻</a>：</p>
-<blockquote>
-<p>Phison has reportedly broken into the supply chain of Microsoft’s Xbox, while Silicon Motion has seen orders for home consoles with built-in SSDs surge.</p>
-</blockquote>
-<p>我们可能会在Xbox Series X上面见到来自群联（Phison）的SSD，而现在的分析偏向于认为Sony将会在SSD上面和三星进行合作。</p>
-<p>讨论完了SSD的可能性，我们来看由它提供支持的快速恢复功能，笔者个人猜测这项功能基于虚拟机快照技术。</p>
-<p>常用虚拟机的朋友应该不会对快照这个常见功能感到陌生，它会把虚拟机目前的内存数据和运行状态保存成文件，在下次开启虚拟机/读取快照时就从保存好的文件里面读数据，直接恢复到快照保存时的状态。是不是听上去和官方描述的“几乎瞬间（almost instantly）”、“多个游戏（multiple games）”、“从冻结状态（from a suspended state）”很像？</p>
-<img src="/images/xbox-os-arch.jpg" width="100%" />
-
-<p>可能有些读者就有疑问了，虚拟机里面怎么打游戏？那就不用担心微软的技术力了，Xbox One的系统——Xbox OS已经应用了微软自家的虚拟机技术，游戏和系统是分别跑在两个虚拟机中的。Xbox Series X的系统基本上可以确定会沿用目前的Xbox OS，所以这套成熟的虚拟机体系也将会被沿用。而此前因为HDD的读写速度不够而没法启用的快照功能自然就可以用了。</p>
-<h2 id="动态延迟输入（DLI）"><a href="#动态延迟输入（DLI）" class="headerlink" title="动态延迟输入（DLI）"></a>动态延迟输入（DLI）</h2><p>在使用无线游戏手柄的时候，有一点是无法忽视的，那就是延迟问题。我们这些普通玩家可能没什么感觉，但在高手眼中，这点延迟就已经会造成手眼不同步。原本微软用来连接手柄的就是他们自己开发的一种专有无线协议了，这次他们新引入了动态延迟输入特性，在寥寥一句话的介绍中也智能推测出这是一个用于同步用户输入与显示输出的特性，既然名为动态，那么可能就是根据输入端的连接延迟在输出上面做相应的补偿来保证手眼同步。</p>
-<h2 id="HDMI-2-1"><a href="#HDMI-2-1" class="headerlink" title="HDMI 2.1"></a>HDMI 2.1</h2><p>HDMI是主机上面常见的用来输出画面的接口，其最新版本为HDMI 2.1，相对于HDMI 2.0，它不仅仅提高了最大支持的分辨率和帧率，更引入了多种新的特性，其中Phil Spencer重点提到了自动低延迟模式（<strong>A</strong>uto <strong>L</strong>ow <strong>L</strong>atency <strong>M</strong>ode）和可变帧率（<strong>V</strong>ariable <strong>R</strong>efresh <strong>R</strong>ate），其实这两种特性在目前已经得到了大范围运用了，只不过HDMI 2.1是将其标准化了。</p>
-<h3 id="8K-60fps、4K-120fps"><a href="#8K-60fps、4K-120fps" class="headerlink" title="8K@60fps、4K@120fps"></a>8K@60fps、4K@120fps</h3><p>HDMI 2.1一举将接口的最大传输速率提升了2.67倍，从18Gbit/s直接提升到48Gbit/s，并且加入了在DisplayPort上面已经成功运用的DSC压缩技术，从而将最大可传输分辨率提升到了10K的高度。不管分辨率是4K、8K还是10K，HDMI 2.1都可以提供最高120Hz的传输帧率，为Xbox Series X的120fps提供了坚实的保障。</p>
-<p><img src="/images/image-20200301142006596.png" alt=""></p>
-<h3 id="可变帧率（VRR）"><a href="#可变帧率（VRR）" class="headerlink" title="可变帧率（VRR）"></a>可变帧率（VRR）</h3><p>说到可变帧率，PC玩家肯定是不陌生的，这项特性是用来让显示器的刷新率与显卡输出的画面帧数保持一致，减少画面撕裂现象出现的。目前PC上面有FreeSync和G-SYNC两种方案，前者是AMD主推，并且与DisplayPort接口中的Adaptive-Sync相兼容，目前相关的产品更多；而后者则是NVIDIA主推，但已经推出G-SYNC Compatible对FreeSync做了兼容。</p>
-<p>早在2016年，FreeSync就已经可以跑在HDMI接口上了，而近来也有LG的一系列OLED电视机支持搭配N卡开启G-SYNC Compatible，用的也是HDMI接口，未来支持可变帧率技术的电视机将会越来越多，只要他们支持HDMI 2.1 VRR特性，Xbox Series X即可兼容并开启可变帧率模式，为玩家带来更加顺滑的画面，减少撕裂。</p>
-<h3 id="自动低延迟模式（ALLM）"><a href="#自动低延迟模式（ALLM）" class="headerlink" title="自动低延迟模式（ALLM）"></a>自动低延迟模式（ALLM）</h3><p>实际上Xbox One就已经支持自动低延迟模式，听过AOC电视那期广告节目的应该会记得，电视机的延迟是远高于显示器的，但现在很多电视机厂家都在着重优化这一块，尽量降低内部延迟，为游戏玩家提供更好的体验。而ALLM特性就可以自动进行延迟优化。</p>
-<p><img src="/images/ALLM_600wide.jpg" alt=""></p>
-<p>根据HDMI官方的说法，ALLM可以简化玩家的操作。在需要时，主机会向电视机发送一个开启低延迟模式的信号，而在不需要时也能够自动关闭掉这个模式以恢复电视内置的画面优化。</p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>实际上HDMI 2.1还引入了很多增强游戏体验的特性，像快速媒体切换和快速帧传输都是崭新的面向游戏应用的特性。前者用来减少在内容之间切换的空白屏幕时间，后者则可以让图像帧更早的到达电视机进行处理，减少Lag情况。</p>
-<h2 id="120-fps支持"><a href="#120-fps支持" class="headerlink" title="120 fps支持"></a>120 fps支持</h2><p>主机端锁60帧是很常见的事情，但我们应该有点更高的追求。近年来高刷新率显示器的流行让很多PC玩家都认识到原来60帧真的束缚住了我们的视觉体验。其实在手机业界也是一样的，更高刷新率的屏幕可以明显带来更好的观感。本世代的主机可能限于机能问题只能锁60帧，但是对于硬件规格上有巨大飞跃的新主机而言，真的可以抛弃掉锁60帧这个传统了，于是Phil Spencer也写明了，在Xbox Series X上面，帧数上限被拉高到了120帧。再加上强悍的硬件能力支持，以及各路保障视觉体验的特性，在下个世代，玩家的视觉体验提升将不局限于分辨率和画面质量，更是在帧数，画面顺滑度和体感延迟上都会有很大的提高。</p>
-<h2 id="四代同堂和智能分发"><a href="#四代同堂和智能分发" class="headerlink" title="四代同堂和智能分发"></a>四代同堂和智能分发</h2><p>四代同堂就不用多说了，微软在Xbox的兼容性上面一向是非常良心的，它为新入坑的玩家提供了一个用来回顾老游戏的非常方便的入口，只要有兴趣就可以用一台主机玩前后接近二十年的游戏，甚至不用重复购买。</p>
-<p>重点来看智能分发。</p>
-<p>有印象的读者可能还记得，在一月中旬的时候Xbox游戏工作室的主管Matt Booty在接受采访的时候确认Xbox Series X将没有独占游戏。给这点带来保障的就是新的智能分发技术，买一次即可在两代主机上游玩，并且有相应的优化版本，还得到了CDPR这个第三方的响应。本身Xbox第一方15个工作室的作品都会采用这种分发模式，再加上第三方的支持，在未来两年中老玩家在老平台上面玩到新游戏应该不是什么困难的事情。</p>
-<p>能怎么说呢？Xbox牛逼就完事了。</p>
-<h1 id="总结：用户体验至上，核心即为游戏"><a href="#总结：用户体验至上，核心即为游戏" class="headerlink" title="总结：用户体验至上，核心即为游戏"></a>总结：用户体验至上，核心即为游戏</h1><p>总的来说，目前官方透露出来的Xbox Series X是一台硬件配置强悍，功能特性着重为玩家服务的次世代游戏主机。还记得本世代初期，Xbox One的惨败吗？很明显，Xbox团队吸取了经验教训，他们不再想做一个有游戏功能的客厅机顶盒，而是专注于游戏，为玩家带来最好的游戏体验。而在本世代中期开始转变的营销思路也得以延续，Xbox现在卖的是服务，Xbox Game Pass得到大家的追捧是因为它很实在，游戏又多又新，而微软也很清楚，订阅制服务实际上是更赚钱的（看看Office 365就知道了）。想要吸引更多的玩家买他们的服务首先要把硬件基础给搞好，于是Xbox Series X就诞生了。</p>
 
 
-    
-    
-    
-	  <div class="tags">
-      <a class="tag-link" href="/tags/Hardware/" rel="tag">Hardware</a>
-	  </div>
-    
 
-  </section>
-</article>
-  
-    <article class="post ">
-
-  
-  <h2 class="title">
-    <a href="/2020/01/how-to-fetch-news/">
-      如何在资讯大爆炸时代获得最及时最准确的新闻，以科技和游戏新闻为例
-    </a>
-  </h2>
-  
-  <time>
-    Jan 29, 2020
-  </time>
-  <section class="content">
-	  <p>这是一个资讯大爆炸的时代，在移动互联网大潮的推动下，我们每天接触到各种资讯的渠道从电视、报纸和电脑上网等变成了从手机上面的一个个 App 中获取，哦不对，是被推送“塞入”大量的资讯，这其中有的是新闻，有的是本地实用资讯，甚至还有各路八卦消息。</p>
-<p>这是时代的潮流，我们躲不过去。然而笔者相信机核的很多读者并不想要诸如娱乐圈八卦这样的杂七杂八的新闻，只想看游戏相关的资讯；或者是嫌弃各路媒体速度还不够快，自己想成为最快的资讯大佬；抑或者是想要绕过媒体这层中介去获取最原始的消息。那么该怎么做呢？本文就以科技、游戏新闻为例，简单介绍一种方法和三种常见的误导手段，帮助大家获得更高质量的新闻。</p>
-<h1 id="很大比例的新闻都是通过官方网站向外发布的"><a href="#很大比例的新闻都是通过官方网站向外发布的" class="headerlink" title="很大比例的新闻都是通过官方网站向外发布的"></a>很大比例的新闻都是通过官方网站向外发布的</h1><p>媒体的消息源头是怎么来的呢？一些是提前发送给媒体的新闻稿，这些一般人是搞不到的，因为绝大多数提前发送给媒体的新闻稿会带上 NDA，但以这种形式出现的新闻只是少数，因为也只有比较大的公司才会有较为全面的媒体覆盖。另外很大比例的新闻其实是来自于第一时间发布在公司官方网站上的新闻稿，这种做法较为通行，各行各业基本上都会采用这种做法，科技和游戏行业就更是如此了。另外，对于科技和游戏行业来说，还有一部分新闻是各种传闻（Rumor），这种不确定的消息一般是媒体（尤其是国外媒体）挖掘出来广而告之的。</p>
-<img src="/images/image-20200129004050632.png" width="80%" />
-
-<p style="text-align:center;">FromSoftware 的新闻稿页面</p>
-
-<p>所以对于我们普通网民来说，可以通过访问公司官方网站来获取最为及时最为准确的消息。不过很多公司都不会把自己发布的最新消息给挂到首页去，那该怎么找到发布新闻的地方呢？</p>
-<p>这里教一招很简单的：利用搜索引擎，用“公司名 Press Release”、“公司名 News”这样的关键词来搜索，这招可以说是屡试不爽。当然也有像 Steam 这种把新消息全当成博文发的，这时候关键词就要换成“Blog”了：</p>
-<p><img src="/images/image-20200129010256137.png" alt=""></p>
-<p style="text-align:center;">Steam 新闻页中的 Press Releases 已经很久没更新了，近一年半新的官方消息都直接写博文了</p>
-
-<p>而对于一些传言新闻来说，越是靠谱的媒体拿到的内部消息一般会更准确，此时就要选对正确的媒体，对于游戏领域的传闻来说，<a href="https://kotaku.com/" target="_blank" rel="noopener">Kotaku</a>、<a href="https://www.polygon.com/" target="_blank" rel="noopener">Polygon</a> 这两家的爆料新闻准确度还算不错。</p>
-<p>那么这么多网站，我总不可能每天就盯着页面刷新等新闻吧，那该怎么将这么多网站和媒体整合到一起看呢？这时候就要请出一个默默在背后奉献了很久的协议——RSS，关于它的介绍请看后文。</p>
-<h1 id="精准溯源，拒绝二手错误新闻"><a href="#精准溯源，拒绝二手错误新闻" class="headerlink" title="精准溯源，拒绝二手错误新闻"></a>精准溯源，拒绝二手错误新闻</h1><p>当然绝大多数人是没有时时刻刻盯着最新新闻这个必要的，而且就游戏这块来说，国内的几家游戏媒体都是比较及时的，准确性也是比较高的。但科技媒体的新闻就相对要鱼龙混杂一些，这时候就需要我们具有一定的溯源能力，绕过二手新闻。</p>
-<h2 id="不准确的翻译可能会带来误解"><a href="#不准确的翻译可能会带来误解" class="headerlink" title="不准确的翻译可能会带来误解"></a>不准确的翻译可能会带来误解</h2><p>由于语言隔阂和时差，一般我们通过国内媒体看到的国外科技、游戏公司的新闻都是经过编译，或者直接就是转述的。在编译和转述过程中，很可能就会出现信息失真的现象，最终误导读者，比较常见的就是拿捏不准英文多义词、专业名词或是直接机翻导致出错，比如：</p>
-<p><img src="/images/image-20200128214220141.png" alt=""></p>
-<p style="text-align:center;">Console，一词多意，这里被错误翻译成了“控制台”</p>
-
-<h2 id="直接拿流言做新闻却不加提示"><a href="#直接拿流言做新闻却不加提示" class="headerlink" title="直接拿流言做新闻却不加提示"></a>直接拿流言做新闻却不加提示</h2><p>还有就是直接拿传闻、流言来做新闻，但却不在标题或内容中注明这是流言，对读者进行误导，比如下面<a href="https://wccftech.com/rumor-intel-moving-select-cpus-to-globalfoundries/" target="_blank" rel="noopener">这条</a>来自于著名传言站 Wccftech 的 Rumor，在编译之后不仅标题中用于提醒读者的“传言”二字不见了，内文也没有相应的提醒：</p>
-<p><img src="/images/image-20200128214716163.png" alt=""></p>
-<p><img src="/images/image-20200128214521304.png" alt=""></p>
-<p style="text-align:center;">到了某媒体那儿，流言提示就没了，变成肯定了</p>
-
-<p>当看到这类新闻的时候，一定要小心，如果你觉得这事情不太对，那么大可稍微小花一点点时间去溯源。国内做的好的媒体都会注明消息出处，点进去稍微读一下，既可以通过原文来理清楚事情原委还能顺便锻炼一下自己的英文阅读能力。如果是没有标明出处的……非一手的新闻就直接拉黑吧。</p>
-<h2 id="标题党"><a href="#标题党" class="headerlink" title="标题党"></a>标题党</h2><p>这是笔者最为痛恨的一种现象，但不可否认的是，一个非常在我们看来可能是离谱的标题往往可以吸引到很多一般通过路人。标题党在微博、微信朋友圈非常有优势，很多人真的就只看一个标题然后就转发了，实际内容如何呢？不知道没看过没兴趣。</p>
-<p><img src="/images/image-20200129003331527.png" alt=""></p>
-<p style="text-align:center;">不点名了，都是友媒</p>
-
-<p>这种现象还挺常见的，不过国内几家比较正经的游戏媒体都没有用，这是好的。现在的标题党已经没有以前那么明显了，但是仍然存在曲解文章内容、断章取义这样的情况，所以如果各位读者遇到了一个较为夸张的标题，请务必粗看一下内容以防止被标题带着走了。</p>
-<h1 id="定制自己想看的新闻：RSS"><a href="#定制自己想看的新闻：RSS" class="headerlink" title="定制自己想看的新闻：RSS"></a>定制自己想看的新闻：RSS</h1><p>上文提到了一个名词，RSS。它定义了一种标准格式，网站可以依照这种标准格式将自己站里面的内容写成一个文件，方便用户抓取网站上面的内容。在 RSS 的帮助下，我们可以用相应的软件从不同的站点上面抓取整理好的内容，直接在一个地方阅读，大大提高了聚合度和效率。其实今天的诸多新闻客户端继承的就是 RSS 的聚合理念，但 RSS 的自由度要更大一些，并且内容也不局限于新闻，所以我们完全可以利用它来打造自己的“新闻客户端”。</p>
-<p>目前各个平台上有数量繁多的 RSS 客户端，用的人比较多的有 Feedly、Inoreader 这些，笔者用 Inoreader 比较多，它的免费版基本够用，而且 App 做的挺不错的，比较符合笔者的需求。</p>
-<p>那么哪里可以找到 RSS 呢？一般可以留意一下这个标志：</p>
-<p><img src="/images/128px-Feed-icon.svg.png" alt=""></p>
-<p>比如在 SIE 的首页，就有一个很明显的 RSS 标记，它超链接到 RSS 文件的地址上，复制这个链接，扔到 RSS 阅读器里面订阅就行了。</p>
-<img src="/images/image-20200129001345420.png" width="80%" />
-
-<p>很多公司的官网都会提供 RSS，在浏览时可以留意一下。</p>
-<img src="/images/image-20200129001526815.png" width="80%" />
-
-<p style="text-align:center;">一些网站也会把 RSS 通道做到页面底部去，比如机核就是</p>
-
-<p>通过一段时间的积累，基本上可以拥有一个稳定的 RSS 源列表，RSS 阅读器会自动按照一定的时间间隔抓取各个订阅站点的 RSS 文件，并把更新的内容展示给你，下图就是笔者积累一段时间之后，RSS 阅读器中订阅的游戏媒体。</p>
-<p><img src="/images/image-20200129001801878.png" alt=""></p>
-<p>这样子做出来的“新闻客户端”具有明显的个人风格，并且有一点很重要的是，你可以摆脱原本各种新闻 App 的推送，看自己想看的媒体，读自己想读的新闻。</p>
-<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>网络让我们拥有了更多的信息获取渠道，有了更快的信息获取速度，但不可否认的是，我们在信息的真伪确认上面越发的陷入困境。自媒体的兴起让传统媒体的双重信源确认制度在这个时代显得滞后，但也仍然有 AnandTech 这样<a href="https://www.anandtech.com/show/15359/trx80-and-wrx80-dont-exist-neither-does-the-intel-lga1159-socket" target="_blank" rel="noopener">对流言坚守双重信源确认</a>的老牌科技媒体，还有像机核这样能够为了<a href="https://www.gcores.com/articles/117920" target="_blank" rel="noopener">新闻报道失实而诚恳道歉</a>的媒体。我相信即使大环境再差，也一定（在新闻上）坚守自己节操的媒体。</p>
-<p>希望本文能够起一个抛砖引玉的作用，也希望各位读者朋友在今后，尤其是目前这段特殊时期中，擦亮自己的眼睛，不被谣言所害。</p>
-
-
-    
-    
-    
-	  <div class="tags">
-      <a class="tag-link" href="/tags/Tutorial/" rel="tag">Tutorial</a>
-	  </div>
-    
-
-  </section>
-</article>
-  
-    <article class="post ">
-
-  
-  <h2 class="title">
-    <a href="/2020/01/how-i-deal-with-rumors/">
-      如何面对传闻和流言做新闻？
-    </a>
-  </h2>
-  
-  <time>
-    Jan 14, 2020
-  </time>
-  <section class="content">
-	  <p>大学在校期间我有幸接触到了《The Newsroom》这部优秀的不像是美剧的电视剧，在2018年的时候，我曾经写过一点粗浅的观后感，但其实并没有写完，写到中途便草草收尾了事了。但是《The Newsroom》对我的影响比我预想的还要大一些，可以说这部电视剧正是把我推向媒体行业的最大推手，我现在正秉承了这部剧教给我的“如何做新闻”尽可能地高要求自己，尽管我只是一个小小的硬件数码编辑，但我仍然想给自己的读者提供最新、最快并且最为准确的新闻。</p>
-<p>而今天读到了Ian Cutress所写的<a href="https://www.anandtech.com/show/15359/trx80-and-wrx80-dont-exist-neither-does-the-intel-lga1159-socket" target="_blank" rel="noopener">《TRX80 and WRX80 Don’t Exist: Neither Does the ‘Intel LGA1159’ Socket》</a>，文中他介绍他们AnandTech的新闻原则还是保留了新闻界的传统——双重信源：</p>
-<blockquote>
-<p>Here at AnandTech, we often use at least two sources for any particular story, preferably both primary sources.</p>
-</blockquote>
-<p>这个名词是我擅自归纳的，意思就是一条传言如果被两个可靠的信源确认，那就可以当作真实新闻处理。当然AnandTech的严谨程度并没有专业的电视媒体那么高，但是相对于我们国内的很多硬件媒体，他们的要求已经很高了。</p>
-<p>在进入行业之前，我很好奇，每天这么多传闻都是从哪里挖出来的。直到自己开始写新闻才发现，原来Twitter爆料人的一句话甚至是一个单词都可以扩写成一条新闻，实际上我们并没有办法去确认这些爆料的真实程度，所幸的是他们一般都是在有把握的情况下才发的，我们的报道最终也没有出现太多的偏差。</p>
-<p>我们需要判断信息的可靠性，作为信息传递的放大环节，媒体应该尽量做到不失真。我们可以带着一些主观看法去写评论，但是新闻的基本事实必须是明确的、可靠的。</p>
-<p>科技媒体都在吃二手屎，比那些自媒体慢一步，但又不能保证自己的消息完全是可靠的，那为什么还要来看你呢？现在的很多媒体靠的是独家新闻来吸引读者，但我们这种体量的媒体还做不到所谓的独家新闻，只能靠速度、准确度和专业程度来吸引读者了，速度由于码字还不够快确实赶不上，那就只能通过提升后两者来提高自己新闻的质量了。</p>
-<p><code>&gt;&gt;endl;</code></p>
-
-
-    
-    
-    
-	  <div class="tags">
-      <a class="tag-link" href="/tags/Comment/" rel="tag">Comment</a>
-	  </div>
-    
-
-  </section>
-</article>
-  
-    <article class="post ">
-
-  
-  <h2 class="title">
-    <a href="/2020/01/a-talk-about-video-vvip/">
-      也谈视频网站VVIP问题
-    </a>
-  </h2>
-  
-  <time>
-    Jan 4, 2020
-  </time>
-  <section class="content">
-	  <p>上个月有个名词闹得全网沸沸扬扬——《庆余年》，倒也不是这部电视剧本身引发了热烈讨论，而是它的播放平台闹了不小的动静，我们来简单回顾一下事件的经过：</p>
-<p>2019年11月26日，《庆余年》正式在腾讯视频以及爱奇艺两家视频网站上线，采用了与之前不少电视剧相似的播放策略——每周一、二、三20:00更新2集、VIP会员抢先看6集，这并没有什么问题。</p>
-<p>2019年12月11日，似乎是看到《庆余年》热度的升高，抑或是出于其他什么原因，腾讯视频和爱奇艺为此剧推出VIP专享付费超前点播服务，VIP会员可以通过一次性的50元付费，在每周更新日领先非会员6集的基础上再多抢先看6集。此举一出，被国内视频网站百般花样影响收看体验的用户马上就不乐意了，通过各种SNS抒发自己的愤懑，此事让万千媒体经过添油加醋，最终引得官方媒体为用户发声，视频网站最终低头<a href="http://society.people.com.cn/n1/2019/1218/c1008-31510577.html" target="_blank" rel="noopener">承认考虑不周</a>。</p>
-<p>视频网站会员并不是一个新东西，作为国内的“订阅制服务”变种，它可以让交了费的用户享受到更好的画质，更好的观看体验，更多的内容访问权，但事实真的是这样子的吗？</p>
-<p>最早视频网站在推出会员服务的时候确实将开头的广告给去掉了，但慢慢的，他们通过各种各样的方式让本该享受无广告体验的付费会员们也看上了广告，各种播放中植入广告，什么贴片广告。今年九月份，就有《钱江晚报》对腾讯视频、爱奇艺、优酷、芒果TV、搜狐视频、腾讯体育等九大视频网站进行了体验，<a href="http://www.xinhuanet.com/fortune/2019-06/25/c_1124665535.htm" target="_blank" rel="noopener">该文章</a>被新华网转载，针对广告内容，我引用文章的原话：</p>
-<blockquote>
-<p>省消保委相关负责人告诉钱江晚报记者，他们通过暗访发现，大部分视频网站对会员免广告的描述五花八门。比如，“广告特权”、“跳广告”、“免广告”，但在实际体验中发现，在腾讯、爱奇艺、芒果TV等网站成为会员后，依然可以看到开屏广告、弹窗广告、页面广告、会员广告、暂停页面广告等；优酷有开屏、页面、暂停页面广告；搜狐视频可以看到会员广告；PP视频可以看到开屏和页面广告；乐视可以看到开屏和暂停页面广告等。</p>
-<p>为什么明明已经“免广告”，还有这样多种多样的广告方式？体验人员告诉钱江晚报记者，他们也是仔细查看会员协议才发现其中的猫腻——所谓的“免广告”、“跳广告”仅仅是免去或跳过视频开始的片头广告，但这一点在开通会员的页面上并没有明示。</p>
-<p>更有个例让人有些无奈，比如，腾讯视频“小剧场广告”。体验人员在观看腾讯自制剧《怒晴湘西》时发现，每集中间部分都会穿插由剧中原班人马出演，强行穿插在剧情里的腾讯微视广告，“虽然可以手动快进，但不能关闭。”调查人员对此也是一番苦笑。</p>
-</blockquote>
-<p>诚然，视频网站为了提高自己的收入弥补自己的亏损，在网站/App的各种地方植入广告是合乎情理的，但对于付费会员来说，这就是收了他们的钱，然后再跟他们说这钱只能用在去掉开头广告上，其他广告你得跟普通用户一样照看，那么他们的心理会不会产生不值得的感觉？这是不是在降低付费用户的体验？</p>
-<p>要说用户体验的话，我想B站应该算是国内视频网站中矮个儿中拔尖的。至少多年前食言推出大会员服务至今，他们仍然没有添加贴片广告，非付费用户也能够以相对能够接受的画质观看视频， 而付费会员则是可以用比较合理的资费获得更高的画质以及更多内容的访问权，至少这个大会员我买的是挺满意的。</p>
-<p>而再看国外的同类网站，比如一大巨头Netflix，虽然贵，但是它的内容质量和使用体验（当然是在可以流畅观看的前提下）不会让用户感觉到不值得，简单一个例子就是它的高清真的是实打实的1080p，超高清就是真的是UHD，也就是4K，而不像国内视频网站那样挂羊头卖狗肉，在分辨率上缩水或是欠码。</p>
-<img src="/images/image-20200104150823502.png" width=70% />
-
-<p>我们不是不愿意为内容付费，回头看看国内的正版游戏推广就知道了，为什么大家都愿意去Steam上面买游戏？最主要的恐怕就是它的用户体验做的好，购买简单，下载又快，比以前自己去找盗版还要简单（当然还有便宜）。而视频网站呢？付了费之后得到的是如此糟糕的用户体验，甚至还要二段式收费，那必然有部分用户会不愿意掏钱，而选择自行寻找盗版资源。“反正我要看的也就是那部剧嘛，其他内容送我都不要”，这可能是一些观众的真实想法，也折射出国内视频网站在内容吸引力上面的匮乏。当然，国内的大环境使得优质原创内容的出现概率并不高，这也是客观存在的事实。该如何提高用户的付费率呢？视频网站想出了一招付费提前看更多，并且尝试了一下感觉还行，就用在这次的《庆余年》身上了，结果这批观众不忍了，于是事件就这么爆发了。</p>
-<p>用户是用脚投票的。你给我好的内容、好的用户体验，我自然会心甘情愿地掏钱留下来，而如果你的内容对我没吸引力了，用户体验变差了，那我还每个月续着你干嘛？现在视频网站的内容质量可能需要很长时间才能有明显的改善，那么是不是能够从用户体验出发，至少让付费用户看得更舒服一些，弥合用户与网站之间越来越大的裂痕，不要再赶走这些提供着不菲运营资金的“优质用户”了。</p>
-
-
-    
-    
-    
-	  <div class="tags">
-      <a class="tag-link" href="/tags/Comment/" rel="tag">Comment</a><a class="tag-link" href="/tags/Entertainment/" rel="tag">Entertainment</a>
-	  </div>
-    
-
-  </section>
-</article>
-  
-</section>
-
-
-  <nav id="page-nav">
-    
-    
-    <a class="next" rel="next" href="/page/2/">
-      <span class="text">Next</span>
-      <span class="icon icon-chevron-right"></span>
-    </a>
-    
-  </nav>
-  
 
       <script>setLoadingBarProgress(60);</script>
     </main>
