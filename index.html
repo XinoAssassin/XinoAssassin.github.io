@@ -124,24 +124,26 @@
 <h2 id="CPU：基于Zen-2，相对本世代主机有巨大提升"><a href="#CPU：基于Zen-2，相对本世代主机有巨大提升" class="headerlink" title="CPU：基于Zen 2，相对本世代主机有巨大提升"></a>CPU：基于Zen 2，相对本世代主机有巨大提升</h2><p><img src="/images/Zen_2_Logo.jpg" alt=""></p>
 <p>首先来看CPU部分，也就是Zen 2处理器。它是AMD近年来的最大翻身之作，在拥有相同核心数、相同频率的情况下它的综合性能已经可以比肩Intel最新一代的酷睿桌面版处理器（比如说，Ryzen 7 3700X的综合性能压了同为八核的i7-9700K一头，比i9-9900K稍弱），而它在玩家更看重的游戏性能方面也表现得相当优秀，基本上已经有对手90％的功力了。对比本世代主机上面那颗羸弱的Jaguar APU，那提升幅度只能用巨大来形容，原本CPU方面存在的严重短板将不复存在。</p>
 <h2 id="GPU：基于RDNA-2，性能可能约在RTX-2080与RTX-2080-SUPER之间"><a href="#GPU：基于RDNA-2，性能可能约在RTX-2080与RTX-2080-SUPER之间" class="headerlink" title="GPU：基于RDNA 2，性能可能约在RTX 2080与RTX 2080 SUPER之间"></a>GPU：基于RDNA 2，性能可能约在RTX 2080与RTX 2080 SUPER之间</h2><p>然后来看对于游戏更为重要的GPU。这里Phil Spencer给出了一个具体的数字——12 TFLOPS，这个数字代表的是GPU的单精度浮点运算能力，经常性被用来当作GPU的主要性能指标。但我们并不能单单看这个指标就说新主机的GPU性能会是Xbox One X的两倍，因为它只是一个理论值，实际性能还得看架构，而新主机的GPU架构恰恰就有着巨大的改变。RDNA架构是AMD完全重新打造的显卡架构，在游戏图形效能上面较沿用约八年的GCN架构有很大的提升。比如说，理论单精度性能比RX 580显卡（基于GCN 4.0架构，就是PS4 Pro和Xbox One X上的GPU架构）低1 TFLOPS的RX 5500 XT（基于RDNA架构），其实际游戏性能反而要比前者强。（对于RDNA与GCN架构的实际表现差异，Digital Foundry做过一期视频，有兴趣的可以去看一下：《<a href="https://www.youtube.com/watch?v=fzPo7gu-fTw" target="_blank" rel="noopener">Navi RDNA vs GCN 1.0: Last-Gen vs Next-Gen GPU Tech Head-To-Head!</a>》）</p>
-<p style="text-align:center;"><img src="/images/PS5_XboxSeriesX_Specs-5.jpg" /><br/>Digital Foundry推测中的Xbox Series X GPU规格</p>
-比较凑巧的是，此前的泄漏显示Xbox Series X的GPU将会集成56组计算单元（CU），Digital Foundry对这枚GPU的单精度浮点性能推算结果正好是12 TFLOPS，所以现在我们可以假设这枚GPU拥有56组CU，那么对比拥有40组CU的Radeon RX 5700 XT（目前RDNA架构的旗舰显卡），它的计算单元规模大了40％，这将会带来显著的性能提升。
+<p style="text-align:center;"><img src="/images/PS5_XboxSeriesX_Specs-5.jpg" / width="100%" /><br/>Digital Foundry推测中的Xbox Series X GPU规格</p>
 
+<p>比较凑巧的是，此前的泄漏显示Xbox Series X的GPU将会集成56组计算单元（CU），Digital Foundry对这枚GPU的单精度浮点性能推算结果正好是12 TFLOPS，所以现在我们可以假设这枚GPU拥有56组CU，那么对比拥有40组CU的Radeon RX 5700 XT（目前RDNA架构的旗舰显卡），它的计算单元规模大了40％，这将会带来显著的性能提升。</p>
 <p>因此我们有理由认为Xbox Series X上面的显卡将会比Radeon RX 5700 XT强上不止一个档次。如果放在PC市场来看，RX 5700 XT跟NVIDIA GeForce RTX 2070 SUPER差上半档左右，也就是说，如果不算上RDNA 2架构可能带来的效率提升，Xbox Series X的GPU性能可能会处于RTX 2080到RTX 2080 SUPER之间，这是笔者的保守估计。</p>
 <h2 id="RDNA-2带来的VRS和光线追踪支持"><a href="#RDNA-2带来的VRS和光线追踪支持" class="headerlink" title="RDNA 2带来的VRS和光线追踪支持"></a>RDNA 2带来的VRS和光线追踪支持</h2><p>新的图形架构带来的不单单是性能方面的提升，在功能性上也终于追上了这个时代，加入了VRS（<strong>V</strong>ariable <strong>R</strong>ate <strong>S</strong>hading，可变速率着色）和光线追踪的支持。对于后者，我们见到了它在游戏中的实际表现，而VRS是什么东西呢？</p>
 <h3 id="可变速率着色"><a href="#可变速率着色" class="headerlink" title="可变速率着色"></a>可变速率着色</h3><p>VRS的原理是通过改变单次像素着色器操作所处理的像素数量，来改变屏幕不同区域的着色质量。简单来说，它可以改变同个画面中不同部分的渲染精细度，<strong>它的用处是提高画面帧数</strong>。我们还是拿NVIDIA的那张示意图来举例：</p>
-<p><img src="/images/vrs_grids_car_002.png" alt=""></p>
+<img src="/images/vrs_grids_car_002.png" width="100%" />
+
 <p>在不开启VRS的情况，也就是正常情况下，一帧画面的所有像素都是独立着色的；而开启VRS之后，原本独立的像素被分成了一个个像素块，它们会共享着色结果，此时GPU会根据程序员设定的重要性分级为所有像素块分配不同的着色精细度。拿上面的图片为例，车辆和远景部分的像素仍然是独立着色的，但快速变动的道路和路边的像素块就是区块共同着色的，此时由于显卡的计算资源得到了节约，所以游戏的帧数会有所提高。</p>
 <p>目前3DMark已经引入了VRS相关的测试，在该软件的测试中，VRS分为两级，在Tier 1测试中，你会发现画面整体的精细程度都变差了，这是因为整个画面的着色速率都被降低了。</p>
-<p style="text-align:center;"><img src="/images/VRS-T1-Comp.jpg"/><br/>左：VRS关；右：VRS开</p>
-而在完整的Tier 2特性下，才会像上面所说的那样对整个画面进行分区，此时的效果就好了太多：
+<p style="text-align:center;"><img src="/images/VRS-T1-Comp.jpg" width="100%" /><br/>左：VRS关；右：VRS开</p>
 
-<p style="text-align:center;"><img src="/images/VRS-T2-Comp-2.jpg"/><br/>上：VRS关；下：VRS开。现在区别就小了很多。</p>
-这项技术最大的意义就是提高帧数，而且分辨率越高它的作用越明显。在3DMark的测试中，一张公版RTX 2070在1080p分辨率下的帧数提升为24.43％，而在4K分辨率下，提升幅度已经达到70.84％，在8K下面更是有116.62％的提升，直接从18帧幻灯片变成了40帧基本流畅的水平（数据来源：[超能网](https://www.expreview.com/72147.html)）。
+<p>而在完整的Tier 2特性下，才会像上面所说的那样对整个画面进行分区，此时的效果就好了太多：</p>
+<p style="text-align:center;"><img src="/images/VRS-T2-Comp-2.jpg" width="100%" /><br/>上：VRS关；下：VRS开。现在区别就小了很多。</p>
 
+<p>这项技术最大的意义就是提高帧数，而且分辨率越高它的作用越明显。在3DMark的测试中，一张公版RTX 2070在1080p分辨率下的帧数提升为24.43％，而在4K分辨率下，提升幅度已经达到70.84％，在8K下面更是有116.62％的提升，直接从18帧幻灯片变成了40帧基本流畅的水平（数据来源：<a href="https://www.expreview.com/72147.html" target="_blank" rel="noopener">超能网</a>）。</p>
 <p>这项功能是由NVIDIA最先在Turing GPU上引入的，Intel也在他们的Gen 11核显上面加入了这项特性，我们也终于将在RDNA 2架构中看到AMD方面的支持。所以，这项技术是Xbox Series X实现8K游戏的一大技术利器，如果运用得当，我们将会在不牺牲过多画面质量的情况下得到更为流畅的画面，或是享受到更高分辨率的画面。</p>
 <h2 id="硬件光线追踪支持"><a href="#硬件光线追踪支持" class="headerlink" title="硬件光线追踪支持"></a>硬件光线追踪支持</h2><p>微软家嘛，肯定会用自己的DXR API作为光追的入口啦。官方也明确说了这是基于硬件加速（Hardware-accelerated）的光线追踪支持，所以很明确的一点就是RDNA 2架构中将会加入新的针对光线追踪的处理单元，一如当年Turing架构中的RT Core，用专用处理单元的形式为光追提供更好的支持。</p>
-<p><img src="/images/RDNA_2_RT.jpg" alt=""></p>
+<img src="/images/RDNA_2_RT.jpg" width="100%" />
+
 <p>这方面因为没有太多的信息，所以也没什么可说的。但有一个趋势是很明显的，那就是在主机端的推动下，未来支持光追的游戏将大幅变多。目前的PC市场上面也就只有NVIDIA在大力推光追，但实际收效并不明显，Turing推出一年多了也就只有寥寥十数款已发售游戏支持光追，其中很多游戏也只是浅尝辄止，没有完全应用光追的所有效果。这方面还是需要占据游戏业界主流地位的主机来推动。</p>
 <h1 id="功能性：快速恢复、DLI、HDMI-2-1、120fps、四代同堂以及智能分发"><a href="#功能性：快速恢复、DLI、HDMI-2-1、120fps、四代同堂以及智能分发" class="headerlink" title="功能性：快速恢复、DLI、HDMI 2.1、120fps、四代同堂以及智能分发"></a>功能性：快速恢复、DLI、HDMI 2.1、120fps、四代同堂以及智能分发</h1><p>在硬件部分之后，Phil Spencer介绍了由新硬件带来的新功能和新特性，主要有SSD存储、快速恢复、延迟动态输入、HDMI 2.1、120 fps支持和四代兼容性、智能分发，对于这部分内容，我们分成一个个小点来看，首先是SSD以及在它支持下的快速恢复功能。</p>
 <h2 id="高速SSD带来的超快加载以及快速恢复"><a href="#高速SSD带来的超快加载以及快速恢复" class="headerlink" title="高速SSD带来的超快加载以及快速恢复"></a>高速SSD带来的超快加载以及快速恢复</h2><p>新主机将会用SSD这个事情实际上在去年就已经公布了，但我们不清楚的是新主机会用什么规格的SSD，是中端的“够用型”SSD呢还是高端的性能级SSD。现在Phil Spencer似乎暗示了Xbox Series X将会使用高端性能级SSD，因为他使用了“next-generation”来形容SSD。</p>
@@ -156,7 +158,8 @@
 <p>我们可能会在Xbox Series X上面见到来自群联（Phison）的SSD，而现在的分析偏向于认为Sony将会在SSD上面和三星进行合作。</p>
 <p>讨论完了SSD的可能性，我们来看由它提供支持的快速恢复功能，笔者个人猜测这项功能基于虚拟机快照技术。</p>
 <p>常用虚拟机的朋友应该不会对快照这个常见功能感到陌生，它会把虚拟机目前的内存数据和运行状态保存成文件，在下次开启虚拟机/读取快照时就从保存好的文件里面读数据，直接恢复到快照保存时的状态。是不是听上去和官方描述的“几乎瞬间（almost instantly）”、“多个游戏（multiple games）”、“从冻结状态（from a suspended state）”很像？</p>
-<p><img src="/images/xbox-os-arch.jpg" alt=""></p>
+<img src="/images/xbox-os-arch.jpg" width="100%" />
+
 <p>可能有些读者就有疑问了，虚拟机里面怎么打游戏？那就不用担心微软的技术力了，Xbox One的系统——Xbox OS已经应用了微软自家的虚拟机技术，游戏和系统是分别跑在两个虚拟机中的。Xbox Series X的系统基本上可以确定会沿用目前的Xbox OS，所以这套成熟的虚拟机体系也将会被沿用。而此前因为HDD的读写速度不够而没法启用的快照功能自然就可以用了。</p>
 <h2 id="动态延迟输入（DLI）"><a href="#动态延迟输入（DLI）" class="headerlink" title="动态延迟输入（DLI）"></a>动态延迟输入（DLI）</h2><p>在使用无线游戏手柄的时候，有一点是无法忽视的，那就是延迟问题。我们这些普通玩家可能没什么感觉，但在高手眼中，这点延迟就已经会造成手眼不同步。原本微软用来连接手柄的就是他们自己开发的一种专有无线协议了，这次他们新引入了动态延迟输入特性，在寥寥一句话的介绍中也智能推测出这是一个用于同步用户输入与显示输出的特性，既然名为动态，那么可能就是根据输入端的连接延迟在输出上面做相应的补偿来保证手眼同步。</p>
 <h2 id="HDMI-2-1"><a href="#HDMI-2-1" class="headerlink" title="HDMI 2.1"></a>HDMI 2.1</h2><p>HDMI是主机上面常见的用来输出画面的接口，其最新版本为HDMI 2.1，相对于HDMI 2.0，它不仅仅提高了最大支持的分辨率和帧率，更引入了多种新的特性，其中Phil Spencer重点提到了自动低延迟模式（<strong>A</strong>uto <strong>L</strong>ow <strong>L</strong>atency <strong>M</strong>ode）和可变帧率（<strong>V</strong>ariable <strong>R</strong>efresh <strong>R</strong>ate），其实这两种特性在目前已经得到了大范围运用了，只不过HDMI 2.1是将其标准化了。</p>
