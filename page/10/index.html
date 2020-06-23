@@ -51,7 +51,7 @@
   </script>
   
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body>
   
@@ -104,6 +104,40 @@
 
 <section class="post-list">
 	
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/2018/01/rf-developing-0/">
+      RaidFinder 开发记——1
+    </a>
+  </h2>
+  
+  <time>
+    Jan 13, 2018
+  </time>
+  <section class="content">
+	  <p>上篇文章给自己写了一个开发计划，这两天已经开始动手了，结果刚开头就非常不顺，来写篇文章吐槽一下。</p>
+<p>从原版的描述和一些代码中，我发现原作者使用了 Twitter4j 这个看起来在 Java 平台非常强大的库来进行 Twitter Stream 的获取。而在 NPM 上不难找到类似的 Twitter 库，也不难使用，填好两组 Key &amp; Secret 之后简单的调用 API 就可以输出源源不断的 Tweets 来。</p>
+<p>Twitter 官方提供的 Stream API 中自带了对自定义关键词的 Filter, 那么我们就来调用它。然后就碰到了目前为止第一个也是最主要最棘手的问题。</p>
+<h2 id="最主要的问题"><a href="#最主要的问题" class="headerlink" title="最主要的问题"></a>最主要的问题</h2><p>问题就是：Twitter Stream Track 的关键词设置不支持 CJK 字符，而 GBF 的玩家则大部分使用日语，他们的救援推的关键词都是<code>&quot;参加者募集！&quot;</code>。</p>
+<p>于是我在 Twitter Deck 中新建了一栏，使用<code>&quot;参加者募集！&quot; OR &quot;I need backup!&quot;</code>的搜索条件进行搜索并观察官方用的是什么办法支持 CJK 字符的。结果大失所望，官方的搜索也只是用 Search API 而不是 Stream API, 然后定时获取一次假装出 Stream 的感觉来“糊弄”用户。那么我想，目前找到的库对于 CJK 都没有支持的情况下应该作者是用了一些手段来支持 CJK 字符的。</p>
+<p>那么也只有继续读源码了。</p>
+<hr>
+<p>经过大概一小时的思考，我决定暂时先将实现平台放到 .NET 上，目前 .NET Core 在跨平台上面已经比较稳定了，用 C# 写也更顺手一些。先拿这套把实现思路和一些算法给摸清楚，以后再重新用 Node.js 来实现。</p>
+
+
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/tags/Game/" rel="tag">Game</a><a class="tag-link" href="/tags/Programming/" rel="tag">Programming</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
     <article class="post ">
 
   
@@ -251,40 +285,6 @@
     
 	  <div class="tags">
       <a class="tag-link" href="/tags/Comment/" rel="tag">Comment</a><a class="tag-link" href="/tags/Game/" rel="tag">Game</a>
-	  </div>
-    
-
-  </section>
-</article>
-  
-    <article class="post ">
-
-  
-  <h2 class="title">
-    <a href="/2017/12/something-1/">
-      杂（二）
-    </a>
-  </h2>
-  
-  <time>
-    Dec 17, 2017
-  </time>
-  <section class="content">
-	  <p>前略，快考试了。</p>
-<p>今天一时兴起去听贾鹏芳老师的曲子。<br>自己当初还拉二胡的时候没听说过其人，直到后来接触了和平之月之后才了解到，原来还有这么一位当代二胡演奏、作曲、艺术家。当今二胡界，他应当就是那个站在顶端的人了。可惜了，这么杰出的人物却要跑到日本才能获得更好的发展。<br>翻了一眼网易云下面的评论，称赞的，喷她的，叫人安心听曲子别废话的，什么都有，却没人思考为什么这么好的艺术家要跑到日本去才有今天的成就。</p>
-<p>结合一下昨晚 steamcommunity 突然被墙之后今天贴吧让人去举报那几个政治敏感组想让 Valve 关闭掉那几个组从而让国内用户能够重新访问社区的事情，可笑。</p>
-<p>大家都以一句「你懂的」略过对于体制本身问题的探讨，问起为什么的时候都无奈地表达出『「说了反正也会被删」、「我说了也没用」』这样的意思。这已经是相当多已经麻木的国人自我阉割的状态了，在一次次的尝试争取宪法中规定公民应当享有的权利中，越来越多的人放弃了。这其中不少人转而把枪口对准另外一批还在努力为所有人争取权利的“斗争者”，他们中有的认为，是另一批人持续不断的斗争行为导致了自己享有不到应该有的权利，而他们的目的，是干扰这帮给他们争取着权利的人们，甚至不择手段。</p>
-<p>思想是自由的，讨论思想也应当是自由的。对于某种思想的评价是每个人自己做出的评判，不应当根据自己对于这种思想的理解而去干扰别人对于这种思想的看法。我们应该做的是讨论，而不是闭口不言甚至去把那些敢于讨论的人的嘴巴给捂上。你去把那些敢于讨论的人的嘴巴捂上，那么你是不是跟那些不让你开口说话的人是一样的呢？</p>
-<p>鲁迅先生的文章中的那些道理，在这个年代仍然适用着。或者说，对中国这块大地上生活着的人们，只要有一天封建思想还扎根在人们的心中，那么将一直适用下去。</p>
-<hr>
-<p>明天还有场考试，这周就写这么多。</p>
-
-
-    
-    
-    
-	  <div class="tags">
-      <a class="tag-link" href="/tags/%E6%9D%82/" rel="tag">杂</a>
 	  </div>
     
 
