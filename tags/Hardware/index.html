@@ -123,7 +123,7 @@
   <section class="content">
 	  <p>昨晚Intel举办了今年的架构日活动，和往年一样，Intel在架构日活动上会公布很多自家未来芯片设计方面的细节，比如说即将发布的CPU/GPU架构，新的内核设计和一些新的技术，今年的Intel架构日活动上他们带来了下一代处理器，也就是Alder Lake的详细内容。</p>
 <h2 id="Alder-Lake简介"><a href="#Alder-Lake简介" class="headerlink" title="Alder Lake简介"></a>Alder Lake简介</h2><p>Alder Lake是Intel耗时多年打造的一款全新架构，它是未来将要发布的第12代酷睿处理器的核心。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-068.jpg"></p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-068.jpg" width="100%"/> /&gt;</p>
 <p>和以往的Intel处理器架构一样，Alder Lake包含了CPU、GPU、内存控制器、IO、显示输出和AI加速器等部件。它也是Intel首个采用大小核设计的高性能处理器，改动主要有以下几点：</p>
 <ul>
 <li>CPU部分采用大小核混合计算架构，最高由8大核8小核组成16核24线程</li>
@@ -134,46 +134,65 @@
 <li>PCIe升级到5.0版本</li>
 </ul>
 <p>让我们一点点来看Alder Lake的进化。</p>
-<h2 id="x86大小核异构"><a href="#x86大小核异构" class="headerlink" title="x86大小核异构"></a>x86大小核异构</h2><p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-053.jpg"></p>
+<h2 id="x86大小核异构"><a href="#x86大小核异构" class="headerlink" title="x86大小核异构"></a>x86大小核异构</h2><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-053.jpg" width="100%"/>
+
 <p>Alder Lake上最大的变化点便是它采用大小核异构的架构，此前Intel曾在Lakefield上试水大小核异构，并推出了两款正式产品，不过它们都是低功耗处理器，性能不强。因此Alder Lake可以说是首款大小核异构设计的高性能x86处理器，在继承Lakefield的大小核异构设计之上，进行了深度改进。首先来看被Intel称为效率核心（E-Core）的Gracemont。</p>
 <h3 id="E-Core：整体性能接近Skylake、但能耗更低的Gracemont"><a href="#E-Core：整体性能接近Skylake、但能耗更低的Gracemont" class="headerlink" title="E-Core：整体性能接近Skylake、但能耗更低的Gracemont"></a>E-Core：整体性能接近Skylake、但能耗更低的Gracemont</h3><p>在大小核异构设计中，一般小核的设计目标是高能效比，而大核的目标则是提供极限高性能，Gracemont便是一个非常高效的核心。Intel的小核心设计是独立于大核心的另外一条线，现在一般称为Atom核心。一脉相传下来，Gracemont的上代是Tremont。从Tremont到Gracemont，Intel着重加强了小核心的后端执行能力，尤其是整数性能。</p>
-<p><img src="/images/adl-deep-dive/tremont-vs-gracemont.jpg"></p>
+<img src="/images/adl-deep-dive/tremont-vs-gracemont.jpg" width="100%"/>
+
 <p>上图左边是Tremont，右边是Gracemont，可以非常明显的看到，Gracemont的执行端口多了不少，从原本的10个猛增至17个，而跟着的就是执行单元数量变多了。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-029.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-029.jpg" width="100%"/>
+
 <p>整数部分ALU从3个增加到4个，AGU从2个倍增到4个，对应还增加了一组MUL和DIV单元，整数执行能力得到大幅增强；浮点运算部分也有一定提升，原本只有一个的FADD和FMUL单元现在均有两个，能够拼合处理256-bit宽度的数据，也就是说能够满足执行AVX2指令集的需求；浮点ALU和STD均增加一个，计算能力会有较大提升。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-026.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-026.jpg" width="100%"/>
+
 <p>为了满足大幅膨胀的后端，前端也相应做了较大增强，解码部分仍然是两组三宽度设计，可以同时启用达成六解码。L1指令缓存（L1I）倍增至64KB，同时分支预测器得到加强，拥有更大的缓存。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-028.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-028.jpg" width="100%"/>
+
 <p>中核部分，ROB增大到256，这一数字比Skylake的224更大，与Zen 3持平。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-030.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-030.jpg" width="100%"/>
+
 <p>最后是缓存子系统，前面说过AGU从2个倍增到4个，分配成2个Load和2个Store。L1D的大小没有变化，仍为32KB，L2的缓存最高可达4MB，需要注意的是，L2缓存是4个小核一起共用的，同时容量可配置。对了，还需要提到的是，小核以4个为一组，一组小核的面积与一个Golden Cove差不多。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-033.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-033.jpg" width="100%"/>
+
 <p>总的这些改进加起来，Gracemont的性能提升相当可观。官方将它与Skylake进行了对比，在单线程的整数性能方面，Gracemont同功耗性能可提升超过40％，同性能下节约40％左右的功耗，能效比超群。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-034.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-034.jpg" width="100%"/>
+
 <p>而在多线程方面，同样是4线程，与开启超线程的2个Skylake内核相比，4个Gracemont内核能够在少用80％功耗的情况下输出同样的整数性能，而如果火力全开，那么能够提供约1.8倍的整数性能，同时功耗还更低。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-035.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-035.jpg" width="100%"/>
+
 <p>总的来说，Alder Lake使用Gracemont来提升处理器在多线程情景下的总性能，同时在注重节能的场景下，可以凭借小核优异的能效比实现更长的续航表现。</p>
 <h3 id="P-Core：IPC提升约19％的Golden-Cove"><a href="#P-Core：IPC提升约19％的Golden-Cove" class="headerlink" title="P-Core：IPC提升约19％的Golden Cove"></a>P-Core：IPC提升约19％的Golden Cove</h3><p>小核很强，而大核——Intel称为性能核心（Performance Core，简称P-Core）——的Golden Cove内核只能说是改的更大提升更多。用Intel的官方口径来说，就是变得更宽、更深和更智能了。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-050.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-050.jpg" width="100%"/>
+
 <p>更宽指的是内核解码、执行指令的并行程度更大；更深指的是内核中的各种指令缓存变得更大；更智能指的是部分组件具有更准确的判断能力。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-040.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-040.jpg" width="100%"/>
+
 <p>Golden Cove的前端部分改动相当大，最明显的就是多年未变的4宽度（实际上是4+1宽度）解码器升级成了6宽度解码器（应该是6+1）。不像Arm等RISC体系的内核，属于CISC体系的x86要增加指令解码器的代价相当大，因此不管是AMD还是Intel都把前端解码器维持在4宽度，现在Intel首先前行一步。同时L1I缓存的带宽也扩大一倍到32Bytes以满足6宽度解码器的需要。</p>
 <p>增加解码器宽度会增加处理器的流水线长度，这让分支预测错误的惩罚更重。Intel选择增加分支预测缓冲区（BTB）来应对这一问题，其分支条目数量从5K直接增加到12K，比Zen 3的6.5K多将近一倍。分支预测器本身也变得“Smarter”了，准确率继续提升。</p>
 <p>宏指令（µOP）的吞吐量从多年未变的每周期6个增加到8个，同时用于缓存宏指令的宏指令缓存（µOP Cache）继续增大，从2.25K直接增大到4K，与Zen 2/Zen 3持平。宏指令队列的结构有所调整，现在为超线程进行了更多优化，双线程同时利用的情况下，单线程队列深度为72；而如果是单线程利用核心的情况则可以完整利用144的队列深度。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-041.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-041.jpg" width="100%"/>
+
 <p>中核部分，同步变得更宽，发射区从原本的5宽度加宽到6宽度，ROB缓存从Sunny Cove的384加大到512，直逼苹果Firestorm内核的600+，ROB增大会显著增加内核功耗。另外，执行端口方面增加两个，现在共有12个端口，不过整数和浮点仍然共用发射端口，没有改成流行的分离式。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-042.jpg"></p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-043.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-042.jpg" width="100%"/>
+
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-043.jpg" width="100%"/>
+
 <p>虽然是共用端口，不过Intel还是把整数和浮点的改进分开讲了。后端执行部分的改动相对较小，从上面两张图中可以看到，整数部分增加了一个ALU；FPU部分增加了两个FADD单元，它比FMA单元更高效，指令周期也更短了；而FMA单元增加了对FP16数据的支持，对低精度计算有帮助，不过因为需要调用AVX-512指令集，所以在Alder Lake上我们无法利用到它。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-044.jpg"></p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-045.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-044.jpg" width="100%"/>
+
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-045.jpg" width="100%"/>
+
 <p>另一个新增的端口被用于缓存子系统，新增了一个Load AGU，这样每周期的Load带宽提升至3，和Zen 3持平。L2沿用Willow Cove的设计，仍然是非包含式设计，每核心具有1.25MB。不过加入了新的预取机制，降低了DRAM的读取次数。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-046.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-046.jpg" width="100%"/>
+
 <p>总的改进加起来让Golden Cove相比起Cypress Core有了平均约19％的同频性能提升，最高甚至能有60％左右的提升。不过比较奇怪的是，有几个项目的成绩出现了倒退。总的来说，Golden Cove是一次全面的大改，可能是自Skylake以来改动最大的一个内核微架构。</p>
 <h3 id="Intel-Thread-Director：调度大小核的关键角色"><a href="#Intel-Thread-Director：调度大小核的关键角色" class="headerlink" title="Intel Thread Director：调度大小核的关键角色"></a>Intel Thread Director：调度大小核的关键角色</h3><p>大小核心的性能提升都非常可观，但要如何调度它们，让它们充分发挥自己的长处呢？其实Arm已经替x86淌过浑水了，big.LITTLE架构发展至今已有十余年时间，主流的操作系统都添加了对大小核的调度支持，包括Windows。操作系统是知道处理器上多个性能不同的内核的。但之前在Lakefield上我们也看到了Windows在调度大小核x86处理器时候的糟糕表现了，该怎么解决这个要命的问题呢？Intel选择了一个软硬件结合的方案，称为线程总监（Thread Director，暂译，等官方中文名）。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-065.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-065.jpg" width="100%"/>
+
 <p>在操作系统层面上，Intel和微软合作改进了Windows的任务调度，从Windows 11开始，系统的任务调度器能够获取更多信息，用于判断当前正在运行的线程需要什么样的性能模式，它要调用哪些指令集，同时它还懂得让硬件为高优先级任务让位。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-056.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-056.jpg" width="100%"/>
+
 <p>同时，Intel在Alder Lake处理器中集成了一个非常小的MCU，用来监控当前处理器内核的运行情况，能够监测到每个线程的特征，比如它运行什么样的指令集、它的性能需求如何等等。在收集完信息之后，它会将收集到的信息反馈给Windows 11，而后者将会把这些信息与自己收集到的信息相结合，判断是否应该将线程转移到别的核心上。这一切发生在短短30微秒以内，而传统的调度器可能需要100多毫秒才能判断出结论。</p>
 <p>当然，Alder Lake默认还是会把线程安排在P-Core上，除非高性能核心上面都有任务在跑。Intel将Alder Lake分为以下三个性能层级：</p>
 <ol>
@@ -184,13 +203,17 @@
 <p>也就是说，在一般情况下，系统调度器会优先把线程安排到P-Core原生的线程上，8个原生P-Core线程被放完后，轮到的是E-Core，如果还不够用，它才会去利用P-Core超线程出来的线程（因为超线程出来的线程性能肯定是不如E-Core的好嘛）。比如一个20线程的任务，会利用上P-Core原生的8个线程+E-Core原生的8个线程外加4个P-Core超线程出来的4个线程。</p>
 <p>当然，Windows 10也还是有大小核调度的能力的，但是说简单点就是不够智能。在Windows 11下Alder Lake应该会有更好的能效表现。</p>
 <h2 id="支持DDR5与LPDDR5内存，仍然兼容DDR4和LPDDR4"><a href="#支持DDR5与LPDDR5内存，仍然兼容DDR4和LPDDR4" class="headerlink" title="支持DDR5与LPDDR5内存，仍然兼容DDR4和LPDDR4"></a>支持DDR5与LPDDR5内存，仍然兼容DDR4和LPDDR4</h2><p>讲完内核部分，我们略过没有实质性变化的Xe GPU，直接来看其他的一些变化点，首先是内存控制器：</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-076.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-076.jpg" width="100%"/>
+
 <p>可以看到Alder Lake新增了对DDR5和LPDDR5内存的支持。默认情况下DDR5支持到4800MT/s，LPDDR5支持到5200MT/s，前者在今年晚些时候会开始出货，而后者在移动设备上已经被广泛应用，本来Tiger Lake是号称支持LPDDR5的，后来因为种种原因没能最终实现。而在Alder Lake正式推出之后，应该会有很多轻薄本用上LPDDR5内存。</p>
-<h2 id="支持PCIe-5-0的新IO"><a href="#支持PCIe-5-0的新IO" class="headerlink" title="支持PCIe 5.0的新IO"></a>支持PCIe 5.0的新IO</h2><p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-077.jpg"></p>
+<h2 id="支持PCIe-5-0的新IO"><a href="#支持PCIe-5-0的新IO" class="headerlink" title="支持PCIe 5.0的新IO"></a>支持PCIe 5.0的新IO</h2><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-077.jpg" width="100%"/>
+
 <p>Alder Lake的PCIe支持非常激进，直接一步升级到最新的PCIe 5.0，带宽较PCIe 4再翻一番，x16下数据带宽高达64GB/s。当然因为功耗原因，这应该是桌面平台独有的。在Rocket Lake-S和Tiger Lake上新增的x4通道则仍然是PCIe 4.0规格的，可以用于连接SSD。虽然没有明说，但与PCH互联的总线应该是升级到DMI 4.0了，至少会是x4的宽度，而高端PCH应该会通过DMI 4.0 x8与CPU相连。PCH能够再导出12条PCIe 4.0和16条PCIe 3.0，扩展性比起以前来可谓是一个天上一个地下。</p>
-<h2 id="大一统的Alder-Lake"><a href="#大一统的Alder-Lake" class="headerlink" title="大一统的Alder Lake"></a>大一统的Alder Lake</h2><p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-074-1629402245043.jpg"></p>
+<h2 id="大一统的Alder-Lake"><a href="#大一统的Alder-Lake" class="headerlink" title="大一统的Alder Lake"></a>大一统的Alder Lake</h2><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-074-1629402245043.jpg" width="100%"/>
+
 <p>相比起11代酷睿在桌面和移动端的分裂，Alder Lake又重新统一了回来，当然不同平台还是会有不同的规格。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-075.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-075.jpg" width="100%"/>
+
 <p>桌面端的Alder Lake最高会有8大核8小核，不过没有集成的Thunderbolt 4控制器，核显规格也仍然只有32EU。移动端最高则是会有6大核8小核，外加96EU和4个Thunderbolt控制器，当然还是会集成祖传的IPU。对功耗更为敏感的超轻薄端最高就只有2大核8小核了，Thunderbolt控制器数量也减少到2个。</p>
 <p>Alder Lake是近些年来Intel推出的改变最大的一个架构，不管是计算内核本身的改动还是大小核的设计，可以说是非常激进的。很惊喜Intel能给我们带来这样一个很有创造性的新架构，Intel可能会在10月末的innovatiON活动上正式发布Alder Lake的产品，也就是第12代酷睿处理器，非常期待它的正式表现。</p>
 
@@ -389,14 +412,14 @@
     Mar 1, 2020
   </time>
   <section class="content">
-	  <h1 id="从硬件编辑的角度解读Xbox-Series-X的规格"><a href="#从硬件编辑的角度解读Xbox-Series-X的规格" class="headerlink" title="从硬件编辑的角度解读Xbox Series X的规格"></a>从硬件编辑的角度解读Xbox Series X的规格</h1><p>在对外正式公开Xbox Series X这台主机74天之后，2月25日，Phil Spencer用一篇新的<a href="https://news.xbox.com/en-us/2020/02/24/what-you-can-expect-next-generation-gaming/" target="_blank" rel="noopener">博文</a>对外公布了这台次世代主机身上更多的细节，想必各位或多或少已经读过<a href="https://www.gcores.com/articles/120661" target="_blank" rel="noopener">新闻</a>了。不过普通玩家可能会对文章里面的很多名词感到陌生，什么Zen 2、RDNA 2、VRS……可能只看懂这台主机被吹上天了。本文就对这些名词简单进行一番介绍，顺便带出笔者作为一个硬件媒体编辑，对于这台主机的一些个人看法。让我们顺着Phil Spencer的文章脉络，一点一点来看。</p>
+	  <h1 id="从硬件编辑的角度解读Xbox-Series-X的规格"><a href="#从硬件编辑的角度解读Xbox-Series-X的规格" class="headerlink" title="从硬件编辑的角度解读Xbox Series X的规格"></a>从硬件编辑的角度解读Xbox Series X的规格</h1><p>在对外正式公开Xbox Series X这台主机74天之后，2月25日，Phil Spencer用一篇新的<a target="_blank" rel="noopener" href="https://news.xbox.com/en-us/2020/02/24/what-you-can-expect-next-generation-gaming/">博文</a>对外公布了这台次世代主机身上更多的细节，想必各位或多或少已经读过<a target="_blank" rel="noopener" href="https://www.gcores.com/articles/120661">新闻</a>了。不过普通玩家可能会对文章里面的很多名词感到陌生，什么Zen 2、RDNA 2、VRS……可能只看懂这台主机被吹上天了。本文就对这些名词简单进行一番介绍，顺便带出笔者作为一个硬件媒体编辑，对于这台主机的一些个人看法。让我们顺着Phil Spencer的文章脉络，一点一点来看。</p>
 <h1 id="硬件部分：Zen-2、RDNA-2、VRS、光追的简介"><a href="#硬件部分：Zen-2、RDNA-2、VRS、光追的简介" class="headerlink" title="硬件部分：Zen 2、RDNA 2、VRS、光追的简介"></a>硬件部分：Zen 2、RDNA 2、VRS、光追的简介</h1><p>Phil Spencer首先介绍的是Xbox Series X使用的处理器——下一代定制处理器（Next Generation Custom Processor）。这枚处理器比今年CES展会上AMD发布的Ryzen 4000系列APU还要新，Phil Spencer其实早就已经剧透了这枚芯片的模样，在1月头上的时候，他把自己的Twitter头像给改成了这枚芯片的照片。</p>
-<p><img src="/images/dO7wSpcd_400x400.jpg" alt=""></p>
+<p><img src="/images/dO7wSpcd_400x400.jpg"></p>
 <p>Xbox Series X上面使用的这枚“下一代定制处理器”中集成了CPU和GPU，CPU部分是这半年来PC市场上表现得非常好的Zen 2处理器，而GPU部分则是基于尚未公布技术细节的RDNA 2架构。那么这块芯片究竟有多强呢？</p>
-<h2 id="CPU：基于Zen-2，相对本世代主机有巨大提升"><a href="#CPU：基于Zen-2，相对本世代主机有巨大提升" class="headerlink" title="CPU：基于Zen 2，相对本世代主机有巨大提升"></a>CPU：基于Zen 2，相对本世代主机有巨大提升</h2><p><img src="/images/Zen_2_Logo.jpg" alt=""></p>
+<h2 id="CPU：基于Zen-2，相对本世代主机有巨大提升"><a href="#CPU：基于Zen-2，相对本世代主机有巨大提升" class="headerlink" title="CPU：基于Zen 2，相对本世代主机有巨大提升"></a>CPU：基于Zen 2，相对本世代主机有巨大提升</h2><p><img src="/images/Zen_2_Logo.jpg"></p>
 <p>首先来看CPU部分，也就是Zen 2处理器。它是AMD近年来的最大翻身之作，在拥有相同核心数、相同频率的情况下它的综合性能已经可以比肩Intel最新一代的酷睿桌面版处理器（比如说，Ryzen 7 3700X的综合性能压了同为八核的i7-9700K一头，比i9-9900K稍弱），而它在玩家更看重的游戏性能方面也表现得相当优秀，基本上已经有对手90％的功力了。对比本世代主机上面那颗羸弱的Jaguar APU，那提升幅度只能用巨大来形容，原本CPU方面存在的严重短板将不复存在。</p>
-<h2 id="GPU：基于RDNA-2，性能可能约在RTX-2080与RTX-2080-SUPER之间"><a href="#GPU：基于RDNA-2，性能可能约在RTX-2080与RTX-2080-SUPER之间" class="headerlink" title="GPU：基于RDNA 2，性能可能约在RTX 2080与RTX 2080 SUPER之间"></a>GPU：基于RDNA 2，性能可能约在RTX 2080与RTX 2080 SUPER之间</h2><p>然后来看对于游戏更为重要的GPU。这里Phil Spencer给出了一个具体的数字——12 TFLOPS，这个数字代表的是GPU的单精度浮点运算能力，经常性被用来当作GPU的主要性能指标。但我们并不能单单看这个指标就说新主机的GPU性能会是Xbox One X的两倍，因为它只是一个理论值，实际性能还得看架构，而新主机的GPU架构恰恰就有着巨大的改变。RDNA架构是AMD完全重新打造的显卡架构，在游戏图形效能上面较沿用约八年的GCN架构有很大的提升。比如说，理论单精度性能比RX 580显卡（基于GCN 4.0架构，就是PS4 Pro和Xbox One X上的GPU架构）低1 TFLOPS的RX 5500 XT（基于RDNA架构），其实际游戏性能反而要比前者强。（对于RDNA与GCN架构的实际表现差异，Digital Foundry做过一期视频，有兴趣的可以去看一下：《<a href="https://www.youtube.com/watch?v=fzPo7gu-fTw" target="_blank" rel="noopener">Navi RDNA vs GCN 1.0: Last-Gen vs Next-Gen GPU Tech Head-To-Head!</a>》）</p>
-<p style="text-align:center;"><img src="/images/PS5_XboxSeriesX_Specs-5.jpg" / width="100%" /><br/>Digital Foundry推测中的Xbox Series X GPU规格</p>
+<h2 id="GPU：基于RDNA-2，性能可能约在RTX-2080与RTX-2080-SUPER之间"><a href="#GPU：基于RDNA-2，性能可能约在RTX-2080与RTX-2080-SUPER之间" class="headerlink" title="GPU：基于RDNA 2，性能可能约在RTX 2080与RTX 2080 SUPER之间"></a>GPU：基于RDNA 2，性能可能约在RTX 2080与RTX 2080 SUPER之间</h2><p>然后来看对于游戏更为重要的GPU。这里Phil Spencer给出了一个具体的数字——12 TFLOPS，这个数字代表的是GPU的单精度浮点运算能力，经常性被用来当作GPU的主要性能指标。但我们并不能单单看这个指标就说新主机的GPU性能会是Xbox One X的两倍，因为它只是一个理论值，实际性能还得看架构，而新主机的GPU架构恰恰就有着巨大的改变。RDNA架构是AMD完全重新打造的显卡架构，在游戏图形效能上面较沿用约八年的GCN架构有很大的提升。比如说，理论单精度性能比RX 580显卡（基于GCN 4.0架构，就是PS4 Pro和Xbox One X上的GPU架构）低1 TFLOPS的RX 5500 XT（基于RDNA架构），其实际游戏性能反而要比前者强。（对于RDNA与GCN架构的实际表现差异，Digital Foundry做过一期视频，有兴趣的可以去看一下：《<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=fzPo7gu-fTw">Navi RDNA vs GCN 1.0: Last-Gen vs Next-Gen GPU Tech Head-To-Head!</a>》）</p>
+<p style="text-align:center;"><img src="/images/PS5_XboxSeriesX_Specs-5.jpg" width="100%" />Digital Foundry推测中的Xbox Series X GPU规格</p>
 
 <p>比较凑巧的是，此前的泄漏显示Xbox Series X的GPU将会集成56组计算单元（CU），Digital Foundry对这枚GPU的单精度浮点性能推算结果正好是12 TFLOPS，所以现在我们可以假设这枚GPU拥有56组CU，那么对比拥有40组CU的Radeon RX 5700 XT（目前RDNA架构的旗舰显卡），它的计算单元规模大了40％，这将会带来显著的性能提升。</p>
 <p>因此我们有理由认为Xbox Series X上面的显卡将会比Radeon RX 5700 XT强上不止一个档次。如果放在PC市场来看，RX 5700 XT跟NVIDIA GeForce RTX 2070 SUPER差上半档左右，也就是说，如果不算上RDNA 2架构可能带来的效率提升，Xbox Series X的GPU性能可能会处于RTX 2080到RTX 2080 SUPER之间，这是笔者的保守估计。</p>
@@ -406,12 +429,12 @@
 
 <p>在不开启VRS的情况，也就是正常情况下，一帧画面的所有像素都是独立着色的；而开启VRS之后，原本独立的像素被分成了一个个像素块，它们会共享着色结果，此时GPU会根据程序员设定的重要性分级为所有像素块分配不同的着色精细度。拿上面的图片为例，车辆和远景部分的像素仍然是独立着色的，但快速变动的道路和路边的像素块就是区块共同着色的，此时由于显卡的计算资源得到了节约，所以游戏的帧数会有所提高。</p>
 <p>目前3DMark已经引入了VRS相关的测试，在该软件的测试中，VRS分为两级，在Tier 1测试中，你会发现画面整体的精细程度都变差了，这是因为整个画面的着色速率都被降低了。</p>
-<p style="text-align:center;"><img src="/images/VRS-T1-Comp.jpg" width="100%" /><br/>左：VRS关；右：VRS开</p>
+<p style="text-align:center;"><img src="/images/VRS-T1-Comp.jpg" width="100%" />左：VRS关；右：VRS开</p>
 
 <p>而在完整的Tier 2特性下，才会像上面所说的那样对整个画面进行分区，此时的效果就好了太多：</p>
-<p style="text-align:center;"><img src="/images/VRS-T2-Comp-2.jpg" width="100%" /><br/>上：VRS关；下：VRS开。现在区别就小了很多。</p>
+<p style="text-align:center;"><img src="/images/VRS-T2-Comp-2.jpg" width="100%" />上：VRS关；下：VRS开。现在区别就小了很多。</p>
 
-<p>这项技术最大的意义就是提高帧数，而且分辨率越高它的作用越明显。在3DMark的测试中，一张公版RTX 2070在1080p分辨率下的帧数提升为24.43％，而在4K分辨率下，提升幅度已经达到70.84％，在8K下面更是有116.62％的提升，直接从18帧幻灯片变成了40帧基本流畅的水平（数据来源：<a href="https://www.expreview.com/72147.html" target="_blank" rel="noopener">超能网</a>）。</p>
+<p>这项技术最大的意义就是提高帧数，而且分辨率越高它的作用越明显。在3DMark的测试中，一张公版RTX 2070在1080p分辨率下的帧数提升为24.43％，而在4K分辨率下，提升幅度已经达到70.84％，在8K下面更是有116.62％的提升，直接从18帧幻灯片变成了40帧基本流畅的水平（数据来源：<a target="_blank" rel="noopener" href="https://www.expreview.com/72147.html">超能网</a>）。</p>
 <p>这项功能是由NVIDIA最先在Turing GPU上引入的，Intel也在他们的Gen 11核显上面加入了这项特性，我们也终于将在RDNA 2架构中看到AMD方面的支持。所以，这项技术是Xbox Series X实现8K游戏的一大技术利器，如果运用得当，我们将会在不牺牲过多画面质量的情况下得到更为流畅的画面，或是享受到更高分辨率的画面。</p>
 <h2 id="硬件光线追踪支持"><a href="#硬件光线追踪支持" class="headerlink" title="硬件光线追踪支持"></a>硬件光线追踪支持</h2><p>微软家嘛，肯定会用自己的DXR API作为光追的入口啦。官方也明确说了这是基于硬件加速（Hardware-accelerated）的光线追踪支持，所以很明确的一点就是RDNA 2架构中将会加入新的针对光线追踪的处理单元，一如当年Turing架构中的RT Core，用专用处理单元的形式为光追提供更好的支持。</p>
 <img src="/images/RDNA_2_RT.jpg" width="100%" />
@@ -423,7 +446,7 @@
 <p style="text-align:center;">
 <img src="/images/samsung-980-pro.jpg" /><br/>三星980 PRO，支持PCIe 4.0，图片来自<a herf="https://www.anandtech.com/show/15352/ces-2020-samsung-980-pro-pcie-40-ssd-makes-an-appearance">AnandTech</a></p>
 
-<p>一个多月前，DigiTimes报道过<a href="https://www.digitimes.com/news/a20200110PD204.html" target="_blank" rel="noopener">一则群联打入Xbox供应链的新闻</a>：</p>
+<p>一个多月前，DigiTimes报道过<a target="_blank" rel="noopener" href="https://www.digitimes.com/news/a20200110PD204.html">一则群联打入Xbox供应链的新闻</a>：</p>
 <blockquote>
 <p>Phison has reportedly broken into the supply chain of Microsoft’s Xbox, while Silicon Motion has seen orders for home consoles with built-in SSDs surge.</p>
 </blockquote>
@@ -436,11 +459,11 @@
 <h2 id="动态延迟输入（DLI）"><a href="#动态延迟输入（DLI）" class="headerlink" title="动态延迟输入（DLI）"></a>动态延迟输入（DLI）</h2><p>在使用无线游戏手柄的时候，有一点是无法忽视的，那就是延迟问题。我们这些普通玩家可能没什么感觉，但在高手眼中，这点延迟就已经会造成手眼不同步。原本微软用来连接手柄的就是他们自己开发的一种专有无线协议了，这次他们新引入了动态延迟输入特性，在寥寥一句话的介绍中也智能推测出这是一个用于同步用户输入与显示输出的特性，既然名为动态，那么可能就是根据输入端的连接延迟在输出上面做相应的补偿来保证手眼同步。</p>
 <h2 id="HDMI-2-1"><a href="#HDMI-2-1" class="headerlink" title="HDMI 2.1"></a>HDMI 2.1</h2><p>HDMI是主机上面常见的用来输出画面的接口，其最新版本为HDMI 2.1，相对于HDMI 2.0，它不仅仅提高了最大支持的分辨率和帧率，更引入了多种新的特性，其中Phil Spencer重点提到了自动低延迟模式（<strong>A</strong>uto <strong>L</strong>ow <strong>L</strong>atency <strong>M</strong>ode）和可变帧率（<strong>V</strong>ariable <strong>R</strong>efresh <strong>R</strong>ate），其实这两种特性在目前已经得到了大范围运用了，只不过HDMI 2.1是将其标准化了。</p>
 <h3 id="8K-60fps、4K-120fps"><a href="#8K-60fps、4K-120fps" class="headerlink" title="8K@60fps、4K@120fps"></a>8K@60fps、4K@120fps</h3><p>HDMI 2.1一举将接口的最大传输速率提升了2.67倍，从18Gbit/s直接提升到48Gbit/s，并且加入了在DisplayPort上面已经成功运用的DSC压缩技术，从而将最大可传输分辨率提升到了10K的高度。不管分辨率是4K、8K还是10K，HDMI 2.1都可以提供最高120Hz的传输帧率，为Xbox Series X的120fps提供了坚实的保障。</p>
-<p><img src="/images/image-20200301142006596.png" alt=""></p>
+<p><img src="/images/image-20200301142006596.png"></p>
 <h3 id="可变帧率（VRR）"><a href="#可变帧率（VRR）" class="headerlink" title="可变帧率（VRR）"></a>可变帧率（VRR）</h3><p>说到可变帧率，PC玩家肯定是不陌生的，这项特性是用来让显示器的刷新率与显卡输出的画面帧数保持一致，减少画面撕裂现象出现的。目前PC上面有FreeSync和G-SYNC两种方案，前者是AMD主推，并且与DisplayPort接口中的Adaptive-Sync相兼容，目前相关的产品更多；而后者则是NVIDIA主推，但已经推出G-SYNC Compatible对FreeSync做了兼容。</p>
 <p>早在2016年，FreeSync就已经可以跑在HDMI接口上了，而近来也有LG的一系列OLED电视机支持搭配N卡开启G-SYNC Compatible，用的也是HDMI接口，未来支持可变帧率技术的电视机将会越来越多，只要他们支持HDMI 2.1 VRR特性，Xbox Series X即可兼容并开启可变帧率模式，为玩家带来更加顺滑的画面，减少撕裂。</p>
 <h3 id="自动低延迟模式（ALLM）"><a href="#自动低延迟模式（ALLM）" class="headerlink" title="自动低延迟模式（ALLM）"></a>自动低延迟模式（ALLM）</h3><p>实际上Xbox One就已经支持自动低延迟模式，听过AOC电视那期广告节目的应该会记得，电视机的延迟是远高于显示器的，但现在很多电视机厂家都在着重优化这一块，尽量降低内部延迟，为游戏玩家提供更好的体验。而ALLM特性就可以自动进行延迟优化。</p>
-<p><img src="/images/ALLM_600wide.jpg" alt=""></p>
+<p><img src="/images/ALLM_600wide.jpg"></p>
 <p>根据HDMI官方的说法，ALLM可以简化玩家的操作。在需要时，主机会向电视机发送一个开启低延迟模式的信号，而在不需要时也能够自动关闭掉这个模式以恢复电视内置的画面优化。</p>
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>实际上HDMI 2.1还引入了很多增强游戏体验的特性，像快速媒体切换和快速帧传输都是崭新的面向游戏应用的特性。前者用来减少在内容之间切换的空白屏幕时间，后者则可以让图像帧更早的到达电视机进行处理，减少Lag情况。</p>
 <h2 id="120-fps支持"><a href="#120-fps支持" class="headerlink" title="120 fps支持"></a>120 fps支持</h2><p>主机端锁60帧是很常见的事情，但我们应该有点更高的追求。近年来高刷新率显示器的流行让很多PC玩家都认识到原来60帧真的束缚住了我们的视觉体验。其实在手机业界也是一样的，更高刷新率的屏幕可以明显带来更好的观感。本世代的主机可能限于机能问题只能锁60帧，但是对于硬件规格上有巨大飞跃的新主机而言，真的可以抛弃掉锁60帧这个传统了，于是Phil Spencer也写明了，在Xbox Series X上面，帧数上限被拉高到了120帧。再加上强悍的硬件能力支持，以及各路保障视觉体验的特性，在下个世代，玩家的视觉体验提升将不局限于分辨率和画面质量，更是在帧数，画面顺滑度和体感延迟上都会有很大的提高。</p>
@@ -476,34 +499,34 @@
   </time>
   <section class="content">
 	  <p>最近最火的CPU应该莫过于i5-9600KF，这周一的时候，这枚处理器突然在Intel的京东自营旗舰店理开始降价促销，1399的价格做到了比618还要低的史低，让一直想更换成9700K的我不禁心动，都这个价位了还要啥自行车？于是想到正好在上周六的时候收了朋友的一块Z170，魔改一下应该能上9600KF，低成本换平台，买了！于是当天看到优惠信息后不到半小时就下单了。</p>
-<p><img src="/images/1569724371107.png" alt=""></p>
-<p><img src="/images/1569716281622.png" alt=""></p>
+<p><img src="/images/1569724371107.png"></p>
+<p><img src="/images/1569716281622.png"></p>
 <p>这批货应该是新到的，所以都还没有进京东各地的仓库，我的这枚处理器是上海发过来的，沙包的Z170先到了，用笔记本上面的i3-8100试了试，恩，兼容性不错，除了USB会报资源不够和内存兼容性有点小问题不能超手上的双面16GB内存之外其他一切正常，这让我对它能作为9600KF的座驾充满了信心。结果……（其实因为内存兼容性问题还下单了两条威刚金色威龙3600）</p>
 <p>周三的时候，9600KF终于到了，上手贴好护舒宝，其实放在华擎华硕等一票除技嘉外的板子上都可以只屏蔽2点+短接2点（微星和蓝天这两家甚至只用屏蔽2点）。上板子，正当我兴冲冲地等着它进系统的时候，又开始卡Windows启动加载的第二个圈了。</p>
-<p><img src="/images/IMG_6650_900.JPG" alt="IMG_6650_900"></p>
-<p><img src="/images/IMG_6652_900.JPG" alt="IMG_6652_900"></p>
+<p><img src="/images/IMG_6650_900.JPG"></p>
+<p><img src="/images/IMG_6652_900.JPG"></p>
 <p>无奈，先换回8100检查主板BIOS，用afuwin把当前BIOS备份出来，然后用MMTool查看里面含有的微码信息，发现缺少了针对R0步进的新微码，遂根据网上教程，找来同厂商的Z390板子BIOS，将微码移植过去，然后再用afuwin给刷上，一切看似很顺利应该是没有毛病了，结果仍然开机卡加载。</p>
-<p><img src="/images/EA4cFgXU4AALSL_.jpg" alt="img"></p>
+<p><img src="/images/EA4cFgXU4AALSL_.jpg"></p>
 <p>9代处理器步进情况，注意从9600KF和9600K基本都是8核屏蔽而来的，而且还分R0和P0两种步进，其中R0步进可以硬件免疫Spectre。</p>
 <p>一头雾水之下只能认为是BIOS有问题，但在网上基本找不到解决办法，因为R0步进太新了，很少有人把新的R0步进处理器放在老主板上面用，无奈第二天还要跑上海，遂睡觉。</p>
 <p>睡了可能只有三个钟就爬起来赶飞机了，地铁上面刷了下什么值得买发现京东上微星的Z390系列板子稍微有点优惠，考虑了一下觉得自己是没有能力解决那块Z170的BIOS问题了，于是直接下单MPG Z390 GAMING EDGE AC。</p>
 <p>在广州和上海间当天来回还是有点累的，但是挡不住我用上新主板的兴奋之情。没几分钟把CPU显卡内存两块SSD和风扇全部搞定，然后插上电源开机，顺利点亮。然后直接进BIOS，先测试内存能不能上3200，打开XMP重启，很顺利就跳上3200了，然后再把处理器倍频拉到50，电压先开了自动。很顺利地直接进了系统，打开CPU-Z，看到了从来没见过的5GHz。</p>
-<p><img src="/images/MSI_SnapShot_900.jpg" alt="MSI_SnapShot_00_900"></p>
+<p><img src="/images/MSI_SnapShot_900.jpg"></p>
 <p>然后打开AIDA64单拷FPU，观察到电压为1.34V，体感稍微有点高，想降一点，因为稍微降一点可以让CPU温度更低，散热器更好压，于是安装了Intel XTU，在Windows下面开始降电压，到1.3V的时候我感觉差不多了就没往下降，此时倍频其实可以再往上拉一档，5.1GHz单拷FPU过关，4热管的利民刺灵AS120可以把满载功耗120W的9600KF压在75度，很满意了。</p>
 <p>进《刺客信条：奥德赛》简单benchmark了一下，同样显示配置的情况下，平均帧数上升了有10多帧，而高频CPU最大的优势——电子竞技游戏不掉最低帧我还没测过，但是想来这块5GHz的9600KF比我原本超频至3.8GHz的E3-1231V3肯定是要强得多了。</p>
-<p><img src="/images/IMG_6779.PNG" alt="IMG_6779"></p>
+<p><img src="/images/IMG_6779.PNG"></p>
 <p>然后就是把BIOS各种选项都开起来，我是不喜欢CPU没负载的时候还加着一个1.32V这么高的电压的，所以在设置里面把电压控制改成了自适应+Offset，手动给了+0.08V的Offset，这样主板的电压在满载的时候最高可以达到1.32V，而在没有负载的时候也会自动降压。</p>
-<p><img src="/images/1569722542854.png" alt="1569722542854"></p>
+<p><img src="/images/1569722542854.png"></p>
 <p>而内存，因为从朋友那儿借了闲置的两根单条16GB的DDR4-3200内存，自己又下单买了一组8GBx2的套装，所以想着能不能插一块搞个48GB内存系统，事实证明是可以的，只要两个通道的内存容量相等、频率和时序设定一致即可开启，手动在BIOS里面把时序改成差的那一套内存上自带XMP信息中的就可以把频率调至3200，并且十分稳定。</p>
-<p><img src="/images/1569723402197.png" alt="1569723402197"></p>
-<p><img src="/images/MSI_SnapShot_02_900.jpg" alt="MSI_SnapShot_02_900"></p>
-<p><img src="/images/1569722895569.png" alt="1569722895569"></p>
+<p><img src="/images/1569723402197.png"></p>
+<p><img src="/images/MSI_SnapShot_02_900.jpg"></p>
+<p><img src="/images/1569722895569.png"></p>
 <p>这次时间几乎长达一周的折腾让我明白了，有些问题，加钱真的就完事儿了……</p>
-<p><img src="/images/IMG_6780.PNG" alt="IMG_6780"></p>
+<p><img src="/images/IMG_6780.PNG"></p>
 <p>另外值得一提的是，想摸CJR颗粒的朋友可以买威刚的金色威龙，我推荐别人、自己、还有朋友那儿一共四套金色威龙，频率从3000到3600全部都摸到了CJR颗粒。</p>
-<p><img src="/images/IMG_6655_900.JPG" alt="IMG_6655_900"></p>
+<p><img src="/images/IMG_6655_900.JPG"></p>
 <p>老平台：</p>
-<p><img src="/images/IMG_6642_900.JPG" alt="IMG_6642_900"></p>
+<p><img src="/images/IMG_6642_900.JPG"></p>
 
 
     
@@ -608,8 +631,6 @@
 <p>同时，Intel 开始大力推进品牌宣传，那段由五个音符组成的短旋律搭配上”Intel Inside”成为了 Intel 后来用了二十多年的经典宣传组合，深入人心。</p>
 <iframe width="800" height="450" src="https://www.youtube.com/embed/cW8LLhHq9_c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-
-
 <h3 id="Wintel"><a href="#Wintel" class="headerlink" title="Wintel"></a>Wintel</h3><p>上世纪九十年代中期，Intel 俨然已经成为了 PC 行业的领头羊，由它参与主导制定了多种业界标准，比如用到今天的 USB 就是典型的例子。那么为什么 IBM 没能保持住自己在 PC 市场中的标准制定者的地位呢？让我们把时间倒回到八十年代。</p>
 <p>上文提到，PC 标准是根据 IBM PC 来的，但它更是一种开放标准，想要以一己之力控制一个有数百家企业参与的开放标准，是一种妄想，而 IBM，正好就是这个做白日梦的人。1987 年，IBM 推出了 PS/2 系列机型，其中使用的扩展总线为 IBM 新设计并专有的 MSA 总线，这与市面上已经大量存在的 ISA 卡不兼容。而数量众多的制造商也不愿意使用新的 MSA 标准，首先，用新的总线制造扩展卡要向 IBM 缴纳一笔专利使用费，这与之前 ISA 总线的开放态度截然相反；其次，新的卡只能用在新的 IBM PS/2 系列机型上面，无法与市场主流所相容。所以最终妄想通过新机型来重获 PC 标准主导权的 IBM 并没有得逞，反而逐渐被时代所抛弃。</p>
 <img src="/images/creative_sound_card_ISA.jpg" width=40% />
@@ -647,36 +668,30 @@
 	  <h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><p>这期史话笔者将视点从 CPU 这个单一元件转移开，来讲讲 PC 标准出现前的那些故事。</p>
 <h2 id="DEC-与小型机"><a href="#DEC-与小型机" class="headerlink" title="DEC 与小型机"></a>DEC 与小型机</h2><p>Minicomputer，中文中多称为小型机，用今天的眼光来看，小型机其实并不小，大多数都还是有个立柜那么大。不过在微型计算机出现之前，小型机占据了计算机市场的大半江山，而要说起小型机，不得不提的就是影响了整个计算机历史的 PDP 系列和它背后的创造者—— DEC 公司。</p>
 <h3 id="从-TX-0-到-PDP-1"><a href="#从-TX-0-到-PDP-1" class="headerlink" title="从 TX-0 到 PDP-1"></a>从 TX-0 到 PDP-1</h3><p>让我们把时间倒回到上世纪四五十年代，现代计算机刚诞生不久的时候。那时的计算机动辄几个书柜的大小，更大的可能占据几个房间，并且造价普遍十分昂贵。而从六十年代开始，随着晶体管和集成电路的大规模应用，计算机开始了小型化之路。首先出现的，是 1956 年由麻省理工学院林肯实验室<em>（MIT Lincoln Laboratory）</em>研发出的首台全晶体管计算机—— TX-0，这台计算机不久之后被 MIT “借走”拿去当教学仪器了。</p>
-<img src="/images/tx-0.jpg" width=40% />
-
-<p style="text-align: center;">TX-0</p>
+<p style="text-align: center;"><img src="/images/tx-0.jpg" width=100% />TX-0</p>
 
 <p>随后，两名 TX-0 的工程师肯·奥尔森（Ken Olsen） 和 Harlan Anderson 在 MIT 注意到了一个奇怪的现象：明明学院里有同样提供给学生用并且更快的 IBM 的大型计算机，但学生就是喜欢在 TX-0 那儿排长长的队伍来尝试一下它。思索之后，他们认为小型计算机是有市场前景的，并且不是所有人都需要大型机那么强的性能，对于某些特定用途，低成本的解决方案就可以满足需求了；还有些用户往往更在意机器的图形输出或是实时可操作性而非机器的性能。</p>
 <p>于是在 1957 年，TX-2 项目遇到严重困难之后，他们便离开了实验室，想用自己的理念拉到投资来推出产品。然而当时业界并不景气，小公司不断成立又破产，而诸如 RCA 和通用电气之类的大公司在计算机市场也讨不到好处。他们千辛万苦才拉到美国研究发展公司<em>（American Research and Development Corporation）</em>公司的投资，不过投资人 Georges Doriot 出于对市场的担心，要求他们变更原来的商业计划，把重心少放在计算机业务上一点，甚至还要求他们把公司的名字从原来的「数字计算机公司<em>（Digital Computer Corporation）</em>」改成了「数字装备公司<em>（Digital Equipment Corporation）</em>」（后文简称 DEC）。</p>
 <p>没有办法，公司开头只能听投资人的，DEC 开始生产名为「数字实验室模块」的系列产品，这是一种集成了电子元件和晶体管的电路板，可以用来组建计算机。结果推出之后还挺受其他计算机公司欢迎的，他们买来组建测试自己系统的设备，在不景气的五十年代末期，这个产品线让刚成立的 DEC 开始盈利了。</p>
-<p><img src="/images/dec-digital-laboratory-module-hp-computerhistory.jpg" alt="DEC Digital Laboratory Modules"></p>
-<p style="text-align: center;">数字实验室模块</p>
+<p style="text-align: center;"><img src="/images/dec-digital-laboratory-module-hp-computerhistory.jpg">数字实验室模块</p>
 
 <p>有了成功的产品线之后，DEC 开始将重心重新转回他们最初想做的小型机上。很快，在 1959 年末，采用新设计的计算机诞生了，同样为了规避风险，新的计算机的命名避开了 Computer 一词，新造了「可编程数据处理器<em>（Programmed Data Processor）</em>」这样一个有些拗口的名词。新的机器是系列第一台，即为 PDP-1，比起它需要占用半个房间的祖先 TX-0 来说，它小了很多，而性能却更强。它还拥有一块配套的 CRT 显示器，具有高速显示点阵的能力，用特殊的指令就可以让上面显示图片，这也是最早具有图形显示能力的机型之一。后来在 1961 年 9 月，DEC 向 MIT 捐赠了一台 PDP-1，就摆在 TX-0 的旁边。</p>
 <p>PDP-1 的特殊意义不仅仅在于它的小型化上，更在于更深远的文化层面上。这款机型不但推动了黑客文化的发展，还孕育出了最早的电脑游戏——《太空大战<em>（Spacewar!）</em>》。对于软件领域来说，它更是意义非凡——一系列直到如今我们都仍在使用的软件类型的开山鼻祖就是在 PDP-1 上开发运行的，比如最早的文本编辑器（Notepad 记事本类），最早的文字处理器（文字排版类软件），最早的可交互式调试工具和最早可稳定运行的国际象棋程序等。</p>
-<p><img src="/images/Steve_Russell_and_PDP-1.png" alt="PDP-1"></p>
-<p style="text-align: center;">计算机历史博物馆中的 PDP-1 和《太空大战》的创造者史蒂夫·拉塞尔</p>
+<p style="text-align: center;"><img src="/images/Steve_Russell_and_PDP-1.png">计算机历史博物馆中的 PDP-1 和《太空大战》的创造者史蒂夫·拉塞尔</p>
 
 <h3 id="PDP-8-和-PDP-11"><a href="#PDP-8-和-PDP-11" class="headerlink" title="PDP-8 和 PDP-11"></a>PDP-8 和 PDP-11</h3><p>在 PDP-1 推出之后 DEC 没有停歇，用今天的话来说就是疯狂刷机型，1960 年 PDP-3，1962年 PDP-4，1963 年 PDP-5，1964 年 PDP-7。这其中有的销售不佳，如 PDP-4 就非常惨淡，而 PDP-6 项目则直接因为市场反映不佳而直接搁浅；但继续走小型化之路的 PDP-5 却非常受市场欢迎。于是，秉承着 PDP-5 的理念，在此基础上进行大幅度改进的 PDP-8 被刷出来了。</p>
-<p><img src="/images/pdp-8.jpg" alt="pdp-8"></p>
-<p style="text-align: center;">PDP-8</p>
+<p style="text-align: center;"><img src="/images/pdp-8.jpg">PDP-8</p>
 
 <p>1965 年 3 月 22 日，PDP-8 发布，这是一台可以放在桌上使用的小型机，比起它的前辈们，在性能上可能有所不足，但是它足够“小”，而且更便宜：它标价 18500 美元，是首台售价低于两万美元的小型机，后续的 PDP-8/S 甚至卖到了一万美元之下，这在当时的市场如同一颗价格炸弹一般。而市场的反映也证明了人们对它的喜爱：PDP-8 系列产品一共卖出去了 30 万台，直接推动了 DEC 在上世纪六十年代中后期到七十年代中期称霸小型机市场。</p>
 <p>之后在 1970 年，DEC 推出了 PDP 系列中销量最高的机型——PDP-11，这同样也是一台无论在硬件还是软件方面都对后世有着深远影响的机器：硬件方面，PDP-11 的架构设计影响了整个后七十年代的微处理器的设计，包括 Intel 的 x86 系列处理器和摩托罗拉那著名的 68k 系列处理器；而在软件上，今天互联网世界的基石之一——Unix 系统的首次正式出现，就是在 PDP-11 上面；还有后来流行的 CP/M 及其后继者 DOS 系统等，均受到了 PDP-11 原生系统的启发。正是因为 PDP-11 优秀的、满足时代需求并有些超前的设计，使得 PDP-11 从 1970 年问世一直卖到了九十年代，总共销售六十多万台，被不少评论家誉为“最受欢迎的小型机”，比尔·盖茨曾在他的简历里着重提到过有 PDP-11 的编程经验。</p>
-<p><img src="/images/PDP-11.jpg" alt="PDP-11"></p>
-<p style="text-align: center;">PDP-11</p>
+<p style="text-align: center;"><img src="/images/PDP-11.jpg">PDP-11</p>
 
 <h3 id="DEC-与今世"><a href="#DEC-与今世" class="headerlink" title="DEC 与今世"></a>DEC 与今世</h3><p>说到这里，让我们回头看看 DEC 创始人在 TX-0 前做出的思考，他们对于计算机小型化趋势的判断是多么的精准，而除了这点之外，DEC 还对今世有着非常重大的间接贡献，比如：</p>
 <ul>
 <li>与 C 语言的渊源<br>Unix 最早是用 PDP-7 的汇编语言写成的（当时还没有一个正式名字），为了移植到 PDP-11 上面，核心开发人员不断开发改进新的编程语言，而 C 语言就是这一阶段性完成产物，直到今天 C 语言标准中仍残留有 PDP-11 指令的痕迹。</li>
 <li>与 Windows NT 的渊源<br>在 PDP 系列之后，DEC 继续推出了 VAX 系列，他们将其称之为超级小型机（Superminicomputer）。VAX 系列上运行的系统是重新设计编写的 VMS，其核心设计师戴夫·卡特勒（Dave Cutler）后来被微软招入麾下并领导了 Windows NT 的开发，他把 VMS 的不少理念带入到了 NT 上，甚至后来有说法称 Windows NT 是 VMS 的重新改进版本，而 NT 内核也一直被微软沿用至今。值得一提的是，戴夫·卡特勒后来还领导开发了 Azure 平台，再后来设计了 Xbox One 的系统架构。</li>
 </ul>
-<img src="/images/VAX-11-750.jpg" width=60% />
+<img src="/images/VAX-11-750.jpg" width=70% />
 
 <h3 id="巅峰与衰亡"><a href="#巅峰与衰亡" class="headerlink" title="巅峰与衰亡"></a>巅峰与衰亡</h3><p>不过有句话说的好：“王权没有永恒”，这句话同样可以套用在 DEC 身上。回首上一篇文章，PDP-11 推出之后不久，Intel 的 8008 就登上了舞台，单片式微处理器技术的成熟使得计算机行业掀起了一波更加汹涌的微型（Micro）化浪潮，其结果直接导致了微型计算机（Microcomputer），也就是我们现在使用的这代计算机的成熟和普及。而 DEC 作为小型化的先锋，却抗拒着新的浪潮。</p>
 <p>1974 年，公司的研发组已经证明了微机的可行性，甚至给出了两台原型机，然而奥尔森却选择中断了这项企划。1977 年，DEC 又同样拒绝了开发个人电脑的提案，奥尔森甚至说「个人没有理由在家里放台计算机<em>（There is no reason for any individual to have a computer in his home.）</em>（后来他澄清他说的 Computer 指代的不是现代意义上的 PC）」。</p>
@@ -686,20 +701,20 @@
 <h2 id="IBM-PC-出现前的洪荒年代"><a href="#IBM-PC-出现前的洪荒年代" class="headerlink" title="IBM PC 出现前的洪荒年代"></a>IBM PC 出现前的洪荒年代</h2><p>愈演愈烈的微型化革命年代里，可谓是群雄四起。1972 年末，一家法国公司用 Intel 8008 为核心开发出了一款计算机，并用了 “Micro-ordinateur” 作为它的注册商标，在英语中，这个词等价于 Microcomputer。不过发明这个词的人并不是他们，而是大名鼎鼎的艾萨克·阿西莫夫（Isaac Asimov），他在 1956 年的短篇小说 <em>The Dying Night</em> 就已经使用了这个词。</p>
 <p>Intel 8008 似乎特别受欢迎，早期的微机大多采用了 8008 作为他们机型的中央处理器。1974 年 4 月，Intel 发布了 8008 的加强版——8080。就是这枚处理器，真正拉开了微机普及的序幕。</p>
 <h3 id="Altair-8800"><a href="#Altair-8800" class="headerlink" title="Altair 8800"></a>Altair 8800</h3><p>现在一般认为的首台商业成功的微型计算机就是 MITS 公司在 1974 年出品的 Altair 8800，而且这是 MITS 转型做计算机之后的第一个产品，在这之前 MITS 的主营产品是计算器。1972 年，由于 TI 的强势介入，计算器市场不好混了，MITS 的老板艾德·罗伯茨（Ed Roberts）决定转型去做计算机。1974 年他选定了当时刚发布不久的 Intel 8080 作为中央处理器，不过因为 8080 的官方定价略高，决心做平价计算机的罗伯茨跑去跟 Intel 砍价，他有着多年的 OEM 采购经验，谈价很厉害；而 Intel 那时候主营业务还是存储芯片，不懂小批量微处理器的定价。所以最终罗伯茨成功地把单片价格从 360 美元谈到了 75 美元。</p>
-<p>十月份，他们完成了第一台原型机，并快递给了《大众电子<em>（Popular Electronics)</em>》杂志社，结果不巧的是，他们撞上了快递公司的罢工潮，杂志社并没有收到这台原型机。幸好，他们提前联系的杂志编辑手上已经有了不少这台机器的照片，于是在当年年末出版的杂志封面上，Altair 8800 正式登场了，这是一台可扩展的实用微型计算机，整台机器只需 439 美元！<br><img src="/images/Popular_Electronics_Cover_Jan_1975.jpg" alt="Popular_Electronics_Cover_Jan_1975"></p>
+<p>十月份，他们完成了第一台原型机，并快递给了《大众电子*（Popular Electronics)*》杂志社，结果不巧的是，他们撞上了快递公司的罢工潮，杂志社并没有收到这台原型机。幸好，他们提前联系的杂志编辑手上已经有了不少这台机器的照片，于是在当年年末出版的杂志封面上，Altair 8800 正式登场了，这是一台可扩展的实用微型计算机，整台机器只需 439 美元！<br><img src="/images/Popular_Electronics_Cover_Jan_1975.jpg"></p>
 <p>七十年代初，计算器和电子游戏的普及让大众认知了计算机的威力，而数字化产品也吸引着越来越多的电子爱好者。于是这么一台平价但是实用，而且扩展性还不赖的机器一上市就火了。这是罗伯茨自己也没想到的事情，原本他预想能卖 800 台已经很不错了，结果一个月内他们就收到了一千份订单，五月末的时候这个数字已经变成了 2500 台，到了八月，这个数字又翻了一番，还有不少订单是直接买组装好的机器。</p>
-<p>而在 Altair 8800 身上最出名的故事可能已经为很多人所熟知了：我们亲爱的比尔·盖茨和他的好友保罗·艾伦为它开发了一套 BASIC 语言解译器，并察觉到了软件行业存在的巨大机遇，随后便创立了 Micro-Soft。<br><img src="/images/altair-8800.jpg" alt="img"></p>
+<p>而在 Altair 8800 身上最出名的故事可能已经为很多人所熟知了：我们亲爱的比尔·盖茨和他的好友保罗·艾伦为它开发了一套 BASIC 语言解译器，并察觉到了软件行业存在的巨大机遇，随后便创立了 Micro-Soft。<br><img src="/images/altair-8800.jpg"></p>
 <p>在 Altair 8800 之后，许多公司察觉到了新的商机，于是乎类似的微型计算机如雨后春笋般开始出现，它们大多采用一块 8bit 的处理器比如 Intel 的 8080 或者 Zilog 的 Z80，采用了兼容 Altair 8800 的 S-100 总线，运行着 CP/M 之类的操作系统。在这波创业大潮中，就有苹果电脑公司，他们的 Apple II 获得了巨大的成功。也是摆这股潮流所赐，越来越多小公司也能用得起计算机来做数据库管理、会计还有文字排版之类的活。</p>
-<img src="/images/Apple_II.jpg" width=60% />
+<img src="/images/Apple_II.jpg" width=70% />
 
 <p>不过最终使得微机走入千家万户的，还是有请我们的主角——PC。</p>
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>所谓合久必分，分久必合，微型计算机野蛮生长了足够长的时间了，是时候该有人出来一统江湖了！</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><a href="https://www.computerhistory.org/pdp-1" target="_blank" rel="noopener">PDP-1 Restoration Project</a></li>
-<li><a href="http://www.computer-history.info/Page4.dir/pages/PDP.1.dir/index.html" target="_blank" rel="noopener">The PDP-1</a></li>
-<li><a href="https://www.bell-labs.com/usr/dmr/www/chist.html" target="_blank" rel="noopener">The Development of the C Language</a></li>
-<li><a href="https://xueqiu.com/3993902801/83078596" target="_blank" rel="noopener">DEC创始人、小型机之父：肯·奥尔森</a></li>
-<li><a href="https://www.computerhistory.org/revolution/minicomputers/11/331" target="_blank" rel="noopener">DEC’s Blockbuster: The PDP-8 - CHM Revolution</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.computerhistory.org/pdp-1">PDP-1 Restoration Project</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.computer-history.info/Page4.dir/pages/PDP.1.dir/index.html">The PDP-1</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bell-labs.com/usr/dmr/www/chist.html">The Development of the C Language</a></li>
+<li><a target="_blank" rel="noopener" href="https://xueqiu.com/3993902801/83078596">DEC创始人、小型机之父：肯·奥尔森</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.computerhistory.org/revolution/minicomputers/11/331">DEC’s Blockbuster: The PDP-8 - CHM Revolution</a></li>
 </ol>
 
 
@@ -719,7 +734,7 @@
   
   <h2 class="title">
     <a href="/2019/03/pc-hardware-history-1/">
-      PC 硬件史话
+      PC 硬件史话（一）
     </a>
   </h2>
   
@@ -728,10 +743,10 @@
   </time>
   <section class="content">
 	  <h2 id="成立之初的-Intel-和-AMD"><a href="#成立之初的-Intel-和-AMD" class="headerlink" title="成立之初的 Intel 和 AMD"></a>成立之初的 Intel 和 AMD</h2><h3 id="Intel-篇"><a href="#Intel-篇" class="headerlink" title="Intel 篇"></a>Intel 篇</h3><p>书接上文，NM Electronics，在创立的头个月底改名成 Intel。据称，Intel 这个名字是启发自 <em>int</em>egrated 和 <em>el</em>ectronics 的整合。</p>
-<img src="/images/Intel_old_logo.png" width="30%" />
+<img src="/images/Intel_old_logo.png" width="50%" />
 
 <p>Intel 成立初期的主要业务并不是微处理器的开发与制造，而是瞄准半导体存储器市场，公司的首款产品便是 SRAM（静态随机存取存储器，现多见于 CPU 内部）—— Intel 3101。</p>
-<img src="/images/Intel-3101.jpg" width="40%" />
+<img src="/images/Intel-3101.jpg" />
 
 <p>3101 推出于 1969 年，比当时市场上的同类产品快了接近一倍。同年，Intel 还推出了 1101 和 3301 两款产品，前者是创新性地将 MOSFET 工艺运用于存储器制造的产物，后者则是一款只读存储器（<strong>R</strong>ead-<strong>O</strong>nly <strong>M</strong>emory）。虽然 3101 和 1101 这两款产品都颇具创新意义，但是影响并不大。真正使 Intel 开始出名的，是 1970 年发售的 1103——世界上第一款商用的 DRAM（动态随机存取存储器，也就是今天最常见的内存类型）。1103 在 1972 年成为了最为畅销的半导体存储芯片，并成功地在许多应用场合完成了 Intel 原本的设想——取代当时最流行的磁芯存储器（Magnetic-core memory）。</p>
 <h3 id="AMD-篇"><a href="#AMD-篇" class="headerlink" title="AMD 篇"></a>AMD 篇</h3><p>与 Intel 不同的是，AMD 在成立之初原本是仙童半导体和国家半导体（National Semiconductor）第二供货商，专注于制造芯片，并引入了美国军方标准作为质量管理标准。要知道，在早期的计算机工业里，微芯片不可靠的质量是各大客户都极力想避免的问题，所以 AMD 靠这个赢得了一些优势。</p>
@@ -740,38 +755,38 @@
 <p>到 1975 年，AMD 一共生产着 212 种产品，其中 49 种是自主研发的。</p>
 <h2 id="4004-与-8008"><a href="#4004-与-8008" class="headerlink" title="4004 与 8008"></a>4004 与 8008</h2><h3 id="Intel-4004"><a href="#Intel-4004" class="headerlink" title="Intel 4004"></a>Intel 4004</h3><p>终于讲到 Intel 的第一颗微处理器（Microprocessor），4004 的故事了。</p>
 <p>1969 年，Busicom，一家日本的计算器公司拿着自己设计的一套由 12 枚 IC 组成的计算器引擎方案找到了刚成立不久的 Intel（其实是 Intel 主动去接触的），想让他们完善并生产这套引擎。然而 Intel 方面给出了一套更加优雅的方案，1971 年初，由 Federico Faggin 领导的开发团队设计出了一套只需要 4 枚芯片就可以取代原来的 12 枚芯片的芯片组，也就是后来的 MCS-4 芯片组，其中的核心便是大名鼎鼎的 4004。</p>
-<img src="/images/intel-4004.jpg" width="40%" />
+<img src="/images/intel-4004.jpg" />
 
 <p>4004 使用了 10 微米的制程，一共集成了约 2300 个晶体管，最高主频为 740 kHz，数据位宽为 4 bit，每秒最多能执行约 92000 条指令。这些参数在当时虽然并不是最强的，但因为它是市场上首款通用可编程处理器，又是全球首款商用单片微处理器，所以就像 1971 年 11 月 15 日 Intel 在 Electronic News 上刊登的广告语说的那样，它在集成电子领域开创了一个新的纪元。</p>
-<img src="/images/intel-4004-ad.jpg" width="40%" />
+<img src="/images/intel-4004-ad.jpg" />
 
-<p>4004 直到 1981 年才停产，期间推出了 4040 作为它的加强版。这里有一段 4004 发布三十五周年纪念会的录像，其中有两位设计师的演讲，感兴趣的朋友可以去看看：<a href="https://www.youtube.com/watch?v=j00AULJLCNo" target="_blank" rel="noopener">Intel 4004 Microprocessor 35th Anniversary</a></p>
+<p>4004 直到 1981 年才停产，期间推出了 4040 作为它的加强版。这里有一段 4004 发布三十五周年纪念会的录像，其中有两位设计师的演讲，感兴趣的朋友可以去看看：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=j00AULJLCNo">Intel 4004 Microprocessor 35th Anniversary</a></p>
 <h3 id="Intel-8008"><a href="#Intel-8008" class="headerlink" title="Intel 8008"></a>Intel 8008</h3><p>8008 与 4004 实际上是两个独立进行的项目，8008 项目开始的时间甚至可能早于 4004。而 8008 背后的故事，则是非常有趣：</p>
 <p>Computer Terminal Corporation (CTC) 是当时刚成立不久的一家设计制造小型桌面终端的公司，1967 年他们推出了一款非常受欢迎的机型：Datapoint 3300。</p>
-<img src="/images/DataPoint_3300.jpg" width="40%" />
+<img src="/images/DataPoint_3300.jpg" width="100%" />
 
 <p>这款机型虽然卖的不错，然而它的小毛病可是不少，比如发热问题就是其一。为了解决这台机型上存在的问题，CTC 开始考虑采用单片 CPU 的设计来改进内部电路，于是公司掌门人之一的 Roche 找到了罗伯特·诺伊斯，交流了这个想法。诺伊斯觉得这是个绝妙的点子，而且 Intel 有能力做，但是这样子干很蠢：“一台计算机只能卖一块主处理芯片，但是可以卖数百颗存储芯片”。另一个考量则是当时 Intel 的存量客户几乎都是买他们的存储芯片搭配自己研发的处理器，而一旦 Intel 开始卖自家的处理器了，那么它和客户间就可能会形成竞争关系，原本的客户可能会另寻供应商。</p>
 <p>但最终诺伊斯还是在 1970 年初和 CTC 签下了价值 50000 美元的开发合同，不过呢，CTC 同时还找了德州仪器作为它们的备胎。</p>
 <p>接下来的故事就众说纷纭了，英文维基上给出的这个缺少来源的说法是 TI（德州仪器）拿到了 Intel 的早期设计，并做出了样片，但是有许多 bug，被 CTC 给否了。Intel 自己的进度也不顺利，推迟了。结果呢，CTC 那边等不及了，还是用了老而成熟的方案在 1970 年 3 月末推出了改进型新品：Datapoint 2200。这新品都出了，那么自然也就不需要原来计划的配套处理器了，所以 CTC 叫停了代号为 1201 的芯片的研发。</p>
 <p>半年过去了，似乎是注意到了 4004 的成功，有家计算器生产商向 Intel 表达了想把 1201 芯片用在他们家的科学计算器上的想法。正巧隔壁 4004 项目已经完成了，我们的老熟人 Federico Faggin 过来接手了 1201 项目，他们对原来的设计进行了一些小调整。最终在 1971 年的晚些时候，Intel 把完成版的 1201 送到了 CTC 手上。</p>
 <p>结果 CTC 为了推出新的产品，已经不满足于 1201 所提供的性能，于是他们砍掉了这个项目，用 1201 身上的所有知识产权代替五万美金向 Intel 支付了费用。随后 Intel 将这款产品更名为 8008，并在 1972 年 4 月份将它以 $120 的价格放进了自家的产品目录里，他们原本担心的老客户流失问题也没有发生，反而延续了 4004 在商业上的成功。</p>
-<img src="/images/Intel_8008.jpg" width="40%" />
+<img src="/images/Intel_8008.jpg" width="100%" />
 
 <p>与 4004 一样，8008 也是采用的 10 微米制程，集成了约 3500 个晶体管，早期版本主频为 500 kHz，后来升高至 800 kHz。但因为数据位宽为 8 bit，所以实际性能比 4004 还是要高不少。</p>
 <p>8008 最大的意义还是在它的设计上，后来 1974 年 4 月份发布的 8080 延续了它的设计，而 x86 的开创者 8086 则是继承了 8080 的指令集，所以说 8008 是现在所有 x86 CPU 的老祖宗也不为过。</p>
 <h2 id="AMD-的逆向工程"><a href="#AMD-的逆向工程" class="headerlink" title="AMD 的逆向工程"></a>AMD 的逆向工程</h2><p>1974 年，Intel 推出了 8080 微处理器。AMD 此时想进入微处理器的市场，于是他们搞到一块早期的 8080 芯片，对其展开了逆向工程：显微拍照，用照片捣鼓出了原理图和逻辑图，然后研发出了自己的第一款微处理器：Am9080。</p>
-<img src="/images/AMD_Am9080.jpg" width="40%" />
+<img src="/images/AMD_Am9080.jpg" width="100%" />
 
 <p>Am9080 的制造成本只需要 50 美分，但却以 700 美元一片的价格卖给军用市场。结果不久之后 Intel 就与 AMD 签署了一份协议，AMD 成为了 8080 的授权第二供应商，这使得两家可以联合打入那些不接受单一供货源的市场，这份协议也给后来的故事埋下了伏笔。</p>
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>虽然 Intel 研发出的这两款单片型处理器的性能都挺一般的，但还是有不少业界人士和爱好者注意到了这种类型的处理器的远大前景——可以加速计算机的小型化，而事实上，在七十年代中期，已经有几家公司开始尝试用 Intel 的芯片设计制造小型的计算机了。</p>
 <p>下一章，笔者将会把主视角从 CPU 转开，尝试讲述一下 IBM PC 兼容标准诞生的故事。</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
-<li><a href="https://newsroom.intel.com/news/intel-at-50-intels-first-product-3101/" target="_blank" rel="noopener">Intel at 50: Intel’s First Product – the 3101</a></li>
-<li><a href="https://newsroom.intel.com/news/intel-50-intels-1101/" target="_blank" rel="noopener">Intel at 50: Intel’s 1101</a></li>
-<li><a href="http://www.mynikko.com/CPU/3101.html" target="_blank" rel="noopener">MyNikko.com 微處理器博物館 - Intel 3101</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/39804154" target="_blank" rel="noopener">纪念英特尔成立五十周年 篇一 阴差阳错</a></li>
-<li><a href="https://www.intel.com/content/www/us/en/history/museum-story-of-intel-4004.html" target="_blank" rel="noopener">The Story of the Intel® 4004</a></li>
-<li><a href="https://en.wikichip.org/wiki/intel/mcs-8#History" target="_blank" rel="noopener">MCS-8  - Intel - WikiChip</a></li>
+<li><a target="_blank" rel="noopener" href="https://newsroom.intel.com/news/intel-at-50-intels-first-product-3101/">Intel at 50: Intel’s First Product – the 3101</a></li>
+<li><a target="_blank" rel="noopener" href="https://newsroom.intel.com/news/intel-50-intels-1101/">Intel at 50: Intel’s 1101</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.mynikko.com/CPU/3101.html">MyNikko.com 微處理器博物館 - Intel 3101</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/39804154">纪念英特尔成立五十周年 篇一 阴差阳错</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.intel.com/content/www/us/en/history/museum-story-of-intel-4004.html">The Story of the Intel® 4004</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikichip.org/wiki/intel/mcs-8#History">MCS-8  - Intel - WikiChip</a></li>
 </ol>
 <p>英文维基不作为参考资料列出。</p>
 
@@ -815,16 +830,16 @@
 <img src="/images/Fairchild_ad_Electronics-1958-08-15.jpg" width="50%" />
 
 <p>继承了前人的理念之后，在 1958 年 9 月 12 日，德州仪器（Texas Instruments）的 Jack Kilby 成功的研发出了第一块能够工作的集成电路，随后他在 1959 年 2 月 6 日为这项发明申请了专利。半年之后，八叛逆之一的罗伯特·诺伊斯成功独立研发出了另一种不同的集成电路，与 Jack Kilby 不同的是，罗伯特·诺伊斯的集成电路是以硅为基底，并且更加实用。一年之后，诺伊斯又将平面工艺运用到集成电路的制造流程上，这也使得业界更为认可仙童半导体出产的集成电路。仙童半导体在创造了一系列对后世影响深远的研究发明之后俨然已经成为了整个半导体行业的领军者。</p>
-<h3 id="摩尔定律"><a href="#摩尔定律" class="headerlink" title="摩尔定律"></a>摩尔定律</h3><p>1965 年 4 月 8 日，八叛逆之一的高登·摩尔在 Electronics 杂志上发表了名为 <a href="http://hasler.ece.gatech.edu/Published_papers/Technology_overview/gordon_moore_1965_article.pdf" target="_blank" rel="noopener"><em>Cramming more components onto integrated circuits</em></a> 的文章，文中，他基于对行业发展的长久观察和思考后做出了一项具有历史意义的预测：</p>
+<h3 id="摩尔定律"><a href="#摩尔定律" class="headerlink" title="摩尔定律"></a>摩尔定律</h3><p>1965 年 4 月 8 日，八叛逆之一的高登·摩尔在 Electronics 杂志上发表了名为 <a target="_blank" rel="noopener" href="http://hasler.ece.gatech.edu/Published_papers/Technology_overview/gordon_moore_1965_article.pdf"><em>Cramming more components onto integrated circuits</em></a> 的文章，文中，他基于对行业发展的长久观察和思考后做出了一项具有历史意义的预测：</p>
 <blockquote>
 <p>The complexity for minimum component costs has increased at a rate of roughly a factor of two per year. Certainly over the short term this rate can be expected to continue, if not to increase. Over the longer term, the rate of increase is a bit more uncertain, although there is no reason to believe it will not remain nearly constant for at least 10 years. </p>
 </blockquote>
 <p>这就是半导体行业中著名的”Moore’s Law”的前身，在 1975 年 IEEE（电气电子工程师学会）的一次会议上，摩尔修订了预测的增长率，原本两倍的增长率将在 1980 年之后减半。年内稍晚时候，加州理工学院的 Carver Mead 教授将摩尔的预测总结为”Moore’s Law”。</p>
-<img src="/images/transistors-per-microprocessor.png" width="50%" />
+<img src="/images/transistors-per-microprocessor.png" width="100%" />
 
 <p>摩尔定律事实上只是一条经验定律，但是却延续至今仍旧没有失效，甚至一定程度上在很长一段时间内指引了半导体业界的发展。</p>
 <h3 id="分崩离析与传奇的开始"><a href="#分崩离析与传奇的开始" class="headerlink" title="分崩离析与传奇的开始"></a>分崩离析与传奇的开始</h3><p>让我们把目光重新对准仙童半导体。在六十年代的前五年，仙童半导体的风光一时无两，员工数量从最早的12人发展到了12000人。然而王权没有永恒，这家公司并不会这么一帆风顺下去。1965 年开始，仙童半导体在公司内部管理上开始出现了一些问题，到了 1967 年 7 月，公司已经开始亏损并且领头羊的位置被德州仪器所夺取。1968 年 8 月，罗伯特·诺伊斯、高登·摩尔和 Andrew Grove 一起从仙童半导体离职，创办了 NM Electronics，一年之后，公司更名为 Intel。1969 年，仙童半导体的一群工程师决定离开公司创业，他们找到了 Jerry Sanders 一起合伙，5 月 1 日，Advanced Micro Devices 公司成立。</p>
-<img src="/images/The-Roots-of-Silicon-Valley.jpg" width="50%" />
+<img src="/images/The-Roots-of-Silicon-Valley.jpg" width="70%" />
 
 <p>好了，演员已经全数登场，传奇即将上演。</p>
 

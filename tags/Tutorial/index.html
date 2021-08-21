@@ -129,25 +129,25 @@
 <h2 id="为什么我们需要对视频进行压缩编码？"><a href="#为什么我们需要对视频进行压缩编码？" class="headerlink" title="为什么我们需要对视频进行压缩编码？"></a>为什么我们需要对视频进行压缩编码？</h2><p>很简单，就是为了减小视频占用的容量大小。</p>
 <p>数字视频实质上就是一帧帧连续的图像，虽然一帧图像的大小并不大，但每秒至少得有24帧图像（一般情况），它们累计起来就会占据非常大的空间，我们没有那么多的地方存储原始数据，那么只有一条路可以走，对它进行压缩。而视频的编码过程就是这个压缩过程，但与音频一样，在传统数据压缩算法来看视频文件里面基本上是没有什么冗余信息的，所以人们就有必要去开发针对视频的压缩算法，把实际存在的冗余信息给去掉，从而减少它的数据量，达到减小占用容量的目的。因此，目前的视频编码基本上都是有损的，意味着编码过后的视频在画面质量上会有损失。</p>
 <h2 id="前蓝光时代的视频编码发展之路"><a href="#前蓝光时代的视频编码发展之路" class="headerlink" title="前蓝光时代的视频编码发展之路"></a>前蓝光时代的视频编码发展之路</h2><p>让我们首先沿着国际标准，按时间顺序来看看视频编码是怎么一步一步“现代化”的。</p>
-<p><img src="/images/S0_P2_Sullivan-3.png" alt=""></p>
+<p><img src="/images/S0_P2_Sullivan-3.png"></p>
 <p>在模拟电视和胶片电影时代，我们看到的内容都是模拟信号还原出来的。但随着人们的需求不断提高，和计算机、网络的蓬勃发展，我们需要新的、能够承载视频内容的数字编码，用来支持视频内容在互联网上的传输，或是将其存储在数字化的存储设备中。</p>
 <p>在上世纪七十年代末八十年代初的时候，人们已经研究出了不少新的针对图像等多媒体内容的压缩算法，此时开发数字视频编码的条件已经基本成熟，而第一个开发出实际编码的，就是后来在数字视频编码领域中起领头作用的视频编码专家组（<strong>V</strong>ideo <strong>C</strong>oding <strong>E</strong>xperts <strong>G</strong>roup），他们是当时名字还是“国际电报和电话咨询委员会（CCITT）”的ITU-T（国际电信联盟电信标准化部门）组织下面的专家组。这个编码被命名为H.120，它诞生于1984年，是一种偏向于实验性质的早期编码，主要基于差分PCM编码，用来保存电视内容，但是它并没有大规模的实际运用。</p>
 <h3 id="H-261：引入各种特性，奠定现代视频编码基础"><a href="#H-261：引入各种特性，奠定现代视频编码基础" class="headerlink" title="H.261：引入各种特性，奠定现代视频编码基础"></a>H.261：引入各种特性，奠定现代视频编码基础</h3><p>在制定完H.120过后几年，VCEG并没有停止他们在视频编码上面的研究。此时很多跨国公司已经使用网络进行视频会议的需求了，在互联网带宽尚不充裕的年代里，人们需要新的视频编码来实现流畅而优质的实时视频通信，H.261就应运而生了。</p>
 <p>H.261与首个数字视频编码标准H.120并没有直接的继承关系，它可以说是完全另起炉灶的一种编码。在针对图像的压缩算法上，H.261使用了我们现在比较熟悉的离散余弦变换（DCT）算法， 它在后来的JPEG编码中起主要作用。但不止于此，它引入了一系列针对视频的特性，奠定了现代视频编码的基础，其中主要有宏块（Macroblock）和基于宏块的运动补偿（Motion Compensation）。</p>
 <h4 id="宏块与基于运动补偿的帧间预测"><a href="#宏块与基于运动补偿的帧间预测" class="headerlink" title="宏块与基于运动补偿的帧间预测"></a>宏块与基于运动补偿的帧间预测</h4><p>我们知道，视频是由一帧一帧的图像组成的组合，一般情况下一秒钟的视频中会包含24、25、30、60或更多张图片，它们按照一定的时间间隔播放出来，基于视觉残留原理形成了流畅、会动的画面。在连续的几帧之间，实际上存在着大量重复的画面，比如说下面这个例子：</p>
-<p style="text-align:center;"><img src="/images/mc.jpg" /><br/>一个白色台球在绿色桌面上面运动</p>
+<p style="text-align:center;"><img src="/images/mc.jpg" />一个白色台球在绿色桌面上面运动</p>
 
-<p><img src="/images/mc-vector.jpg" alt=""><br/>用小球运动的方向和距离来描述图像的变化</p>
+<p><img src="/images/mc-vector.jpg"><br/>用小球运动的方向和距离来描述图像的变化</p>
 <p>如果是以传统的思路对每一帧图像做压缩的话，显然整个视频在压缩过后仍存在大量的冗余。那么怎么办呢？H.261标准引入了宏块的思维，它将整个画面切分为许多小块，然后再引入基于运动补偿的帧间预测——画面的大部分都是不动的，那么我们将不动部分的区块沿用之前的压缩结果，动的部分用运动方向加距离这样一个矢量来描述不就可以节省出大量的存储空间了吗？</p>
-<h4 id="DCT算法"><a href="#DCT算法" class="headerlink" title="DCT算法"></a>DCT算法</h4><p style="text-align:center;"><img src="/images/DCT-8x8.jpg" /><br/>将8x8个像素分成一个块</p>
+<h4 id="DCT算法"><a href="#DCT算法" class="headerlink" title="DCT算法"></a>DCT算法</h4><p style="text-align:center;"><img src="/images/DCT-8x8.jpg" />将8x8个像素分成一个块</p>
 
-<p><img src="/images/pixel-block.jpg" alt=""></p>
+<p><img src="/images/pixel-block.jpg"></p>
 <p>DCT算法起源于上世纪70年代，到了80年代中后期，有研究者开始将其用于图像压缩。这种算法可以将图像从空间域转换到频率域，然后做量化——减少人眼敏感程度较低的高频信息，保留绝大部分低频信息，从而减少图像的体积。最后再用高效的数据编码方式将处理过后的数据进一步压缩，这里使用了Zig-Zag扫描和可变长编码。</p>
 <blockquote>
 <p>注：图像的高频部分存有很多细节信息，而低频部分则存有轮廓等覆盖范围较大的信息。</p>
 </blockquote>
-<p><img src="/images/DCT-pic.jpg" alt=""></p>
-<p style="text-align:center;"><img src="/images/DCT-pic-2.jpg" /><br/>亮度通道做DCT变换后的图像，可以看到上方颜色连续部分非常平坦，而下方则拥有诸多细节</p>
+<p><img src="/images/DCT-pic.jpg"></p>
+<p style="text-align:center;"><img src="/images/DCT-pic-2.jpg" />亮度通道做DCT变换后的图像，可以看到上方颜色连续部分非常平坦，而下方则拥有诸多细节</p>
 
 <p>在H.261及之后基于H.261框架的视频编码中，DCT算法主要针对的是关键帧的压缩，所谓关键帧，就是在运动补偿中作为基准参考的一帧。打个比方，就像Flash动画中的关键帧一样，它定义了一个起点，后续的几帧都是基于这个关键帧演算出来的。因为它只做帧内压缩，不涉及其他帧，又被称为Intra-frame（帧内编码帧），简称I帧。</p>
 <h4 id="小结：创立混合编码框架，有里程碑意义"><a href="#小结：创立混合编码框架，有里程碑意义" class="headerlink" title="小结：创立混合编码框架，有里程碑意义"></a>小结：创立混合编码框架，有里程碑意义</h4><p>H.261设计的目标是编码出比特率在64~2048kbps范围内的视频，以用于实时的视频电话等应用。它首次确立了帧内预测与帧间预测同时使用的编码框架，在消除每一帧本身存有的冗余外，消除了帧与帧之间的冗余信息，从而大幅度降低了码率，成为了实际可用性相当高的一种视频编码。而它的编码框架也影响到了之后几乎所有的视频编码，尤其是H.26x和MPEG家族。</p>
@@ -156,16 +156,16 @@
 </blockquote>
 <h3 id="MPEG-1-Part-2：引入帧类型概念，成为VCD标准"><a href="#MPEG-1-Part-2：引入帧类型概念，成为VCD标准" class="headerlink" title="MPEG-1 Part 2：引入帧类型概念，成为VCD标准"></a>MPEG-1 Part 2：引入帧类型概念，成为VCD标准</h3><p>几乎在H.261开发的同时间，1988年，ISO和IEC两大国际标准化组织建立了MPEG（动态图像专家组，<strong>M</strong>oving <strong>P</strong>icture <strong>E</strong>xperts <strong>G</strong>roup）以开发国际标准化的音视频压缩编码。他们在1992年11月份完成了MPEG-1整套标准的制定，其中的第二部分标准化了一个新的视频压缩编码，它受到H.261的深刻影响，继承和发展了分块、运动补偿、DCT算法等思想，并做出了自己的改进，比如引入新的双向预测帧、亚像素精度的运动补偿等新技术。</p>
 <h4 id="引入双向预测帧（B帧）"><a href="#引入双向预测帧（B帧）" class="headerlink" title="引入双向预测帧（B帧）"></a>引入双向预测帧（B帧）</h4><p>H.261引入基于运动补偿的帧间预测算法之后，视频中的帧其实就已经分成两类了，一类是完整的，称为关键帧（Intra-frame），它就是一张完整的静态图像，可以直接被解码出来。另外的帧则是通过运动补偿算法在关键帧之上计算得到的。</p>
-<p><img src="/images/image-20200313120744255.png" alt=""></p>
+<p><img src="/images/image-20200313120744255.png"></p>
 <p>MPEG-1 Part 2引入了帧类别的概念，原来的关键帧被称为“I帧”，基于帧间预测计算得到的帧为P帧。在这两种H.261已有的帧类型外，它引入了一种新的帧：双向预测帧，也叫作B帧。</p>
-<p><img src="/images/B-frame.png" alt=""></p>
+<p><img src="/images/B-frame.png"></p>
 <p>原本的P帧只能够前向预测，也就是说，它只能够基于前一帧计算得到。双向预测，顾名思义，它可以用前面的一帧作为自己的参考，也可以用后面那帧来进行预测。由于参考了更多的信息，B帧自身就可以包含更少的信息量，其压缩比自然就要比只能做单向预测的P帧还要高了。但是，B帧的引入带来了一个新的问题，即编解码难度上升了。</p>
 <h4 id="引入帧序列（Group-of-Pictures）"><a href="#引入帧序列（Group-of-Pictures）" class="headerlink" title="引入帧序列（Group of Pictures）"></a>引入帧序列（<strong>G</strong>roup <strong>o</strong>f <strong>P</strong>ictures）</h4><p>帧序列是一些按顺序排列的图像帧的组合，简称为GOP。一个GOP的头部是一个I帧，也只会有一个I帧，它包含了该GOP的基准参考图像信息，其后是数个P帧、B帧，它们都是以开头的I帧为基础，经过计算得到的。</p>
-<p><img src="/images/GOP.png" alt=""></p>
+<p><img src="/images/GOP.png"></p>
 <p>上面的图片就描述了一个完整的GOP，可以看到一个I和P帧之间隔了三个B帧。实际应用中，B帧确实是数量最多的帧类型。</p>
-<p><img src="/images/Snipaste_2019-10-18_21-59-14.jpg" alt=""></p>
+<p><img src="/images/Snipaste_2019-10-18_21-59-14.jpg"></p>
 <h4 id="亚像素精度的运动补偿"><a href="#亚像素精度的运动补偿" class="headerlink" title="亚像素精度的运动补偿"></a>亚像素精度的运动补偿</h4><p>H.261中引入的帧间预测精度为像素级的，对很多分块的运动瞄准是不精确的，这点在MPEG-1上得到了有效改进。他们引入了亚像素级别的运动补偿，可以以1/2像素级别描述像素块的运动。</p>
-<p><img src="/images/sub-pixel.png" alt=""></p>
+<p><img src="/images/sub-pixel.png"></p>
 <h4 id="小结：成功接棒"><a href="#小结：成功接棒" class="headerlink" title="小结：成功接棒"></a>小结：成功接棒</h4><p>MPEG-1成功地继承了H.261的技术框架，并对其进行了有效的补充，从而达成了不错的压缩比。在那个人们普遍还在用VHS录像带的年代里，MPEG-1已经能够以1~2Mbps的码率提供类似于VHS录像带的画质了。这也使得它被选用为VCD的标准，在世界范围，尤其是在我国风行十余年。</p>
 <p>不过MPEG-1主要面向低码率应用，但实际上它在高码率下的表现也不差，于是，MPEG很快推出了它的升级版本，也就是MPEG-2。</p>
 <h3 id="MPEG-2-Part-2-H-262：DVD与（前）数字电视标准"><a href="#MPEG-2-Part-2-H-262：DVD与（前）数字电视标准" class="headerlink" title="MPEG-2 Part 2/H.262：DVD与（前）数字电视标准"></a>MPEG-2 Part 2/H.262：DVD与（前）数字电视标准</h3><p>1994年推出的MPEG-2中标准化了一种新的视频编码，它在1995年被ITU-T接纳为H.262，在这里我们简单称它为MPEG-2。相对于1993年推出的MPEG-1，它并没有太大的改动，主要是针对DVD应用和数字时代进行了改良。</p>
@@ -193,15 +193,15 @@
 <p>对于H.264这个名字，我想大家应该都不会耳熟。但就是这个现在我们每天都能够接触到的视频编码格式，曾在十多年前引发了一场软解危机，将当时很多主流CPU挑落马下，也使得ANI三家都在自己的产品中加入了辅助解码的硬件加速单元，不过这与我们的主题没什么关系，暂且按下不表。这里要讲的，还是H.264的厉害之处，究竟它用了什么手段能够在编码质量上面实现飞跃，从而独占市场十余年时间还没呈现衰退迹象。</p>
 <p>总结下来主要有如下的几点：更灵活的宏块划分方法、数量更多的参考帧、更先进的帧内预测和压缩比更高的数据压缩算法。</p>
 <h4 id="更灵活的宏块划分方法"><a href="#更灵活的宏块划分方法" class="headerlink" title="更灵活的宏块划分方法"></a>更灵活的宏块划分方法</h4><p>之前的标准中，宏块的划分方法是固定的，以16x16个像素为一个宏块。不过在新时代，这种粗放的划分方法不够灵活，于是H.264同时允许16x8、8x16、8x8、8x4、4x8和4x4这些精细度更高的划分方式。同时H.264将亚像素精度的运动补偿描述从1/2像素精度细化到了1/4的程度。这样一来，在帧间预测中新的编码拥有更高的精准度，但实际的数据量并不会增加太多，提高了压缩率。</p>
-<p><img src="/images/H.264_block_division.svg.png" alt=""></p>
+<p><img src="/images/H.264_block_division.svg.png"></p>
 <h4 id="数量更多的参考帧"><a href="#数量更多的参考帧" class="headerlink" title="数量更多的参考帧"></a>数量更多的参考帧</h4><p>在以前的标准中，每个B或P帧可参考的帧数是有限且数量过少的，H.264一举将限制放松到了16帧的程度，在大部分应用场景中，每帧的可参考帧数量至少都有4~5个，而在之前的标准中，P帧仅能参考1帧，B帧则是2。这一特性可以提高大多数场景的画面质量，或是降低体积。</p>
-<h4 id="更先进的帧内压缩"><a href="#更先进的帧内压缩" class="headerlink" title="更先进的帧内压缩"></a>更先进的帧内压缩</h4><p style="text-align:center;"><img src="/images/intra-pred-1.jpg" /><br/>每个宏块包含的预测模式信息</p>
+<h4 id="更先进的帧内压缩"><a href="#更先进的帧内压缩" class="headerlink" title="更先进的帧内压缩"></a>更先进的帧内压缩</h4><p style="text-align:center;"><img src="/images/intra-pred-1.jpg" />每个宏块包含的预测模式信息</p>
 
 <p>对于I帧，H.264也引入了新的压缩方式。一般来说，对于图像中的某一像素点，它与附近相邻的像素的颜色是差距不大的，所以我们就可以利用这个特性进一步缩小单帧图像的大小，怎么利用呢？H.264将单个宏块内的像素颜色变化规律规范成了公式，编码时只要写此处应用哪个公式就行了。当然这里我表述的较为简单，完整的帧内预测还是非常复杂的，H.264对4x4的宏块规定了9种预测模式，对16x16的亮度平面宏块规定了4种可用模式。大大减少了单帧图像的数据量，同时保持了很高的图像质量。</p>
-<p style="text-align:center;"><img src="/images/intra-pred.jpg" /><br/>差分图像加上预测信息可以还原出原始图像</p>
+<p style="text-align:center;"><img src="/images/intra-pred.jpg" />差分图像加上预测信息可以还原出原始图像</p>
 
 <h4 id="CABAC"><a href="#CABAC" class="headerlink" title="CABAC"></a>CABAC</h4><p>在编码的最后阶段，对数据进行无损压缩时，H.264除了支持在H.261中就存在的VLC编码外，新增加了两种无损数据压缩编码，一种是VLC的升级版——CAVLC，另一种是复杂程度更高的CABAC（前文参考之适应性二元算术编码，<strong>C</strong>ontext-based <strong>A</strong>daptive <strong>B</strong>inary <strong>A</strong>rithmetic <strong>C</strong>oding）。</p>
-<p><img src="/images/CABAC.jpg" alt=""></p>
+<p><img src="/images/CABAC.jpg"></p>
 <p>CABAC也是一种熵编码，主要原理也是用长编码替换掉出现频率少的数据，而用短编码替换出现频率高的数据，但它引入了更多统计学优化，并且具有动态适应能力。虽然在解码时需要更多计算，但它能够比CAVLC节省更多的数据量，通常能有10%。</p>
 <h4 id="小结：巨大的改变带来的是巨大的成功"><a href="#小结：巨大的改变带来的是巨大的成功" class="headerlink" title="小结：巨大的改变带来的是巨大的成功"></a>小结：巨大的改变带来的是巨大的成功</h4><p>除了以上介绍的几点外，H.264还有非常多的新特性，与MPEG-4 Visual不同的是，这些新特性有效地帮助H.264在节省容量方面取得了重大进展。这里我举一个有强烈对比的例子，DVD Video标准的视频，采用的是MPEG-2编码，码率约在9Mbps左右，但它的分辨率仅为720x480，而且在某些场景下我们可以很明显看到有损压缩产生的破坏；而同样的码率，放在H.264上面，已经可以承载起1080p的视频，并且拥有良好的质量。</p>
 <p>除了在编码效率上有重大提升外，H.264针对网络传输的特性对编码组织方式进行了优化，让它更能够抗丢包，抗干扰。在种种手段之下，它成为了近十年来统治视频领域的编码，并且可以说它已经成为了HTML 5中的事实标准，现在你很难看到一件不支持H.264编码的设备，从手机到摄像机，从流视频到蓝光光盘，它的应用范围广，效能强，即使在新编码已经出现的当下，它仍然有很强的生命力和不可替代性，可以预见的是，H.264将在未来一段时间内继续统治视频编码领域。</p>
@@ -214,7 +214,7 @@
 <p>单个编码单元也可以继续被切割、分类，可以成为预测单元（Prediction Units），后者可以指示该单元的预测形式，是画面内预测还是画面间预测或者甚至是根本没有变化、可以被跳过的单元；也可以成为转换单元（Transform Units），它可以做DCT转换或是量化。</p>
 <p>编码树单元的引入让HEVC既可以用大面积单元来提高编码效率，也可在需要的时候细化，保留更精细的细节。所谓该粗略的地方就粗略，该精细的地方就精细，HEVC在它的帮助下让码流的效率更高。</p>
 <h4 id="更高效的DCT"><a href="#更高效的DCT" class="headerlink" title="更高效的DCT"></a>更高效的DCT</h4><p>既然分块的最大面积大了，那么DCT算法也需要跟上才行，HEVC将DCT算法的最大尺寸扩大到了32x32的地步，对于图像中变化较为平坦的部分，它有着更高的压缩率。</p>
-<h4 id="33种帧内预测方向"><a href="#33种帧内预测方向" class="headerlink" title="33种帧内预测方向"></a>33种帧内预测方向</h4><p><img src="/images/HEVC_angular_intra_prediction_modes.png" alt=""></p>
+<h4 id="33种帧内预测方向"><a href="#33种帧内预测方向" class="headerlink" title="33种帧内预测方向"></a>33种帧内预测方向</h4><p><img src="/images/HEVC_angular_intra_prediction_modes.png"></p>
 <p>还记得上面写到H.264为4x4宏块引入了9种帧内预测方向吗？HEVC直接把这个数字提升到了33种，在静态图像的压制上不仅实现了更高的效率，也实现了更高的精度，这也是它成功杀入静态图像编码市场的一大利器。虽然编码难度变高了，但只要用硬件编码器就没有那么多问题。</p>
 <h4 id="小结：高效编码，但受困于高额专利费用"><a href="#小结：高效编码，但受困于高额专利费用" class="headerlink" title="小结：高效编码，但受困于高额专利费用"></a>小结：高效编码，但受困于高额专利费用</h4><p>相较于AVC，HEVC在高分辨率下的编码效率又有非常大的提升，举个实例，同样一段4K视频，使用H.264编码的大小可能会比使用HEVC大出个一倍。这种巨大的进步幅度也使得Blu-ray直接用它作为标准编码，推出了UHD BD，而它在单帧图像压缩上面的改进也让它拥有胜过JPEG的能力，于是我们看到在移动端，越来越多的设备选择将其作为默认的视频、照片输出编码。</p>
 <p>但是相比起AVC，HEVC的推广速度慢了很多，一个是它的编解码难度比H.264高了太多，但这点通过各路硬件编码器和软件优化逐渐化解掉了，目前常见的设备基本上支持HEVC的硬件编解码；第二个就是HEVC高昂的专利费用问题，它并不是一个免费的编码格式，虽然个人使用它完全没有问题，但对于想要兼容它的厂商来说，这笔高昂的专利费用足以让他们却步，尤其是崇尚自由开放的互联网市场。于是，我们看到众多厂商选择了免费开放的VPx系列编码，以及系列的后继者——AV1。</p>
@@ -259,49 +259,42 @@
 	  <p>这是一个资讯大爆炸的时代，在移动互联网大潮的推动下，我们每天接触到各种资讯的渠道从电视、报纸和电脑上网等变成了从手机上面的一个个 App 中获取，哦不对，是被推送“塞入”大量的资讯，这其中有的是新闻，有的是本地实用资讯，甚至还有各路八卦消息。</p>
 <p>这是时代的潮流，我们躲不过去。然而笔者相信机核的很多读者并不想要诸如娱乐圈八卦这样的杂七杂八的新闻，只想看游戏相关的资讯；或者是嫌弃各路媒体速度还不够快，自己想成为最快的资讯大佬；抑或者是想要绕过媒体这层中介去获取最原始的消息。那么该怎么做呢？本文就以科技、游戏新闻为例，简单介绍一种方法和三种常见的误导手段，帮助大家获得更高质量的新闻。</p>
 <h1 id="很大比例的新闻都是通过官方网站向外发布的"><a href="#很大比例的新闻都是通过官方网站向外发布的" class="headerlink" title="很大比例的新闻都是通过官方网站向外发布的"></a>很大比例的新闻都是通过官方网站向外发布的</h1><p>媒体的消息源头是怎么来的呢？一些是提前发送给媒体的新闻稿，这些一般人是搞不到的，因为绝大多数提前发送给媒体的新闻稿会带上 NDA，但以这种形式出现的新闻只是少数，因为也只有比较大的公司才会有较为全面的媒体覆盖。另外很大比例的新闻其实是来自于第一时间发布在公司官方网站上的新闻稿，这种做法较为通行，各行各业基本上都会采用这种做法，科技和游戏行业就更是如此了。另外，对于科技和游戏行业来说，还有一部分新闻是各种传闻（Rumor），这种不确定的消息一般是媒体（尤其是国外媒体）挖掘出来广而告之的。</p>
-<img src="/images/image-20200129004050632.png" width="80%" />
-
-<p style="text-align:center;">FromSoftware 的新闻稿页面</p>
+<p style="text-align:center;"><img src="/images/image-20200129004050632.png" width="100%" />FromSoftware 的新闻稿页面</p>
 
 <p>所以对于我们普通网民来说，可以通过访问公司官方网站来获取最为及时最为准确的消息。不过很多公司都不会把自己发布的最新消息给挂到首页去，那该怎么找到发布新闻的地方呢？</p>
 <p>这里教一招很简单的：利用搜索引擎，用“公司名 Press Release”、“公司名 News”这样的关键词来搜索，这招可以说是屡试不爽。当然也有像 Steam 这种把新消息全当成博文发的，这时候关键词就要换成“Blog”了：</p>
-<p><img src="/images/image-20200129010256137.png" alt=""></p>
-<p style="text-align:center;">Steam 新闻页中的 Press Releases 已经很久没更新了，近一年半新的官方消息都直接写博文了</p>
+<p style="text-align:center;"><img src="/images/image-20200129010256137.png" width="100%">Steam 新闻页中的 Press Releases 已经很久没更新了<br>近一年半新的官方消息都直接写博文了</p>
 
-<p>而对于一些传言新闻来说，越是靠谱的媒体拿到的内部消息一般会更准确，此时就要选对正确的媒体，对于游戏领域的传闻来说，<a href="https://kotaku.com/" target="_blank" rel="noopener">Kotaku</a>、<a href="https://www.polygon.com/" target="_blank" rel="noopener">Polygon</a> 这两家的爆料新闻准确度还算不错。</p>
+<p>而对于一些传言新闻来说，越是靠谱的媒体拿到的内部消息一般会更准确，此时就要选对正确的媒体，对于游戏领域的传闻来说，<a target="_blank" rel="noopener" href="https://kotaku.com/">Kotaku</a>、<a target="_blank" rel="noopener" href="https://www.polygon.com/">Polygon</a> 这两家的爆料新闻准确度还算不错。</p>
 <p>那么这么多网站，我总不可能每天就盯着页面刷新等新闻吧，那该怎么将这么多网站和媒体整合到一起看呢？这时候就要请出一个默默在背后奉献了很久的协议——RSS，关于它的介绍请看后文。</p>
 <h1 id="精准溯源，拒绝二手错误新闻"><a href="#精准溯源，拒绝二手错误新闻" class="headerlink" title="精准溯源，拒绝二手错误新闻"></a>精准溯源，拒绝二手错误新闻</h1><p>当然绝大多数人是没有时时刻刻盯着最新新闻这个必要的，而且就游戏这块来说，国内的几家游戏媒体都是比较及时的，准确性也是比较高的。但科技媒体的新闻就相对要鱼龙混杂一些，这时候就需要我们具有一定的溯源能力，绕过二手新闻。</p>
 <h2 id="不准确的翻译可能会带来误解"><a href="#不准确的翻译可能会带来误解" class="headerlink" title="不准确的翻译可能会带来误解"></a>不准确的翻译可能会带来误解</h2><p>由于语言隔阂和时差，一般我们通过国内媒体看到的国外科技、游戏公司的新闻都是经过编译，或者直接就是转述的。在编译和转述过程中，很可能就会出现信息失真的现象，最终误导读者，比较常见的就是拿捏不准英文多义词、专业名词或是直接机翻导致出错，比如：</p>
-<p><img src="/images/image-20200128214220141.png" alt=""></p>
-<p style="text-align:center;">Console，一词多意，这里被错误翻译成了“控制台”</p>
+<p style="text-align:center;"><img src="/images/image-20200128214220141.png" width=100% />Console，一词多意，这里被错误翻译成了“控制台”</p>
 
-<h2 id="直接拿流言做新闻却不加提示"><a href="#直接拿流言做新闻却不加提示" class="headerlink" title="直接拿流言做新闻却不加提示"></a>直接拿流言做新闻却不加提示</h2><p>还有就是直接拿传闻、流言来做新闻，但却不在标题或内容中注明这是流言，对读者进行误导，比如下面<a href="https://wccftech.com/rumor-intel-moving-select-cpus-to-globalfoundries/" target="_blank" rel="noopener">这条</a>来自于著名传言站 Wccftech 的 Rumor，在编译之后不仅标题中用于提醒读者的“传言”二字不见了，内文也没有相应的提醒：</p>
-<p><img src="/images/image-20200128214716163.png" alt=""></p>
-<p><img src="/images/image-20200128214521304.png" alt=""></p>
-<p style="text-align:center;">到了某媒体那儿，流言提示就没了，变成肯定了</p>
+<h2 id="直接拿流言做新闻却不加提示"><a href="#直接拿流言做新闻却不加提示" class="headerlink" title="直接拿流言做新闻却不加提示"></a>直接拿流言做新闻却不加提示</h2><p>还有就是直接拿传闻、流言来做新闻，但却不在标题或内容中注明这是流言，对读者进行误导，比如下面<a target="_blank" rel="noopener" href="https://wccftech.com/rumor-intel-moving-select-cpus-to-globalfoundries/">这条</a>来自于著名传言站 Wccftech 的 Rumor，在编译之后不仅标题中用于提醒读者的“传言”二字不见了，内文也没有相应的提醒：</p>
+<p style="text-align:center;"><img src="/images/image-20200128214716163.png" />
+
+<p style="text-align:center;"><img src="/images/image-20200128214521304.png" />到了某媒体那儿，流言提示就没了，变成肯定了</p>
 
 <p>当看到这类新闻的时候，一定要小心，如果你觉得这事情不太对，那么大可稍微小花一点点时间去溯源。国内做的好的媒体都会注明消息出处，点进去稍微读一下，既可以通过原文来理清楚事情原委还能顺便锻炼一下自己的英文阅读能力。如果是没有标明出处的……非一手的新闻就直接拉黑吧。</p>
 <h2 id="标题党"><a href="#标题党" class="headerlink" title="标题党"></a>标题党</h2><p>这是笔者最为痛恨的一种现象，但不可否认的是，一个非常在我们看来可能是离谱的标题往往可以吸引到很多一般通过路人。标题党在微博、微信朋友圈非常有优势，很多人真的就只看一个标题然后就转发了，实际内容如何呢？不知道没看过没兴趣。</p>
-<p><img src="/images/image-20200129003331527.png" alt=""></p>
-<p style="text-align:center;">不点名了，都是友媒</p>
+<p style="text-align:center;"><img src="/images/image-20200129003331527.png" />不点名了，都是友媒</p>
 
 <p>这种现象还挺常见的，不过国内几家比较正经的游戏媒体都没有用，这是好的。现在的标题党已经没有以前那么明显了，但是仍然存在曲解文章内容、断章取义这样的情况，所以如果各位读者遇到了一个较为夸张的标题，请务必粗看一下内容以防止被标题带着走了。</p>
 <h1 id="定制自己想看的新闻：RSS"><a href="#定制自己想看的新闻：RSS" class="headerlink" title="定制自己想看的新闻：RSS"></a>定制自己想看的新闻：RSS</h1><p>上文提到了一个名词，RSS。它定义了一种标准格式，网站可以依照这种标准格式将自己站里面的内容写成一个文件，方便用户抓取网站上面的内容。在 RSS 的帮助下，我们可以用相应的软件从不同的站点上面抓取整理好的内容，直接在一个地方阅读，大大提高了聚合度和效率。其实今天的诸多新闻客户端继承的就是 RSS 的聚合理念，但 RSS 的自由度要更大一些，并且内容也不局限于新闻，所以我们完全可以利用它来打造自己的“新闻客户端”。</p>
 <p>目前各个平台上有数量繁多的 RSS 客户端，用的人比较多的有 Feedly、Inoreader 这些，笔者用 Inoreader 比较多，它的免费版基本够用，而且 App 做的挺不错的，比较符合笔者的需求。</p>
 <p>那么哪里可以找到 RSS 呢？一般可以留意一下这个标志：</p>
-<p><img src="/images/128px-Feed-icon.svg.png" alt=""></p>
+<p><img src="/images/128px-Feed-icon.svg.png"></p>
 <p>比如在 SIE 的首页，就有一个很明显的 RSS 标记，它超链接到 RSS 文件的地址上，复制这个链接，扔到 RSS 阅读器里面订阅就行了。</p>
-<img src="/images/image-20200129001345420.png" width="80%" />
+<img src="/images/image-20200129001345420.png" width="100%" />
 
 <p>很多公司的官网都会提供 RSS，在浏览时可以留意一下。</p>
-<img src="/images/image-20200129001526815.png" width="80%" />
-
-<p style="text-align:center;">一些网站也会把 RSS 通道做到页面底部去，比如机核就是</p>
+<p style="text-align:center;"><img src="/images/image-20200129001526815.png" width="100%" />一些网站也会把 RSS 通道做到页面底部去，比如机核就是</p>
 
 <p>通过一段时间的积累，基本上可以拥有一个稳定的 RSS 源列表，RSS 阅读器会自动按照一定的时间间隔抓取各个订阅站点的 RSS 文件，并把更新的内容展示给你，下图就是笔者积累一段时间之后，RSS 阅读器中订阅的游戏媒体。</p>
-<p><img src="/images/image-20200129001801878.png" alt=""></p>
+<p><img src="/images/image-20200129001801878.png"></p>
 <p>这样子做出来的“新闻客户端”具有明显的个人风格，并且有一点很重要的是，你可以摆脱原本各种新闻 App 的推送，看自己想看的媒体，读自己想读的新闻。</p>
-<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>网络让我们拥有了更多的信息获取渠道，有了更快的信息获取速度，但不可否认的是，我们在信息的真伪确认上面越发的陷入困境。自媒体的兴起让传统媒体的双重信源确认制度在这个时代显得滞后，但也仍然有 AnandTech 这样<a href="https://www.anandtech.com/show/15359/trx80-and-wrx80-dont-exist-neither-does-the-intel-lga1159-socket" target="_blank" rel="noopener">对流言坚守双重信源确认</a>的老牌科技媒体，还有像机核这样能够为了<a href="https://www.gcores.com/articles/117920" target="_blank" rel="noopener">新闻报道失实而诚恳道歉</a>的媒体。我相信即使大环境再差，也一定（在新闻上）坚守自己节操的媒体。</p>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>网络让我们拥有了更多的信息获取渠道，有了更快的信息获取速度，但不可否认的是，我们在信息的真伪确认上面越发的陷入困境。自媒体的兴起让传统媒体的双重信源确认制度在这个时代显得滞后，但也仍然有 AnandTech 这样<a target="_blank" rel="noopener" href="https://www.anandtech.com/show/15359/trx80-and-wrx80-dont-exist-neither-does-the-intel-lga1159-socket">对流言坚守双重信源确认</a>的老牌科技媒体，还有像机核这样能够为了<a target="_blank" rel="noopener" href="https://www.gcores.com/articles/117920">新闻报道失实而诚恳道歉</a>的媒体。我相信即使大环境再差，也一定（在新闻上）坚守自己节操的媒体。</p>
 <p>希望本文能够起一个抛砖引玉的作用，也希望各位读者朋友在今后，尤其是目前这段特殊时期中，擦亮自己的眼睛，不被谣言所害。</p>
 
 
@@ -344,7 +337,7 @@
 <h2 id="以音频CD为标尺的无损、有损以及Hi-Res"><a href="#以音频CD为标尺的无损、有损以及Hi-Res" class="headerlink" title="以音频CD为标尺的无损、有损以及Hi-Res"></a>以音频CD为标尺的无损、有损以及Hi-Res</h2><p>因为数字信号系统记录下的音频信号已经经过了一次采样了，相对于原始的模拟音频信号它已经是“有损”的了，所以我们今天常说的有损无损指的是有损压缩和无损压缩（可以是无压缩）的区别。顾名思义，无损压缩指的是数据在经过压缩之后没有任何的损失，而有损压缩则相对，它在压缩过后相对于原始数据出现了损失。</p>
 <p>而原始数据是什么呢？那就要讲到开启人类数字音频时代的CD。</p>
 <h3 id="CD：光、数字、音乐"><a href="#CD：光、数字、音乐" class="headerlink" title="CD：光、数字、音乐"></a>CD：光、数字、音乐</h3><p>在上个世纪五六十年代，人们常用的还是黑胶唱片，而随着1965年光盘的问世，这种比黑胶唱片更加小巧精致的记录载体很快受到了大公司的青睐，其中飞利浦和Sony就决定用光盘作为记录数字音频数据的载体，并为它量身定做一种数字音频记录格式，最终他们决定采用LPCM——线性PCM作为编码。</p>
-<p><img src="/images/220px-CDDAlogo.svg.png" alt="CDDAlogo.svg"></p>
+<p><img src="/images/220px-CDDAlogo.svg.png"></p>
 <p>然后飞利浦和Sony这两家在CD要使用的LPCM编码具体参数，也就是采样频率和量化位数上面产生了分歧，进行了一段长时间的拉锯战。</p>
 <p>首先因为人耳普遍只能够辨识频率在20Hz~20kHz之间的声音，而根据<strong>奈奎斯特–香农采样定理</strong>，对于一个连续信号，只要采样率高于（注意，不能等于）原信号带宽的两倍即可通过采样完美（理论上的）重建原信号，所以CD标准的采样频率先被确定到要在40kHz以上。根据这个底线，飞利浦那边提出的标准是44056Hz/14-bit，而Sony则是使用44100Hz/16-bit的标准，双方都是站在自己的利益角度，两种标准都是为保留与原本的电视、录像带系统（NTSC/PAL）的兼容性而提出的。</p>
 <p>最终拉锯战以Sony方面的大获全胜而告终，CD音频以44.1kHz/16-bit的双声道LPCM的形式进行记录，这就是Compact Disc Digital Audio（CDDA）标准，它于1980年定稿。</p>
@@ -364,7 +357,7 @@
 <h2 id="常用的有损音频编码"><a href="#常用的有损音频编码" class="headerlink" title="常用的有损音频编码"></a>常用的有损音频编码</h2><p>一张CD翻录下来的大小总会有个500、600MB吧，对于上个世纪90年代还在使用以几MB为单位的软盘的人们来说显然是太大了，另外网络时代早期的带宽还是非常小的，比如当年拨号上网最快也就只有56kbps的带宽，如果想将CD保存到自己电脑里，或者是通过网络跟人分享，在当时几乎是一件不可能的事情。</p>
 <p>而有些人说那为什么不做压缩呢？因为在数据压缩软件看来，你这个CD文件的数据几乎没有冗余，传统的数据压缩方式对音频数据是起不了太大效果的，那咋办呢？只能走有损编码的道路了，这其中，MP3是比较早、也是人们用的最多的有损音频编码。</p>
 <h3 id="MP3：最常用的，不一定是最好的"><a href="#MP3：最常用的，不一定是最好的" class="headerlink" title="MP3：最常用的，不一定是最好的"></a>MP3：最常用的，不一定是最好的</h3><p>MP3的全称为MPEG-1 Audio Layer III，也可以是MPEG-2 Audio Layer III，它是在1993年被标准化的，至今已经有26年的历史了。别看它的岁数大，但它应用的音频压缩思想至今仍然在音频编码领域中发挥着重要的作用。</p>
-<p><img src="/images/MP3_Logo.jpg" alt="MP3_Logo"></p>
+<p><img src="/images/MP3_Logo.jpg"></p>
 <p>首先，MP3使用了MDCT算法，这种算法改正了原始DCT算法上面的一些缺点，它将音频原本的时域信息转换成频域信息，是之后对不同频段信号进行处理的前提。</p>
 <p>其次，MP3运用了声音心理学模型，这里有三点。第一，人的听觉频率范围大概在20Hz~20kHz，所以可以多去掉一些高频声音；第二，人耳对于不同频率声音的敏感程度不同，大概在2000Hz~5000Hz之间是最灵敏的，而在两端下降的比较厉害，尤其是高频；第三，人耳听声音有遮蔽效应，一个较强的声音会遮蔽掉较弱的声音，比如说手机开同样的音量在闹市中和在自己房中听起来完全是两码事，另外不同频率声音的遮蔽宽度不同。根据以上三点，MP3编码器就可以对不同频段的音频信号进行取舍，给人耳比较敏感的频段多保留一些细节，而去掉人耳不敏感甚至会听不见的一些声音。</p>
 <p>最后，MP3运用了哈夫曼算法来对处理过后的音频数据进行压缩，并且编码器会不断地对前面的处理进行调整，以达到用户给出的码率、质量需求。</p>
@@ -377,19 +370,19 @@
 一刀切虽然可以大幅减少音频文件的体积，但在实际听感上总会感觉缺了什么。
 
 <p>第二个缺点，其实也不能算是MP3编码自身的缺点而是它使用的标签有问题。肯定有用户在下载网上的MP3资源时遇到过乱码问题，比如：</p>
-<p><img src="/images/image-20191127233224835.png" alt=""></p>
+<p><img src="/images/image-20191127233224835.png"></p>
 <p>这是因为MP3文件使用的ID3标签最初没有统一的文本编码，各种语言的系统会以自己当前使用的文本编码标准往里面写数据，导致使用其他文本编码标准的系统无法正确读取文本数据，最终出现乱码。比如图上这个MP3的信息就是日文系统用Shift-JIS文本编码写入的，而我们平时使用的简体中文Windows的文本编码标准是GBK，无法正确读取，所以出现了乱码。ID3标签在之后的v2版本中改进了这一点。</p>
 <p>第三个问题是MP3对于多声道的支持较差，常用的MPEG-1 Audio Layer III标准只支持双声道音频，而非主流的MPEG-2 Audio Layer III才支持最高5.1声道，但是它最高只能够支持采样率为24kHz的音频，完全不够用。</p>
 <p>其他的缺点可能算不上什么大问题，不然它也不会被用到今天仍然是主流了。</p>
 <h3 id="AAC：先进、优秀，但是没能取代MP3"><a href="#AAC：先进、优秀，但是没能取代MP3" class="headerlink" title="AAC：先进、优秀，但是没能取代MP3"></a>AAC：先进、优秀，但是没能取代MP3</h3><p>AAC名叫进阶音频编码（Advanced Audio Coding），它本来是开发出来取代MP3的。联合起来开发它的公司有一大堆，个个都是知名大企业或研究机构，比如索尼、微软、杜比实验室、贝尔实验室，等等等等。最终，AAC被MPEG组织接受，写进了他们的MPEG-2和MPEG-4标准中。</p>
-<p> <img src="/images/advanced-audio-coding-aac-logo-1C1956B992-seeklogo.com.png" alt="Advanced Audio Coding AAC Logo Vector"> </p>
+<p> <img src="/images/advanced-audio-coding-aac-logo-1C1956B992-seeklogo.com.png"> </p>
 <p>相对于MP3，AAC使用了完整的MDCT算法，因此在编码效率上它更胜一筹，一般在同等码率下，AAC的质量比MP3更好一些。而其他的改进点还有支持更大范围的采样率（16~48kHz=&gt;8~96kHz），最多支持高达48个声道，在对频率高于16kHz的音频处理上明显要好等。总之，作为设计目的是取代MP3的编码，它的特性非常优秀，然而，AAC没有如愿以偿的成功取代掉MP3，究其原因可能还是推广力度不够大。另外，尽管用户无需为使用AAC格式进行流式传输或分发而付费，但硬件制造商和软件开发者需要交这笔钱，专利费用也使得在AAC标准确定之初，普通用户手上根本没有能用的AAC编码器，而在这时候，MP3和著名的LAME编码器已经满天下都是了。</p>
 <p>实际上我们现在的日常生活中AAC可以说是无处不在的，在线视频的“业界规范”就是以它作为音频编码标准，所以你随便点开一个在线视频，基本上就会听到用AAC编码的音频。另外一个主力推广AAC的公司就是苹果，早在iTunes商店建立之初，他们就使用AAC作为这个数字音乐商店的音频编码标准了，一直到今天都是，包括在前几年推出的Apple Music流媒体服务。</p>
 <p>AAC使用两种容器，一般我们见到的都是以.m4a为扩展名的文件，其实就是mp4。而因为使用mp4容器，文件的元数据使用UTF-8编码保存，所以不会出现如MP3那样的乱码。另一种容器现在比较少见，直接以.aac为扩展名，实际上是一种名为ADTS的容器。</p>
 <p>除了以上的特性之外，AAC的编码还是可以模块化定制的，在MPEG-2 Part 7中就已经给出了三种模块化编码方式，而到了更加现代化的MPEG-4 Part 3规范中，更是给出了多达11种模块化配置规范，其中不乏有低延迟模式和高效模式（HE-AAC），下面就简单提一下AAC-LC和HE-AAC。</p>
-<h4 id="AAC-LC与HE-AAC"><a href="#AAC-LC与HE-AAC" class="headerlink" title="AAC-LC与HE-AAC"></a>AAC-LC与HE-AAC</h4><p><img src="/images/AAC-LC-HE.png.jpg" alt="AAC-LC-HE.png"></p>
+<h4 id="AAC-LC与HE-AAC"><a href="#AAC-LC与HE-AAC" class="headerlink" title="AAC-LC与HE-AAC"></a>AAC-LC与HE-AAC</h4><p><img src="/images/AAC-LC-HE.png.jpg"></p>
 <p>AAC-LC，或者叫低复杂度（Low Complexity）AAC，你可以将它看成是原版的AAC编码，它的编码规范写在MPEG-2 Part 7中，在MPEG-4 Part 3中就直接叫做AAC Profile，而HE-AAC全称High-Efficiency AAC，直译就是高效AAC，它的编码规范写在MPEG-4 Part 3中。主要区别是HE-AAC利用了一些新特性，在编码效率上有明显的提高，特别是在低码率情况下。</p>
-<p><img src="/images/783px-HE-AAC_and_HE-AAC_v2.svg.jpg" alt="AAC-LC-HE.png"></p>
+<p><img src="/images/783px-HE-AAC_and_HE-AAC_v2.svg.jpg"></p>
 <p>简单的关系图如上，可以看到HE-AAC包含了很多新特性，这些新特性帮助它实现了更高的压缩比。</p>
 <h3 id="WMA：规格很先进，但它是微软的东西"><a href="#WMA：规格很先进，但它是微软的东西" class="headerlink" title="WMA：规格很先进，但它是微软的东西"></a>WMA：规格很先进，但它是微软的东西</h3><p>早个十五年，我们在百度上搜索音乐下载的时候，除了MP3，见得最多的一种格式应该就是WMA了，看到开头的WM两个字母就能明白，这是微软的格式。没错，这是“鼎盛”时期的微软开发并强力推广的专有编码，多见于Windows平台。微软最初开发出它的目的很简单，就是为了和MP3和RealAudio竞争，结果大家都知道了，MP3活到了今天，而WMA和RealAudio都已经消逝在历史长河中了。</p>
 <p>WMA全称Windows Media Audio，它同样使用了音频心理学对原始音频进行处理，去除人耳不敏感的声音来减小数据体积，思路与MP3大同小异，不过具体实现上面有差异。WMA是与Windows Media紧紧捆绑的一种音频编码格式，不过微软将编解码开放给了第三方，交钱就可以用，所以在十多年前的MP3播放器上我们也可以播放WMA格式的音频。WMA与Windows Media一起升级，它还有个增强版，就是WMA Pro。我们比较熟悉的可能是Windows XP SP2自带的那个Windows Media Player 9.0，实际上在这个版本中，微软还为WMA引入了无损编码，称为WMA Lossless。</p>
@@ -398,11 +391,11 @@
 
 <h3 id="Dolby-Digital（AC-3）与DTS：电影工业的常客"><a href="#Dolby-Digital（AC-3）与DTS：电影工业的常客" class="headerlink" title="Dolby Digital（AC-3）与DTS：电影工业的常客"></a>Dolby Digital（AC-3）与DTS：电影工业的常客</h3><p>VCD上面用的MP1音频编码效果太差了，还不支持多声道，但这也是因为CD的容量不够大，而从DVD开始，人们终于有机会在自己家里听到影院级别的音效了，因为它的容量足以直接收录电影使用的Dolby Digital或者DTS音频。那么这两种音频是什么呢？先来说Dolby Digital，我们可能更熟知它的另一个名字：AC-3。</p>
 <h4 id="Dolby-Digital（AC-3）"><a href="#Dolby-Digital（AC-3）" class="headerlink" title="Dolby Digital（AC-3）"></a>Dolby Digital（AC-3）</h4><p>Dolby实验室是美国一家专注于音频效果、音频编解码领域的公司，原本在模拟时代，它发明的一系列音频编码已经被好莱坞广泛使用，人们在电影院里面最常听到的就是用Dolby技术编码而成的声音。而到了数字时代，他们也紧跟潮流，于1991年推出了Dolby Digital这种数字音频编码。</p>
-<p><img src="/images/Dolby-Digital.png" alt="Dolby-Digital"></p>
+<p><img src="/images/Dolby-Digital.png"></p>
 <p>Dolby Digital的开创性在于它是首个使用MDCT算法进行压缩的编码，同时他们还使用了音频心理学的研究成果对压缩算法进行优化，使得最终压缩后的产物仍然拥有影院级别的效果，但是DD只支持固定码率编码，这使得它的码率一般都会比较高，所以压缩过后的音频体积也较大。常见的DD编码一般有6个声道，称为DD 5.1，而在很多DVD上面我们经常可以看到它的Logo。DD音频的另外一个特点是它的元数据中带有对解码过程进行控制的相关信息，使得它在支持的播放器上可以还原出制片方想要的效果。</p>
 <p>随后DD又发展出了很多新分支，其中比较有名的是Dolby Digital Live，它随着另一家老牌音频硬件公司——创新——进入了千家万户。而DD也有自己的后继者——Dolby Digital Plus，我们可能更熟悉它的另一个名字——E-AC-3，它在DD的基础上提升了比特率和声道数量，我们经常可以在下载版的美剧中见到这种编码。</p>
 <h4 id="DTS"><a href="#DTS" class="headerlink" title="DTS"></a>DTS</h4><p>在电影音频领域中，另一家影响力很广，技术力很强的公司就是DTS了，DVD时代我们经常见到的就是他们以公司名命名的音频编码格式DTS，这种编码推出于1993年，直接竞争对手就是Dolby实验室的产品。</p>
-<p><img src="/images/DTS_small_logo.png" alt="DTS_small_logo"></p>
+<p><img src="/images/DTS_small_logo.png"></p>
 <p>与Dolby Digital选择使用MDCT算法不同的是，DTS选择了ADPCM作为算法基础，这种算法是PCM的变种，与PCM使用固定量化位数记录电平值不同的是，ADPCM有自适应的特征，在音频电平差值较小时用较少的量化位数去记录，而差值大的时候用更多的量化位数进行记录，这样对于存储空间的利用率就更高了，相对于用MDCT算法算出不同的频率段再砍掉人耳不敏感部分的做法，基于ADPCM算法的编码虽然压缩率要低一些，但是对于声音细节的保留肯定是它要做的更好。当然，这就使得它的体积控制比DD要差一些，所以在一般的DVD上，我们更常见到的是DD而不是DTS。</p>
 <p style="text-align:center;"><img src="/images/dd.jpg" /><br/>好莱坞电影真的是以Dobly编码居多的</p>
 Dolby实验室与DTS的竞争从这时候的DD与DTS开始，一直延续到今天的Dolby TrueHD VS. DTS-HD Master Audio，后面两个都已经是无损编码了，我们放到下面去讲。
@@ -412,24 +405,24 @@ Dolby实验室与DTS的竞争从这时候的DD与DTS开始，一直延续到今�
 <p>之后它的主要开发者Xiph.Org基金会又推出了一种新的编码——Opus，这种编码有着比Vorbis更好的低码率表现，在同码率下终于实现了对HE-AAC的超越。而它还有一个低时延的特性，可以做到目前最低的编码延迟，这也使得它在数字语音通信领域中大放异彩，它现在也是IETF标准中的一员。</p>
 <h2 id="常见的无损音频编码"><a href="#常见的无损音频编码" class="headerlink" title="常见的无损音频编码"></a>常见的无损音频编码</h2><p>在自己的硬盘空间逐渐大到放CD原盘都没有问题了之后，新的问题出现了，网速跟不上。回想一下05年左右，国内家庭普遍还是在用ADSL上网，速率可能也就只有1~2Mbps，用这个速度下点MP3还行，但是下原盘就太慢了，但很多音乐爱好者就是想收藏“没有瑕疵”的无损音频，怎么办呢？这时无损音频压缩编码走上了舞台，首先登场的是Monkey’s Audio，又叫APE。</p>
 <h3 id="APE：无损音频压缩的先行者"><a href="#APE：无损音频压缩的先行者" class="headerlink" title="APE：无损音频压缩的先行者"></a>APE：无损音频压缩的先行者</h3><p>APE是Monkey’s Audio这个编码使用的扩展名，但是叫得多了大家都只知道APE而不知道Monkey’s Audio了。它是可考的、比较早出现的一种无损音频编码，后面要提到的WavPack（.wv）比它出现的还要早，但是APE却是头一个大范围流行起来的无损音频编码，最初版本公开于2000年。</p>
-<p><img src="/images/image-20191128154458041.png" alt="image-20191128154458041"></p>
+<p><img src="/images/image-20191128154458041.png"></p>
 <p>问题来了，前面不是说对传统压缩方式对于音频数据并不能起到很好的效果吗？那APE是怎么在无损的情况下实现如此高的压缩率的？答案也很简单，传统方式不行，那我就用新的针对性算法呗。</p>
 <p>APE主要使用了三大算法来实现对原始音频数据的无损压缩，第一个是Joint Coding，简单说就是将左右两个声道的共同信息进行复用，从而减小音频体积；第二个是线性预测编码（Linear Predictive Coding），因为音频信号前后关联性非常大，可以根据前面一段音频波形预测后面的音频波形，如果预测得到的值与真实值有差距，则对差值进行编码，这种算法是音频无损编码的核心杀手级算法，可以做到在没有损失的情况下大幅提升压缩比；第三个就是预测编码所需要的量化位数。</p>
 <p>这三种主要算法使得APE可以在没有损失的情况下达到约50%的压缩比，这是之前的无损音频编码做不到的事情。</p>
 <p>但是APE也有较大的缺陷，最高只支持双声道、24-bit的量化位数让它在新世代落后于FLAC，因为存在浮点计算，所以对硬件性能的需求要高于FLAC，在编解码上面也更慢，而它也没有针对数据完整性做</p>
 <p>另外由于APE虽然标了自由软件，但是它使用的许可证并不能让人们直接使用Monkey’s Audio现成的源代码，必须自行动手去实现对它的解码支持，这也限制了它的应用范围。</p>
 <h3 id="FLAC：免费开放，新的业界事实标准"><a href="#FLAC：免费开放，新的业界事实标准" class="headerlink" title="FLAC：免费开放，新的业界事实标准"></a>FLAC：免费开放，新的业界事实标准</h3><p>FLAC基本上是与APE同时间提出来的，稍微晚了那么一丢丢，它直接将编码的最大特点写在自己的名字里了——Free Lossless Audio Codec，自由、无损。</p>
-<p> <img src="/images/logo130.gif" alt="FLAC Logo"> </p>
+<p> <img src="/images/logo130.gif"> </p>
 <p>相对于APE，虽然同样使用了线性预测算法，但它的压缩比稍微差了一点，不过由于FLAC使用全整数的数据计算方式，所以低端电子设备也可轻松对其进行解码，而它在数据结构上考虑到了数据完整性和流传输，它采用帧结构设计确保了即使文件的部分片段遭遇不测，其他部分也能够正常播放，而支持流传输的特性使得它在可以在流媒体时代占据一席之地。并且它对于多声道的支持比APE强很多，最高可以支持8声道。</p>
 <p>FLAC身上的种种优点使得它成为了目前最为流行的无损音频压缩编码，Android早就添加了对于FLAC的支持，而iOS也在第11个大版本中放下自己的矜持加入了对它的支持。FLAC已经俨然成为了新的业界通用编码，各大Hi-Res音乐售卖网站也在使用FLAC作为载体传播Hi-Res及普通无损音乐。</p>
-<h3 id="Apple-Lossless（ALAC）"><a href="#Apple-Lossless（ALAC）" class="headerlink" title="Apple Lossless（ALAC）"></a>Apple Lossless（ALAC）</h3><p> <img src="/images/applelossless.png" alt="img"> </p>
+<h3 id="Apple-Lossless（ALAC）"><a href="#Apple-Lossless（ALAC）" class="headerlink" title="Apple Lossless（ALAC）"></a>Apple Lossless（ALAC）</h3><p> <img src="/images/applelossless.png"> </p>
 <p>macOS作为很多音频编辑软件使用的系统环境，对于音频编码自然也是有着很高的要求，其实苹果自己也很早就跟进了无损音频的发展，在2004年的时候他们就推出了自己的无损音频压缩编码——Apple Lossless，但是当时这种格式只有苹果自家的系统和软件才能支持，并且会收取授权费用，这也导致了ALAC错过了无损音频开始发展的萌芽期，直到2011年，FLAC已经成为市场主流的情况下，苹果才将ALAC开放出来，并且取消了它的专利费用。</p>
 <p>ALAC在编码方式上与其他几种无损音频压缩编码并没有太大的区别，同样是基于线性预测的算法，不过它的编码器连个压缩率选项都不提供，但编码速度确实挺快的。ALAC与AAC一样使用MP4作为数据容器，所以也继承了MP4良好的标签支持。</p>
 <p>但是它的使用范围始终不广，本来就基本限定于苹果设备上，而在iOS和macOS纷纷支持FLAC之后，它的存在意义就更小了。</p>
 <h3 id="Dolby-TrueHD与DTS-HD-Master-Audio：蓝光时代电影常用音频编码，新的战场"><a href="#Dolby-TrueHD与DTS-HD-Master-Audio：蓝光时代电影常用音频编码，新的战场" class="headerlink" title="Dolby TrueHD与DTS-HD Master Audio：蓝光时代电影常用音频编码，新的战场"></a>Dolby TrueHD与DTS-HD Master Audio：蓝光时代电影常用音频编码，新的战场</h3><p>从DVD到蓝光是一次大的飞跃，光盘这种存储介质在新的蓝色激光的帮助下，大幅度提升了存储密度，也使得它可以记录体积更为庞大的音频，有了大的空间，那肯定就要上无损啊，其实蓝光的容量已经足够放7.1声道、48kHz/24-bit的LPCM了，但是它的体积还是太大，所以Dolby和DTS不约而同的在高清时代推出了新版的音频压缩编码技术，Dolby这边是以Dolby TrueHD系列为主，而DTS是以DTS-HD Master Audio为主，两边都是无损压缩技术，这边就讲的粗略一些了。</p>
-<h3 id="Dolby-TrueHD"><a href="#Dolby-TrueHD" class="headerlink" title="Dolby TrueHD"></a>Dolby TrueHD</h3><p><img src="/images/Dolby_TrueHD.png" alt="Dolby_TrueHD"></p>
+<h3 id="Dolby-TrueHD"><a href="#Dolby-TrueHD" class="headerlink" title="Dolby TrueHD"></a>Dolby TrueHD</h3><p><img src="/images/Dolby_TrueHD.png"></p>
 <p>Dolby TrueHD使用与DVD-Audio相同的MLP编码对原始PCM音频数据进行处理，最高支持192kHz/24-bit的规格，另外还支持16个独立声道。与前任Dolby Digital一样，它也带有用于控制播放过程的元数据，提供更加还原的音频效果，Dolby后来推出的Atmos氛围声效果就是通过这些独立于音轨之外的元数据实现的。</p>
-<h3 id="DTS-HD-Master-Audio"><a href="#DTS-HD-Master-Audio" class="headerlink" title="DTS-HD Master Audio"></a>DTS-HD Master Audio</h3><p><img src="/images/DTS-HD-MA.png" alt="DTS-HD-MA"></p>
+<h3 id="DTS-HD-Master-Audio"><a href="#DTS-HD-Master-Audio" class="headerlink" title="DTS-HD Master Audio"></a>DTS-HD Master Audio</h3><p><img src="/images/DTS-HD-MA.png"></p>
 <p>这两种多见于蓝光原盘的音频编码都附带了对原来有损编码的兼容，DTS-HD Master Audio内建了一条有损音轨，称为DTS Core Stream，它的无损部分其实是对有损部分的一个补充，在支持的设备上自动就会播放无损的DTS-HD Master Audio，而在不支持的设备上也可以切换到DTS Core Stream，不会影响到正常的播放，而另一边的Dolby TrueHD则是通过附带一条Dolby Digital音轨的方式来解决兼容性。</p>
 <p>DTS-HD Master Audio在日本用的比较多一些，尤其是各种动画小圆盘。</p>
 <h3 id="TTK，TAK，WavPack等"><a href="#TTK，TAK，WavPack等" class="headerlink" title="TTK，TAK，WavPack等"></a>TTK，TAK，WavPack等</h3><p>除了上面三个稍微多见一点的编码以外，无损音频编码界还有很多其他的编码，由于APE推出时间早、FLAC用的人多等原因，这些无损压缩编码最终都没有推广开来，成为了比较小众的编码，虽然它们可能在某些方面有着优势，但很可惜，时势造英雄，取代英雄没有这么容易。</p>
@@ -473,12 +466,12 @@ DSD解决了传统PCM编码上的高频量化噪声问题，高采样率同时�
   </time>
   <section class="content">
 	  <p>其实很简单，只需要将obs的网络连接引向代理，但是Shadowsocks中直接挂全局模式不太好，因为会将本来能够直连的网站也会通过代理连接，而且应该是不能代理到obs的（我从来不用全局）。</p>
-<p>那么要怎么做到这点呢？我常用的是<a href="https://www.proxifier.com/" target="_blank" rel="noopener">Proxifier</a>，使用教程网上很多，这边不再赘述，只要在规则里面把obs的执行文件加入需代理列表即可，各种使用RTMP协议的直播网站应该都是直接可以这样搞定。</p>
-<img src="/images/proxifier-rule.png" width="50%" />
+<p>那么要怎么做到这点呢？我常用的是<a target="_blank" rel="noopener" href="https://www.proxifier.com/">Proxifier</a>，使用教程网上很多，这边不再赘述，只要在规则里面把obs的执行文件加入需代理列表即可，各种使用RTMP协议的直播网站应该都是直接可以这样搞定。</p>
+<img src="/images/proxifier-rule.png" width="100%" />
 
 <p>当然，一个高带宽的代理是必须条件。</p>
 <p>题外话，无论是Youtube还是Twitch，其直播后台都比Bilibili强太多了。</p>
-<img src="/images/youtube-back.png"  width="70%" />
+<img src="/images/youtube-back.png"  width="100%" />
 
     
     
@@ -644,15 +637,15 @@ DSD解决了传统PCM编码上的高频量化噪声问题，高采样率同时�
   <section class="content">
 	  <p>今天听 Gadio News 的时候，最末尾一段提到了希望有人能来讲讲抗锯齿技术。才疏学浅，但是前几年看 MC 的文章还是知道一点相关内容，所以就来看着维基写写看，如有不正之处劳请指出。</p>
 <h2 id="锯齿与抗锯齿"><a href="#锯齿与抗锯齿" class="headerlink" title="锯齿与抗锯齿"></a>锯齿与抗锯齿</h2><p>首先，什么是锯齿，以及为什么会出现锯齿。</p>
-<p>我们的屏幕，是以一个个正方形的像素点组成的，而正方形的特性导致了在倾斜的线上，边缘必定会出现一个个突起的阶梯状“毛刺”，比如图上这种<img src="/images/04fb3bbbec0c10e70c660aac1efd7cf1_r.jpg" alt="preview"></p>
+<p>我们的屏幕，是以一个个正方形的像素点组成的，而正方形的特性导致了在倾斜的线上，边缘必定会出现一个个突起的阶梯状“毛刺”，比如图上这种<img src="/images/04fb3bbbec0c10e70c660aac1efd7cf1_r.jpg"></p>
 <p>这种阶梯状的“毛刺”就是典型的锯齿。而有了锯齿也就有了抗锯齿(Anti-Aliasing).</p>
-<p>抗锯齿的一般过程就是将这个毛刺的边缘柔化，使图像边缘看起来更平滑。如图：<img src="/images/4ec755cfd484c8333f094f57b97f3408_hd.jpg" alt="img"></p>
+<p>抗锯齿的一般过程就是将这个毛刺的边缘柔化，使图像边缘看起来更平滑。如图：<img src="/images/4ec755cfd484c8333f094f57b97f3408_hd.jpg"></p>
 <h2 id="各种算法简单介绍"><a href="#各种算法简单介绍" class="headerlink" title="各种算法简单介绍"></a>各种算法简单介绍</h2><p>抗锯齿算法种类非常多，下面的介绍顺序基本上是各种抗锯齿算法出现的时间顺序。</p>
 <h3 id="SSAA"><a href="#SSAA" class="headerlink" title="SSAA"></a>SSAA</h3><p>超级采样抗锯齿(Super-Sampling Anti-Aliasing, 也可叫做 Supersampling 超采样)是最早也最简单粗暴的抗锯齿手法，它的原理非常简单，就是在渲染时将要输出的分辨率提升 x 倍，比如要输出 1920x1080 的分辨率到屏幕上，开启 SSAA 2x, 那么内部渲染时的分辨率就是 3840x2160, 然后 Downsampling 到 1920x1080 上，自然在许多纹理边缘上就显得平滑许多。但是这种方式太太太吃资源了，所以又开发出了新的算法。</p>
-<p>在 Nvidia 发布二代 Maxwell 架构的时候，同时发布的 <a href="http://www.geforce.cn/hardware/technology/dsr/technology" target="_blank" rel="noopener">DSR</a> 技术中就有 SSAA 的影子，技术思路同样是以更高分辨率渲染的原始画面输出到显示器分辨率上来得到更加精细平滑的画面。</p>
+<p>在 Nvidia 发布二代 Maxwell 架构的时候，同时发布的 <a target="_blank" rel="noopener" href="http://www.geforce.cn/hardware/technology/dsr/technology"></a> 技术中就有 SSAA 的影子，技术思路同样是以更高分辨率渲染的原始画面输出到显示器分辨率上来得到更加精细平滑的画面。</p>
 <h3 id="MSAA"><a href="#MSAA" class="headerlink" title="MSAA"></a>MSAA</h3><p>SSAA 太吃资源了，我们的硬件暂时还跟不上，怎么办？于是就有了多重采样抗锯齿(Multi-Sampling Anti-Aliasing), 它跟 SSAA 的区别就是，MSAA 只对于多边形的边缘进行抗锯齿处理。比如一个红色的圆，只对圆周作抗锯齿多重采样计算，但是圆周以内的部分则不会处理。这种方式下的画面锯齿得到了一定的抑制，而抗锯齿需要的资源也大幅下降到可接受的范围中。所以 MSAA 也逐渐成为目前被使用的最多的抗锯齿技术。</p>
 <p>但是 MSAA 也有其局限之处，比如对于半透明物件、边缘不明确或者非常复杂的物件比如密集草丛、铁丝网这类的抗锯齿处理就比较力不从心。</p>
-<h3 id="CSAA-amp-CFAA"><a href="#CSAA-amp-CFAA" class="headerlink" title="CSAA &amp; CFAA"></a>CSAA &amp; CFAA</h3><p>历史进入 Direct 10 时代，NV 方先声夺人发布了 G80 系列，同时带来了覆盖采样抗锯齿(<a href="http://www.nvidia.com/object/coverage-sampled-aa.html" target="_blank" rel="noopener">Coverage-Sampling Anti-Aliasing</a>)技术，主要改进了取样类型从而使得抗锯齿效率提升，资源占用量也得到减少。举例来说，如果使用 16x MSAA，需要在周围取得 16 个采样点的色彩值和 Z 轴值，然后保存这些数值进行计算。而 16x CSAA，则全部在被采样的像素点中心取得色彩之和Z轴值，然后对比并去掉同样的数据。一般来说，16x CSAA 后只需要保存 4 份色彩值和 Z 轴值即可。换句话来说，4x MSAA 耗费的资源和 16x CSAA 是相同的，但是，16x CSAA的画面效果相比 4x MSAA 更好。</p>
+<h3 id="CSAA-amp-CFAA"><a href="#CSAA-amp-CFAA" class="headerlink" title="CSAA &amp; CFAA"></a>CSAA &amp; CFAA</h3><p>历史进入 Direct 10 时代，NV 方先声夺人发布了 G80 系列，同时带来了覆盖采样抗锯齿(<a target="_blank" rel="noopener" href="http://www.nvidia.com/object/coverage-sampled-aa.html"></a>)技术，主要改进了取样类型从而使得抗锯齿效率提升，资源占用量也得到减少。举例来说，如果使用 16x MSAA，需要在周围取得 16 个采样点的色彩值和 Z 轴值，然后保存这些数值进行计算。而 16x CSAA，则全部在被采样的像素点中心取得色彩之和Z轴值，然后对比并去掉同样的数据。一般来说，16x CSAA 后只需要保存 4 份色彩值和 Z 轴值即可。换句话来说，4x MSAA 耗费的资源和 16x CSAA 是相同的，但是，16x CSAA的画面效果相比 4x MSAA 更好。</p>
 <p>同期 ATI 在发布 R600 系列时也带来了可编程过滤抗锯齿(Custom Filter Anti-Aliasing)技术。简单的来说 CFAA 就是扩大取样面积的 MSAA，比方说之前的 MSAA 是严格选取物体边缘像素进行缩放的，而 CFAA 则可以通过驱动判断对影响锯齿效果较大的像素进行缩放，以较少的性能牺牲换取平滑效果。</p>
 <p>但是由于种种原因，CSAA 被接受程度更高一些，不少游戏就直接加入了 CSAA 选项。而 CFAA 由于需要在显卡驱动面板中进行调试而渐渐被用户所遗忘。</p>
 <h3 id="MLAA-amp-FXAA"><a href="#MLAA-amp-FXAA" class="headerlink" title="MLAA &amp; FXAA"></a>MLAA &amp; FXAA</h3><p>在 CFAA 被遗忘之后，AMD-ATI 带来了形态抗锯齿(Morphological Anti-Aliasing).</p>
@@ -660,7 +653,7 @@ DSD解决了传统PCM编码上的高频量化噪声问题，高采样率同时�
 <p>MLAA 的实际效果还是非常不错的，但是资源耗用还是有点厉害的。它的最大优势就是不需要游戏来支持它，因为是后处理技术所以在显卡驱动面板中打开就能用而且兼容性非常好。但是由于其仅仅使用颜色数据来判断抗锯齿边缘，因此 MLAA 的应用可能导致无法辨识到底哪些边缘需要进行抗锯齿计算。特别是一些不需要抗锯齿的地方，如文字，表格等，可能都由于不当抗锯齿而显得圆滑甚至怪异。</p>
 <p>这边 A 家出了新抗锯齿技术，老冤家 NV 当然也不甘落后，在 Fermi 上推出了快速近似抗锯齿(Fast Approximate Anti-Aliasing)。</p>
 <p>FXAA 和 MLAA 一样，也是一种后处理抗锯齿，两种 AA 在原理上相似，但是由于 FXAA 可以在 AN 两家的卡上都可以用而 MLAA 则由于部分计算处理依赖于硬件所以只能在 A 卡上用，最后导致 FXAA 被广泛的采用了。而且同时期 FXAA 的性能损失比 MLAA 更小，而效果上基本能接近 4x MSAA 的画面，虽然同样还是会出现“字体破坏”的情况。</p>
-<h3 id="TXAA"><a href="#TXAA" class="headerlink" title="TXAA"></a>TXAA</h3><p>在抗锯齿这条路上，众多程序员以及各种“家”的探索是不会停下来的。在 Kepler 架构发布的同时，NV 也带来了新的 <a href="http://www.geforce.cn/hardware/technology/txaa/technology" target="_blank" rel="noopener">TXAA</a>(Temporal Anti-Aliasing 可称为“时间性抗锯齿”)技术，据 NV 自家的介绍，这项技术集时间性过滤器、硬件抗锯齿以及定制的 CG 电影式抗锯齿解算法于一身。</p>
+<h3 id="TXAA"><a href="#TXAA" class="headerlink" title="TXAA"></a>TXAA</h3><p>在抗锯齿这条路上，众多程序员以及各种“家”的探索是不会停下来的。在 Kepler 架构发布的同时，NV 也带来了新的 <a target="_blank" rel="noopener" href="http://www.geforce.cn/hardware/technology/txaa/technology"></a>(Temporal Anti-Aliasing 可称为“时间性抗锯齿”)技术，据 NV 自家的介绍，这项技术集时间性过滤器、硬件抗锯齿以及定制的 CG 电影式抗锯齿解算法于一身。</p>
 <p>原有的抗锯齿技术在解决静态画面的锯齿上可以说已经达到了瓶颈了，但是在动态画面上，有锯齿的部位很容易出现闪烁。如同其名字中的“时间性”，TXAA 旨在解决“时间性抗锯齿”，也就是动态画面中的锯齿闪烁等问题。而其同时提供着不输于 8x MSAA 的静态画面抗锯齿效果。</p>
 <p>TXAA 可以说是目前被采用的较多的抗锯齿算法中最厉害的一种了，但是它一是需要硬件电路配合，二是吃资源，以性能换画面，所以也基本上是中高端 N 卡用户用的。</p>
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>目前主流的一些抗锯齿技术大概就是这么多了，本文很多内容都是参考中文互联网上的一些文章写成的。第一次在机核发文，存在的许多不足之处也请多多包涵。</p>
@@ -690,8 +683,8 @@ DSD解决了传统PCM编码上的高频量化噪声问题，高采样率同时�
     Jan 21, 2018
   </time>
   <section class="content">
-	  <p>在<a href="https://blog.xinoassassin.com/2018/01/holiday-0/" target="_blank" rel="noopener">上一篇文章</a>中，我提到回家要干的一件事情就是更换路由。把新买的二手<del> Nepgear</del> Netgear R6250 替换掉用了两年多的洋垃圾 RT-N16. 更换到现在已经过去一天半左右的时间了，遇到了几个问题。</p>
-<p><img src="/images/HomeNetwork.png" alt="HomeNetwork"></p>
+	  <p>在<a target="_blank" rel="noopener" href="https://blog.xinoassassin.com/2018/01/holiday-0/">上一篇文章</a>中，我提到回家要干的一件事情就是更换路由。把新买的二手<del> Nepgear</del> Netgear R6250 替换掉用了两年多的洋垃圾 RT-N16. 更换到现在已经过去一天半左右的时间了，遇到了几个问题。</p>
+<p><img src="/images/HomeNetwork.png"></p>
 <p>拿快递开箱换上配置好一共花了不到半小时就搞定了，然后问题开始浮现：我的 ThinkPad S1 Yoga 连接不到 R6250 提供的 2.4G 无线网络。开始认为是笔记本上那块单频 Intel 7260 的锅，然后把 R6250 的 2.4G 网的频宽从 40MHz 降到了 20MHz, 结果仍然有时断时续的情况出现，认为还是 7260 这张网卡的问题，准备更换网卡。但北美良心想在 BIOS 中做了限制，更换起来很麻烦，所以一筹莫展。结果今晚日常拿起手柄 V 的时候突发奇想连一下无线，发现根本找不到 2.4G 网的 SSID, 就算不容易刷出来了也是连接不上的状态，遂开始感觉是 R6250 的问题。Google 之，发现使用第三方固件的 R6250 大多都存在这种问题，比如 2.4G 网不稳定，2.4G 根本连不上什么的。但是我又不想用回官方那个烂的很的固件，于是掏出从学校快递回家，原本准备用来替换掉配电箱中的主路由的那只被改装过的 TP-Link WR720N, 本就刷好了 LEDE, 稍微改了几个配置就当 2.4G 的 AP 来用了，连接非常稳定。</p>
 <p>把 DMZ 主机指定到自己的机器之后，直接通过 DDNS 域名进行内网访问，速度非常快，延迟非常低，爽。</p>
 <p>然后用着用着，无心看到 IPv6 的地址头不对，而且怎么本地 DNS 域也变成了 LEDE 了？一看果然是小的 AP 在作怪，上面的 DHCP 服务器没关，也就是一个网段中有两个设备在 DHCP 广播。遂关闭之，顺带着把 Lan 口设置中的网关确定为 2.1, 并把 Dnsmasq 的服务一起关了，问题消失。</p>

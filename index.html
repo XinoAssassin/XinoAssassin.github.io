@@ -119,7 +119,7 @@
   <section class="content">
 	  <p>昨晚Intel举办了今年的架构日活动，和往年一样，Intel在架构日活动上会公布很多自家未来芯片设计方面的细节，比如说即将发布的CPU/GPU架构，新的内核设计和一些新的技术，今年的Intel架构日活动上他们带来了下一代处理器，也就是Alder Lake的详细内容。</p>
 <h2 id="Alder-Lake简介"><a href="#Alder-Lake简介" class="headerlink" title="Alder Lake简介"></a>Alder Lake简介</h2><p>Alder Lake是Intel耗时多年打造的一款全新架构，它是未来将要发布的第12代酷睿处理器的核心。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-068.jpg"></p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-068.jpg" width="100%"/> /&gt;</p>
 <p>和以往的Intel处理器架构一样，Alder Lake包含了CPU、GPU、内存控制器、IO、显示输出和AI加速器等部件。它也是Intel首个采用大小核设计的高性能处理器，改动主要有以下几点：</p>
 <ul>
 <li>CPU部分采用大小核混合计算架构，最高由8大核8小核组成16核24线程</li>
@@ -130,46 +130,65 @@
 <li>PCIe升级到5.0版本</li>
 </ul>
 <p>让我们一点点来看Alder Lake的进化。</p>
-<h2 id="x86大小核异构"><a href="#x86大小核异构" class="headerlink" title="x86大小核异构"></a>x86大小核异构</h2><p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-053.jpg"></p>
+<h2 id="x86大小核异构"><a href="#x86大小核异构" class="headerlink" title="x86大小核异构"></a>x86大小核异构</h2><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-053.jpg" width="100%"/>
+
 <p>Alder Lake上最大的变化点便是它采用大小核异构的架构，此前Intel曾在Lakefield上试水大小核异构，并推出了两款正式产品，不过它们都是低功耗处理器，性能不强。因此Alder Lake可以说是首款大小核异构设计的高性能x86处理器，在继承Lakefield的大小核异构设计之上，进行了深度改进。首先来看被Intel称为效率核心（E-Core）的Gracemont。</p>
 <h3 id="E-Core：整体性能接近Skylake、但能耗更低的Gracemont"><a href="#E-Core：整体性能接近Skylake、但能耗更低的Gracemont" class="headerlink" title="E-Core：整体性能接近Skylake、但能耗更低的Gracemont"></a>E-Core：整体性能接近Skylake、但能耗更低的Gracemont</h3><p>在大小核异构设计中，一般小核的设计目标是高能效比，而大核的目标则是提供极限高性能，Gracemont便是一个非常高效的核心。Intel的小核心设计是独立于大核心的另外一条线，现在一般称为Atom核心。一脉相传下来，Gracemont的上代是Tremont。从Tremont到Gracemont，Intel着重加强了小核心的后端执行能力，尤其是整数性能。</p>
-<p><img src="/images/adl-deep-dive/tremont-vs-gracemont.jpg"></p>
+<img src="/images/adl-deep-dive/tremont-vs-gracemont.jpg" width="100%"/>
+
 <p>上图左边是Tremont，右边是Gracemont，可以非常明显的看到，Gracemont的执行端口多了不少，从原本的10个猛增至17个，而跟着的就是执行单元数量变多了。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-029.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-029.jpg" width="100%"/>
+
 <p>整数部分ALU从3个增加到4个，AGU从2个倍增到4个，对应还增加了一组MUL和DIV单元，整数执行能力得到大幅增强；浮点运算部分也有一定提升，原本只有一个的FADD和FMUL单元现在均有两个，能够拼合处理256-bit宽度的数据，也就是说能够满足执行AVX2指令集的需求；浮点ALU和STD均增加一个，计算能力会有较大提升。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-026.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-026.jpg" width="100%"/>
+
 <p>为了满足大幅膨胀的后端，前端也相应做了较大增强，解码部分仍然是两组三宽度设计，可以同时启用达成六解码。L1指令缓存（L1I）倍增至64KB，同时分支预测器得到加强，拥有更大的缓存。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-028.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-028.jpg" width="100%"/>
+
 <p>中核部分，ROB增大到256，这一数字比Skylake的224更大，与Zen 3持平。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-030.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-030.jpg" width="100%"/>
+
 <p>最后是缓存子系统，前面说过AGU从2个倍增到4个，分配成2个Load和2个Store。L1D的大小没有变化，仍为32KB，L2的缓存最高可达4MB，需要注意的是，L2缓存是4个小核一起共用的，同时容量可配置。对了，还需要提到的是，小核以4个为一组，一组小核的面积与一个Golden Cove差不多。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-033.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-033.jpg" width="100%"/>
+
 <p>总的这些改进加起来，Gracemont的性能提升相当可观。官方将它与Skylake进行了对比，在单线程的整数性能方面，Gracemont同功耗性能可提升超过40％，同性能下节约40％左右的功耗，能效比超群。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-034.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-034.jpg" width="100%"/>
+
 <p>而在多线程方面，同样是4线程，与开启超线程的2个Skylake内核相比，4个Gracemont内核能够在少用80％功耗的情况下输出同样的整数性能，而如果火力全开，那么能够提供约1.8倍的整数性能，同时功耗还更低。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-035.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-035.jpg" width="100%"/>
+
 <p>总的来说，Alder Lake使用Gracemont来提升处理器在多线程情景下的总性能，同时在注重节能的场景下，可以凭借小核优异的能效比实现更长的续航表现。</p>
 <h3 id="P-Core：IPC提升约19％的Golden-Cove"><a href="#P-Core：IPC提升约19％的Golden-Cove" class="headerlink" title="P-Core：IPC提升约19％的Golden Cove"></a>P-Core：IPC提升约19％的Golden Cove</h3><p>小核很强，而大核——Intel称为性能核心（Performance Core，简称P-Core）——的Golden Cove内核只能说是改的更大提升更多。用Intel的官方口径来说，就是变得更宽、更深和更智能了。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-050.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-050.jpg" width="100%"/>
+
 <p>更宽指的是内核解码、执行指令的并行程度更大；更深指的是内核中的各种指令缓存变得更大；更智能指的是部分组件具有更准确的判断能力。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-040.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-040.jpg" width="100%"/>
+
 <p>Golden Cove的前端部分改动相当大，最明显的就是多年未变的4宽度（实际上是4+1宽度）解码器升级成了6宽度解码器（应该是6+1）。不像Arm等RISC体系的内核，属于CISC体系的x86要增加指令解码器的代价相当大，因此不管是AMD还是Intel都把前端解码器维持在4宽度，现在Intel首先前行一步。同时L1I缓存的带宽也扩大一倍到32Bytes以满足6宽度解码器的需要。</p>
 <p>增加解码器宽度会增加处理器的流水线长度，这让分支预测错误的惩罚更重。Intel选择增加分支预测缓冲区（BTB）来应对这一问题，其分支条目数量从5K直接增加到12K，比Zen 3的6.5K多将近一倍。分支预测器本身也变得“Smarter”了，准确率继续提升。</p>
 <p>宏指令（µOP）的吞吐量从多年未变的每周期6个增加到8个，同时用于缓存宏指令的宏指令缓存（µOP Cache）继续增大，从2.25K直接增大到4K，与Zen 2/Zen 3持平。宏指令队列的结构有所调整，现在为超线程进行了更多优化，双线程同时利用的情况下，单线程队列深度为72；而如果是单线程利用核心的情况则可以完整利用144的队列深度。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-041.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-041.jpg" width="100%"/>
+
 <p>中核部分，同步变得更宽，发射区从原本的5宽度加宽到6宽度，ROB缓存从Sunny Cove的384加大到512，直逼苹果Firestorm内核的600+，ROB增大会显著增加内核功耗。另外，执行端口方面增加两个，现在共有12个端口，不过整数和浮点仍然共用发射端口，没有改成流行的分离式。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-042.jpg"></p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-043.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-042.jpg" width="100%"/>
+
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-043.jpg" width="100%"/>
+
 <p>虽然是共用端口，不过Intel还是把整数和浮点的改进分开讲了。后端执行部分的改动相对较小，从上面两张图中可以看到，整数部分增加了一个ALU；FPU部分增加了两个FADD单元，它比FMA单元更高效，指令周期也更短了；而FMA单元增加了对FP16数据的支持，对低精度计算有帮助，不过因为需要调用AVX-512指令集，所以在Alder Lake上我们无法利用到它。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-044.jpg"></p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-045.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-044.jpg" width="100%"/>
+
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-045.jpg" width="100%"/>
+
 <p>另一个新增的端口被用于缓存子系统，新增了一个Load AGU，这样每周期的Load带宽提升至3，和Zen 3持平。L2沿用Willow Cove的设计，仍然是非包含式设计，每核心具有1.25MB。不过加入了新的预取机制，降低了DRAM的读取次数。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-046.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-046.jpg" width="100%"/>
+
 <p>总的改进加起来让Golden Cove相比起Cypress Core有了平均约19％的同频性能提升，最高甚至能有60％左右的提升。不过比较奇怪的是，有几个项目的成绩出现了倒退。总的来说，Golden Cove是一次全面的大改，可能是自Skylake以来改动最大的一个内核微架构。</p>
 <h3 id="Intel-Thread-Director：调度大小核的关键角色"><a href="#Intel-Thread-Director：调度大小核的关键角色" class="headerlink" title="Intel Thread Director：调度大小核的关键角色"></a>Intel Thread Director：调度大小核的关键角色</h3><p>大小核心的性能提升都非常可观，但要如何调度它们，让它们充分发挥自己的长处呢？其实Arm已经替x86淌过浑水了，big.LITTLE架构发展至今已有十余年时间，主流的操作系统都添加了对大小核的调度支持，包括Windows。操作系统是知道处理器上多个性能不同的内核的。但之前在Lakefield上我们也看到了Windows在调度大小核x86处理器时候的糟糕表现了，该怎么解决这个要命的问题呢？Intel选择了一个软硬件结合的方案，称为线程总监（Thread Director，暂译，等官方中文名）。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-065.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-065.jpg" width="100%"/>
+
 <p>在操作系统层面上，Intel和微软合作改进了Windows的任务调度，从Windows 11开始，系统的任务调度器能够获取更多信息，用于判断当前正在运行的线程需要什么样的性能模式，它要调用哪些指令集，同时它还懂得让硬件为高优先级任务让位。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-056.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-056.jpg" width="100%"/>
+
 <p>同时，Intel在Alder Lake处理器中集成了一个非常小的MCU，用来监控当前处理器内核的运行情况，能够监测到每个线程的特征，比如它运行什么样的指令集、它的性能需求如何等等。在收集完信息之后，它会将收集到的信息反馈给Windows 11，而后者将会把这些信息与自己收集到的信息相结合，判断是否应该将线程转移到别的核心上。这一切发生在短短30微秒以内，而传统的调度器可能需要100多毫秒才能判断出结论。</p>
 <p>当然，Alder Lake默认还是会把线程安排在P-Core上，除非高性能核心上面都有任务在跑。Intel将Alder Lake分为以下三个性能层级：</p>
 <ol>
@@ -180,13 +199,17 @@
 <p>也就是说，在一般情况下，系统调度器会优先把线程安排到P-Core原生的线程上，8个原生P-Core线程被放完后，轮到的是E-Core，如果还不够用，它才会去利用P-Core超线程出来的线程（因为超线程出来的线程性能肯定是不如E-Core的好嘛）。比如一个20线程的任务，会利用上P-Core原生的8个线程+E-Core原生的8个线程外加4个P-Core超线程出来的4个线程。</p>
 <p>当然，Windows 10也还是有大小核调度的能力的，但是说简单点就是不够智能。在Windows 11下Alder Lake应该会有更好的能效表现。</p>
 <h2 id="支持DDR5与LPDDR5内存，仍然兼容DDR4和LPDDR4"><a href="#支持DDR5与LPDDR5内存，仍然兼容DDR4和LPDDR4" class="headerlink" title="支持DDR5与LPDDR5内存，仍然兼容DDR4和LPDDR4"></a>支持DDR5与LPDDR5内存，仍然兼容DDR4和LPDDR4</h2><p>讲完内核部分，我们略过没有实质性变化的Xe GPU，直接来看其他的一些变化点，首先是内存控制器：</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-076.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-076.jpg" width="100%"/>
+
 <p>可以看到Alder Lake新增了对DDR5和LPDDR5内存的支持。默认情况下DDR5支持到4800MT/s，LPDDR5支持到5200MT/s，前者在今年晚些时候会开始出货，而后者在移动设备上已经被广泛应用，本来Tiger Lake是号称支持LPDDR5的，后来因为种种原因没能最终实现。而在Alder Lake正式推出之后，应该会有很多轻薄本用上LPDDR5内存。</p>
-<h2 id="支持PCIe-5-0的新IO"><a href="#支持PCIe-5-0的新IO" class="headerlink" title="支持PCIe 5.0的新IO"></a>支持PCIe 5.0的新IO</h2><p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-077.jpg"></p>
+<h2 id="支持PCIe-5-0的新IO"><a href="#支持PCIe-5-0的新IO" class="headerlink" title="支持PCIe 5.0的新IO"></a>支持PCIe 5.0的新IO</h2><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-077.jpg" width="100%"/>
+
 <p>Alder Lake的PCIe支持非常激进，直接一步升级到最新的PCIe 5.0，带宽较PCIe 4再翻一番，x16下数据带宽高达64GB/s。当然因为功耗原因，这应该是桌面平台独有的。在Rocket Lake-S和Tiger Lake上新增的x4通道则仍然是PCIe 4.0规格的，可以用于连接SSD。虽然没有明说，但与PCH互联的总线应该是升级到DMI 4.0了，至少会是x4的宽度，而高端PCH应该会通过DMI 4.0 x8与CPU相连。PCH能够再导出12条PCIe 4.0和16条PCIe 3.0，扩展性比起以前来可谓是一个天上一个地下。</p>
-<h2 id="大一统的Alder-Lake"><a href="#大一统的Alder-Lake" class="headerlink" title="大一统的Alder Lake"></a>大一统的Alder Lake</h2><p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-074-1629402245043.jpg"></p>
+<h2 id="大一统的Alder-Lake"><a href="#大一统的Alder-Lake" class="headerlink" title="大一统的Alder Lake"></a>大一统的Alder Lake</h2><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-074-1629402245043.jpg" width="100%"/>
+
 <p>相比起11代酷睿在桌面和移动端的分裂，Alder Lake又重新统一了回来，当然不同平台还是会有不同的规格。</p>
-<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-075.jpg"></p>
+<img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-075.jpg" width="100%"/>
+
 <p>桌面端的Alder Lake最高会有8大核8小核，不过没有集成的Thunderbolt 4控制器，核显规格也仍然只有32EU。移动端最高则是会有6大核8小核，外加96EU和4个Thunderbolt控制器，当然还是会集成祖传的IPU。对功耗更为敏感的超轻薄端最高就只有2大核8小核了，Thunderbolt控制器数量也减少到2个。</p>
 <p>Alder Lake是近些年来Intel推出的改变最大的一个架构，不管是计算内核本身的改动还是大小核的设计，可以说是非常激进的。很惊喜Intel能给我们带来这样一个很有创造性的新架构，Intel可能会在10月末的innovatiON活动上正式发布Alder Lake的产品，也就是第12代酷睿处理器，非常期待它的正式表现。</p>
 
@@ -393,25 +416,25 @@
 <h2 id="为什么我们需要对视频进行压缩编码？"><a href="#为什么我们需要对视频进行压缩编码？" class="headerlink" title="为什么我们需要对视频进行压缩编码？"></a>为什么我们需要对视频进行压缩编码？</h2><p>很简单，就是为了减小视频占用的容量大小。</p>
 <p>数字视频实质上就是一帧帧连续的图像，虽然一帧图像的大小并不大，但每秒至少得有24帧图像（一般情况），它们累计起来就会占据非常大的空间，我们没有那么多的地方存储原始数据，那么只有一条路可以走，对它进行压缩。而视频的编码过程就是这个压缩过程，但与音频一样，在传统数据压缩算法来看视频文件里面基本上是没有什么冗余信息的，所以人们就有必要去开发针对视频的压缩算法，把实际存在的冗余信息给去掉，从而减少它的数据量，达到减小占用容量的目的。因此，目前的视频编码基本上都是有损的，意味着编码过后的视频在画面质量上会有损失。</p>
 <h2 id="前蓝光时代的视频编码发展之路"><a href="#前蓝光时代的视频编码发展之路" class="headerlink" title="前蓝光时代的视频编码发展之路"></a>前蓝光时代的视频编码发展之路</h2><p>让我们首先沿着国际标准，按时间顺序来看看视频编码是怎么一步一步“现代化”的。</p>
-<p><img src="/images/S0_P2_Sullivan-3.png" alt=""></p>
+<p><img src="/images/S0_P2_Sullivan-3.png"></p>
 <p>在模拟电视和胶片电影时代，我们看到的内容都是模拟信号还原出来的。但随着人们的需求不断提高，和计算机、网络的蓬勃发展，我们需要新的、能够承载视频内容的数字编码，用来支持视频内容在互联网上的传输，或是将其存储在数字化的存储设备中。</p>
 <p>在上世纪七十年代末八十年代初的时候，人们已经研究出了不少新的针对图像等多媒体内容的压缩算法，此时开发数字视频编码的条件已经基本成熟，而第一个开发出实际编码的，就是后来在数字视频编码领域中起领头作用的视频编码专家组（<strong>V</strong>ideo <strong>C</strong>oding <strong>E</strong>xperts <strong>G</strong>roup），他们是当时名字还是“国际电报和电话咨询委员会（CCITT）”的ITU-T（国际电信联盟电信标准化部门）组织下面的专家组。这个编码被命名为H.120，它诞生于1984年，是一种偏向于实验性质的早期编码，主要基于差分PCM编码，用来保存电视内容，但是它并没有大规模的实际运用。</p>
 <h3 id="H-261：引入各种特性，奠定现代视频编码基础"><a href="#H-261：引入各种特性，奠定现代视频编码基础" class="headerlink" title="H.261：引入各种特性，奠定现代视频编码基础"></a>H.261：引入各种特性，奠定现代视频编码基础</h3><p>在制定完H.120过后几年，VCEG并没有停止他们在视频编码上面的研究。此时很多跨国公司已经使用网络进行视频会议的需求了，在互联网带宽尚不充裕的年代里，人们需要新的视频编码来实现流畅而优质的实时视频通信，H.261就应运而生了。</p>
 <p>H.261与首个数字视频编码标准H.120并没有直接的继承关系，它可以说是完全另起炉灶的一种编码。在针对图像的压缩算法上，H.261使用了我们现在比较熟悉的离散余弦变换（DCT）算法， 它在后来的JPEG编码中起主要作用。但不止于此，它引入了一系列针对视频的特性，奠定了现代视频编码的基础，其中主要有宏块（Macroblock）和基于宏块的运动补偿（Motion Compensation）。</p>
 <h4 id="宏块与基于运动补偿的帧间预测"><a href="#宏块与基于运动补偿的帧间预测" class="headerlink" title="宏块与基于运动补偿的帧间预测"></a>宏块与基于运动补偿的帧间预测</h4><p>我们知道，视频是由一帧一帧的图像组成的组合，一般情况下一秒钟的视频中会包含24、25、30、60或更多张图片，它们按照一定的时间间隔播放出来，基于视觉残留原理形成了流畅、会动的画面。在连续的几帧之间，实际上存在着大量重复的画面，比如说下面这个例子：</p>
-<p style="text-align:center;"><img src="/images/mc.jpg" /><br/>一个白色台球在绿色桌面上面运动</p>
+<p style="text-align:center;"><img src="/images/mc.jpg" />一个白色台球在绿色桌面上面运动</p>
 
-<p><img src="/images/mc-vector.jpg" alt=""><br/>用小球运动的方向和距离来描述图像的变化</p>
+<p><img src="/images/mc-vector.jpg"><br/>用小球运动的方向和距离来描述图像的变化</p>
 <p>如果是以传统的思路对每一帧图像做压缩的话，显然整个视频在压缩过后仍存在大量的冗余。那么怎么办呢？H.261标准引入了宏块的思维，它将整个画面切分为许多小块，然后再引入基于运动补偿的帧间预测——画面的大部分都是不动的，那么我们将不动部分的区块沿用之前的压缩结果，动的部分用运动方向加距离这样一个矢量来描述不就可以节省出大量的存储空间了吗？</p>
-<h4 id="DCT算法"><a href="#DCT算法" class="headerlink" title="DCT算法"></a>DCT算法</h4><p style="text-align:center;"><img src="/images/DCT-8x8.jpg" /><br/>将8x8个像素分成一个块</p>
+<h4 id="DCT算法"><a href="#DCT算法" class="headerlink" title="DCT算法"></a>DCT算法</h4><p style="text-align:center;"><img src="/images/DCT-8x8.jpg" />将8x8个像素分成一个块</p>
 
-<p><img src="/images/pixel-block.jpg" alt=""></p>
+<p><img src="/images/pixel-block.jpg"></p>
 <p>DCT算法起源于上世纪70年代，到了80年代中后期，有研究者开始将其用于图像压缩。这种算法可以将图像从空间域转换到频率域，然后做量化——减少人眼敏感程度较低的高频信息，保留绝大部分低频信息，从而减少图像的体积。最后再用高效的数据编码方式将处理过后的数据进一步压缩，这里使用了Zig-Zag扫描和可变长编码。</p>
 <blockquote>
 <p>注：图像的高频部分存有很多细节信息，而低频部分则存有轮廓等覆盖范围较大的信息。</p>
 </blockquote>
-<p><img src="/images/DCT-pic.jpg" alt=""></p>
-<p style="text-align:center;"><img src="/images/DCT-pic-2.jpg" /><br/>亮度通道做DCT变换后的图像，可以看到上方颜色连续部分非常平坦，而下方则拥有诸多细节</p>
+<p><img src="/images/DCT-pic.jpg"></p>
+<p style="text-align:center;"><img src="/images/DCT-pic-2.jpg" />亮度通道做DCT变换后的图像，可以看到上方颜色连续部分非常平坦，而下方则拥有诸多细节</p>
 
 <p>在H.261及之后基于H.261框架的视频编码中，DCT算法主要针对的是关键帧的压缩，所谓关键帧，就是在运动补偿中作为基准参考的一帧。打个比方，就像Flash动画中的关键帧一样，它定义了一个起点，后续的几帧都是基于这个关键帧演算出来的。因为它只做帧内压缩，不涉及其他帧，又被称为Intra-frame（帧内编码帧），简称I帧。</p>
 <h4 id="小结：创立混合编码框架，有里程碑意义"><a href="#小结：创立混合编码框架，有里程碑意义" class="headerlink" title="小结：创立混合编码框架，有里程碑意义"></a>小结：创立混合编码框架，有里程碑意义</h4><p>H.261设计的目标是编码出比特率在64~2048kbps范围内的视频，以用于实时的视频电话等应用。它首次确立了帧内预测与帧间预测同时使用的编码框架，在消除每一帧本身存有的冗余外，消除了帧与帧之间的冗余信息，从而大幅度降低了码率，成为了实际可用性相当高的一种视频编码。而它的编码框架也影响到了之后几乎所有的视频编码，尤其是H.26x和MPEG家族。</p>
@@ -420,16 +443,16 @@
 </blockquote>
 <h3 id="MPEG-1-Part-2：引入帧类型概念，成为VCD标准"><a href="#MPEG-1-Part-2：引入帧类型概念，成为VCD标准" class="headerlink" title="MPEG-1 Part 2：引入帧类型概念，成为VCD标准"></a>MPEG-1 Part 2：引入帧类型概念，成为VCD标准</h3><p>几乎在H.261开发的同时间，1988年，ISO和IEC两大国际标准化组织建立了MPEG（动态图像专家组，<strong>M</strong>oving <strong>P</strong>icture <strong>E</strong>xperts <strong>G</strong>roup）以开发国际标准化的音视频压缩编码。他们在1992年11月份完成了MPEG-1整套标准的制定，其中的第二部分标准化了一个新的视频压缩编码，它受到H.261的深刻影响，继承和发展了分块、运动补偿、DCT算法等思想，并做出了自己的改进，比如引入新的双向预测帧、亚像素精度的运动补偿等新技术。</p>
 <h4 id="引入双向预测帧（B帧）"><a href="#引入双向预测帧（B帧）" class="headerlink" title="引入双向预测帧（B帧）"></a>引入双向预测帧（B帧）</h4><p>H.261引入基于运动补偿的帧间预测算法之后，视频中的帧其实就已经分成两类了，一类是完整的，称为关键帧（Intra-frame），它就是一张完整的静态图像，可以直接被解码出来。另外的帧则是通过运动补偿算法在关键帧之上计算得到的。</p>
-<p><img src="/images/image-20200313120744255.png" alt=""></p>
+<p><img src="/images/image-20200313120744255.png"></p>
 <p>MPEG-1 Part 2引入了帧类别的概念，原来的关键帧被称为“I帧”，基于帧间预测计算得到的帧为P帧。在这两种H.261已有的帧类型外，它引入了一种新的帧：双向预测帧，也叫作B帧。</p>
-<p><img src="/images/B-frame.png" alt=""></p>
+<p><img src="/images/B-frame.png"></p>
 <p>原本的P帧只能够前向预测，也就是说，它只能够基于前一帧计算得到。双向预测，顾名思义，它可以用前面的一帧作为自己的参考，也可以用后面那帧来进行预测。由于参考了更多的信息，B帧自身就可以包含更少的信息量，其压缩比自然就要比只能做单向预测的P帧还要高了。但是，B帧的引入带来了一个新的问题，即编解码难度上升了。</p>
 <h4 id="引入帧序列（Group-of-Pictures）"><a href="#引入帧序列（Group-of-Pictures）" class="headerlink" title="引入帧序列（Group of Pictures）"></a>引入帧序列（<strong>G</strong>roup <strong>o</strong>f <strong>P</strong>ictures）</h4><p>帧序列是一些按顺序排列的图像帧的组合，简称为GOP。一个GOP的头部是一个I帧，也只会有一个I帧，它包含了该GOP的基准参考图像信息，其后是数个P帧、B帧，它们都是以开头的I帧为基础，经过计算得到的。</p>
-<p><img src="/images/GOP.png" alt=""></p>
+<p><img src="/images/GOP.png"></p>
 <p>上面的图片就描述了一个完整的GOP，可以看到一个I和P帧之间隔了三个B帧。实际应用中，B帧确实是数量最多的帧类型。</p>
-<p><img src="/images/Snipaste_2019-10-18_21-59-14.jpg" alt=""></p>
+<p><img src="/images/Snipaste_2019-10-18_21-59-14.jpg"></p>
 <h4 id="亚像素精度的运动补偿"><a href="#亚像素精度的运动补偿" class="headerlink" title="亚像素精度的运动补偿"></a>亚像素精度的运动补偿</h4><p>H.261中引入的帧间预测精度为像素级的，对很多分块的运动瞄准是不精确的，这点在MPEG-1上得到了有效改进。他们引入了亚像素级别的运动补偿，可以以1/2像素级别描述像素块的运动。</p>
-<p><img src="/images/sub-pixel.png" alt=""></p>
+<p><img src="/images/sub-pixel.png"></p>
 <h4 id="小结：成功接棒"><a href="#小结：成功接棒" class="headerlink" title="小结：成功接棒"></a>小结：成功接棒</h4><p>MPEG-1成功地继承了H.261的技术框架，并对其进行了有效的补充，从而达成了不错的压缩比。在那个人们普遍还在用VHS录像带的年代里，MPEG-1已经能够以1~2Mbps的码率提供类似于VHS录像带的画质了。这也使得它被选用为VCD的标准，在世界范围，尤其是在我国风行十余年。</p>
 <p>不过MPEG-1主要面向低码率应用，但实际上它在高码率下的表现也不差，于是，MPEG很快推出了它的升级版本，也就是MPEG-2。</p>
 <h3 id="MPEG-2-Part-2-H-262：DVD与（前）数字电视标准"><a href="#MPEG-2-Part-2-H-262：DVD与（前）数字电视标准" class="headerlink" title="MPEG-2 Part 2/H.262：DVD与（前）数字电视标准"></a>MPEG-2 Part 2/H.262：DVD与（前）数字电视标准</h3><p>1994年推出的MPEG-2中标准化了一种新的视频编码，它在1995年被ITU-T接纳为H.262，在这里我们简单称它为MPEG-2。相对于1993年推出的MPEG-1，它并没有太大的改动，主要是针对DVD应用和数字时代进行了改良。</p>
@@ -457,15 +480,15 @@
 <p>对于H.264这个名字，我想大家应该都不会耳熟。但就是这个现在我们每天都能够接触到的视频编码格式，曾在十多年前引发了一场软解危机，将当时很多主流CPU挑落马下，也使得ANI三家都在自己的产品中加入了辅助解码的硬件加速单元，不过这与我们的主题没什么关系，暂且按下不表。这里要讲的，还是H.264的厉害之处，究竟它用了什么手段能够在编码质量上面实现飞跃，从而独占市场十余年时间还没呈现衰退迹象。</p>
 <p>总结下来主要有如下的几点：更灵活的宏块划分方法、数量更多的参考帧、更先进的帧内预测和压缩比更高的数据压缩算法。</p>
 <h4 id="更灵活的宏块划分方法"><a href="#更灵活的宏块划分方法" class="headerlink" title="更灵活的宏块划分方法"></a>更灵活的宏块划分方法</h4><p>之前的标准中，宏块的划分方法是固定的，以16x16个像素为一个宏块。不过在新时代，这种粗放的划分方法不够灵活，于是H.264同时允许16x8、8x16、8x8、8x4、4x8和4x4这些精细度更高的划分方式。同时H.264将亚像素精度的运动补偿描述从1/2像素精度细化到了1/4的程度。这样一来，在帧间预测中新的编码拥有更高的精准度，但实际的数据量并不会增加太多，提高了压缩率。</p>
-<p><img src="/images/H.264_block_division.svg.png" alt=""></p>
+<p><img src="/images/H.264_block_division.svg.png"></p>
 <h4 id="数量更多的参考帧"><a href="#数量更多的参考帧" class="headerlink" title="数量更多的参考帧"></a>数量更多的参考帧</h4><p>在以前的标准中，每个B或P帧可参考的帧数是有限且数量过少的，H.264一举将限制放松到了16帧的程度，在大部分应用场景中，每帧的可参考帧数量至少都有4~5个，而在之前的标准中，P帧仅能参考1帧，B帧则是2。这一特性可以提高大多数场景的画面质量，或是降低体积。</p>
-<h4 id="更先进的帧内压缩"><a href="#更先进的帧内压缩" class="headerlink" title="更先进的帧内压缩"></a>更先进的帧内压缩</h4><p style="text-align:center;"><img src="/images/intra-pred-1.jpg" /><br/>每个宏块包含的预测模式信息</p>
+<h4 id="更先进的帧内压缩"><a href="#更先进的帧内压缩" class="headerlink" title="更先进的帧内压缩"></a>更先进的帧内压缩</h4><p style="text-align:center;"><img src="/images/intra-pred-1.jpg" />每个宏块包含的预测模式信息</p>
 
 <p>对于I帧，H.264也引入了新的压缩方式。一般来说，对于图像中的某一像素点，它与附近相邻的像素的颜色是差距不大的，所以我们就可以利用这个特性进一步缩小单帧图像的大小，怎么利用呢？H.264将单个宏块内的像素颜色变化规律规范成了公式，编码时只要写此处应用哪个公式就行了。当然这里我表述的较为简单，完整的帧内预测还是非常复杂的，H.264对4x4的宏块规定了9种预测模式，对16x16的亮度平面宏块规定了4种可用模式。大大减少了单帧图像的数据量，同时保持了很高的图像质量。</p>
-<p style="text-align:center;"><img src="/images/intra-pred.jpg" /><br/>差分图像加上预测信息可以还原出原始图像</p>
+<p style="text-align:center;"><img src="/images/intra-pred.jpg" />差分图像加上预测信息可以还原出原始图像</p>
 
 <h4 id="CABAC"><a href="#CABAC" class="headerlink" title="CABAC"></a>CABAC</h4><p>在编码的最后阶段，对数据进行无损压缩时，H.264除了支持在H.261中就存在的VLC编码外，新增加了两种无损数据压缩编码，一种是VLC的升级版——CAVLC，另一种是复杂程度更高的CABAC（前文参考之适应性二元算术编码，<strong>C</strong>ontext-based <strong>A</strong>daptive <strong>B</strong>inary <strong>A</strong>rithmetic <strong>C</strong>oding）。</p>
-<p><img src="/images/CABAC.jpg" alt=""></p>
+<p><img src="/images/CABAC.jpg"></p>
 <p>CABAC也是一种熵编码，主要原理也是用长编码替换掉出现频率少的数据，而用短编码替换出现频率高的数据，但它引入了更多统计学优化，并且具有动态适应能力。虽然在解码时需要更多计算，但它能够比CAVLC节省更多的数据量，通常能有10%。</p>
 <h4 id="小结：巨大的改变带来的是巨大的成功"><a href="#小结：巨大的改变带来的是巨大的成功" class="headerlink" title="小结：巨大的改变带来的是巨大的成功"></a>小结：巨大的改变带来的是巨大的成功</h4><p>除了以上介绍的几点外，H.264还有非常多的新特性，与MPEG-4 Visual不同的是，这些新特性有效地帮助H.264在节省容量方面取得了重大进展。这里我举一个有强烈对比的例子，DVD Video标准的视频，采用的是MPEG-2编码，码率约在9Mbps左右，但它的分辨率仅为720x480，而且在某些场景下我们可以很明显看到有损压缩产生的破坏；而同样的码率，放在H.264上面，已经可以承载起1080p的视频，并且拥有良好的质量。</p>
 <p>除了在编码效率上有重大提升外，H.264针对网络传输的特性对编码组织方式进行了优化，让它更能够抗丢包，抗干扰。在种种手段之下，它成为了近十年来统治视频领域的编码，并且可以说它已经成为了HTML 5中的事实标准，现在你很难看到一件不支持H.264编码的设备，从手机到摄像机，从流视频到蓝光光盘，它的应用范围广，效能强，即使在新编码已经出现的当下，它仍然有很强的生命力和不可替代性，可以预见的是，H.264将在未来一段时间内继续统治视频编码领域。</p>
@@ -478,7 +501,7 @@
 <p>单个编码单元也可以继续被切割、分类，可以成为预测单元（Prediction Units），后者可以指示该单元的预测形式，是画面内预测还是画面间预测或者甚至是根本没有变化、可以被跳过的单元；也可以成为转换单元（Transform Units），它可以做DCT转换或是量化。</p>
 <p>编码树单元的引入让HEVC既可以用大面积单元来提高编码效率，也可在需要的时候细化，保留更精细的细节。所谓该粗略的地方就粗略，该精细的地方就精细，HEVC在它的帮助下让码流的效率更高。</p>
 <h4 id="更高效的DCT"><a href="#更高效的DCT" class="headerlink" title="更高效的DCT"></a>更高效的DCT</h4><p>既然分块的最大面积大了，那么DCT算法也需要跟上才行，HEVC将DCT算法的最大尺寸扩大到了32x32的地步，对于图像中变化较为平坦的部分，它有着更高的压缩率。</p>
-<h4 id="33种帧内预测方向"><a href="#33种帧内预测方向" class="headerlink" title="33种帧内预测方向"></a>33种帧内预测方向</h4><p><img src="/images/HEVC_angular_intra_prediction_modes.png" alt=""></p>
+<h4 id="33种帧内预测方向"><a href="#33种帧内预测方向" class="headerlink" title="33种帧内预测方向"></a>33种帧内预测方向</h4><p><img src="/images/HEVC_angular_intra_prediction_modes.png"></p>
 <p>还记得上面写到H.264为4x4宏块引入了9种帧内预测方向吗？HEVC直接把这个数字提升到了33种，在静态图像的压制上不仅实现了更高的效率，也实现了更高的精度，这也是它成功杀入静态图像编码市场的一大利器。虽然编码难度变高了，但只要用硬件编码器就没有那么多问题。</p>
 <h4 id="小结：高效编码，但受困于高额专利费用"><a href="#小结：高效编码，但受困于高额专利费用" class="headerlink" title="小结：高效编码，但受困于高额专利费用"></a>小结：高效编码，但受困于高额专利费用</h4><p>相较于AVC，HEVC在高分辨率下的编码效率又有非常大的提升，举个实例，同样一段4K视频，使用H.264编码的大小可能会比使用HEVC大出个一倍。这种巨大的进步幅度也使得Blu-ray直接用它作为标准编码，推出了UHD BD，而它在单帧图像压缩上面的改进也让它拥有胜过JPEG的能力，于是我们看到在移动端，越来越多的设备选择将其作为默认的视频、照片输出编码。</p>
 <p>但是相比起AVC，HEVC的推广速度慢了很多，一个是它的编解码难度比H.264高了太多，但这点通过各路硬件编码器和软件优化逐渐化解掉了，目前常见的设备基本上支持HEVC的硬件编解码；第二个就是HEVC高昂的专利费用问题，它并不是一个免费的编码格式，虽然个人使用它完全没有问题，但对于想要兼容它的厂商来说，这笔高昂的专利费用足以让他们却步，尤其是崇尚自由开放的互联网市场。于是，我们看到众多厂商选择了免费开放的VPx系列编码，以及系列的后继者——AV1。</p>
@@ -520,14 +543,14 @@
     Mar 1, 2020
   </time>
   <section class="content">
-	  <h1 id="从硬件编辑的角度解读Xbox-Series-X的规格"><a href="#从硬件编辑的角度解读Xbox-Series-X的规格" class="headerlink" title="从硬件编辑的角度解读Xbox Series X的规格"></a>从硬件编辑的角度解读Xbox Series X的规格</h1><p>在对外正式公开Xbox Series X这台主机74天之后，2月25日，Phil Spencer用一篇新的<a href="https://news.xbox.com/en-us/2020/02/24/what-you-can-expect-next-generation-gaming/" target="_blank" rel="noopener">博文</a>对外公布了这台次世代主机身上更多的细节，想必各位或多或少已经读过<a href="https://www.gcores.com/articles/120661" target="_blank" rel="noopener">新闻</a>了。不过普通玩家可能会对文章里面的很多名词感到陌生，什么Zen 2、RDNA 2、VRS……可能只看懂这台主机被吹上天了。本文就对这些名词简单进行一番介绍，顺便带出笔者作为一个硬件媒体编辑，对于这台主机的一些个人看法。让我们顺着Phil Spencer的文章脉络，一点一点来看。</p>
+	  <h1 id="从硬件编辑的角度解读Xbox-Series-X的规格"><a href="#从硬件编辑的角度解读Xbox-Series-X的规格" class="headerlink" title="从硬件编辑的角度解读Xbox Series X的规格"></a>从硬件编辑的角度解读Xbox Series X的规格</h1><p>在对外正式公开Xbox Series X这台主机74天之后，2月25日，Phil Spencer用一篇新的<a target="_blank" rel="noopener" href="https://news.xbox.com/en-us/2020/02/24/what-you-can-expect-next-generation-gaming/">博文</a>对外公布了这台次世代主机身上更多的细节，想必各位或多或少已经读过<a target="_blank" rel="noopener" href="https://www.gcores.com/articles/120661">新闻</a>了。不过普通玩家可能会对文章里面的很多名词感到陌生，什么Zen 2、RDNA 2、VRS……可能只看懂这台主机被吹上天了。本文就对这些名词简单进行一番介绍，顺便带出笔者作为一个硬件媒体编辑，对于这台主机的一些个人看法。让我们顺着Phil Spencer的文章脉络，一点一点来看。</p>
 <h1 id="硬件部分：Zen-2、RDNA-2、VRS、光追的简介"><a href="#硬件部分：Zen-2、RDNA-2、VRS、光追的简介" class="headerlink" title="硬件部分：Zen 2、RDNA 2、VRS、光追的简介"></a>硬件部分：Zen 2、RDNA 2、VRS、光追的简介</h1><p>Phil Spencer首先介绍的是Xbox Series X使用的处理器——下一代定制处理器（Next Generation Custom Processor）。这枚处理器比今年CES展会上AMD发布的Ryzen 4000系列APU还要新，Phil Spencer其实早就已经剧透了这枚芯片的模样，在1月头上的时候，他把自己的Twitter头像给改成了这枚芯片的照片。</p>
-<p><img src="/images/dO7wSpcd_400x400.jpg" alt=""></p>
+<p><img src="/images/dO7wSpcd_400x400.jpg"></p>
 <p>Xbox Series X上面使用的这枚“下一代定制处理器”中集成了CPU和GPU，CPU部分是这半年来PC市场上表现得非常好的Zen 2处理器，而GPU部分则是基于尚未公布技术细节的RDNA 2架构。那么这块芯片究竟有多强呢？</p>
-<h2 id="CPU：基于Zen-2，相对本世代主机有巨大提升"><a href="#CPU：基于Zen-2，相对本世代主机有巨大提升" class="headerlink" title="CPU：基于Zen 2，相对本世代主机有巨大提升"></a>CPU：基于Zen 2，相对本世代主机有巨大提升</h2><p><img src="/images/Zen_2_Logo.jpg" alt=""></p>
+<h2 id="CPU：基于Zen-2，相对本世代主机有巨大提升"><a href="#CPU：基于Zen-2，相对本世代主机有巨大提升" class="headerlink" title="CPU：基于Zen 2，相对本世代主机有巨大提升"></a>CPU：基于Zen 2，相对本世代主机有巨大提升</h2><p><img src="/images/Zen_2_Logo.jpg"></p>
 <p>首先来看CPU部分，也就是Zen 2处理器。它是AMD近年来的最大翻身之作，在拥有相同核心数、相同频率的情况下它的综合性能已经可以比肩Intel最新一代的酷睿桌面版处理器（比如说，Ryzen 7 3700X的综合性能压了同为八核的i7-9700K一头，比i9-9900K稍弱），而它在玩家更看重的游戏性能方面也表现得相当优秀，基本上已经有对手90％的功力了。对比本世代主机上面那颗羸弱的Jaguar APU，那提升幅度只能用巨大来形容，原本CPU方面存在的严重短板将不复存在。</p>
-<h2 id="GPU：基于RDNA-2，性能可能约在RTX-2080与RTX-2080-SUPER之间"><a href="#GPU：基于RDNA-2，性能可能约在RTX-2080与RTX-2080-SUPER之间" class="headerlink" title="GPU：基于RDNA 2，性能可能约在RTX 2080与RTX 2080 SUPER之间"></a>GPU：基于RDNA 2，性能可能约在RTX 2080与RTX 2080 SUPER之间</h2><p>然后来看对于游戏更为重要的GPU。这里Phil Spencer给出了一个具体的数字——12 TFLOPS，这个数字代表的是GPU的单精度浮点运算能力，经常性被用来当作GPU的主要性能指标。但我们并不能单单看这个指标就说新主机的GPU性能会是Xbox One X的两倍，因为它只是一个理论值，实际性能还得看架构，而新主机的GPU架构恰恰就有着巨大的改变。RDNA架构是AMD完全重新打造的显卡架构，在游戏图形效能上面较沿用约八年的GCN架构有很大的提升。比如说，理论单精度性能比RX 580显卡（基于GCN 4.0架构，就是PS4 Pro和Xbox One X上的GPU架构）低1 TFLOPS的RX 5500 XT（基于RDNA架构），其实际游戏性能反而要比前者强。（对于RDNA与GCN架构的实际表现差异，Digital Foundry做过一期视频，有兴趣的可以去看一下：《<a href="https://www.youtube.com/watch?v=fzPo7gu-fTw" target="_blank" rel="noopener">Navi RDNA vs GCN 1.0: Last-Gen vs Next-Gen GPU Tech Head-To-Head!</a>》）</p>
-<p style="text-align:center;"><img src="/images/PS5_XboxSeriesX_Specs-5.jpg" / width="100%" /><br/>Digital Foundry推测中的Xbox Series X GPU规格</p>
+<h2 id="GPU：基于RDNA-2，性能可能约在RTX-2080与RTX-2080-SUPER之间"><a href="#GPU：基于RDNA-2，性能可能约在RTX-2080与RTX-2080-SUPER之间" class="headerlink" title="GPU：基于RDNA 2，性能可能约在RTX 2080与RTX 2080 SUPER之间"></a>GPU：基于RDNA 2，性能可能约在RTX 2080与RTX 2080 SUPER之间</h2><p>然后来看对于游戏更为重要的GPU。这里Phil Spencer给出了一个具体的数字——12 TFLOPS，这个数字代表的是GPU的单精度浮点运算能力，经常性被用来当作GPU的主要性能指标。但我们并不能单单看这个指标就说新主机的GPU性能会是Xbox One X的两倍，因为它只是一个理论值，实际性能还得看架构，而新主机的GPU架构恰恰就有着巨大的改变。RDNA架构是AMD完全重新打造的显卡架构，在游戏图形效能上面较沿用约八年的GCN架构有很大的提升。比如说，理论单精度性能比RX 580显卡（基于GCN 4.0架构，就是PS4 Pro和Xbox One X上的GPU架构）低1 TFLOPS的RX 5500 XT（基于RDNA架构），其实际游戏性能反而要比前者强。（对于RDNA与GCN架构的实际表现差异，Digital Foundry做过一期视频，有兴趣的可以去看一下：《<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=fzPo7gu-fTw">Navi RDNA vs GCN 1.0: Last-Gen vs Next-Gen GPU Tech Head-To-Head!</a>》）</p>
+<p style="text-align:center;"><img src="/images/PS5_XboxSeriesX_Specs-5.jpg" width="100%" />Digital Foundry推测中的Xbox Series X GPU规格</p>
 
 <p>比较凑巧的是，此前的泄漏显示Xbox Series X的GPU将会集成56组计算单元（CU），Digital Foundry对这枚GPU的单精度浮点性能推算结果正好是12 TFLOPS，所以现在我们可以假设这枚GPU拥有56组CU，那么对比拥有40组CU的Radeon RX 5700 XT（目前RDNA架构的旗舰显卡），它的计算单元规模大了40％，这将会带来显著的性能提升。</p>
 <p>因此我们有理由认为Xbox Series X上面的显卡将会比Radeon RX 5700 XT强上不止一个档次。如果放在PC市场来看，RX 5700 XT跟NVIDIA GeForce RTX 2070 SUPER差上半档左右，也就是说，如果不算上RDNA 2架构可能带来的效率提升，Xbox Series X的GPU性能可能会处于RTX 2080到RTX 2080 SUPER之间，这是笔者的保守估计。</p>
@@ -537,12 +560,12 @@
 
 <p>在不开启VRS的情况，也就是正常情况下，一帧画面的所有像素都是独立着色的；而开启VRS之后，原本独立的像素被分成了一个个像素块，它们会共享着色结果，此时GPU会根据程序员设定的重要性分级为所有像素块分配不同的着色精细度。拿上面的图片为例，车辆和远景部分的像素仍然是独立着色的，但快速变动的道路和路边的像素块就是区块共同着色的，此时由于显卡的计算资源得到了节约，所以游戏的帧数会有所提高。</p>
 <p>目前3DMark已经引入了VRS相关的测试，在该软件的测试中，VRS分为两级，在Tier 1测试中，你会发现画面整体的精细程度都变差了，这是因为整个画面的着色速率都被降低了。</p>
-<p style="text-align:center;"><img src="/images/VRS-T1-Comp.jpg" width="100%" /><br/>左：VRS关；右：VRS开</p>
+<p style="text-align:center;"><img src="/images/VRS-T1-Comp.jpg" width="100%" />左：VRS关；右：VRS开</p>
 
 <p>而在完整的Tier 2特性下，才会像上面所说的那样对整个画面进行分区，此时的效果就好了太多：</p>
-<p style="text-align:center;"><img src="/images/VRS-T2-Comp-2.jpg" width="100%" /><br/>上：VRS关；下：VRS开。现在区别就小了很多。</p>
+<p style="text-align:center;"><img src="/images/VRS-T2-Comp-2.jpg" width="100%" />上：VRS关；下：VRS开。现在区别就小了很多。</p>
 
-<p>这项技术最大的意义就是提高帧数，而且分辨率越高它的作用越明显。在3DMark的测试中，一张公版RTX 2070在1080p分辨率下的帧数提升为24.43％，而在4K分辨率下，提升幅度已经达到70.84％，在8K下面更是有116.62％的提升，直接从18帧幻灯片变成了40帧基本流畅的水平（数据来源：<a href="https://www.expreview.com/72147.html" target="_blank" rel="noopener">超能网</a>）。</p>
+<p>这项技术最大的意义就是提高帧数，而且分辨率越高它的作用越明显。在3DMark的测试中，一张公版RTX 2070在1080p分辨率下的帧数提升为24.43％，而在4K分辨率下，提升幅度已经达到70.84％，在8K下面更是有116.62％的提升，直接从18帧幻灯片变成了40帧基本流畅的水平（数据来源：<a target="_blank" rel="noopener" href="https://www.expreview.com/72147.html">超能网</a>）。</p>
 <p>这项功能是由NVIDIA最先在Turing GPU上引入的，Intel也在他们的Gen 11核显上面加入了这项特性，我们也终于将在RDNA 2架构中看到AMD方面的支持。所以，这项技术是Xbox Series X实现8K游戏的一大技术利器，如果运用得当，我们将会在不牺牲过多画面质量的情况下得到更为流畅的画面，或是享受到更高分辨率的画面。</p>
 <h2 id="硬件光线追踪支持"><a href="#硬件光线追踪支持" class="headerlink" title="硬件光线追踪支持"></a>硬件光线追踪支持</h2><p>微软家嘛，肯定会用自己的DXR API作为光追的入口啦。官方也明确说了这是基于硬件加速（Hardware-accelerated）的光线追踪支持，所以很明确的一点就是RDNA 2架构中将会加入新的针对光线追踪的处理单元，一如当年Turing架构中的RT Core，用专用处理单元的形式为光追提供更好的支持。</p>
 <img src="/images/RDNA_2_RT.jpg" width="100%" />
@@ -554,7 +577,7 @@
 <p style="text-align:center;">
 <img src="/images/samsung-980-pro.jpg" /><br/>三星980 PRO，支持PCIe 4.0，图片来自<a herf="https://www.anandtech.com/show/15352/ces-2020-samsung-980-pro-pcie-40-ssd-makes-an-appearance">AnandTech</a></p>
 
-<p>一个多月前，DigiTimes报道过<a href="https://www.digitimes.com/news/a20200110PD204.html" target="_blank" rel="noopener">一则群联打入Xbox供应链的新闻</a>：</p>
+<p>一个多月前，DigiTimes报道过<a target="_blank" rel="noopener" href="https://www.digitimes.com/news/a20200110PD204.html">一则群联打入Xbox供应链的新闻</a>：</p>
 <blockquote>
 <p>Phison has reportedly broken into the supply chain of Microsoft’s Xbox, while Silicon Motion has seen orders for home consoles with built-in SSDs surge.</p>
 </blockquote>
@@ -567,11 +590,11 @@
 <h2 id="动态延迟输入（DLI）"><a href="#动态延迟输入（DLI）" class="headerlink" title="动态延迟输入（DLI）"></a>动态延迟输入（DLI）</h2><p>在使用无线游戏手柄的时候，有一点是无法忽视的，那就是延迟问题。我们这些普通玩家可能没什么感觉，但在高手眼中，这点延迟就已经会造成手眼不同步。原本微软用来连接手柄的就是他们自己开发的一种专有无线协议了，这次他们新引入了动态延迟输入特性，在寥寥一句话的介绍中也智能推测出这是一个用于同步用户输入与显示输出的特性，既然名为动态，那么可能就是根据输入端的连接延迟在输出上面做相应的补偿来保证手眼同步。</p>
 <h2 id="HDMI-2-1"><a href="#HDMI-2-1" class="headerlink" title="HDMI 2.1"></a>HDMI 2.1</h2><p>HDMI是主机上面常见的用来输出画面的接口，其最新版本为HDMI 2.1，相对于HDMI 2.0，它不仅仅提高了最大支持的分辨率和帧率，更引入了多种新的特性，其中Phil Spencer重点提到了自动低延迟模式（<strong>A</strong>uto <strong>L</strong>ow <strong>L</strong>atency <strong>M</strong>ode）和可变帧率（<strong>V</strong>ariable <strong>R</strong>efresh <strong>R</strong>ate），其实这两种特性在目前已经得到了大范围运用了，只不过HDMI 2.1是将其标准化了。</p>
 <h3 id="8K-60fps、4K-120fps"><a href="#8K-60fps、4K-120fps" class="headerlink" title="8K@60fps、4K@120fps"></a>8K@60fps、4K@120fps</h3><p>HDMI 2.1一举将接口的最大传输速率提升了2.67倍，从18Gbit/s直接提升到48Gbit/s，并且加入了在DisplayPort上面已经成功运用的DSC压缩技术，从而将最大可传输分辨率提升到了10K的高度。不管分辨率是4K、8K还是10K，HDMI 2.1都可以提供最高120Hz的传输帧率，为Xbox Series X的120fps提供了坚实的保障。</p>
-<p><img src="/images/image-20200301142006596.png" alt=""></p>
+<p><img src="/images/image-20200301142006596.png"></p>
 <h3 id="可变帧率（VRR）"><a href="#可变帧率（VRR）" class="headerlink" title="可变帧率（VRR）"></a>可变帧率（VRR）</h3><p>说到可变帧率，PC玩家肯定是不陌生的，这项特性是用来让显示器的刷新率与显卡输出的画面帧数保持一致，减少画面撕裂现象出现的。目前PC上面有FreeSync和G-SYNC两种方案，前者是AMD主推，并且与DisplayPort接口中的Adaptive-Sync相兼容，目前相关的产品更多；而后者则是NVIDIA主推，但已经推出G-SYNC Compatible对FreeSync做了兼容。</p>
 <p>早在2016年，FreeSync就已经可以跑在HDMI接口上了，而近来也有LG的一系列OLED电视机支持搭配N卡开启G-SYNC Compatible，用的也是HDMI接口，未来支持可变帧率技术的电视机将会越来越多，只要他们支持HDMI 2.1 VRR特性，Xbox Series X即可兼容并开启可变帧率模式，为玩家带来更加顺滑的画面，减少撕裂。</p>
 <h3 id="自动低延迟模式（ALLM）"><a href="#自动低延迟模式（ALLM）" class="headerlink" title="自动低延迟模式（ALLM）"></a>自动低延迟模式（ALLM）</h3><p>实际上Xbox One就已经支持自动低延迟模式，听过AOC电视那期广告节目的应该会记得，电视机的延迟是远高于显示器的，但现在很多电视机厂家都在着重优化这一块，尽量降低内部延迟，为游戏玩家提供更好的体验。而ALLM特性就可以自动进行延迟优化。</p>
-<p><img src="/images/ALLM_600wide.jpg" alt=""></p>
+<p><img src="/images/ALLM_600wide.jpg"></p>
 <p>根据HDMI官方的说法，ALLM可以简化玩家的操作。在需要时，主机会向电视机发送一个开启低延迟模式的信号，而在不需要时也能够自动关闭掉这个模式以恢复电视内置的画面优化。</p>
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>实际上HDMI 2.1还引入了很多增强游戏体验的特性，像快速媒体切换和快速帧传输都是崭新的面向游戏应用的特性。前者用来减少在内容之间切换的空白屏幕时间，后者则可以让图像帧更早的到达电视机进行处理，减少Lag情况。</p>
 <h2 id="120-fps支持"><a href="#120-fps支持" class="headerlink" title="120 fps支持"></a>120 fps支持</h2><p>主机端锁60帧是很常见的事情，但我们应该有点更高的追求。近年来高刷新率显示器的流行让很多PC玩家都认识到原来60帧真的束缚住了我们的视觉体验。其实在手机业界也是一样的，更高刷新率的屏幕可以明显带来更好的观感。本世代的主机可能限于机能问题只能锁60帧，但是对于硬件规格上有巨大飞跃的新主机而言，真的可以抛弃掉锁60帧这个传统了，于是Phil Spencer也写明了，在Xbox Series X上面，帧数上限被拉高到了120帧。再加上强悍的硬件能力支持，以及各路保障视觉体验的特性，在下个世代，玩家的视觉体验提升将不局限于分辨率和画面质量，更是在帧数，画面顺滑度和体感延迟上都会有很大的提高。</p>
