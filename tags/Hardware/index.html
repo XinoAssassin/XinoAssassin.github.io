@@ -112,6 +112,104 @@
 
   
   <h2 class="title">
+    <a href="/2021/08/adl-deep-dive/">
+      Alder Lake SoC深度解析：Intel的大小核未来梦
+    </a>
+  </h2>
+  
+  <time>
+    Aug 22, 2021
+  </time>
+  <section class="content">
+	  <p>昨晚Intel举办了今年的架构日活动，和往年一样，Intel在架构日活动上会公布很多自家未来芯片设计方面的细节，比如说即将发布的CPU/GPU架构，新的内核设计和一些新的技术，今年的Intel架构日活动上他们带来了下一代处理器，也就是Alder Lake的详细内容。</p>
+<h2 id="Alder-Lake简介"><a href="#Alder-Lake简介" class="headerlink" title="Alder Lake简介"></a>Alder Lake简介</h2><p>Alder Lake是Intel耗时多年打造的一款全新架构，它是未来将要发布的第12代酷睿处理器的核心。</p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-068.jpg"></p>
+<p>和以往的Intel处理器架构一样，Alder Lake包含了CPU、GPU、内存控制器、IO、显示输出和AI加速器等部件。它也是Intel首个采用大小核设计的高性能处理器，改动主要有以下几点：</p>
+<ul>
+<li>CPU部分采用大小核混合计算架构，最高由8大核8小核组成16核24线程</li>
+<li>CPU大核升级到Golden Cove架构，IPC提升约19%</li>
+<li>CPU小核升级到Gracemont架构，性能接近Skylake，能效比很高</li>
+<li>采用Intel 7工艺制程，频率相较于10nm SuperFin工艺会有进一步提升</li>
+<li>内存控制器升级支持DDR5和LPDDR5内存</li>
+<li>PCIe升级到5.0版本</li>
+</ul>
+<p>让我们一点点来看Alder Lake的进化。</p>
+<h2 id="x86大小核异构"><a href="#x86大小核异构" class="headerlink" title="x86大小核异构"></a>x86大小核异构</h2><p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-053.jpg"></p>
+<p>Alder Lake上最大的变化点便是它采用大小核异构的架构，此前Intel曾在Lakefield上试水大小核异构，并推出了两款正式产品，不过它们都是低功耗处理器，性能不强。因此Alder Lake可以说是首款大小核异构设计的高性能x86处理器，在继承Lakefield的大小核异构设计之上，进行了深度改进。首先来看被Intel称为效率核心（E-Core）的Gracemont。</p>
+<h3 id="E-Core：整体性能接近Skylake、但能耗更低的Gracemont"><a href="#E-Core：整体性能接近Skylake、但能耗更低的Gracemont" class="headerlink" title="E-Core：整体性能接近Skylake、但能耗更低的Gracemont"></a>E-Core：整体性能接近Skylake、但能耗更低的Gracemont</h3><p>在大小核异构设计中，一般小核的设计目标是高能效比，而大核的目标则是提供极限高性能，Gracemont便是一个非常高效的核心。Intel的小核心设计是独立于大核心的另外一条线，现在一般称为Atom核心。一脉相传下来，Gracemont的上代是Tremont。从Tremont到Gracemont，Intel着重加强了小核心的后端执行能力，尤其是整数性能。</p>
+<p><img src="/images/adl-deep-dive/tremont-vs-gracemont.jpg"></p>
+<p>上图左边是Tremont，右边是Gracemont，可以非常明显的看到，Gracemont的执行端口多了不少，从原本的10个猛增至17个，而跟着的就是执行单元数量变多了。</p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-029.jpg"></p>
+<p>整数部分ALU从3个增加到4个，AGU从2个倍增到4个，对应还增加了一组MUL和DIV单元，整数执行能力得到大幅增强；浮点运算部分也有一定提升，原本只有一个的FADD和FMUL单元现在均有两个，能够拼合处理256-bit宽度的数据，也就是说能够满足执行AVX2指令集的需求；浮点ALU和STD均增加一个，计算能力会有较大提升。</p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-026.jpg"></p>
+<p>为了满足大幅膨胀的后端，前端也相应做了较大增强，解码部分仍然是两组三宽度设计，可以同时启用达成六解码。L1指令缓存（L1I）倍增至64KB，同时分支预测器得到加强，拥有更大的缓存。</p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-028.jpg"></p>
+<p>中核部分，ROB增大到256，这一数字比Skylake的224更大，与Zen 3持平。</p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-030.jpg"></p>
+<p>最后是缓存子系统，前面说过AGU从2个倍增到4个，分配成2个Load和2个Store。L1D的大小没有变化，仍为32KB，L2的缓存最高可达4MB，需要注意的是，L2缓存是4个小核一起共用的，同时容量可配置。对了，还需要提到的是，小核以4个为一组，一组小核的面积与一个Golden Cove差不多。</p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-033.jpg"></p>
+<p>总的这些改进加起来，Gracemont的性能提升相当可观。官方将它与Skylake进行了对比，在单线程的整数性能方面，Gracemont同功耗性能可提升超过40％，同性能下节约40％左右的功耗，能效比超群。</p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-034.jpg"></p>
+<p>而在多线程方面，同样是4线程，与开启超线程的2个Skylake内核相比，4个Gracemont内核能够在少用80％功耗的情况下输出同样的整数性能，而如果火力全开，那么能够提供约1.8倍的整数性能，同时功耗还更低。</p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-035.jpg"></p>
+<p>总的来说，Alder Lake使用Gracemont来提升处理器在多线程情景下的总性能，同时在注重节能的场景下，可以凭借小核优异的能效比实现更长的续航表现。</p>
+<h3 id="P-Core：IPC提升约19％的Golden-Cove"><a href="#P-Core：IPC提升约19％的Golden-Cove" class="headerlink" title="P-Core：IPC提升约19％的Golden Cove"></a>P-Core：IPC提升约19％的Golden Cove</h3><p>小核很强，而大核——Intel称为性能核心（Performance Core，简称P-Core）——的Golden Cove内核只能说是改的更大提升更多。用Intel的官方口径来说，就是变得更宽、更深和更智能了。</p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-050.jpg"></p>
+<p>更宽指的是内核解码、执行指令的并行程度更大；更深指的是内核中的各种指令缓存变得更大；更智能指的是部分组件具有更准确的判断能力。</p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-040.jpg"></p>
+<p>Golden Cove的前端部分改动相当大，最明显的就是多年未变的4宽度（实际上是4+1宽度）解码器升级成了6宽度解码器（应该是6+1）。不像Arm等RISC体系的内核，属于CISC体系的x86要增加指令解码器的代价相当大，因此不管是AMD还是Intel都把前端解码器维持在4宽度，现在Intel首先前行一步。同时L1I缓存的带宽也扩大一倍到32Bytes以满足6宽度解码器的需要。</p>
+<p>增加解码器宽度会增加处理器的流水线长度，这让分支预测错误的惩罚更重。Intel选择增加分支预测缓冲区（BTB）来应对这一问题，其分支条目数量从5K直接增加到12K，比Zen 3的6.5K多将近一倍。分支预测器本身也变得“Smarter”了，准确率继续提升。</p>
+<p>宏指令（µOP）的吞吐量从多年未变的每周期6个增加到8个，同时用于缓存宏指令的宏指令缓存（µOP Cache）继续增大，从2.25K直接增大到4K，与Zen 2/Zen 3持平。宏指令队列的结构有所调整，现在为超线程进行了更多优化，双线程同时利用的情况下，单线程队列深度为72；而如果是单线程利用核心的情况则可以完整利用144的队列深度。</p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-041.jpg"></p>
+<p>中核部分，同步变得更宽，发射区从原本的5宽度加宽到6宽度，ROB缓存从Sunny Cove的384加大到512，直逼苹果Firestorm内核的600+，ROB增大会显著增加内核功耗。另外，执行端口方面增加两个，现在共有12个端口，不过整数和浮点仍然共用发射端口，没有改成流行的分离式。</p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-042.jpg"></p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-043.jpg"></p>
+<p>虽然是共用端口，不过Intel还是把整数和浮点的改进分开讲了。后端执行部分的改动相对较小，从上面两张图中可以看到，整数部分增加了一个ALU；FPU部分增加了两个FADD单元，它比FMA单元更高效，指令周期也更短了；而FMA单元增加了对FP16数据的支持，对低精度计算有帮助，不过因为需要调用AVX-512指令集，所以在Alder Lake上我们无法利用到它。</p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-044.jpg"></p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-045.jpg"></p>
+<p>另一个新增的端口被用于缓存子系统，新增了一个Load AGU，这样每周期的Load带宽提升至3，和Zen 3持平。L2沿用Willow Cove的设计，仍然是非包含式设计，每核心具有1.25MB。不过加入了新的预取机制，降低了DRAM的读取次数。</p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-046.jpg"></p>
+<p>总的改进加起来让Golden Cove相比起Cypress Core有了平均约19％的同频性能提升，最高甚至能有60％左右的提升。不过比较奇怪的是，有几个项目的成绩出现了倒退。总的来说，Golden Cove是一次全面的大改，可能是自Skylake以来改动最大的一个内核微架构。</p>
+<h3 id="Intel-Thread-Director：调度大小核的关键角色"><a href="#Intel-Thread-Director：调度大小核的关键角色" class="headerlink" title="Intel Thread Director：调度大小核的关键角色"></a>Intel Thread Director：调度大小核的关键角色</h3><p>大小核心的性能提升都非常可观，但要如何调度它们，让它们充分发挥自己的长处呢？其实Arm已经替x86淌过浑水了，big.LITTLE架构发展至今已有十余年时间，主流的操作系统都添加了对大小核的调度支持，包括Windows。操作系统是知道处理器上多个性能不同的内核的。但之前在Lakefield上我们也看到了Windows在调度大小核x86处理器时候的糟糕表现了，该怎么解决这个要命的问题呢？Intel选择了一个软硬件结合的方案，称为线程总监（Thread Director，暂译，等官方中文名）。</p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-065.jpg"></p>
+<p>在操作系统层面上，Intel和微软合作改进了Windows的任务调度，从Windows 11开始，系统的任务调度器能够获取更多信息，用于判断当前正在运行的线程需要什么样的性能模式，它要调用哪些指令集，同时它还懂得让硬件为高优先级任务让位。</p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-056.jpg"></p>
+<p>同时，Intel在Alder Lake处理器中集成了一个非常小的MCU，用来监控当前处理器内核的运行情况，能够监测到每个线程的特征，比如它运行什么样的指令集、它的性能需求如何等等。在收集完信息之后，它会将收集到的信息反馈给Windows 11，而后者将会把这些信息与自己收集到的信息相结合，判断是否应该将线程转移到别的核心上。这一切发生在短短30微秒以内，而传统的调度器可能需要100多毫秒才能判断出结论。</p>
+<p>当然，Alder Lake默认还是会把线程安排在P-Core上，除非高性能核心上面都有任务在跑。Intel将Alder Lake分为以下三个性能层级：</p>
+<ol>
+<li>每个P-Core上只跑1个线程</li>
+<li>E-Core上只跑1个线程（当然它也只能跑1个）</li>
+<li>在P-Core的超线程上跑线程、</li>
+</ol>
+<p>也就是说，在一般情况下，系统调度器会优先把线程安排到P-Core原生的线程上，8个原生P-Core线程被放完后，轮到的是E-Core，如果还不够用，它才会去利用P-Core超线程出来的线程（因为超线程出来的线程性能肯定是不如E-Core的好嘛）。比如一个20线程的任务，会利用上P-Core原生的8个线程+E-Core原生的8个线程外加4个P-Core超线程出来的4个线程。</p>
+<p>当然，Windows 10也还是有大小核调度的能力的，但是说简单点就是不够智能。在Windows 11下Alder Lake应该会有更好的能效表现。</p>
+<h2 id="支持DDR5与LPDDR5内存，仍然兼容DDR4和LPDDR4"><a href="#支持DDR5与LPDDR5内存，仍然兼容DDR4和LPDDR4" class="headerlink" title="支持DDR5与LPDDR5内存，仍然兼容DDR4和LPDDR4"></a>支持DDR5与LPDDR5内存，仍然兼容DDR4和LPDDR4</h2><p>讲完内核部分，我们略过没有实质性变化的Xe GPU，直接来看其他的一些变化点，首先是内存控制器：</p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-076.jpg"></p>
+<p>可以看到Alder Lake新增了对DDR5和LPDDR5内存的支持。默认情况下DDR5支持到4800MT/s，LPDDR5支持到5200MT/s，前者在今年晚些时候会开始出货，而后者在移动设备上已经被广泛应用，本来Tiger Lake是号称支持LPDDR5的，后来因为种种原因没能最终实现。而在Alder Lake正式推出之后，应该会有很多轻薄本用上LPDDR5内存。</p>
+<h2 id="支持PCIe-5-0的新IO"><a href="#支持PCIe-5-0的新IO" class="headerlink" title="支持PCIe 5.0的新IO"></a>支持PCIe 5.0的新IO</h2><p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-077.jpg"></p>
+<p>Alder Lake的PCIe支持非常激进，直接一步升级到最新的PCIe 5.0，带宽较PCIe 4再翻一番，x16下数据带宽高达64GB/s。当然因为功耗原因，这应该是桌面平台独有的。在Rocket Lake-S和Tiger Lake上新增的x4通道则仍然是PCIe 4.0规格的，可以用于连接SSD。虽然没有明说，但与PCH互联的总线应该是升级到DMI 4.0了，至少会是x4的宽度，而高端PCH应该会通过DMI 4.0 x8与CPU相连。PCH能够再导出12条PCIe 4.0和16条PCIe 3.0，扩展性比起以前来可谓是一个天上一个地下。</p>
+<h2 id="大一统的Alder-Lake"><a href="#大一统的Alder-Lake" class="headerlink" title="大一统的Alder Lake"></a>大一统的Alder Lake</h2><p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-074-1629402245043.jpg"></p>
+<p>相比起11代酷睿在桌面和移动端的分裂，Alder Lake又重新统一了回来，当然不同平台还是会有不同的规格。</p>
+<p><img src="/images/adl-deep-dive/intel-architecture-day-2021-presentation-075.jpg"></p>
+<p>桌面端的Alder Lake最高会有8大核8小核，不过没有集成的Thunderbolt 4控制器，核显规格也仍然只有32EU。移动端最高则是会有6大核8小核，外加96EU和4个Thunderbolt控制器，当然还是会集成祖传的IPU。对功耗更为敏感的超轻薄端最高就只有2大核8小核了，Thunderbolt控制器数量也减少到2个。</p>
+<p>Alder Lake是近些年来Intel推出的改变最大的一个架构，不管是计算内核本身的改动还是大小核的设计，可以说是非常激进的。很惊喜Intel能给我们带来这样一个很有创造性的新架构，Intel可能会在10月末的innovatiON活动上正式发布Alder Lake的产品，也就是第12代酷睿处理器，非常期待它的正式表现。</p>
+
+
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-none-link" href="/tags/Everything/" rel="tag">Everything</a><a class="tag-none-link" href="/tags/Hardware/" rel="tag">Hardware</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
     <a href="/2020/05/why-intel-cpu-in-disadvantage/">
       Intel是怎么失去自己的性能优势地位的？
     </a>
@@ -736,53 +834,6 @@
     
 	  <div class="tags">
       <a class="tag-none-link" href="/tags/Hardware/" rel="tag">Hardware</a><a class="tag-none-link" href="/tags/Hardware-History/" rel="tag">Hardware History</a>
-	  </div>
-    
-
-  </section>
-</article>
-  
-    <article class="post ">
-
-  
-  <h2 class="title">
-    <a href="/2018/10/latitude-5285/">
-      Latitude 5285 半长测
-    </a>
-  </h2>
-  
-  <time>
-    Oct 17, 2018
-  </time>
-  <section class="content">
-	  <h2 id="换机缘起"><a href="#换机缘起" class="headerlink" title="换机缘起"></a>换机缘起</h2><p>九月底，借来大概一年的 2014 款 ThinkPad S1 yoga 在频繁的使用过程中终于不堪重用，本来进过水的屏幕彻底好不了了。没办法，总不能让我背着重六斤还没算上电源适配器的大家伙每天上下班挤地铁吧我会死的。于是，九月中旬就开始在淘宝上寻找替代用品，因为 Yoga 算是一台 2 in 1 设备，所以还是打算买一台轻便的类似设备，先是盯上了 2017 年发售的 XPS 12 2 in 1，但是因为这系列都是超低压 CPU，性能上我是无法接受的，于是继续翻，运气还不错，DELL 在 Latitude 系列中也推出了类似的 2 in 1 设备，分为使用常规低压 CPU 和常规分辨率屏幕的 5285/5290 系列和使用超低压 CPU 和高分辨率屏幕的 7285/7290 系列。我也不知道 DELL 是脑子抽风了还是一心想学习巨硬和水果的作死精神，总之 Latitude 5285 正好符合我的需求，国内某宝上面也有几家在卖官翻货，价格也是我正好能承受的范围内（学费垫着），于是在国庆前夕，在一趟回学校的公交车上我点击购买了。</p>
-<img src="/images/magic-word-by-Lin-Xiaoyu.jpg" title="一句充满魔力的咒语" />
-
-<h2 id="购机波折"><a href="#购机波折" class="headerlink" title="购机波折"></a>购机波折</h2><p>顺丰速度还是快，两天到了。我提前下了班回去准备摸新机器。没有做仔细的检查，就看了看外表没有受损屏幕没毛病之后就插盘开始装系统，结果在那个蓝偏紫的首屏，我发现了触摸屏有异样，光标停留在靠近左下角的一个点上，当时还没在意，安装完系统开始用的时候发现真不对，屏幕下部有大范围触摸失灵的情况，马上联系了卖家说明情况，卖家也没多废话就给我说寄回来给我换。</p>
-<p>国庆节第一天下午，换的机器到了，这次接手后做了详细的检查，这次发现左下角屏幕不正常，有一小块应该是漏液了。跟卖家反映了情况之后还是愿意给我换一台，但是实在是懒得折腾加上其他配件都到了，也就用了下来。</p>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>讲了两大段废话，终于开始正文了，首先先夸一夸这机器。</p>
-<h3 id="良心"><a href="#良心" class="headerlink" title="良心"></a>良心</h3><h4 id="预留天线"><a href="#预留天线" class="headerlink" title="预留天线"></a>预留天线</h4><p>相比起北美良心想，DELL 着实良心不少。比如连 ThinkPad X1 这种机型，你只要是不选配 WWAN 模组，那么你到手的机器里面是不会给你预留 WWAN 的天线的。而 DELL 就不一样了，无论哪个配置都是给你预留好了天线，你想要自己加，买张卡装上去就可以了。但比较遗憾的是，5285/5290 这个型号，不购买带有指纹的机型是不会给你来个留指纹位的后盖的，也就是说除非你愿意在后盖上打个孔，不然是无法使用主板上预留的指纹等设备的接口的。</p>
-<h4 id="BIOS"><a href="#BIOS" class="headerlink" title="BIOS"></a>BIOS</h4><p>为什么这里要提一句 BIOS 呢？因为我是北美良心想垃圾 BIOS 的长期受害者，原先的国行版 S1 Yoga 使用的单 2.4 GHz 的网卡，而且在 BIOS 里面指定了能够使用的网卡硬件 ID，使得用户无法自行更换更好的网卡。又因为 R6250 的坑爹 2.4GHz 问题，我没有办法让 S1 Yoga 和我的其他设备共存于同一网段下，要么是委曲求全使用性能更差的外部路由当主网关。而 DELL 就不同了，不仅仅不锁设备，BIOS 设定还非常详细实用，除了自带的诊断之外甚至连锁不锁 BIOS 的升降级都给你提供了开关。</p>
-<h4 id="手册"><a href="#手册" class="headerlink" title="手册"></a>手册</h4><p>DELL 的 Owner’s Manual 是我见过的最详细的笔记本手册，手册中事无巨细的提供了包括但不限于机型参数、拆机方法、拆卸安装配件的方法等等等等。跟着这份手册来，你完全没有看网上拆机教程的必要。</p>
-<h3 id="好"><a href="#好" class="headerlink" title="好"></a>好</h3><h4 id="LTE-amp-GPS"><a href="#LTE-amp-GPS" class="headerlink" title="LTE &amp; GPS"></a>LTE &amp; GPS</h4><p>我现在要吹爆所有预留 M.2 2240 的机器，因为加一个 WWAN 模组加上电信的 20GB 限速卡真的太方便了。Windows 10 对于 WWAN 设备的支持度也相当不错，提供了众多限制后台跑数据的开关，就是传统桌面程序不支持就是了。当时买卡的时候正值 iPhone XS (Max) 发售，Intel 基带背锅的时间段，所以心一狠加了一点钱买了高通的卡（Intel 的卡支持到 Cat.4，而高通的是 Cat.6），实测出来电信 LTE 的速度相当可以，昨天甚至跑出了 4.2 MiB/s 的平均速度。因为这卡还自带 GPS 功能，所以使用系统自带的地图是可以看到实时位置的，照理说其他应用也可以直接使用它提供的 GPS 数据，但最近还没空研究这个，等下次上飞机前看看。</p>
-<h4 id="电磁屏"><a href="#电磁屏" class="headerlink" title="电磁屏"></a>电磁屏</h4><p>其实原来的 S1 Yoga 国外版本是自带电磁屏的，但是北美良心想在国行版本上以更贵的价格发售了不带电磁屏的版本。我是一直都想买个带电磁屏的设备来记笔记的，结果到了大四出去实习了才拥有这么一台。DELL 采用的电磁压感技术来自于熟悉的 Wacom，笔并没有随机附送，还好也不算是太贵，将近 300 大洋一支还是比水果家的强不少的。但是还是要吐槽一下巨硬，宣布 OneNote 免费之后，连 Office 365 中默认都不带上桌面版的 OneNote 了，默认启用的是 UWP 版本的 OneNote。不过因为之前用的少也不太清楚这两者有什么区别，总之压感至少是没有问题的。</p>
-<h4 id="散热"><a href="#散热" class="headerlink" title="散热"></a>散热</h4><p>当初机子还没到手的时候寻找了一些国内用户的评测来看，不知为何这模具的散热相当了得，虽然是主动散热但是平常你完全感觉不到风扇的声音。而温度，比如现在我正在使用电池码字，性能设置是开到 100% 的，但是 CPU 频率不高，温度也就只有接近 40℃ ；到手时也做过温度压力测试，甚至可以将 7300U 维持满整个 28 秒不泄，以这个体积的散热系统来说已经是合格的了，更为惊喜的是，BIOS 设定相当给力，长时间烤机也还是可以维持到默频 2.6GHz 之上。而看到中文论坛有说统一模具但是换用八代低压 U 的 5290 甚至可以压住四核八线程的低压 i7。所以我对于这一块是相当满意的。</p>
-<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p>机器的扩展是一个 USB 3.1 Gen 1 Type A 以及两个支持 DisplayPort 输出的 USB-C 口，虽然 USB-C 口不支持 Thunderbolt™ 3，但是两个之多的数量比起只带一个 USB Type A 的 Surface Pro 来已经完全是秒杀了。另外 DELL 在推进 USB PD 上也算是比较积极的，在 BIOS 中将供电方式设置为 ExpressCharge 之后就可以开启快充，实测在用 Apple 87W 适配器时充电真的快了很多，而自带的适配器是 45W 的。</p>
-<h4 id="携带"><a href="#携带" class="headerlink" title="携带"></a>携带</h4><p>携带真的非常方便，键盘一盖就跟平板毫无区别直接拿走。值得一提是这个键盘（保护盖），它 有 键 程。据某位不愿意透露姓名的沙包说，只要是有键程的键盘就比采用新键盘的 MBP 的强，实际体验了一下，果真如此，MBP 上的新键盘甚至不如 Macbook 12 上面的那块同样几乎没有键程的键盘。并且触摸板面积也不算太小，就是手感上确实比不上 S1 Yoga 那个“带弹簧”的触摸板。</p>
-<p>因为自带自适应的支架，有桌子的时候竖着放上面一按支架就弹出来了，就是支架的最小角度稍微大了一些，在床上用的时候不是太舒服。</p>
-<h3 id="不太行"><a href="#不太行" class="headerlink" title="不太行"></a>不太行</h3><h4 id="屏幕"><a href="#屏幕" class="headerlink" title="屏幕"></a>屏幕</h4><p>夸了电磁屏，但是对于这块屏幕还是有不满意的地方。不知道 DELL 是为了节约成本或是其他什么原因，分辨率虽然完全合格，1920 x 1280 在 12 寸屏幕上看起来已经是相当精细了。但是在色彩方面，可能就不能说准了，跟几年前的 U2312HM 比起来，色彩甚至出现了一些过饱和，而且面板应该是少了一层过滤，屏幕在镜头前存在彩虹纹，反射光源时同样可见。</p>
-<h4 id="续航"><a href="#续航" class="headerlink" title="续航"></a>续航</h4><p>虽然自带的电池容量还是有 44Wh 之多，但是不知道是因为挂在 LTE 网络上同时开启了 GPS 的缘故还是 Windows 10 本身的耗电量比较大的问题，一般典型外带最长只有五六个小时电量就降到 30% 左右了（后台开着 KanColle）。也就算是基本够用的水平吧，不过至少不是超低压 CPU，这个水平已经很满意了，只是希望电池能在大点，把缺失的指纹模块那部分的空间利用起来就好了。</p>
-<h2 id="抱怨两句"><a href="#抱怨两句" class="headerlink" title="抱怨两句"></a>抱怨两句</h2><p>这台机器买的我是非常的舒服，该有的都有，还带了一些惊喜给我，估计之后长久都会带着它跑来跑去了。但是提到跑来跑去就有话要说了，把本来打算写《杂》的话搬到这里来讲吧。</p>
-<p>九月头上开始实习之后，深刻体会到了你国上班一族的现状，早起挤地铁挤公交，睡眠不足靠咖啡因撑，中午午休睡成一片，晚上疯狂加班。每天都是固定的日子，也难怪会把人的意志给消磨干净，难得的周末补两天觉打打游戏就没了，自然的也就没什么心思想别的东西了。</p>
-<p>所以如果有还没上大学或者是刚开始大学生涯的同学，记得真的要在大学谈次恋爱，不然毕业之后真的没有时间去认真谈恋爱了。</p>
-<p><code>&gt;&gt;&gt;endl;</code></p>
-
-
-    
-    
-    
-	  <div class="tags">
-      <a class="tag-none-link" href="/tags/DIY/" rel="tag">DIY</a><a class="tag-none-link" href="/tags/Hardware/" rel="tag">Hardware</a>
 	  </div>
     
 
